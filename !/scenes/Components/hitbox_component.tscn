@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://bhjypj2tgq0md"]
+
+[sub_resource type="GDScript" id="GDScript_vjmn5"]
+script/source = "extends Area2D
+class_name HitboxComponent
+
+# Drag the entity HealthComponent here
+@export var health_component: HealthComponent
+
+func take_hit(attack: AttackComponent) -> void:
+	if health_component:
+		health_component.take_damage(attack.damage)
+"
+
+[node name="HitboxComponent" type="Area2D" unique_id=232939803]
+script = SubResource("GDScript_vjmn5")

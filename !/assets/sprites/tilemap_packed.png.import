@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cmda1as4c3oj"
-path="res://.godot/imported/knight Sheet Test.png-42529e674f6d1b8fbd1f9c0221fc0079.ctex"
+uid="uid://ddp62b0mwne0p"
+path="res://.godot/imported/tilemap_packed.png-c84d27233e9750b938611b89c82f664b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://!/assets/sprites/knight Sheet Test.png"
-dest_files=["res://.godot/imported/knight Sheet Test.png-42529e674f6d1b8fbd1f9c0221fc0079.ctex"]
+source_file="res://!/assets/sprites/tilemap_packed.png"
+dest_files=["res://.godot/imported/tilemap_packed.png-c84d27233e9750b938611b89c82f664b.ctex"]
 
 [params]
 
