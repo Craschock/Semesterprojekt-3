@@ -4,6 +4,10 @@
 [ext_resource type="PackedScene" uid="uid://pnpqmi4np2b" path="res://!/scenes/Components/health_component.tscn" id="2_22ku6"]
 [ext_resource type="PackedScene" uid="uid://bhjypj2tgq0md" path="res://!/scenes/Components/hitbox_component.tscn" id="3_iohne"]
 [ext_resource type="Texture2D" uid="uid://ddp62b0mwne0p" path="res://!/assets/sprites/tilemap_packed.png" id="4_v1m0w"]
+[ext_resource type="PackedScene" uid="uid://dhirfpuogr2q8" path="res://!/scenes/Components/state_machine.tscn" id="5_8ghov"]
+[ext_resource type="Script" uid="uid://60iiuqamlxgb" path="res://!/scripts/player/states/PlayerIdle.gd" id="6_lopw5"]
+[ext_resource type="Script" uid="uid://dc5jhqq4snryw" path="res://!/scripts/player/states/PlayerRun.gd" id="7_20qlv"]
+[ext_resource type="Script" uid="uid://t7evwvg3k14a" path="res://!/scripts/player/states/PlayerJump.gd" id="8_20qlv"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_rqoq1"]
 radius = 2.236068
@@ -39,6 +43,7 @@ script = ExtResource("1_12pno")
 [node name="HealthComponent" parent="." unique_id=1881424083 instance=ExtResource("2_22ku6")]
 
 [node name="HitboxComponent" parent="." unique_id=232939803 instance=ExtResource("3_iohne")]
+script = null
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent" unique_id=300017236]
 position = Vector2(0, -3)
@@ -52,3 +57,15 @@ frame_progress = 0.10424505
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1785599104]
 position = Vector2(0, -3.5)
 shape = SubResource("RectangleShape2D_5u4ll")
+
+[node name="StateMachine" parent="." unique_id=1551728817 node_paths=PackedStringArray("initial_state") instance=ExtResource("5_8ghov")]
+initial_state = NodePath("Idle")
+
+[node name="Idle" type="Node" parent="StateMachine" unique_id=1967148122]
+script = ExtResource("6_lopw5")
+
+[node name="Run" type="Node" parent="StateMachine" unique_id=2014207401]
+script = ExtResource("7_20qlv")
+
+[node name="Jump" type="Node" parent="StateMachine" unique_id=653964851]
+script = ExtResource("8_20qlv")
