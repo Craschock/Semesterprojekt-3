@@ -3,11 +3,17 @@ class_name AttackComponent
 
 @export var damage: int = 10
 
+# array for "multiple enemies hit"
+var hit_entities: Array[Area2D] = []
+
 func _ready() -> void:
-	# Connect Godot signal for when another Area2D enters this one
 	area_entered.connect(_on_area_entered)
 
 func _on_area_entered(area: Area2D) -> void:
-	# Check if the area we hit is Hitbox
-	if area is HitboxComponent:
+	if area is HitboxComponent and area not in hit_entities:
 		area.take_hit(self)
+		hit_entities.append(area)
+
+# call right before attack starts to clear the memory
+func clear_hit_list() -> void:
+	hit_entities.clear()

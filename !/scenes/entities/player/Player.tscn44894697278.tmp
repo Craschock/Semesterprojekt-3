@@ -9,6 +9,7 @@
 [ext_resource type="Script" uid="uid://dc5jhqq4snryw" path="res://!/scripts/player/states/PlayerRun.gd" id="7_20qlv"]
 [ext_resource type="Script" uid="uid://t7evwvg3k14a" path="res://!/scripts/player/states/PlayerJump.gd" id="8_20qlv"]
 [ext_resource type="PackedScene" uid="uid://dp2uswhllarmo" path="res://!/scenes/Components/attack_component.tscn" id="9_mfh6n"]
+[ext_resource type="Script" uid="uid://cy85r20fkc1tr" path="res://!/scripts/entity components/AttackComponent.gd" id="10_lrig1"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_rqoq1"]
 radius = 2.236068
@@ -107,6 +108,8 @@ script = ExtResource("8_20qlv")
 [node name="Scratch" parent="WeaponPivot" unique_id=1829374878 instance=ExtResource("9_mfh6n")]
 collision_layer = 32
 collision_mask = 64
+script = ExtResource("10_lrig1")
+damage = 10
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="WeaponPivot/Scratch" unique_id=1668101493]
 position = Vector2(9, -5)
@@ -116,7 +119,3 @@ disabled = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1395162739]
 libraries/ = SubResource("AnimationLibrary_lrig1")
-
-[node name="Camera2D" type="Camera2D" parent="." unique_id=1042958842]
-offset = Vector2(0, -8)
-zoom = Vector2(5, 5)

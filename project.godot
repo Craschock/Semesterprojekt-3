@@ -63,13 +63,15 @@ move_right={
 
 [layer_names]
 
-2d_physics/layer_1="Player"
-2d_physics/layer_2="Player Attacks"
-2d_physics/layer_3="Enemy"
-2d_physics/layer_4="Enemy Attacks"
-2d_physics/layer_5="Terrain"
-2d_physics/layer_6="Items"
-2d_physics/layer_7="Coins"
+2d_physics/layer_1="World"
+2d_physics/layer_2="PlayerBody"
+2d_physics/layer_3="EnemyBody"
+2d_physics/layer_4="ItemBody"
+2d_physics/layer_5="PlayerHitbox"
+2d_physics/layer_6="PlayerAttack"
+2d_physics/layer_7="EnemyHitbox"
+2d_physics/layer_8="EnemyAttack"
+2d_physics/layer_9="Interactables"
 
 [physics]
 

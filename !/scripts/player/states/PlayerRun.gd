@@ -9,12 +9,19 @@ func _ready() -> void:
 func physics_update(delta: float) -> void:
 	var direction := Input.get_axis("move_left", "move_right")
 	
+	# Flip logic
+	if direction > 0:
+		player.get_node("WeaponPivot").scale.x = 1
+		player.get_node("AnimatedSprite2D").flip_h = false
+	elif direction < 0:
+		player.get_node("WeaponPivot").scale.x = -1
+		player.get_node("AnimatedSprite2D").flip_h = true
+	
 	# Apply movement
 	if direction != 0:
 		player.velocity.x = move_toward(player.velocity.x, direction * player.speed, player.acceleration * delta)
 	else:
 		transitioned.emit(self, "idle")
-		
 		
 		
 		
