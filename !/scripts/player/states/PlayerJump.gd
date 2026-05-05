@@ -8,6 +8,9 @@ func _ready() -> void:
 
 func enter() -> void:
 	player.velocity.y = player.jump_velocity
+	
+	# Play sprite animation
+	player.get_node("AnimatedSprite2D").play("jump")
 
 func physics_update(delta: float) -> void:
 	var direction := Input.get_axis("move_left", "move_right")
@@ -27,3 +30,6 @@ func physics_update(delta: float) -> void:
 			transitioned.emit(self, "run")
 		else:
 			transitioned.emit(self, "idle")
+	
+	if Input.is_action_just_pressed("attack"):
+		transitioned.emit(self, "attack_scratch")

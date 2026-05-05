@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dgda8elabipl5"
-path="res://.godot/imported/under.png-0a3db9a34b139bf69bfb74db0f50c75e.ctex"
+uid="uid://b5enij2dy5p7"
+path="res://.godot/imported/fruit.png-6f775148f84c2583d7954aa6ec6146b2.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://addons/ridiculous_coding/images/under.png"
-dest_files=["res://.godot/imported/under.png-0a3db9a34b139bf69bfb74db0f50c75e.ctex"]
+source_file="res://!/assets/sprites/fruit.png"
+dest_files=["res://.godot/imported/fruit.png-6f775148f84c2583d7954aa6ec6146b2.ctex"]
 
 [params]
 

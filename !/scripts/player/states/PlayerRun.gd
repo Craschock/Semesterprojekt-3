@@ -6,6 +6,10 @@ var player: PlayerMovement
 func _ready() -> void:
 	player = owner
 
+func enter() -> void:
+	# Play sprite animation
+	player.get_node("AnimatedSprite2D").play("run")
+
 func physics_update(delta: float) -> void:
 	var direction := Input.get_axis("move_left", "move_right")
 	
@@ -28,3 +32,6 @@ func physics_update(delta: float) -> void:
 	# Other Transitions
 	if Input.is_action_just_pressed("jump") and player.is_on_floor():
 		transitioned.emit(self, "jump")
+	
+	if Input.is_action_just_pressed("attack"):
+		transitioned.emit(self, "attack_scratch")
