@@ -8,6 +8,7 @@ func _ready() -> void:
 
 func enter() -> void:
 	player.velocity.y = player.jump_velocity
+	player.consume_jump()
 	
 	# Play sprite animation
 	player.get_node("AnimatedSprite2D").play("jump")
@@ -20,10 +21,19 @@ func physics_update(delta: float) -> void:
 		player.velocity.x = move_toward(player.velocity.x, direction * player.speed, player.acceleration * delta)
 	else:
 		player.velocity.x = move_toward(player.velocity.x, 0, player.friction * delta)
-		
-		
-		
-		
+	
+	# Flip logic
+	if direction > 0:
+		player.get_node("WeaponPivot").scale.x = 1
+		player.get_node("AnimatedSprite2D").flip_h = false
+	elif direction < 0:
+		player.get_node("WeaponPivot").scale.x = -1
+		player.get_node("AnimatedSprite2D").flip_h = true
+	
+	
+	
+	
+	
 	# Other Transitions
 	if player.is_on_floor():
 		if direction != 0:

@@ -3,6 +3,8 @@
 [ext_resource type="PackedScene" uid="uid://bf5a4ekgqga1w" path="res://!/scenes/world/test_tiles.tscn" id="2_s4t1n"]
 [ext_resource type="Texture2D" uid="uid://ddp62b0mwne0p" path="res://!/assets/sprites/tilemap_packed.png" id="3_l23do"]
 [ext_resource type="PackedScene" uid="uid://bh6kjgw51fv7u" path="res://!/scenes/entities/player/player.tscn" id="3_s4t1n"]
+[ext_resource type="PackedScene" uid="uid://b88w0xmg2surt" path="res://!/scenes/entities/Enemies/basic enemies/slime_green/dummy_enemy.tscn" id="4_l23do"]
+[ext_resource type="PackedScene" uid="uid://cp2ripfp2aq3j" path="res://!/scenes/items/plump_grub_item.tscn" id="5_uvovq"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_uvovq"]
 texture = ExtResource("3_l23do")
@@ -228,3 +230,9 @@ tile_map_data = PackedByteArray("AAAEAP//AAAOAAQAAAAEAP7/AAAOAAQAAAAEAP3/AAANAAQ
 tile_set = SubResource("TileSet_w5yh6")
 
 [node name="Player" parent="." unique_id=80359539 instance=ExtResource("3_s4t1n")]
+
+[node name="DummyEnemy" parent="." unique_id=961012920 instance=ExtResource("4_l23do")]
+position = Vector2(-28, 0)
+
+[node name="PlumpGrubItem" parent="." unique_id=1088472823 instance=ExtResource("5_uvovq")]
+position = Vector2(24, -3)

@@ -26,11 +26,13 @@ func physics_update(delta: float) -> void:
 		player.velocity.x = move_toward(player.velocity.x, direction * player.speed, player.acceleration * delta)
 	else:
 		transitioned.emit(self, "idle")
-		
-		
-		
+	
+	
+	
+	
+	
 	# Other Transitions
-	if Input.is_action_just_pressed("jump") and player.is_on_floor():
+	if Input.is_action_just_pressed("jump") and player.can_jump():
 		transitioned.emit(self, "jump")
 	
 	if Input.is_action_just_pressed("attack"):

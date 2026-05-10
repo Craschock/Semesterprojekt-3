@@ -1,0 +1,1576 @@
+﻿========== C:\GitHub\Semesterprojekt-3\!\Resources\Items\plump_grub.tres ==========
+[gd_resource type="Resource" script_class="ItemData" format=3 uid="uid://dkm1av16bny22"]
+
+[ext_resource type="Texture2D" uid="uid://dss2teep3vg2m" path="res://!/assets/sprites/items/plump_grub.png" id="1_2sw7x"]
+[ext_resource type="Script" uid="uid://cytj0n2h6v2fp" path="res://!/scripts/items/ItemData.gd" id="1_wkji0"]
+
+[resource]
+script = ExtResource("1_wkji0")
+item_name = "Plump Grub"
+description = "Small Healing Worm"
+icon = ExtResource("1_2sw7x")
+metadata/_custom_type_script = "uid://cytj0n2h6v2fp"
+
+
+========== C:\GitHub\Semesterprojekt-3\!\scenes\base\base_enemy.tscn ==========
+[gd_scene format=3 uid="uid://c301qejfle2yq"]
+
+[ext_resource type="Script" uid="uid://8xwdhk2hao5m" path="res://!/scripts/enemies/BaseEnemy.gd" id="1_4qdbe"]
+[ext_resource type="PackedScene" uid="uid://pnpqmi4np2b" path="res://!/scenes/components/health_component.tscn" id="1_qnakn"]
+[ext_resource type="PackedScene" uid="uid://bhjypj2tgq0md" path="res://!/scenes/components/hitbox_component.tscn" id="2_4qdbe"]
+[ext_resource type="PackedScene" uid="uid://dhirfpuogr2q8" path="res://!/scenes/components/state_machine.tscn" id="4_ikqgl"]
+
+[node name="BaseEnemy" type="CharacterBody2D" unique_id=961012920]
+collision_layer = 4
+script = ExtResource("1_4qdbe")
+
+[node name="HealthComponent" parent="." unique_id=1881424083 instance=ExtResource("1_qnakn")]
+
+[node name="HitboxComponent" parent="." unique_id=232939803 node_paths=PackedStringArray("health_component") instance=ExtResource("2_4qdbe")]
+collision_layer = 64
+collision_mask = 0
+health_component = NodePath("../HealthComponent")
+
+[node name="Body" type="CollisionShape2D" parent="." unique_id=748019568]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1281959025]
+
+[node name="StateMachine" parent="." unique_id=1551728817 instance=ExtResource("4_ikqgl")]
+
+
+========== C:\GitHub\Semesterprojekt-3\!\scenes\base\base_item.tscn ==========
+[gd_scene format=3 uid="uid://cb5v77dqqm2og"]
+
+[ext_resource type="Script" uid="uid://bu0lvma3a61id" path="res://!/scripts/items/BaseItem.gd" id="1_rvjsi"]
+[ext_resource type="PackedScene" uid="uid://cmk0a4jhkk6et" path="res://!/scenes/components/interactable_component.tscn" id="1_u2nbr"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_u2nbr"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_u2nbr"]
+radius = 5.0990195
+
+[node name="BaseItem" type="RigidBody2D" unique_id=1088472823]
+collision_layer = 8
+script = ExtResource("1_rvjsi")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=322286197]
+
+[node name="Body" type="CollisionShape2D" parent="." unique_id=625328982]
+scale = Vector2(0.35, 0.35)
+shape = SubResource("RectangleShape2D_u2nbr")
+
+[node name="InteractableComponent" parent="." unique_id=864943614 instance=ExtResource("1_u2nbr")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractableComponent" unique_id=239360184]
+shape = SubResource("CircleShape2D_u2nbr")
+
+
+========== C:\GitHub\Semesterprojekt-3\!\scenes\components\attack_component.tscn ==========
+[gd_scene format=3 uid="uid://dp2uswhllarmo"]
+
+[ext_resource type="Script" uid="uid://cy85r20fkc1tr" path="res://!/scripts/entity components/AttackComponent.gd" id="1_ts6xr"]
+
+[node name="AttackComponent" type="Area2D" unique_id=1829374878]
+script = ExtResource("1_ts6xr")
+
+
+========== C:\GitHub\Semesterprojekt-3\!\scenes\components\health_component.tscn ==========
+[gd_scene format=3 uid="uid://pnpqmi4np2b"]
+
+[ext_resource type="Script" uid="uid://dxw1uyuql21bx" path="res://!/scripts/entity components/HealthComponent.gd" id="1_pvy6e"]
+
+[node name="HealthComponent" type="Node2D" unique_id=1881424083]
+script = ExtResource("1_pvy6e")
+
+
+========== C:\GitHub\Semesterprojekt-3\!\scenes\components\hitbox_component.tscn ==========
+[gd_scene format=3 uid="uid://bhjypj2tgq0md"]
+
+[ext_resource type="Script" uid="uid://cofks22pfbm4a" path="res://!/scripts/entity components/HitboxComponent.gd" id="1_s73dq"]
+
+[node name="HitboxComponent" type="Area2D" unique_id=232939803]
+script = ExtResource("1_s73dq")
+
+
+========== C:\GitHub\Semesterprojekt-3\!\scenes\components\interactable_component.tscn ==========
+[gd_scene format=3 uid="uid://cmk0a4jhkk6et"]
+
+[ext_resource type="Script" uid="uid://skqpnfklkhjx" path="res://!/scripts/entity components/InteractableComponent.gd" id="1_5gwuh"]
+
+[node name="InteractableComponent" type="Area2D" unique_id=864943614]
+collision_layer = 256
+collision_mask = 0
+script = ExtResource("1_5gwuh")
+
+
+========== C:\GitHub\Semesterprojekt-3\!\scenes\components\inventory_component.tscn ==========
+[gd_scene format=3 uid="uid://cb14ws6lv4t4k"]
+
+[ext_resource type="Script" uid="uid://c8e4a2ss1ffvj" path="res://!/scripts/entity components/InventoryComponent.gd" id="1_7ga4e"]
+
+[node name="InventoryComponent" type="Node" unique_id=969716048]
+script = ExtResource("1_7ga4e")
+
+
+========== C:\GitHub\Semesterprojekt-3\!\scenes\components\state_machine.tscn ==========
+[gd_scene format=3 uid="uid://dhirfpuogr2q8"]
+
+[ext_resource type="Script" uid="uid://duj3j3o4wyipc" path="res://!/scripts/entity components/state components/StateMachine.gd" id="1_t1jvx"]
+
+[node name="StateMachine" type="Node" unique_id=1551728817]
+script = ExtResource("1_t1jvx")
+
+
+========== C:\GitHub\Semesterprojekt-3\!\scenes\entities\Enemies\basic enemies\slime_green\dummy_enemy.tscn ==========
+[gd_scene format=3 uid="uid://b88w0xmg2surt"]
+
+[ext_resource type="PackedScene" uid="uid://c301qejfle2yq" path="res://!/scenes/base/base_enemy.tscn" id="1_xo5e0"]
+[ext_resource type="Texture2D" uid="uid://cfxhvbh18jx42" path="res://!/assets/sprites/slime_green.png" id="2_2n3ph"]
+[ext_resource type="Script" uid="uid://cqpjnrn3ciqwc" path="res://!/scripts/enemies/basic enemies/slime_green/SlimeAwake.gd" id="3_qtubj"]
+[ext_resource type="Script" uid="uid://cppgrl0mtrf4d" path="res://!/scripts/enemies/basic enemies/slime_green/SlimeIdle.gd" id="4_edxnk"]
+[ext_resource type="Script" uid="uid://b4wfr5jd3n4dn" path="res://!/scripts/enemies/basic enemies/slime_green/SlimeHit.gd" id="5_nduv1"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_xo5e0"]
+radius = 5.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xo5e0"]
+size = Vector2(10, 13)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xo5e0"]
+atlas = ExtResource("2_2n3ph")
+region = Rect2(0, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lpqxa"]
+atlas = ExtResource("2_2n3ph")
+region = Rect2(24, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6oiia"]
+atlas = ExtResource("2_2n3ph")
+region = Rect2(48, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kylqf"]
+atlas = ExtResource("2_2n3ph")
+region = Rect2(72, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4yocv"]
+atlas = ExtResource("2_2n3ph")
+region = Rect2(48, 48, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xidg4"]
+atlas = ExtResource("2_2n3ph")
+region = Rect2(72, 48, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2n3ph"]
+atlas = ExtResource("2_2n3ph")
+region = Rect2(0, 24, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rcsj3"]
+atlas = ExtResource("2_2n3ph")
+region = Rect2(24, 24, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lddtx"]
+atlas = ExtResource("2_2n3ph")
+region = Rect2(48, 24, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_woc18"]
+atlas = ExtResource("2_2n3ph")
+region = Rect2(72, 24, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u8q75"]
+atlas = ExtResource("2_2n3ph")
+region = Rect2(48, 24, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qh1fm"]
+atlas = ExtResource("2_2n3ph")
+region = Rect2(72, 24, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3al6v"]
+atlas = ExtResource("2_2n3ph")
+region = Rect2(72, 48, 24, 24)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_3al6v"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xo5e0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lpqxa")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6oiia")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kylqf")
+}],
+"loop": false,
+"name": &"awake",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4yocv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xidg4")
+}],
+"loop": false,
+"name": &"hit",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2n3ph")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rcsj3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lddtx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_woc18")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_u8q75")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qh1fm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3al6v")
+}],
+"loop": true,
+"name": &"run",
+"speed": 5.0
+}]
+
+[node name="DummyEnemy" unique_id=961012920 instance=ExtResource("1_xo5e0")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent" parent_id_path=PackedInt32Array(232939803) index="0" unique_id=1799667279]
+position = Vector2(0, -8)
+shape = SubResource("CircleShape2D_xo5e0")
+
+[node name="Body" parent="." index="2" unique_id=748019568]
+position = Vector2(0, -6.5)
+shape = SubResource("RectangleShape2D_xo5e0")
+
+[node name="AnimatedSprite2D" parent="." index="3" unique_id=1281959025]
+position = Vector2(0, -12)
+sprite_frames = SubResource("SpriteFrames_3al6v")
+animation = &"hit"
+
+[node name="StateMachine" parent="." index="4" unique_id=1551728817 node_paths=PackedStringArray("initial_state")]
+initial_state = NodePath("Awake")
+
+[node name="Awake" type="Node" parent="StateMachine" index="0" unique_id=2109157418]
+script = ExtResource("3_qtubj")
+
+[node name="Idle" type="Node" parent="StateMachine" index="1" unique_id=1388782654]
+script = ExtResource("4_edxnk")
+
+[node name="Hit" type="Node" parent="StateMachine" index="2" unique_id=1925495385]
+script = ExtResource("5_nduv1")
+
+[node name="Run" type="Node" parent="StateMachine" index="3" unique_id=199261472]
+
+
+========== C:\GitHub\Semesterprojekt-3\!\scenes\entities\player\player.tscn ==========
+[gd_scene format=3 uid="uid://bh6kjgw51fv7u"]
+
+[ext_resource type="Script" uid="uid://81ckxyu5ky6r" path="res://!/scripts/player/PlayerMovement.gd" id="1_12pno"]
+[ext_resource type="PackedScene" uid="uid://pnpqmi4np2b" path="res://!/scenes/components/health_component.tscn" id="2_22ku6"]
+[ext_resource type="PackedScene" uid="uid://bhjypj2tgq0md" path="res://!/scenes/components/hitbox_component.tscn" id="3_iohne"]
+[ext_resource type="Texture2D" uid="uid://khtnmtomqtsd" path="res://!/assets/sprites/knight.png" id="4_1cbat"]
+[ext_resource type="Script" uid="uid://dik0xieka724p" path="res://!/scripts/player/PlayerInteractor.gd" id="4_7cutu"]
+[ext_resource type="PackedScene" uid="uid://cb14ws6lv4t4k" path="res://!/scenes/components/inventory_component.tscn" id="4_sgjri"]
+[ext_resource type="PackedScene" uid="uid://dhirfpuogr2q8" path="res://!/scenes/components/state_machine.tscn" id="5_8ghov"]
+[ext_resource type="Script" uid="uid://60iiuqamlxgb" path="res://!/scripts/player/states/PlayerIdle.gd" id="6_lopw5"]
+[ext_resource type="Script" uid="uid://dc5jhqq4snryw" path="res://!/scripts/player/states/PlayerRun.gd" id="7_20qlv"]
+[ext_resource type="Script" uid="uid://t7evwvg3k14a" path="res://!/scripts/player/states/PlayerJump.gd" id="8_20qlv"]
+[ext_resource type="Script" uid="uid://bu4j21y8vkx0a" path="res://!/scripts/player/states/PlayerAttack_Scratch.gd" id="9_084ju"]
+[ext_resource type="PackedScene" uid="uid://dp2uswhllarmo" path="res://!/scenes/components/attack_component.tscn" id="9_mfh6n"]
+[ext_resource type="Texture2D" uid="uid://cuiinucel1hlw" path="res://!/assets/sprites/Scratch.png" id="11_5u4ll"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_rqoq1"]
+radius = 2.236068
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_sgjri"]
+radius = 16.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5u4ll"]
+size = Vector2(6, 7)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rqaru"]
+atlas = ExtResource("4_1cbat")
+region = Rect2(0, 224, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3i6sr"]
+atlas = ExtResource("4_1cbat")
+region = Rect2(32, 224, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_82e1s"]
+atlas = ExtResource("4_1cbat")
+region = Rect2(64, 224, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a25rr"]
+atlas = ExtResource("4_1cbat")
+region = Rect2(0, 160, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_084ju"]
+atlas = ExtResource("4_1cbat")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5u4ll"]
+atlas = ExtResource("4_1cbat")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sgjri"]
+atlas = ExtResource("4_1cbat")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7cutu"]
+atlas = ExtResource("4_1cbat")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8rxgk"]
+atlas = ExtResource("4_1cbat")
+region = Rect2(64, 160, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p5vvv"]
+atlas = ExtResource("4_1cbat")
+region = Rect2(96, 160, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_la4yt"]
+atlas = ExtResource("4_1cbat")
+region = Rect2(128, 160, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dkpok"]
+atlas = ExtResource("4_1cbat")
+region = Rect2(160, 160, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2wvvi"]
+atlas = ExtResource("4_1cbat")
+region = Rect2(0, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lmk5j"]
+atlas = ExtResource("4_1cbat")
+region = Rect2(32, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t5wut"]
+atlas = ExtResource("4_1cbat")
+region = Rect2(64, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_extw0"]
+atlas = ExtResource("4_1cbat")
+region = Rect2(96, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cxbbr"]
+atlas = ExtResource("4_1cbat")
+region = Rect2(128, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dv27r"]
+atlas = ExtResource("4_1cbat")
+region = Rect2(160, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m3m2s"]
+atlas = ExtResource("4_1cbat")
+region = Rect2(192, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sjmtg"]
+atlas = ExtResource("4_1cbat")
+region = Rect2(224, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rnxtw"]
+atlas = ExtResource("4_1cbat")
+region = Rect2(0, 96, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sy04i"]
+atlas = ExtResource("4_1cbat")
+region = Rect2(32, 96, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_65dil"]
+atlas = ExtResource("4_1cbat")
+region = Rect2(64, 96, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xexfc"]
+atlas = ExtResource("4_1cbat")
+region = Rect2(96, 96, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_igrfa"]
+atlas = ExtResource("4_1cbat")
+region = Rect2(128, 96, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6h34a"]
+atlas = ExtResource("4_1cbat")
+region = Rect2(160, 96, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ytgte"]
+atlas = ExtResource("4_1cbat")
+region = Rect2(192, 96, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d21ep"]
+atlas = ExtResource("4_1cbat")
+region = Rect2(224, 96, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_084ju"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rqaru")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3i6sr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_82e1s")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_82e1s")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3i6sr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_a25rr")
+}],
+"loop": true,
+"name": &"attack_scratch",
+"speed": 6.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_084ju")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5u4ll")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sgjri")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7cutu")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8rxgk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p5vvv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_la4yt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dkpok")
+}],
+"loop": true,
+"name": &"jump",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2wvvi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lmk5j")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t5wut")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_extw0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cxbbr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dv27r")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m3m2s")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sjmtg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rnxtw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sy04i")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_65dil")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xexfc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_igrfa")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6h34a")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ytgte")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d21ep")
+}],
+"loop": true,
+"name": &"run",
+"speed": 8.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mfh6n"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uctre"]
+atlas = ExtResource("11_5u4ll")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oe48v"]
+atlas = ExtResource("11_5u4ll")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vo76s"]
+atlas = ExtResource("11_5u4ll")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bvv63"]
+atlas = ExtResource("11_5u4ll")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_he4j2"]
+atlas = ExtResource("11_5u4ll")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fedow"]
+atlas = ExtResource("11_5u4ll")
+region = Rect2(160, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_smj4d"]
+atlas = ExtResource("11_5u4ll")
+region = Rect2(192, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fmfnc"]
+atlas = ExtResource("11_5u4ll")
+region = Rect2(224, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_7k7j4"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uctre")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_oe48v")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vo76s")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bvv63")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_he4j2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fedow")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_smj4d")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fmfnc")
+}],
+"loop": false,
+"name": &"default",
+"speed": 8.0
+}]
+
+[sub_resource type="Animation" id="Animation_5u4ll"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("WeaponPivot/Scratch/EffectSprite:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("WeaponPivot/Scratch/EffectSprite:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("WeaponPivot/Scratch/CollisionShape2D:disabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.0009999999),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_rqaru"]
+resource_name = "scratch"
+length = 0.4
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("WeaponPivot/Scratch")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"clear_hit_list"
+}]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("WeaponPivot/Scratch/CollisionShape2D:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [true, false, true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("WeaponPivot/Scratch/EffectSprite:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("WeaponPivot/Scratch/EffectSprite:frame")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_lrig1"]
+_data = {
+&"RESET": SubResource("Animation_5u4ll"),
+&"scratch": SubResource("Animation_rqaru")
+}
+
+[node name="Player" type="CharacterBody2D" unique_id=80359539]
+collision_layer = 2
+collision_mask = 5
+script = ExtResource("1_12pno")
+
+[node name="HealthComponent" parent="." unique_id=1881424083 instance=ExtResource("2_22ku6")]
+
+[node name="HitboxComponent" parent="." unique_id=232939803 instance=ExtResource("3_iohne")]
+collision_layer = 16
+collision_mask = 0
+script = null
+
+[node name="Hitbox" type="CollisionShape2D" parent="HitboxComponent" unique_id=300017236]
+position = Vector2(0, -3)
+shape = SubResource("CircleShape2D_rqoq1")
+
+[node name="Interactor" type="Area2D" parent="." unique_id=376303030]
+collision_layer = 0
+collision_mask = 256
+script = ExtResource("4_7cutu")
+
+[node name="Pickup Range" type="CollisionShape2D" parent="Interactor" unique_id=1594547229]
+position = Vector2(0, -4)
+shape = SubResource("CircleShape2D_sgjri")
+
+[node name="InventoryComponent" parent="." unique_id=969716048 instance=ExtResource("4_sgjri")]
+
+[node name="Body" type="CollisionShape2D" parent="." unique_id=1785599104]
+position = Vector2(0, -3.5)
+shape = SubResource("RectangleShape2D_5u4ll")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1170618590]
+position = Vector2(0, -6)
+scale = Vector2(0.5, 0.5)
+sprite_frames = SubResource("SpriteFrames_084ju")
+animation = &"jump"
+
+[node name="StateMachine" parent="." unique_id=1551728817 node_paths=PackedStringArray("initial_state") instance=ExtResource("5_8ghov")]
+initial_state = NodePath("Idle")
+
+[node name="Idle" type="Node" parent="StateMachine" unique_id=1967148122]
+script = ExtResource("6_lopw5")
+
+[node name="Run" type="Node" parent="StateMachine" unique_id=2014207401]
+script = ExtResource("7_20qlv")
+
+[node name="Jump" type="Node" parent="StateMachine" unique_id=653964851]
+script = ExtResource("8_20qlv")
+
+[node name="Attack_Scratch" type="Node" parent="StateMachine" unique_id=622868855]
+script = ExtResource("9_084ju")
+
+[node name="WeaponPivot" type="Node2D" parent="." unique_id=1861687888]
+z_index = 10
+
+[node name="Scratch" parent="WeaponPivot" unique_id=1829374878 instance=ExtResource("9_mfh6n")]
+collision_layer = 32
+collision_mask = 64
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WeaponPivot/Scratch" unique_id=1668101493]
+position = Vector2(9, -5)
+scale = Vector2(0.5, 0.5)
+shape = SubResource("RectangleShape2D_mfh6n")
+disabled = true
+
+[node name="EffectSprite" type="AnimatedSprite2D" parent="WeaponPivot/Scratch" unique_id=1195896280]
+visible = false
+position = Vector2(9, -5)
+scale = Vector2(0.3125, 0.3125)
+sprite_frames = SubResource("SpriteFrames_7k7j4")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1395162739]
+libraries/ = SubResource("AnimationLibrary_lrig1")
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1042958842]
+offset = Vector2(0, -8)
+zoom = Vector2(5, 5)
+
+
+========== C:\GitHub\Semesterprojekt-3\!\scenes\items\plump_grub_item.tscn ==========
+[gd_scene format=3 uid="uid://cp2ripfp2aq3j"]
+
+[ext_resource type="PackedScene" uid="uid://cb5v77dqqm2og" path="res://!/scenes/base/base_item.tscn" id="1_qxeaw"]
+[ext_resource type="Resource" uid="uid://dkm1av16bny22" path="res://!/Resources/Items/plump_grub.tres" id="2_aggxr"]
+
+[node name="PlumpGrubItem" unique_id=1088472823 instance=ExtResource("1_qxeaw")]
+item_data = ExtResource("2_aggxr")
+
+
+========== C:\GitHub\Semesterprojekt-3\!\scenes\world\test_tiles.tscn ==========
+[gd_scene format=3 uid="uid://bf5a4ekgqga1w"]
+
+[node name="TileMapLayer" type="TileMapLayer" unique_id=2083263294]
+
+
+========== C:\GitHub\Semesterprojekt-3\!\scenes\world\final scenes\game.tscn ==========
+[gd_scene format=4 uid="uid://coselkpkg4ik4"]
+
+[ext_resource type="PackedScene" uid="uid://bf5a4ekgqga1w" path="res://!/scenes/world/test_tiles.tscn" id="2_s4t1n"]
+[ext_resource type="Texture2D" uid="uid://ddp62b0mwne0p" path="res://!/assets/sprites/tilemap_packed.png" id="3_l23do"]
+[ext_resource type="PackedScene" uid="uid://bh6kjgw51fv7u" path="res://!/scenes/entities/player/player.tscn" id="3_s4t1n"]
+[ext_resource type="PackedScene" uid="uid://b88w0xmg2surt" path="res://!/scenes/entities/Enemies/basic enemies/slime_green/dummy_enemy.tscn" id="4_l23do"]
+[ext_resource type="PackedScene" uid="uid://cp2ripfp2aq3j" path="res://!/scenes/items/plump_grub_item.tscn" id="5_uvovq"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_uvovq"]
+texture = ExtResource("3_l23do")
+texture_region_size = Vector2i(8, 8)
+use_texture_padding = false
+0:0/0 = 0
+1:0/0 = 0
+2:0/0 = 0
+2:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-4, -4, 4, -4, 4, 4, -4, 4)
+3:0/0 = 0
+3:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-4, -4, 4, -4, 4, 4, -4, 4)
+4:0/0 = 0
+4:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-4, -4, 4, -4, 4, 4, -4, 4)
+5:0/0 = 0
+5:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-4, -4, 4, -4, 4, 4, -4, 4)
+6:0/0 = 0
+6:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(4, -4, 4, 4, -4, 4)
+0:1/0 = 0
+1:1/0 = 0
+2:1/0 = 0
+2:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-4, -4, 4, -4, 4, 4, -4, 4)
+3:1/0 = 0
+3:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-4, -4, 4, -4, 4, 4, -4, 4)
+4:1/0 = 0
+4:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-4, -4, 4, -4, 4, 4, -4, 4)
+5:1/0 = 0
+5:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-4, -4, 4, -4, 4, 4, -4, 4)
+6:1/0 = 0
+6:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-4, -4, 4, -4, 4, 4, -4, 4)
+0:2/0 = 0
+1:2/0 = 0
+2:2/0 = 0
+2:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-4, -4, 4, -4, 4, 4, -4, 4)
+3:2/0 = 0
+3:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-4, -4, 4, -4, 4, 4, -4, 4)
+4:2/0 = 0
+4:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-4, -4, 4, -4, 4, 4, -4, 4)
+5:2/0 = 0
+5:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-4, -4, 4, -4, 4, 4, -4, 4)
+6:2/0 = 0
+6:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-4, -4, 4, -4, 4, 4, -4, 4)
+0:3/0 = 0
+1:3/0 = 0
+2:3/0 = 0
+2:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-4, -4, 4, -4, 4, 4, -4, 4)
+3:3/0 = 0
+3:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-4, -4, 4, -4, 4, 4, -4, 4)
+4:3/0 = 0
+4:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-4, -4, 4, -4, 4, 4, -4, 4)
+5:3/0 = 0
+5:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-4, -4, 4, -4, 4, 4, -4, 4)
+6:3/0 = 0
+6:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(4, -4, 4, 4, -4, -4)
+0:4/0 = 0
+1:4/0 = 0
+2:4/0 = 0
+2:4/0/physics_layer_0/polygon_0/points = PackedVector2Array(-4, -4, 4, -4, 4, 4, -4, 4)
+3:4/0 = 0
+3:4/0/physics_layer_0/polygon_0/points = PackedVector2Array(-4, -4, 4, -4, 4, 4, -4, 4)
+4:4/0 = 0
+4:4/0/physics_layer_0/polygon_0/points = PackedVector2Array(-4, -4, 4, -4, 4, 4, -4, 4)
+5:4/0 = 0
+6:4/0 = 0
+7:0/0 = 0
+7:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-4, -4, 4, 4, -4, 4)
+8:0/0 = 0
+9:0/0 = 0
+9:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-4, -4, 4, -4, 4, 4, -4, 4)
+10:0/0 = 0
+10:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-4, -4, 4, -4, 4, 4, -4, 4)
+11:0/0 = 0
+11:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-4, -4, 4, -4, 4, 4, -4, 4)
+12:0/0 = 0
+12:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-4, -4, 4, -4, 4, 4, -4, 4)
+13:0/0 = 0
+13:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(4, -4, 4, 4, -4, 4)
+14:0/0 = 0
+14:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-4, -4, 4, 4, -4, 4)
+14:1/0 = 0
+14:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-4, -4, 4, -4, 4, 4, -4, 4)
+14:2/0 = 0
+14:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-4, -4, 4, -4, 4, 4, -4, 4)
+14:3/0 = 0
+14:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(4, -4, -4, 4, -4, -4)
+14:4/0 = 0
+14:5/0 = 0
+10:6/0 = 0
+9:6/0 = 0
+8:6/0 = 0
+7:6/0 = 0
+6:6/0 = 0
+5:6/0 = 0
+4:6/0 = 0
+3:6/0 = 0
+2:6/0 = 0
+1:6/0 = 0
+0:6/0 = 0
+0:5/0 = 0
+1:5/0 = 0
+2:5/0 = 0
+2:5/0/physics_layer_0/polygon_0/points = PackedVector2Array(-4, -4, 4, -4, 4, 4, -4, 4)
+3:5/0 = 0
+3:5/0/physics_layer_0/polygon_0/points = PackedVector2Array(-4, -4, 4, -4, 4, 4, -4, 4)
+4:5/0 = 0
+4:5/0/physics_layer_0/polygon_0/points = PackedVector2Array(-4, -4, 4, -4, 4, 4, -4, 4)
+5:5/0 = 0
+6:5/0 = 0
+7:5/0 = 0
+8:5/0 = 0
+9:5/0 = 0
+9:5/0/physics_layer_0/polygon_0/points = PackedVector2Array(-4, -4, 4, -4, 4, 4, -4, 4)
+10:5/0 = 0
+10:5/0/physics_layer_0/polygon_0/points = PackedVector2Array(-4, -4, 4, -4, 4, 4, -4, 4)
+11:5/0 = 0
+11:5/0/physics_layer_0/polygon_0/points = PackedVector2Array(-4, -4, 4, -4, 4, 4, -4, 4)
+12:5/0 = 0
+13:5/0 = 0
+13:4/0 = 0
+12:4/0 = 0
+11:4/0 = 0
+11:4/0/physics_layer_0/polygon_0/points = PackedVector2Array(-4, -4, 4, -4, 4, 4, -4, 4)
+10:4/0 = 0
+10:4/0/physics_layer_0/polygon_0/points = PackedVector2Array(-4, -4, 4, -4, 4, 4, -4, 4)
+9:4/0 = 0
+9:4/0/physics_layer_0/polygon_0/points = PackedVector2Array(-4, -4, 4, -4, 4, 4, -4, 4)
+8:4/0 = 0
+7:4/0 = 0
+7:3/0 = 0
+7:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(4, -4, -4, 4, -4, -4)
+8:3/0 = 0
+9:3/0 = 0
+9:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-4, -4, 4, -4, 4, 4, -4, 4)
+10:3/0 = 0
+10:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-4, -4, 4, -4, 4, 4, -4, 4)
+11:3/0 = 0
+11:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-4, -4, 4, -4, 4, 4, -4, 4)
+12:3/0 = 0
+12:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-4, -4, 4, -4, 4, 4, -4, 4)
+13:3/0 = 0
+13:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(4, -4, 4, 4, -4, -4)
+13:2/0 = 0
+13:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-4, -4, 4, -4, 4, 4, -4, 4)
+12:2/0 = 0
+12:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-4, -4, 4, -4, 4, 4, -4, 4)
+11:2/0 = 0
+11:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-4, -4, 4, -4, 4, 4, -4, 4)
+10:2/0 = 0
+10:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-4, -4, 4, -4, 4, 4, -4, 4)
+9:2/0 = 0
+9:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-4, -4, 4, -4, 4, 4, -4, 4)
+8:2/0 = 0
+7:2/0 = 0
+7:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-4, -4, 4, -4, 4, 4, -4, 4)
+7:1/0 = 0
+7:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-4, -4, 4, -4, 4, 4, -4, 4)
+8:1/0 = 0
+9:1/0 = 0
+9:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-4, -4, 4, -4, 4, 4, -4, 4)
+10:1/0 = 0
+10:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-4, -4, 4, -4, 4, 4, -4, 4)
+11:1/0 = 0
+11:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-4, -4, 4, -4, 4, 4, -4, 4)
+12:1/0 = 0
+12:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-4, -4, 4, -4, 4, 4, -4, 4)
+13:1/0 = 0
+13:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-4, -4, 4, -4, 4, 4, -4, 4)
+0:7/0 = 0
+1:7/0 = 0
+0:8/0 = 0
+0:9/0 = 0
+1:9/0 = 0
+1:8/0 = 0
+2:8/0 = 0
+2:7/0 = 0
+2:9/0 = 0
+3:9/0 = 0
+3:8/0 = 0
+3:7/0 = 0
+4:7/0 = 0
+4:8/0 = 0
+4:9/0 = 0
+5:9/0 = 0
+5:8/0 = 0
+5:7/0 = 0
+6:7/0 = 0
+6:8/0 = 0
+7:8/0 = 0
+7:9/0 = 0
+6:9/0 = 0
+7:7/0 = 0
+8:8/0 = 0
+8:9/0 = 0
+8:7/0 = 0
+9:7/0 = 0
+9:8/0 = 0
+9:9/0 = 0
+10:7/0 = 0
+10:8/0 = 0
+10:9/0 = 0
+11:8/0 = 0
+12:8/0 = 0
+13:8/0 = 0
+14:8/0 = 0
+13:9/0 = 0
+12:9/0 = 0
+11:9/0 = 0
+14:9/0 = 0
+11:6/size_in_atlas = Vector2i(2, 2)
+11:6/0 = 0
+13:6/size_in_atlas = Vector2i(2, 2)
+13:6/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_w5yh6"]
+tile_size = Vector2i(8, 8)
+physics_layer_0/collision_layer = 1
+physics_layer_0/collision_mask = 15
+sources/0 = SubResource("TileSetAtlasSource_uvovq")
+
+[node name="Game" type="Node2D" unique_id=1662341520]
+
+[node name="TestTiles" parent="." unique_id=435681942 instance=ExtResource("2_s4t1n")]
+tile_map_data = PackedByteArray("AAAEAP//AAAOAAQAAAAEAP7/AAAOAAQAAAAEAP3/AAANAAQAAAD9/wAAAAALAAIAAAACAAAAAAALAAIAAAADAAAAAAALAAIAAAAEAAAAAAALAAIAAAAFAAAAAAALAAIAAAAAAAEAAAAJAAEAAAD//wEAAAAJAAEAAAD+/wEAAAAJAAEAAAD+/wIAAAAJAAIAAAD//wIAAAAJAAAAAAAAAAIAAAAJAAEAAAABAAIAAAAJAAIAAAABAAEAAAAJAAAAAAACAAEAAAAJAAAAAAADAAIAAAAJAAEAAAAEAAIAAAAJAAAAAAAFAAIAAAAJAAAAAAAFAAEAAAAJAAAAAAAGAAEAAAAJAAAAAAAEAAEAAAAJAAIAAAADAAEAAAAJAAEAAAACAAIAAAAJAAAAAAD9/wEAAAAJAAEAAAD8/wEAAAAJAAAAAAD8/wIAAAAJAAAAAAD9/wIAAAAJAAAAAAD//wMAAAAJAAAAAAAAAAMAAAAJAAIAAAABAAMAAAAJAAIAAAACAAMAAAAJAAEAAAADAAMAAAAJAAEAAAAEAAMAAAAJAAAAAAD7/wEAAAAJAAAAAAD8/wAAAAALAAIAAAD7/wAAAAALAAIAAAD6/wAAAAAOAAEAAAAGAAAAAAANAAEAAAAGAP//AAANAAAAAAAHAP7/AAANAAAAAAAIAP7/AAANAAEAAAAIAP3/AAANAAAAAAAJAP3/AAANAAEAAAAJAPz/AAANAAAAAAAHAP//AAANAAEAAAAKAPz/AAANAAEAAAABAAAAAAAOAAEAAAD+/wAAAAANAAEAAAAAAAAAAAAJAAAAAAD//wAAAAAJAAEAAAD6////AAAOAAAAAAD5//7/AAAOAAAAAAD4//7/AAALAAIAAAD3//7/AAALAAIAAAD2//7/AAANAAAAAAD1////AAANAAAAAAD0/wAAAAANAAAAAADz/wEAAAANAAAAAAD2////AAANAAEAAAD1/wAAAAANAAEAAAD0/wEAAAANAAEAAADz/wIAAAANAAEAAAD5////AAAOAAEAAAD7/wIAAAAJAAIAAAD6/wIAAAAJAAAAAAD6/wEAAAAJAAIAAAD5/wEAAAAJAAAAAAD5/wIAAAAJAAAAAAD4/wIAAAAJAAIAAAD4/wEAAAAJAAEAAAD3/wEAAAAJAAEAAAD3/wAAAAAJAAEAAAD3////AAAJAAAAAAD4////AAAJAAAAAAD4/wAAAAAJAAAAAAD5/wAAAAAJAAIAAAD2/wAAAAAJAAIAAAD2/wEAAAAJAAEAAAD1/wEAAAAJAAAAAAD1/wIAAAAJAAIAAAD0/wIAAAAJAAIAAAD2/wIAAAAJAAAAAAD3/wIAAAAJAAIAAAA=")
+tile_set = SubResource("TileSet_w5yh6")
+
+[node name="Player" parent="." unique_id=80359539 instance=ExtResource("3_s4t1n")]
+
+[node name="DummyEnemy" parent="." unique_id=961012920 instance=ExtResource("4_l23do")]
+position = Vector2(-28, 0)
+
+[node name="PlumpGrubItem" parent="." unique_id=1088472823 instance=ExtResource("5_uvovq")]
+position = Vector2(24, -3)
+
+
+========== C:\GitHub\Semesterprojekt-3\!\scripts\enemies\BaseEnemy.gd ==========
+extends CharacterBody2D
+class_name BaseEnemy
+
+var gravity: float = ProjectSettings.get_setting("physics/2d/default_gravity")
+
+@onready var health_component: HealthComponent = $HealthComponent
+
+func _ready() -> void:
+	# Connect health depleted signal
+	health_component.health_depleted.connect(die)
+	health_component.health_changed.connect(_on_health_changed)
+
+func _physics_process(delta: float) -> void:
+	if not is_on_floor():
+		velocity.y += gravity * delta
+		
+	move_and_slide()
+
+
+func _on_health_changed(_current: int, _max: int) -> void:
+	if has_node("StateMachine"):
+		$StateMachine.force_transition("hit")
+
+# Triggers when health hits 0
+func die() -> void:
+	# Add stuff later
+	queue_free()
+
+
+========== C:\GitHub\Semesterprojekt-3\!\scripts\enemies\basic enemies\slime_green\SlimeAwake.gd ==========
+extends State
+class_name SlimeAwake
+
+var enemy: BaseEnemy
+
+func _ready() -> void:
+	enemy = owner
+
+func enter() -> void:
+	enemy.velocity.x = 0
+	enemy.get_node("AnimatedSprite2D").play("awake")
+
+func physics_update(_delta: float) -> void:
+	# Return Idle when animation finishes
+	if not enemy.get_node("AnimatedSprite2D").is_playing():
+		transitioned.emit(self, "idle")
+
+
+========== C:\GitHub\Semesterprojekt-3\!\scripts\enemies\basic enemies\slime_green\SlimeHit.gd ==========
+extends State
+class_name SlimeHit
+
+var enemy: BaseEnemy
+
+func _ready() -> void:
+	enemy = owner
+
+func enter() -> void:
+	# Stop moving when hit
+	enemy.velocity.x = 0 
+	enemy.get_node("AnimatedSprite2D").play("hit")
+
+func physics_update(_delta: float) -> void:
+	# Return Idle when animation finishes
+	if not enemy.get_node("AnimatedSprite2D").is_playing():
+		transitioned.emit(self, "idle")
+
+
+========== C:\GitHub\Semesterprojekt-3\!\scripts\enemies\basic enemies\slime_green\SlimeIdle.gd ==========
+extends State
+class_name SlimeIdle
+
+var enemy: BaseEnemy
+
+func _ready() -> void:
+	enemy = owner
+
+func enter() -> void:
+	enemy.velocity.x = 0
+	enemy.get_node("AnimatedSprite2D").play("idle")
+
+
+========== C:\GitHub\Semesterprojekt-3\!\scripts\entity components\AttackComponent.gd ==========
+extends Area2D
+class_name AttackComponent
+
+@export var damage: int = 10
+
+# array for "multiple enemies hit"
+var hit_entities: Array[Area2D] = []
+
+func _ready() -> void:
+	area_entered.connect(_on_area_entered)
+
+func _on_area_entered(area: Area2D) -> void:
+	if area is HitboxComponent and area not in hit_entities:
+		area.take_hit(self)
+		hit_entities.append(area)
+
+# call right before attack starts to clear the memory
+func clear_hit_list() -> void:
+	hit_entities.clear()
+
+
+========== C:\GitHub\Semesterprojekt-3\!\scripts\entity components\HealthComponent.gd ==========
+extends Node2D
+class_name HealthComponent
+
+signal health_depleted
+signal health_changed(current_health, max_health)
+
+@export var max_health: int = 100
+var current_health: int
+
+func _ready() -> void:
+	current_health = max_health
+
+func take_damage(amount: int) -> void:
+	current_health -= amount
+	health_changed.emit(current_health, max_health)
+	
+	if current_health <= 0:
+		health_depleted.emit()
+
+
+========== C:\GitHub\Semesterprojekt-3\!\scripts\entity components\HitboxComponent.gd ==========
+extends Area2D
+class_name HitboxComponent
+
+# Drag the entity HealthComponent here
+@export var health_component: HealthComponent
+
+func take_hit(attack: AttackComponent) -> void:
+	if health_component:
+		health_component.take_damage(attack.damage)
+
+
+========== C:\GitHub\Semesterprojekt-3\!\scripts\entity components\InteractableComponent.gd ==========
+extends Area2D
+class_name InteractableComponent
+
+# Interaction Signal for Parent
+signal interacted(interactor: Node)
+
+# Call on Interaction
+func interact(interactor: Node) -> void:
+	interacted.emit(interactor)
+
+
+========== C:\GitHub\Semesterprojekt-3\!\scripts\entity components\InventoryComponent.gd ==========
+extends Node
+class_name InventoryComponent
+
+# Emitted future UI
+signal inventory_changed(item: ItemData, new_amount: int)
+
+# The actual backpack. 
+# Key = ItemData resource, Value = integer (amount)
+var contents: Dictionary = {}
+
+# Functions
+
+# Adds Item to Inventory
+func add_item(item: ItemData, amount: int = 1) -> void:
+	if contents.has(item):
+		contents[item] += amount
+	else:
+		contents[item] = amount
+		
+	# Cap at max stack size
+	if contents[item] > item.max_stack_size:
+		contents[item] = item.max_stack_size
+		
+	inventory_changed.emit(item, contents[item])
+
+# Removes Item to Inventory
+func remove_item(item: ItemData, amount: int = 1) -> void:
+	if not contents.has(item):
+		return
+		
+	contents[item] -= amount
+	
+	if contents[item] <= 0:
+		contents.erase(item)
+		inventory_changed.emit(item, 0)
+	else:
+		inventory_changed.emit(item, contents[item])
+
+# Check for crafting or doors that require key (Not implemented, just placeholder for now)
+func has_item(item: ItemData, amount: int = 1) -> bool:
+	return contents.has(item) and contents[item] >= amount
+	
+	
+
+
+========== C:\GitHub\Semesterprojekt-3\!\scripts\entity components\state components\state.gd ==========
+extends Node
+class_name State
+
+# Signals to tell StateMachine to switch to another state
+signal transitioned(state: State, new_state_name: String)
+
+func enter() -> void:
+	pass
+
+func exit() -> void:
+	pass
+
+func update(_delta: float) -> void:
+	pass
+
+func physics_update(_delta: float) -> void:
+	pass
+
+
+========== C:\GitHub\Semesterprojekt-3\!\scripts\entity components\state components\StateMachine.gd ==========
+extends Node
+class_name StateMachine
+
+@export var initial_state: State
+
+var current_state: State
+var states: Dictionary = {}
+
+func _ready() -> void:
+	# Loop through all child nodes to find states
+	for child in get_children():
+		if child is State:
+			# Save states in dictionary using node name
+			states[child.name.to_lower()] = child
+			child.transitioned.connect(on_child_transition)
+			
+	if initial_state:
+		initial_state.enter()
+		current_state = initial_state
+
+func _process(delta: float) -> void:
+	if current_state:
+		current_state.update(delta)
+
+func _physics_process(delta: float) -> void:
+	if current_state:
+		current_state.physics_update(delta)
+
+func on_child_transition(state: State, new_state_name: String) -> void:
+	# Ignore if background state tries to transition while not active
+	if state != current_state:
+		return
+		
+	var new_state = states.get(new_state_name.to_lower())
+	if !new_state:
+		return
+		
+	# Clean up old state, boot up new state
+	if current_state:
+		current_state.exit()
+		
+	new_state.enter()
+	current_state = new_state
+
+func force_transition(new_state_name: String) -> void:
+	var new_state = states.get(new_state_name.to_lower())
+	if !new_state or new_state == current_state:
+		return
+		
+	if current_state:
+		current_state.exit()
+		
+	new_state.enter()
+	current_state = new_state
+
+
+========== C:\GitHub\Semesterprojekt-3\!\scripts\items\BaseItem.gd ==========
+extends RigidBody2D
+class_name BaseItem
+
+@export var item_data: ItemData
+@export var pickup_message: String = "Pick up"
+
+@onready var sprite: Sprite2D = $Sprite2D
+@onready var interactable: InteractableComponent =$InteractableComponent
+
+func _ready() -> void:
+	
+	# Update Item
+	if item_data:
+		sprite.texture = item_data.icon
+		interactable.prompt_message = pickup_message + item_data.item_name
+	
+	# Connect Signal
+	interactable.interacted.connect(_on_interacted)
+
+func _on_interacted(interactor: Node) -> void:
+	# Get Inventory from Interactor
+	var inventory: InventoryComponent = interactor.get_node_or_null("InventoryComponent")
+	
+	# If Inventory exists, add the item and delete it
+	if inventory and item_data:
+		inventory.add_item(item_data)
+		queue_free()
+	
+
+
+========== C:\GitHub\Semesterprojekt-3\!\scripts\items\ItemData.gd ==========
+extends Resource
+class_name ItemData
+
+@export var item_name: String = "Unknown Item"
+@export_multiline var description: String = ""
+@export var icon: Texture2D
+@export var max_stack_size: int = 99
+
+# Expand this later
+
+
+========== C:\GitHub\Semesterprojekt-3\!\scripts\player\PlayerInteractor.gd ==========
+extends Area2D
+
+func _unhandled_input(event: InputEvent) -> void:
+	if event.is_action_pressed("interact"):
+		# Get all InteractableComponents currently in range
+		var interactables = get_overlapping_areas()
+		
+		if interactables.size() > 0:
+			var target = interactables[0]
+			if target is InteractableComponent:
+				target.interact(owner) # Give Interactable the player
+
+
+========== C:\GitHub\Semesterprojekt-3\!\scripts\player\PlayerManager.gd ==========
+extends Node
+
+# We store the player reference here. Autoload Singleton Pattern
+# Any script can access this by calling: PlayerManager.player
+var player: CharacterBody2D
+
+
+========== C:\GitHub\Semesterprojekt-3\!\scripts\player\PlayerMovement.gd ==========
+extends CharacterBody2D
+class_name PlayerMovement
+
+# Movement 
+@export var speed: float = 70.0
+@export var acceleration: float = 600.0
+@export var friction: float = 800.0
+var stored_velocity: Vector2
+
+#Jump
+@export var jump_velocity: float = -250.0
+@export var jump_buffer_time = 0.15
+var jump_buffer_timer = 0.0
+
+var gravity: float = ProjectSettings.get_setting("physics/2d/default_gravity")
+var apply_gravity: bool = true
+
+
+func _ready() -> void:
+	# Setup Singleton PlayerManager
+	PlayerManager.player = self
+
+func _physics_process(delta: float) -> void:
+	# Jump buffer
+	if is_on_floor():
+		jump_buffer_timer = jump_buffer_time
+	else:
+		jump_buffer_timer -= delta
+	
+	# Apply Gravity
+	if not is_on_floor() and apply_gravity:
+		velocity.y += gravity * delta
+
+	move_and_slide()
+
+
+
+# Utility Methods
+
+# Jump functions
+func can_jump() -> bool:
+	return is_on_floor() or jump_buffer_timer > 0.0 # Returns if player is allowed to jump
+
+func consume_jump() -> void:
+	jump_buffer_timer = 0.0 # Removes jump buffer so player cannot double jump
+
+# Attack freeze
+func freeze() -> void:
+	stored_velocity = velocity
+	velocity = Vector2.ZERO
+	apply_gravity = false
+
+func unfreeze() -> void:
+	velocity = stored_velocity
+	apply_gravity = true
+
+
+========== C:\GitHub\Semesterprojekt-3\!\scripts\player\states\PlayerAttack_Scratch.gd ==========
+extends State
+class_name PlayerAttack_Scratch
+
+var player: PlayerMovement
+
+func _ready() -> void:
+	player = owner
+
+func enter() -> void:
+	player.freeze()
+	
+	# Play animations
+	player.get_node("AnimatedSprite2D").play("attack_scratch")
+	player.get_node("AnimationPlayer").play("scratch")
+
+func exit() -> void:
+	player.unfreeze()
+
+func physics_update(_delta: float) -> void:
+	# Wait for AnimationPlayer
+	if not player.get_node("AnimationPlayer").is_playing():
+		transitioned.emit(self, "idle")
+
+
+========== C:\GitHub\Semesterprojekt-3\!\scripts\player\states\PlayerIdle.gd ==========
+extends State
+class_name PlayerIdle
+
+var player: PlayerMovement
+
+func _ready() -> void:
+	player = owner
+
+func enter() -> void:
+	# Play sprite animation
+	player.get_node("AnimatedSprite2D").play("idle")
+
+func physics_update(delta: float) -> void:
+	# Apply friction
+	player.velocity.x = move_toward(player.velocity.x, 0, player.friction * delta)
+	
+	
+	
+	
+	# Other Transitions
+	if Input.get_axis("move_left", "move_right") != 0:
+		transitioned.emit(self, "run")
+	
+	if Input.is_action_just_pressed("jump") and player.can_jump():
+		transitioned.emit(self, "jump")
+	
+	if Input.is_action_just_pressed("attack"):
+		transitioned.emit(self, "attack_scratch")
+
+
+========== C:\GitHub\Semesterprojekt-3\!\scripts\player\states\PlayerJump.gd ==========
+extends State
+class_name PlayerJump
+
+var player: PlayerMovement
+
+func _ready() -> void:
+	player = owner
+
+func enter() -> void:
+	player.velocity.y = player.jump_velocity
+	player.consume_jump()
+	
+	# Play sprite animation
+	player.get_node("AnimatedSprite2D").play("jump")
+
+func physics_update(delta: float) -> void:
+	var direction := Input.get_axis("move_left", "move_right")
+	
+	# Allow horizontal movement in mid-air
+	if direction != 0:
+		player.velocity.x = move_toward(player.velocity.x, direction * player.speed, player.acceleration * delta)
+	else:
+		player.velocity.x = move_toward(player.velocity.x, 0, player.friction * delta)
+	
+	# Flip logic
+	if direction > 0:
+		player.get_node("WeaponPivot").scale.x = 1
+		player.get_node("AnimatedSprite2D").flip_h = false
+	elif direction < 0:
+		player.get_node("WeaponPivot").scale.x = -1
+		player.get_node("AnimatedSprite2D").flip_h = true
+	
+	
+	
+	
+	
+	# Other Transitions
+	if player.is_on_floor():
+		if direction != 0:
+			transitioned.emit(self, "run")
+		else:
+			transitioned.emit(self, "idle")
+	
+	if Input.is_action_just_pressed("attack"):
+		transitioned.emit(self, "attack_scratch")
+
+
+========== C:\GitHub\Semesterprojekt-3\!\scripts\player\states\PlayerRun.gd ==========
+extends State
+class_name PlayerRun
+
+var player: PlayerMovement
+
+func _ready() -> void:
+	player = owner
+
+func enter() -> void:
+	# Play sprite animation
+	player.get_node("AnimatedSprite2D").play("run")
+
+func physics_update(delta: float) -> void:
+	var direction := Input.get_axis("move_left", "move_right")
+	
+	# Flip logic
+	if direction > 0:
+		player.get_node("WeaponPivot").scale.x = 1
+		player.get_node("AnimatedSprite2D").flip_h = false
+	elif direction < 0:
+		player.get_node("WeaponPivot").scale.x = -1
+		player.get_node("AnimatedSprite2D").flip_h = true
+	
+	# Apply movement
+	if direction != 0:
+		player.velocity.x = move_toward(player.velocity.x, direction * player.speed, player.acceleration * delta)
+	else:
+		transitioned.emit(self, "idle")
+	
+	
+	
+	
+	
+	# Other Transitions
+	if Input.is_action_just_pressed("jump") and player.can_jump():
+		transitioned.emit(self, "jump")
+	
+	if Input.is_action_just_pressed("attack"):
+		transitioned.emit(self, "attack_scratch")
+
+

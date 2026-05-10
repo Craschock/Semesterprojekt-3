@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="ItemData" format=3 uid="uid://dkm1av16bny22"]
+
+[ext_resource type="Texture2D" uid="uid://dss2teep3vg2m" path="res://!/assets/sprites/items/plump_grub.png" id="1_2sw7x"]
+[ext_resource type="Script" uid="uid://cytj0n2h6v2fp" path="res://!/scripts/items/ItemData.gd" id="1_wkji0"]
+
+[resource]
+script = ExtResource("1_wkji0")
+item_name = "Plump Grub"
+description = "Small Healing Worm"
+icon = ExtResource("1_2sw7x")
+metadata/_custom_type_script = "uid://cytj0n2h6v2fp"

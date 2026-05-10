@@ -4,8 +4,6 @@
 [ext_resource type="PackedScene" uid="uid://pnpqmi4np2b" path="res://!/scenes/components/health_component.tscn" id="2_22ku6"]
 [ext_resource type="PackedScene" uid="uid://bhjypj2tgq0md" path="res://!/scenes/components/hitbox_component.tscn" id="3_iohne"]
 [ext_resource type="Texture2D" uid="uid://khtnmtomqtsd" path="res://!/assets/sprites/knight.png" id="4_1cbat"]
-[ext_resource type="Script" uid="uid://dik0xieka724p" path="res://!/scripts/player/PlayerInteractor.gd" id="4_7cutu"]
-[ext_resource type="PackedScene" uid="uid://cb14ws6lv4t4k" path="res://!/scenes/components/inventory_component.tscn" id="4_sgjri"]
 [ext_resource type="PackedScene" uid="uid://dhirfpuogr2q8" path="res://!/scenes/components/state_machine.tscn" id="5_8ghov"]
 [ext_resource type="Script" uid="uid://60iiuqamlxgb" path="res://!/scripts/player/states/PlayerIdle.gd" id="6_lopw5"]
 [ext_resource type="Script" uid="uid://dc5jhqq4snryw" path="res://!/scripts/player/states/PlayerRun.gd" id="7_20qlv"]
@@ -16,12 +14,6 @@
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_rqoq1"]
 radius = 2.236068
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_sgjri"]
-radius = 16.0
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_5u4ll"]
-size = Vector2(6, 7)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_rqaru"]
 atlas = ExtResource("4_1cbat")
@@ -55,6 +47,10 @@ region = Rect2(64, 0, 32, 32)
 atlas = ExtResource("4_1cbat")
 region = Rect2(96, 0, 32, 32)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_d6rt7"]
+atlas = ExtResource("4_1cbat")
+region = Rect2(32, 160, 32, 32)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_8rxgk"]
 atlas = ExtResource("4_1cbat")
 region = Rect2(64, 160, 32, 32)
@@ -70,6 +66,14 @@ region = Rect2(128, 160, 32, 32)
 [sub_resource type="AtlasTexture" id="AtlasTexture_dkpok"]
 atlas = ExtResource("4_1cbat")
 region = Rect2(160, 160, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vonde"]
+atlas = ExtResource("4_1cbat")
+region = Rect2(192, 160, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gjbxo"]
+atlas = ExtResource("4_1cbat")
+region = Rect2(224, 160, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_2wvvi"]
 atlas = ExtResource("4_1cbat")
@@ -179,6 +183,9 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_d6rt7")
+}, {
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_8rxgk")
 }, {
 "duration": 1.0,
@@ -189,6 +196,12 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_dkpok")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vonde")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gjbxo")
 }],
 "loop": true,
 "name": &"jump",
@@ -247,6 +260,9 @@ animations = [{
 "name": &"run",
 "speed": 8.0
 }]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5u4ll"]
+size = Vector2(6, 7)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mfh6n"]
 
@@ -429,26 +445,15 @@ script = null
 position = Vector2(0, -3)
 shape = SubResource("CircleShape2D_rqoq1")
 
-[node name="Interactor" type="Area2D" parent="." unique_id=376303030]
-collision_layer = 0
-collision_mask = 256
-script = ExtResource("4_7cutu")
-
-[node name="Pickup Range" type="CollisionShape2D" parent="Interactor" unique_id=1594547229]
-position = Vector2(0, -4)
-shape = SubResource("CircleShape2D_sgjri")
-
-[node name="InventoryComponent" parent="." unique_id=969716048 instance=ExtResource("4_sgjri")]
-
-[node name="Body" type="CollisionShape2D" parent="." unique_id=1785599104]
-position = Vector2(0, -3.5)
-shape = SubResource("RectangleShape2D_5u4ll")
-
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1170618590]
 position = Vector2(0, -6)
 scale = Vector2(0.5, 0.5)
 sprite_frames = SubResource("SpriteFrames_084ju")
-animation = &"jump"
+animation = &"idle"
+
+[node name="Body" type="CollisionShape2D" parent="." unique_id=1785599104]
+position = Vector2(0, -3.5)
+shape = SubResource("RectangleShape2D_5u4ll")
 
 [node name="StateMachine" parent="." unique_id=1551728817 node_paths=PackedStringArray("initial_state") instance=ExtResource("5_8ghov")]
 initial_state = NodePath("Idle")
@@ -466,7 +471,6 @@ script = ExtResource("8_20qlv")
 script = ExtResource("9_084ju")
 
 [node name="WeaponPivot" type="Node2D" parent="." unique_id=1861687888]
-z_index = 10
 
 [node name="Scratch" parent="WeaponPivot" unique_id=1829374878 instance=ExtResource("9_mfh6n")]
 collision_layer = 32

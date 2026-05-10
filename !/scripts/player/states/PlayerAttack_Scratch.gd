@@ -7,14 +7,14 @@ func _ready() -> void:
 	player = owner
 
 func enter() -> void:
-	# Stop horizontal movement 
-	player.velocity.x = 0 
+	player.freeze()
 	
-	# Play sprite animation
+	# Play animations
 	player.get_node("AnimatedSprite2D").play("attack_scratch")
-	
-	# Play animation (Logic)
 	player.get_node("AnimationPlayer").play("scratch")
+
+func exit() -> void:
+	player.unfreeze()
 
 func physics_update(_delta: float) -> void:
 	# Wait for AnimationPlayer
