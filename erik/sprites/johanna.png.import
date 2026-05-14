@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://c4ieg1fyvyg74"
-path="res://.godot/imported/johanna.png-3467dd2d798a9c8ea94b7fd36f9e696d.ctex"
+path="res://.godot/imported/johanna.png-0a861e30f1184711409f269213616a56.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/johanna.png"
-dest_files=["res://.godot/imported/johanna.png-3467dd2d798a9c8ea94b7fd36f9e696d.ctex"]
+source_file="res://erik/sprites/johanna.png"
+dest_files=["res://.godot/imported/johanna.png-0a861e30f1184711409f269213616a56.ctex"]
 
 [params]
 

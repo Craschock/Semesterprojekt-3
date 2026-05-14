@@ -26,22 +26,21 @@ enabled=PackedStringArray("res://addons/ridiculous_coding/plugin.cfg")
 [file_customization]
 
 folder_colors={
-"res://!/Resources/": "green",
-"res://!/UI/": "yellow",
-"res://!/abilities/": "pink",
-"res://!/assets/": "purple",
-"res://!/scenes/": "gray",
-"res://!/scenes/entities/": "gray",
-"res://!/scenes/entities/Enemies/": "gray",
-"res://!/scenes/entities/Enemies/basic enemies/": "gray",
-"res://!/scenes/entities/Enemies/basic enemies/slime_green/": "gray",
-"res://!/scenes/entities/player/": "gray",
-"res://!/scenes/items/": "gray",
-"res://!/scenes/world/": "gray",
-"res://!/scenes/world/environment/": "gray",
-"res://!/scenes/world/final scenes/": "gray",
-"res://!/scenes/world/traps/": "gray",
-"res://!/scripts/": "teal"
+"res://! self made/Resources/": "green",
+"res://! self made/abilities/": "pink",
+"res://! self made/assets/": "purple",
+"res://! self made/scenes/": "gray",
+"res://! self made/scenes/entities/": "gray",
+"res://! self made/scenes/entities/Enemies/": "gray",
+"res://! self made/scenes/entities/Enemies/basic enemies/": "gray",
+"res://! self made/scenes/entities/Enemies/basic enemies/slime_green/": "gray",
+"res://! self made/scenes/entities/player/": "gray",
+"res://! self made/scenes/items/": "gray",
+"res://! self made/scenes/world/": "gray",
+"res://! self made/scenes/world/environment/": "gray",
+"res://! self made/scenes/world/final scenes/": "gray",
+"res://! self made/scenes/world/traps/": "gray",
+"res://! self made/scripts/": "yellow"
 }
 
 [input]
