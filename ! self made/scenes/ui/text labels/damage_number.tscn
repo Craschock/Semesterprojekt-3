@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://cbskxdkpog3fj"]
+
+[ext_resource type="Script" uid="uid://kq8l5d0v0oxw" path="res://! self made/scripts/ui/text labels/DamageNumber.gd" id="1_x1vie"]
+[ext_resource type="FontFile" uid="uid://ww3qpbbtk4gc" path="res://! self made/assets/fonts/PixelOperator8.ttf" id="2_yk3um"]
+
+[node name="DamageNumber" type="Marker2D" unique_id=1607216402]
+scale = Vector2(0.4, 0.4)
+script = ExtResource("1_x1vie")
+
+[node name="Label" type="Label" parent="." unique_id=102029132]
+offset_right = 40.0
+offset_bottom = 23.0
+theme_override_colors/font_color = Color(0.69919515, 3.742166e-06, 2.0214916e-06, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 8
+theme_override_fonts/font = ExtResource("2_yk3um")
+theme_override_font_sizes/font_size = 8

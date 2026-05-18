@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://b88w0xmg2surt"]
 
 [ext_resource type="PackedScene" uid="uid://c301qejfle2yq" path="res://! self made/scenes/base/base_enemy.tscn" id="1_xo5e0"]
-[ext_resource type="Texture2D" uid="uid://cfxhvbh18jx42" path="res://! self made/assets/sprites/slime_green.png" id="2_2n3ph"]
+[ext_resource type="Texture2D" uid="uid://cfxhvbh18jx42" path="res://! self made/assets/sprites/test/slime_green.png" id="2_2n3ph"]
 [ext_resource type="Script" uid="uid://cqpjnrn3ciqwc" path="res://! self made/scripts/enemies/basic enemies/slime_green/SlimeAwake.gd" id="3_qtubj"]
 [ext_resource type="Script" uid="uid://cppgrl0mtrf4d" path="res://! self made/scripts/enemies/basic enemies/slime_green/SlimeIdle.gd" id="4_edxnk"]
 [ext_resource type="Script" uid="uid://b4wfr5jd3n4dn" path="res://! self made/scripts/enemies/basic enemies/slime_green/SlimeHit.gd" id="5_nduv1"]

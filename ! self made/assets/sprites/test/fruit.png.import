@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c4ieg1fyvyg74"
-path="res://.godot/imported/johanna.png-0a861e30f1184711409f269213616a56.ctex"
+uid="uid://b5enij2dy5p7"
+path="res://.godot/imported/fruit.png-1f778ad44af9ff9a630dd06e6b98d51c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://erik/sprites/johanna.png"
-dest_files=["res://.godot/imported/johanna.png-0a861e30f1184711409f269213616a56.ctex"]
+source_file="res://! self made/assets/sprites/test/fruit.png"
+dest_files=["res://.godot/imported/fruit.png-1f778ad44af9ff9a630dd06e6b98d51c.ctex"]
 
 [params]
 

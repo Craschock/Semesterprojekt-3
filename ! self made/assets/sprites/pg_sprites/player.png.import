@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cuiinucel1hlw"
-path="res://.godot/imported/Scratch.png-ba4308b7f982a1715d1e7b675c8f58a4.ctex"
+uid="uid://b2abwo4xdum4x"
+path="res://.godot/imported/player.png-b62c94f0fc1679162ca26405d0ce1161.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://! self made/assets/sprites/Scratch.png"
-dest_files=["res://.godot/imported/Scratch.png-ba4308b7f982a1715d1e7b675c8f58a4.ctex"]
+source_file="res://! self made/assets/sprites/pg_sprites/player.png"
+dest_files=["res://.godot/imported/player.png-b62c94f0fc1679162ca26405d0ce1161.ctex"]
 
 [params]
 

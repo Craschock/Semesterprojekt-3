@@ -7,3 +7,4 @@ class_name HitboxComponent
 func take_hit(attack: AttackComponent) -> void:
 	if health_component:
 		health_component.take_damage(attack.damage)
+		EffectManager.spawn_damage_number(global_position, attack.damage)

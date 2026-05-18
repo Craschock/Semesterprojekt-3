@@ -18,6 +18,7 @@ config/icon="res://icon.svg"
 [autoload]
 
 PlayerManager="*uid://dgopauq4501ns"
+EffectManager="*uid://qcib5dvtt62x"
 
 [editor_plugins]
 
@@ -35,9 +36,9 @@ folder_colors={
 "res://! self made/scenes/entities/Enemies/basic enemies/": "gray",
 "res://! self made/scenes/entities/Enemies/basic enemies/slime_green/": "gray",
 "res://! self made/scenes/entities/player/": "gray",
+"res://! self made/scenes/environment/": "gray",
 "res://! self made/scenes/items/": "gray",
 "res://! self made/scenes/world/": "gray",
-"res://! self made/scenes/world/environment/": "gray",
 "res://! self made/scenes/world/final scenes/": "gray",
 "res://! self made/scenes/world/traps/": "gray",
 "res://! self made/scripts/": "yellow"
