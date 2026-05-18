@@ -1,6 +1,9 @@
 extends CharacterBody2D
 class_name PlayerMovement
 
+@onready var health_component: HealthComponent = $HealthComponent
+@onready var state_machine: StateMachine = $StateMachine
+
 # Movement 
 @export var speed: float = 70.0
 @export var acceleration: float = 600.0
@@ -19,6 +22,9 @@ var apply_gravity: bool = true
 func _ready() -> void:
 	# Setup Singleton PlayerManager
 	PlayerManager.player = self
+	# Connect signals
+	health_component.health_changed.connect(_on_health_changed)
+	health_component.health_depleted.connect(_on_health_depleted)
 
 func _physics_process(delta: float) -> void:
 	# Jump buffer
@@ -37,12 +43,22 @@ func _physics_process(delta: float) -> void:
 
 # Utility Methods
 
+func _on_health_changed(_current: int, _max: int) -> void:
+	state_machine.force_transition("hit")
+
+func _on_health_depleted() -> void:
+	state_machine.force_transition("death")
+
+
+
 # Jump functions
 func can_jump() -> bool:
 	return is_on_floor() or jump_buffer_timer > 0.0 # Returns if player is allowed to jump
 
 func consume_jump() -> void:
 	jump_buffer_timer = 0.0 # Removes jump buffer so player cannot double jump
+
+
 
 # Attack freeze
 func freeze() -> void:

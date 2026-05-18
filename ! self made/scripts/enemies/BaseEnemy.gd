@@ -3,6 +3,8 @@ class_name BaseEnemy
 
 var gravity: float = ProjectSettings.get_setting("physics/2d/default_gravity")
 
+var apply_gravity: bool = true
+var stored_velocity: Vector2
 @onready var health_component: HealthComponent = $HealthComponent
 
 func _ready() -> void:
@@ -13,9 +15,16 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	if not is_on_floor():
 		velocity.y += gravity * delta
-		
 	move_and_slide()
 
+func freeze_in_place() -> void:
+	stored_velocity = velocity
+	velocity = Vector2.ZERO
+	apply_gravity = false
+
+func unfreeze() -> void:
+	velocity = stored_velocity
+	apply_gravity = true
 
 func _on_health_changed(_current: int, _max: int) -> void:
 	if has_node("StateMachine"):

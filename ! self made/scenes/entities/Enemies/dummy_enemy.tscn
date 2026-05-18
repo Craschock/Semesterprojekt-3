@@ -2,12 +2,12 @@
 
 [ext_resource type="PackedScene" uid="uid://c301qejfle2yq" path="res://! self made/scenes/base/base_enemy.tscn" id="1_xo5e0"]
 [ext_resource type="Texture2D" uid="uid://cfxhvbh18jx42" path="res://! self made/assets/sprites/test/slime_green.png" id="2_2n3ph"]
-[ext_resource type="Script" uid="uid://cqpjnrn3ciqwc" path="res://! self made/scripts/enemies/basic enemies/slime_green/SlimeAwake.gd" id="3_qtubj"]
-[ext_resource type="Script" uid="uid://cppgrl0mtrf4d" path="res://! self made/scripts/enemies/basic enemies/slime_green/SlimeIdle.gd" id="4_edxnk"]
-[ext_resource type="Script" uid="uid://b4wfr5jd3n4dn" path="res://! self made/scripts/enemies/basic enemies/slime_green/SlimeHit.gd" id="5_nduv1"]
+[ext_resource type="Script" uid="uid://cqpjnrn3ciqwc" path="res://! self made/scripts/enemies/basic enemies/dummy enemy/SlimeAwake.gd" id="3_qtubj"]
+[ext_resource type="Script" uid="uid://cppgrl0mtrf4d" path="res://! self made/scripts/enemies/basic enemies/dummy enemy/SlimeIdle.gd" id="4_edxnk"]
+[ext_resource type="Script" uid="uid://b4wfr5jd3n4dn" path="res://! self made/scripts/enemies/basic enemies/EnemyHit.gd" id="5_nduv1"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_xo5e0"]
-radius = 5.0
+radius = 8.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xo5e0"]
 size = Vector2(10, 13)
@@ -129,7 +129,7 @@ animations = [{
 [node name="DummyEnemy" unique_id=961012920 instance=ExtResource("1_xo5e0")]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent" parent_id_path=PackedInt32Array(232939803) index="0" unique_id=1799667279]
-position = Vector2(0, -8)
+position = Vector2(0, -7)
 shape = SubResource("CircleShape2D_xo5e0")
 
 [node name="Body" parent="." index="2" unique_id=748019568]
@@ -139,7 +139,8 @@ shape = SubResource("RectangleShape2D_xo5e0")
 [node name="AnimatedSprite2D" parent="." index="3" unique_id=1281959025]
 position = Vector2(0, -12)
 sprite_frames = SubResource("SpriteFrames_3al6v")
-animation = &"hit"
+animation = &"idle"
+frame_progress = 0.69677067
 
 [node name="StateMachine" parent="." index="4" unique_id=1551728817 node_paths=PackedStringArray("initial_state")]
 initial_state = NodePath("Awake")
@@ -152,5 +153,3 @@ script = ExtResource("4_edxnk")
 
 [node name="Hit" type="Node" parent="StateMachine" index="2" unique_id=1925495385]
 script = ExtResource("5_nduv1")
-
-[node name="Run" type="Node" parent="StateMachine" index="3" unique_id=199261472]

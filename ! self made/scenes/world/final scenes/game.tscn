@@ -3,9 +3,10 @@
 [ext_resource type="PackedScene" uid="uid://bf5a4ekgqga1w" path="res://! self made/scenes/world/test_tiles.tscn" id="2_s4t1n"]
 [ext_resource type="Texture2D" uid="uid://ddp62b0mwne0p" path="res://! self made/assets/sprites/test/tilemap_packed.png" id="3_l23do"]
 [ext_resource type="PackedScene" uid="uid://bh6kjgw51fv7u" path="res://! self made/scenes/entities/player/player.tscn" id="3_s4t1n"]
-[ext_resource type="PackedScene" uid="uid://b88w0xmg2surt" path="res://! self made/scenes/entities/Enemies/basic enemies/slime_green/dummy_enemy.tscn" id="4_l23do"]
+[ext_resource type="PackedScene" uid="uid://b88w0xmg2surt" path="res://! self made/scenes/entities/Enemies/dummy_enemy.tscn" id="4_l23do"]
 [ext_resource type="PackedScene" uid="uid://cp2ripfp2aq3j" path="res://! self made/scenes/items/plump_grub_item.tscn" id="5_uvovq"]
 [ext_resource type="PackedScene" uid="uid://bqiiord2qchy1" path="res://! self made/scenes/environment/readable_sign.tscn" id="6_1o2q3"]
+[ext_resource type="PackedScene" uid="uid://bycye4tdrlmf3" path="res://! self made/scenes/entities/Enemies/basic enemies/small_slime_green/small_slime_green.tscn" id="7_6f1ki"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_uvovq"]
 texture = ExtResource("3_l23do")
@@ -225,6 +226,7 @@ physics_layer_0/collision_mask = 15
 sources/0 = SubResource("TileSetAtlasSource_uvovq")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1o2q3"]
+size = Vector2(28, 50)
 
 [node name="Game" type="Node2D" unique_id=1662341520]
 
@@ -244,6 +246,9 @@ position = Vector2(-65, -20)
 position = Vector2(33, -5)
 sign_text = "Goal"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="ReadableSign" unique_id=426136653]
-position = Vector2(0, -5)
+[node name="SignCollider" type="CollisionShape2D" parent="ReadableSign" unique_id=426136653]
+position = Vector2(4, -15)
 shape = SubResource("RectangleShape2D_1o2q3")
+
+[node name="SmallSlimeGreen" parent="." unique_id=927085607 instance=ExtResource("7_6f1ki")]
+position = Vector2(93, -40)
