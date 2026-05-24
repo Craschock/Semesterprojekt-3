@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c4ieg1fyvyg74"
-path="res://.godot/imported/johanna.png-8db3ff3a63eb932a8484359e9a821b44.ctex"
+uid="uid://0k13xo3u6fmp"
+path="res://.godot/imported/yellowbackground.png-1eca59ce9576ee5d60e1fb79a19fc2f2.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://! self made/assets/sprites/pg_sprites/johanna.png"
-dest_files=["res://.godot/imported/johanna.png-8db3ff3a63eb932a8484359e9a821b44.ctex"]
+source_file="res://! self made/assets/sprites/pg_sprites/biomes/yellowbackground.png"
+dest_files=["res://.godot/imported/yellowbackground.png-1eca59ce9576ee5d60e1fb79a19fc2f2.ctex"]
 
 [params]
 

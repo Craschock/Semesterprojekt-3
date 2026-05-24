@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b2abwo4xdum4x"
-path="res://.godot/imported/player.png-b62c94f0fc1679162ca26405d0ce1161.ctex"
+uid="uid://c4ieg1fyvyg74"
+path="res://.godot/imported/johanna.png-9a2c2ae65073762a495e6b21b6180369.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://! self made/assets/sprites/pg_sprites/player.png"
-dest_files=["res://.godot/imported/player.png-b62c94f0fc1679162ca26405d0ce1161.ctex"]
+source_file="res://! self made/assets/sprites/pg_sprites/biomes/johanna.png"
+dest_files=["res://.godot/imported/johanna.png-9a2c2ae65073762a495e6b21b6180369.ctex"]
 
 [params]
 
