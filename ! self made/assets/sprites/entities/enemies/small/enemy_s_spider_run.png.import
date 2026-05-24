@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b70oij0ytkvg8"
-path="res://.godot/imported/defaultbackground.png-836a12e81e624ca367fabf292a0de7e5.ctex"
+uid="uid://t8ax2sbjf3s6"
+path="res://.godot/imported/enemy_s_spider_run.png-b38650b9e4873c5af66098a5eba3612a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://! self made/assets/sprites/pg_sprites/tiles/defaultbackground.png"
-dest_files=["res://.godot/imported/defaultbackground.png-836a12e81e624ca367fabf292a0de7e5.ctex"]
+source_file="res://! self made/assets/sprites/entities/enemies/small/enemy_s_spider_run.png"
+dest_files=["res://.godot/imported/enemy_s_spider_run.png-b38650b9e4873c5af66098a5eba3612a.ctex"]
 
 [params]
 

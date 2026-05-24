@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b70oij0ytkvg8"
-path="res://.godot/imported/defaultbackground.png-836a12e81e624ca367fabf292a0de7e5.ctex"
+uid="uid://bfrn7wa54a8ib"
+path="res://.godot/imported/player_idle1.png-8c8169dfda947f09269c53482b48fa8f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://! self made/assets/sprites/pg_sprites/tiles/defaultbackground.png"
-dest_files=["res://.godot/imported/defaultbackground.png-836a12e81e624ca367fabf292a0de7e5.ctex"]
+source_file="res://! self made/assets/sprites/entities/player/player_idle1.png"
+dest_files=["res://.godot/imported/player_idle1.png-8c8169dfda947f09269c53482b48fa8f.ctex"]
 
 [params]
 

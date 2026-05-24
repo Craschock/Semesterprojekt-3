@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b70oij0ytkvg8"
-path="res://.godot/imported/defaultbackground.png-836a12e81e624ca367fabf292a0de7e5.ctex"
+uid="uid://1c1h2vgap0e8"
+path="res://.godot/imported/OE.png-9867f0c0710c1aaf2e3762f166636c2b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://! self made/assets/sprites/pg_sprites/tiles/defaultbackground.png"
-dest_files=["res://.godot/imported/defaultbackground.png-836a12e81e624ca367fabf292a0de7e5.ctex"]
+source_file="res://! self made/assets/sprites/pg_sprites/foliage/OE.png"
+dest_files=["res://.godot/imported/OE.png-9867f0c0710c1aaf2e3762f166636c2b.ctex"]
 
 [params]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b70oij0ytkvg8"
-path="res://.godot/imported/defaultbackground.png-836a12e81e624ca367fabf292a0de7e5.ctex"
+uid="uid://body80jhjnb1q"
+path="res://.godot/imported/enemy_s_bat_diveAttack.png-03530d11f87fdcd91ca93e127d92e419.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://! self made/assets/sprites/pg_sprites/tiles/defaultbackground.png"
-dest_files=["res://.godot/imported/defaultbackground.png-836a12e81e624ca367fabf292a0de7e5.ctex"]
+source_file="res://! self made/assets/sprites/entities/enemies/small/enemy_s_bat_diveAttack.png"
+dest_files=["res://.godot/imported/enemy_s_bat_diveAttack.png-03530d11f87fdcd91ca93e127d92e419.ctex"]
 
 [params]
 
