@@ -22,17 +22,8 @@ func physics_update(delta: float) -> void:
 	else:
 		player.velocity.x = move_toward(player.velocity.x, 0, player.friction * delta)
 	
-	# Flip logic
-	if direction > 0:
-		player.get_node("WeaponPivot").scale.x = 1
-		player.get_node("AnimatedSprite2D").flip_h = false
-	elif direction < 0:
-		player.get_node("WeaponPivot").scale.x = -1
-		player.get_node("AnimatedSprite2D").flip_h = true
-	
-	
-	
-	
+	# Flip Sprite
+	player.update_facing(direction)
 	
 	# Other Transitions
 	if player.is_on_floor():

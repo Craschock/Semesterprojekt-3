@@ -16,3 +16,7 @@ func take_damage(amount: int) -> void:
 	
 	if current_health <= 0:
 		health_depleted.emit()
+
+func heal(amount: int) -> void:
+	current_health = min(current_health + amount, max_health)
+	health_changed.emit(current_health, max_health)

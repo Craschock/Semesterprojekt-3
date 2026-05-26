@@ -58,6 +58,15 @@ func _unhandled_input(event: InputEvent) -> void:
 		if event.is_action_pressed("slot_" + str(i)):
 			inventory_component.toggle_slot(i - ITEM_HOTKEY_OFFSET)
 
+# Flip Logic
+func update_facing(direction: float) -> void:
+	if direction > 0:
+		$WeaponPivot.scale.x = 1
+		$AnimatedSprite2D.flip_h = false
+	elif direction < 0:
+		$WeaponPivot.scale.x = -1
+		$AnimatedSprite2D.flip_h = true
+
 # Jump functions
 func can_jump() -> bool:
 	return is_on_floor() or jump_buffer_timer > 0.0 # Returns if player is allowed to jump

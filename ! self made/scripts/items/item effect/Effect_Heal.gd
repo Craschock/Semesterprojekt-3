@@ -10,6 +10,8 @@ func apply_effect(target: Node) -> void:
 	if health:
 		if !isRegen:
 			health.heal(heal_amount)
+			print("Healed for ", heal_amount, " HP")
 		else:
+			print("Healing for ", heal_amount, " over X seconds")
 			return
 			# TODO add regen logic later

@@ -20,6 +20,7 @@
 [ext_resource type="Script" uid="uid://dhtvumcptsihl" path="res://! self made/scripts/player/states/PlayerHit.gd" id="12_kcn1i"]
 [ext_resource type="Script" uid="uid://br02wb3mg1uj6" path="res://! self made/scripts/player/states/PlayerDeath.gd" id="13_hd8kc"]
 [ext_resource type="Script" uid="uid://bho7ii4d1uesh" path="res://! self made/scripts/player/states/PlayerAction.gd" id="18_twcrf"]
+[ext_resource type="Script" uid="uid://8y7lon3xrh43" path="res://! self made/scripts/player/states/PlayerItemConsume.gd" id="19_johpv"]
 [ext_resource type="PackedScene" uid="uid://hi0oqc1o8nv2" path="res://! self made/scenes/ui/overlay/inventory/inventory_ui.tscn" id="20_csrv5"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_dbsne"]
@@ -546,6 +547,7 @@ script = ExtResource("13_hd8kc")
 script = ExtResource("18_twcrf")
 
 [node name="Item_Consume" type="Node" parent="StateMachine" unique_id=1060968053]
+script = ExtResource("19_johpv")
 
 [node name="Item_Attack" type="Node" parent="StateMachine" unique_id=707131879]
 
