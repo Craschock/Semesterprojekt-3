@@ -18,5 +18,5 @@ func exit() -> void:
 
 func physics_update(_delta: float) -> void:
 	# Wait for AnimationPlayer
-	if not player.get_node("AnimationPlayer").is_playing():
+	if not player.get_node("AnimatedSprite2D").is_playing():
 		transitioned.emit(self, "idle")

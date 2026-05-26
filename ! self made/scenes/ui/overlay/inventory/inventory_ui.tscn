@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://hi0oqc1o8nv2"]
+
+[ext_resource type="Script" uid="uid://l4tncjr4274p" path="res://! self made/scripts/ui/overlay/inventory/InventoryUI.gd" id="1_hd6ot"]
+[ext_resource type="PackedScene" uid="uid://b2orebf2o02ra" path="res://! self made/scenes/ui/overlay/inventory/inventory_slot.tscn" id="2_fqjn6"]
+
+[node name="InventoryUI" type="MarginContainer" unique_id=22996944]
+offset_right = 40.0
+offset_bottom = 40.0
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+script = ExtResource("1_hd6ot")
+slot_scene = ExtResource("2_fqjn6")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=390279050]
+layout_mode = 2

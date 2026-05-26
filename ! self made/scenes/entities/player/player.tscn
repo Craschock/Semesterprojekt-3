@@ -19,6 +19,8 @@
 [ext_resource type="Texture2D" uid="uid://cuiinucel1hlw" path="res://! self made/assets/sprites/test/Scratch.png" id="11_5u4ll"]
 [ext_resource type="Script" uid="uid://dhtvumcptsihl" path="res://! self made/scripts/player/states/PlayerHit.gd" id="12_kcn1i"]
 [ext_resource type="Script" uid="uid://br02wb3mg1uj6" path="res://! self made/scripts/player/states/PlayerDeath.gd" id="13_hd8kc"]
+[ext_resource type="Script" uid="uid://bho7ii4d1uesh" path="res://! self made/scripts/player/states/PlayerAction.gd" id="18_twcrf"]
+[ext_resource type="PackedScene" uid="uid://hi0oqc1o8nv2" path="res://! self made/scenes/ui/overlay/inventory/inventory_ui.tscn" id="20_csrv5"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_dbsne"]
 radius = 3.0
@@ -201,7 +203,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_sgryq")
 }],
-"loop": true,
+"loop": false,
 "name": &"attack_scratch",
 "speed": 17.5
 }, {
@@ -287,9 +289,9 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_mdmel")
 }],
-"loop": true,
+"loop": false,
 "name": &"jump",
-"speed": 10.0
+"speed": 14.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -517,7 +519,7 @@ shape = SubResource("RectangleShape2D_5u4ll")
 position = Vector2(0, -15)
 scale = Vector2(0.5, 0.5)
 sprite_frames = SubResource("SpriteFrames_084ju")
-animation = &"idle"
+animation = &"attack_scratch"
 
 [node name="StateMachine" parent="." unique_id=1551728817 node_paths=PackedStringArray("initial_state") instance=ExtResource("5_8ghov")]
 initial_state = NodePath("Idle")
@@ -540,6 +542,15 @@ script = ExtResource("12_kcn1i")
 [node name="Death" type="Node" parent="StateMachine" unique_id=301635867]
 script = ExtResource("13_hd8kc")
 
+[node name="Action" type="Node" parent="StateMachine" unique_id=1836115425]
+script = ExtResource("18_twcrf")
+
+[node name="Item_Consume" type="Node" parent="StateMachine" unique_id=1060968053]
+
+[node name="Item_Attack" type="Node" parent="StateMachine" unique_id=707131879]
+
+[node name="Item_Throw" type="Node" parent="StateMachine" unique_id=1295536]
+
 [node name="WeaponPivot" type="Node2D" parent="." unique_id=1861687888]
 z_index = 12
 
@@ -551,6 +562,7 @@ collision_mask = 64
 position = Vector2(17.5, -9.5)
 scale = Vector2(0.5, 0.5)
 shape = SubResource("RectangleShape2D_mfh6n")
+disabled = true
 
 [node name="EffectSprite" type="AnimatedSprite2D" parent="WeaponPivot/Scratch" unique_id=1195896280]
 visible = false
@@ -564,3 +576,8 @@ libraries/ = SubResource("AnimationLibrary_lrig1")
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1042958842]
 offset = Vector2(0, -8)
 zoom = Vector2(5, 5)
+
+[node name="PlayerUI" type="CanvasLayer" parent="." unique_id=893019572]
+
+[node name="InventoryUI" parent="PlayerUI" unique_id=22996944 node_paths=PackedStringArray("inventory_component") instance=ExtResource("20_csrv5")]
+inventory_component = NodePath("../../InventoryComponent")

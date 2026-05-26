@@ -5,3 +5,4 @@
 
 [node name="PlumpGrubItem" unique_id=1088472823 instance=ExtResource("1_qxeaw")]
 item_data = ExtResource("2_aggxr")
+amount = 55

@@ -3,6 +3,7 @@ class_name PlayerMovement
 
 @onready var health_component: HealthComponent = $HealthComponent
 @onready var state_machine: StateMachine = $StateMachine
+@onready var inventory_component: InventoryComponent = $InventoryComponent
 
 # Movement 
 @export var speed: float = 70.0
@@ -14,6 +15,9 @@ var stored_velocity: Vector2
 @export var jump_velocity: float = -250.0
 @export var jump_buffer_time = 0.15
 var jump_buffer_timer = 0.0
+
+# Inventory
+const ITEM_HOTKEY_OFFSET: int = 5
 
 var gravity: float = ProjectSettings.get_setting("physics/2d/default_gravity")
 var apply_gravity: bool = true
@@ -49,7 +53,10 @@ func _on_health_changed(_current: int, _max: int) -> void:
 func _on_health_depleted() -> void:
 	state_machine.force_transition("death")
 
-
+func _unhandled_input(event: InputEvent) -> void:
+	for i in range(ITEM_HOTKEY_OFFSET, 10):
+		if event.is_action_pressed("slot_" + str(i)):
+			inventory_component.toggle_slot(i - ITEM_HOTKEY_OFFSET)
 
 # Jump functions
 func can_jump() -> bool:

@@ -1,11 +1,23 @@
 [gd_resource type="Resource" script_class="ItemData" format=3 uid="uid://dkm1av16bny22"]
 
 [ext_resource type="Texture2D" uid="uid://dss2teep3vg2m" path="res://! self made/assets/sprites/items/plump_grub.png" id="1_2sw7x"]
+[ext_resource type="Script" uid="uid://qo1ogchardm2" path="res://! self made/scripts/items/ItemEffect.gd" id="1_ntogw"]
 [ext_resource type="Script" uid="uid://cytj0n2h6v2fp" path="res://! self made/scripts/items/ItemData.gd" id="1_wkji0"]
+[ext_resource type="Script" uid="uid://ci1x8tyjfbbpa" path="res://! self made/scripts/items/item effect/Effect_Heal.gd" id="2_aygn7"]
+[ext_resource type="Script" uid="uid://igrj8om6ucb7" path="res://! self made/scripts/items/item effect/Effect_Buff.gd" id="3_f6abo"]
+
+[sub_resource type="Resource" id="Resource_o33gu"]
+script = ExtResource("2_aygn7")
+metadata/_custom_type_script = "uid://ci1x8tyjfbbpa"
+
+[sub_resource type="Resource" id="Resource_tncbl"]
+script = ExtResource("3_f6abo")
+metadata/_custom_type_script = "uid://igrj8om6ucb7"
 
 [resource]
 script = ExtResource("1_wkji0")
 item_name = "Plump Grub"
 description = "Small Healing Worm"
 icon = ExtResource("1_2sw7x")
+consume_effects = Array[ExtResource("1_ntogw")]([SubResource("Resource_o33gu"), SubResource("Resource_tncbl")])
 metadata/_custom_type_script = "uid://cytj0n2h6v2fp"
