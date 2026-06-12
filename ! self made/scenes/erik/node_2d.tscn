@@ -1,0 +1,118 @@
+[gd_scene format=3 uid="uid://dfd10kendyi1g"]
+
+[ext_resource type="Script" uid="uid://co1x8yk4a2syi" path="res://scripts/world_generator.gd" id="1_epypp"]
+[ext_resource type="Script" uid="uid://cqegu44a14mma" path="res://scripts/biome_data.gd" id="2_ir8iy"]
+[ext_resource type="Resource" uid="uid://dgpj1ix4nrm4" path="res://biomes/default.tres" id="3_hqns4"]
+[ext_resource type="Resource" uid="uid://bxwdh4dvm31ny" path="res://biomes/yellow.tres" id="4_x0ka3"]
+[ext_resource type="Resource" uid="uid://uy8usd2jj104" path="res://biomes/border.tres" id="5_0h7mo"]
+[ext_resource type="Texture2D" uid="uid://delq2h3473ggd" path="res://sprites/tilesetdefault.png" id="5_4d7sh"]
+[ext_resource type="Texture2D" uid="uid://cia1xnkbhhsnu" path="res://sprites/tilesetyellow.png" id="6_ir8iy"]
+[ext_resource type="Script" uid="uid://bvkk3n43llbma" path="res://scripts/playerbehaviour.gd" id="7_d21ai"]
+[ext_resource type="Texture2D" uid="uid://b70oij0ytkvg8" path="res://sprites/defaultbackground.png" id="7_ir8iy"]
+[ext_resource type="Texture2D" uid="uid://bojaa0j64371d" path="res://sprites/tilesetborder.png" id="7_x0ka3"]
+[ext_resource type="Texture2D" uid="uid://0k13xo3u6fmp" path="res://sprites/yellowbackground.png" id="8_hqns4"]
+[ext_resource type="Texture2D" uid="uid://b2abwo4xdum4x" path="res://sprites/player.png" id="9_4d7sh"]
+[ext_resource type="Texture2D" uid="uid://d07kk07u6mdmb" path="res://sprites/borderbackground.png" id="10_0h7mo"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_hqns4"]
+texture = ExtResource("5_4d7sh")
+1:0/0 = 0
+2:0/0 = 0
+3:0/0 = 0
+0:1/0 = 0
+1:1/0 = 0
+2:1/0 = 0
+3:1/0 = 0
+0:2/0 = 0
+1:2/0 = 0
+2:2/0 = 0
+3:2/0 = 0
+0:3/0 = 0
+1:3/0 = 0
+2:3/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_x0ka3"]
+texture = ExtResource("6_ir8iy")
+1:0/0 = 0
+2:0/0 = 0
+3:0/0 = 0
+0:1/0 = 0
+1:1/0 = 0
+2:1/0 = 0
+3:1/0 = 0
+0:2/0 = 0
+1:2/0 = 0
+2:2/0 = 0
+3:2/0 = 0
+0:3/0 = 0
+1:3/0 = 0
+2:3/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_d2bti"]
+texture = ExtResource("7_x0ka3")
+1:0/0 = 0
+2:0/0 = 0
+3:0/0 = 0
+0:1/0 = 0
+1:1/0 = 0
+2:1/0 = 0
+3:1/0 = 0
+0:2/0 = 0
+1:2/0 = 0
+2:2/0 = 0
+3:2/0 = 0
+0:3/0 = 0
+1:3/0 = 0
+2:3/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_0h7mo"]
+sources/0 = SubResource("TileSetAtlasSource_hqns4")
+sources/1 = SubResource("TileSetAtlasSource_x0ka3")
+sources/2 = SubResource("TileSetAtlasSource_d2bti")
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_0h7mo"]
+texture = ExtResource("7_ir8iy")
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_nr8wp"]
+texture = ExtResource("8_hqns4")
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ta5nu"]
+texture = ExtResource("10_0h7mo")
+0:0/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_hqns4"]
+sources/0 = SubResource("TileSetAtlasSource_0h7mo")
+sources/1 = SubResource("TileSetAtlasSource_nr8wp")
+sources/2 = SubResource("TileSetAtlasSource_ta5nu")
+
+[node name="World" type="Node2D" unique_id=1622799569 node_paths=PackedStringArray("fg_layer", "bg_layer", "player")]
+script = ExtResource("1_epypp")
+fg_layer = NodePath("Foreground")
+bg_layer = NodePath("Background")
+world_seed = 69
+biomes = Array[ExtResource("2_ir8iy")]([ExtResource("3_hqns4"), ExtResource("4_x0ka3")])
+region_size_chunks = 12
+border_thickness = 1
+filler_biome = ExtResource("5_0h7mo")
+player = NodePath("CharacterBody2D")
+
+[node name="Foreground" type="TileMapLayer" parent="." unique_id=1532146895]
+z_index = 1
+position = Vector2(8, 8)
+tile_set = SubResource("TileSet_0h7mo")
+
+[node name="Background" type="TileMapLayer" parent="." unique_id=1324659571]
+tile_set = SubResource("TileSet_hqns4")
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="." unique_id=2004034296]
+z_index = 1
+scale = Vector2(0.1, 0.1)
+script = ExtResource("7_d21ai")
+speed = 1000.0
+
+[node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D" unique_id=2045830687]
+texture = ExtResource("9_4d7sh")
+
+[node name="Camera2D" type="Camera2D" parent="CharacterBody2D" unique_id=1738471589]
