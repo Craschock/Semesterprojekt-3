@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://d07kk07u6mdmb"
-path="res://.godot/imported/borderbackground.png-81cac1395a975157738e4f4f1226efe0.ctex"
+path="res://.godot/imported/borderbackground.png-c4b9f8f81a1774bea80304157c0b6282.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/borderbackground.png"
-dest_files=["res://.godot/imported/borderbackground.png-81cac1395a975157738e4f4f1226efe0.ctex"]
+source_file="res://! self made/assets/sprites/pg_sprites/tiles/borderbackground.png"
+dest_files=["res://.godot/imported/borderbackground.png-c4b9f8f81a1774bea80304157c0b6282.ctex"]
 
 [params]
 
