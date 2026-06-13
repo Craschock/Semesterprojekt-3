@@ -50,6 +50,30 @@ enum Placement {
 @export_range(1, 256) var cave_fade_depth: int = 40
 
 
+@export_group("Prebuilt Rooms")
+
+##if true, player spawns inside THIS biomes spawn room
+##make sure to give this flag to only one biome at a time
+##(this biome should be SURFACE_ONLY and have open sky)
+@export var is_spawn_biome: bool = false
+
+##carves a spawn room in the top of the cave area
+##has no effect if this biomeisnt spawn biome
+@export var has_spawn_room: bool = true
+
+##INTERIOR size of the spawn room
+@export var spawn_room_size: Vector2i = Vector2i(20, 10)
+
+##carves a boss room in the bottom of the cave area
+@export var has_boss_room: bool = true
+
+##INTERIOR size of the boss room
+@export var boss_room_size: Vector2i = Vector2i(40, 24)
+
+##thickness of the wall-border of spawn and boss room
+@export_range(1, 8) var room_wall_thickness: int = 2
+
+
 @export_group("Terrain Noise")
 
 ##so all biomes are different even if parameters would be the same (keep at 0 if you want no change visible)

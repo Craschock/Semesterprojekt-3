@@ -23,7 +23,7 @@ UIManager="*uid://do2tlfwl68vut"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/ridiculous_coding/plugin.cfg")
+enabled=PackedStringArray()
 
 [file_customization]
 

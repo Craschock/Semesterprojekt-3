@@ -3,7 +3,6 @@
 [ext_resource type="Script" uid="uid://co1x8yk4a2syi" path="res://! self made/scripts/pg_algorithm/world_generator.gd" id="1_3r8k2"]
 [ext_resource type="Script" uid="uid://cqegu44a14mma" path="res://! self made/scripts/pg_algorithm/biome_data.gd" id="2_22d72"]
 [ext_resource type="Resource" uid="uid://dgpj1ix4nrm4" path="res://! self made/Resources/pg_biomes/default.tres" id="3_6vgho"]
-[ext_resource type="Resource" uid="uid://bxwdh4dvm31ny" path="res://! self made/Resources/pg_biomes/yellow.tres" id="4_87qdy"]
 [ext_resource type="Resource" uid="uid://uy8usd2jj104" path="res://! self made/Resources/pg_biomes/border.tres" id="5_3r8k2"]
 [ext_resource type="Texture2D" uid="uid://delq2h3473ggd" path="res://! self made/assets/sprites/pg_sprites/tiles/tilesetdefault.png" id="5_27gof"]
 [ext_resource type="Texture2D" uid="uid://cia1xnkbhhsnu" path="res://! self made/assets/sprites/pg_sprites/tiles/tilesetyellow.png" id="6_rfy0p"]
@@ -12,6 +11,18 @@
 [ext_resource type="Texture2D" uid="uid://0k13xo3u6fmp" path="res://! self made/assets/sprites/pg_sprites/tiles/yellowbackground.png" id="8_d3m8n"]
 [ext_resource type="PackedScene" uid="uid://bh6kjgw51fv7u" path="res://! self made/scenes/entities/player/player.tscn" id="9_0cpw6"]
 [ext_resource type="Texture2D" uid="uid://d07kk07u6mdmb" path="res://! self made/assets/sprites/pg_sprites/tiles/borderbackground.png" id="11_6vgho"]
+
+[sub_resource type="Resource" id="Resource_22d72"]
+script = ExtResource("2_22d72")
+biome_name = "Yellow Biome"
+placement = 1
+has_open_sky = true
+cave_fade_depth = 80
+has_spawn_room = false
+boss_room_size = Vector2i(100, 40)
+seed_offset = 101
+frequency = 0.073
+fg_source_id = 1
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_hqns4"]
 texture = ExtResource("5_27gof")
@@ -123,9 +134,8 @@ sources/2 = SubResource("TileSetAtlasSource_87qdy")
 script = ExtResource("1_3r8k2")
 fg_layer = NodePath("Foreground")
 bg_layer = NodePath("Background")
-world_seed = 69
-biomes = Array[ExtResource("2_22d72")]([ExtResource("4_87qdy"), ExtResource("3_6vgho")])
-region_size_chunks = 8
+biomes = Array[ExtResource("2_22d72")]([SubResource("Resource_22d72"), ExtResource("3_6vgho")])
+region_size_chunks = 3
 border_thickness = 1
 filler_biome = ExtResource("5_3r8k2")
 player = NodePath("Player")
@@ -139,4 +149,3 @@ tile_set = SubResource("TileSet_0h7mo")
 tile_set = SubResource("TileSet_hqns4")
 
 [node name="Player" parent="." unique_id=80359539 instance=ExtResource("9_0cpw6")]
-position = Vector2(1010, 400)

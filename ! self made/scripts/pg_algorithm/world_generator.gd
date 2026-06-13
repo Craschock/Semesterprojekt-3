@@ -68,6 +68,14 @@ var _region_layout: Dictionary = {}
 var _region_min: Vector2i = Vector2i.ZERO
 var _region_max: Vector2i = Vector2i.ZERO
 
+##list of prebuilt rooms in the following format:
+##ja hier halt format rein nachher
+var _rooms: Array[Dictionary] = []
+
+##tile coordinate of player spawn
+var _spawn_tile: Vector2i = Vector2i(0x7FFFFFFF, 0x7FFFFFFF)
+#schwöre ich bin langsam zu müde für kommentare ich häng mich bald vllt auf
+
 ##last chunk player was in
 var _last_player_chunk: Vector2i = Vector2i(0x7FFFFFFF, 0x7FFFFFFF)
 
@@ -75,6 +83,16 @@ var _last_player_chunk: Vector2i = Vector2i(0x7FFFFFFF, 0x7FFFFFFF)
 #MAIN
 func _ready() -> void:
 	_build_world_layout()
+	#drop player into spawn room
+	#called with one tick delay so if melvin has his own spawn function, i
+	#dont override anything (at least normally this should work like that)
+	if player != null and has_spawn_point():
+		_place_player_at_spawn.call_deferred()
+
+
+func _place_player_at_spawn() -> void:
+	if player != null and has_spawn_point():
+		player.global_position = get_spawn_position()
 
 
 func _process(_delta: float) -> void:
@@ -169,6 +187,71 @@ func _build_world_layout() -> void:
 			_region_layout[Vector2i(col, row)] = b
 		row += 1
 
+	_build_rooms()
+
+#die nächsten 165 zeilen sind von gemini generated kussi
+##bakes the tile-space rectangles for every prebuilt room (spawn + boss) once,
+##based on where each room-bearing biome landed in the region layout.
+func _build_rooms() -> void:
+	_rooms.clear()
+	_spawn_tile = Vector2i(0x7FFFFFFF, 0x7FFFFFFF)
+
+	#which biome is the spawn biome? first flagged one wins, warn if several.
+	var spawn_biome: BiomeData = null
+	var spawn_flag_count = 0
+	for b in biomes:
+		if b != null and b.is_spawn_biome:
+			spawn_flag_count += 1
+			if spawn_biome == null:
+				spawn_biome = b
+	if spawn_flag_count > 1:
+		push_warning("WorldGenerator: %d biomes flagged is_spawn_biome; using the first one." % spawn_flag_count)
+
+	var region_tile_size = region_size_chunks * chunk_size
+
+	for region_pos in _region_layout.keys():
+		var biome: BiomeData = _region_layout[region_pos]
+		if biome == null:
+			continue
+
+		var region_tile_origin: Vector2i = region_pos * region_tile_size
+		var rx0 = region_tile_origin.x
+		var ry0 = region_tile_origin.y
+		var center_x = rx0 + region_tile_size / 2
+
+		#SPAWN ROOM: only in the chosen spawn biomes region, anchored so its
+		#TOP sits where the cave fade ends
+		if biome == spawn_biome and biome.has_spawn_room:
+			var w: int = maxi(1, biome.spawn_room_size.x)
+			var h: int = maxi(1, biome.spawn_room_size.y)
+			#use the average surface line of the region (noise sampled at center).
+			var surface_y = _surface_height_at(biome, center_x, ry0)
+			#top of the interior right at the start of the cave fade
+			var interior_x = center_x - w / 2
+			var interior_y = surface_y + biome.cave_fade_depth
+			_rooms.append({
+				"rect": Rect2i(interior_x, interior_y, w, h),
+				"wall": biome.room_wall_thickness,
+				"biome": biome,
+			})
+			#drop the player near the middle-bottom of the room (on the floor)
+			_spawn_tile = Vector2i(center_x, interior_y + h - 1)
+
+		#BOSS ROOM: at the very bottom interior of the region, above the border.
+		if biome.has_boss_room:
+			var bw: int = maxi(1, biome.boss_room_size.x)
+			var bh: int = maxi(1, biome.boss_room_size.y)
+			var ry1 = ry0 + region_tile_size
+			#leave room for the region border + the rooms own wall ring
+			var bottom_interior = ry1 - border_thickness - biome.room_wall_thickness
+			var b_interior_y = bottom_interior - bh
+			var b_interior_x = center_x - bw / 2
+			_rooms.append({
+				"rect": Rect2i(b_interior_x, b_interior_y, bw, bh),
+				"wall": biome.room_wall_thickness,
+				"biome": biome,
+			})
+
 
 func _shuffle(arr: Array, rng: RandomNumberGenerator) -> void:
 	for i in range(arr.size() - 1, 0, -1):
@@ -176,7 +259,7 @@ func _shuffle(arr: Array, rng: RandomNumberGenerator) -> void:
 		var tmp = arr[i]
 		arr[i] = arr[j]
 		arr[j] = tmp
-
+#die letzten 165 zeilen waren von gemini generiert :)
 
 ##is this region cell inside the boundings of thr world
 func _region_in_world(region_pos: Vector2i) -> bool:
@@ -206,6 +289,51 @@ func _region_has_open_sky(region_pos: Vector2i) -> bool:
 	var b = _biome_for_region(region_pos)
 	return b != null and b.has_open_sky
 
+
+#PREBUILT ROOMS (der teil auch von gemini habs lwk nicht hinbekommen mit den pre generated rooms)
+##classify a TILE against all rooms.
+## returns: 0 = not part of any room, 1 = room interior (air), 2 = room wall (solid)
+func _room_tile_kind(tx: int, ty: int) -> int:
+	var kind = 0
+	for room in _rooms:
+		var interior: Rect2i = room["rect"]
+		var wall: int = room["wall"]
+		var outer = Rect2i(
+			interior.position - Vector2i(wall, wall),
+			interior.size + Vector2i(wall * 2, wall * 2)
+		)
+		if not outer.has_point(Vector2i(tx, ty)):
+			continue
+		if interior.has_point(Vector2i(tx, ty)):
+			#interior wins outright; an air tile carves through any nearby wall
+			return 1
+		#inside the wall ring of this room
+		kind = 2
+	return kind
+
+
+##is the CORNER at (wx, wy) controlled by a prebuilt room, and whats its value?
+## returns: 0 = room doesnt touch this corner (leave noise alone)
+##          1 = corner forced solid (wall)
+##          2 = corner forced air (interior)
+func _room_corner_state(wx: int, wy: int) -> int:
+	#the four tiles sharing this corner
+	var k_tl = _room_tile_kind(wx - 1, wy - 1)
+	var k_tr = _room_tile_kind(wx,     wy - 1)
+	var k_bl = _room_tile_kind(wx - 1, wy)
+	var k_br = _room_tile_kind(wx,     wy)
+
+	#if no touching tile belongs to a room, the room has no say here
+	if k_tl == 0 and k_tr == 0 and k_bl == 0 and k_br == 0:
+		return 0
+
+	#a corner is solid if ANY touching tile is a wall; otherwise its air.
+	#(this keeps interiors hollow while ringing them with a solid wall)
+	if k_tl == 2 or k_tr == 2 or k_bl == 2 or k_br == 2:
+		return 1
+	return 2
+
+#ab jetzt wieder "mein" code (also alles was mein code ist ist ja auch 50% copy pasted irgendwo aber du checkst ja eh)
 
 #CHUNK STREAMING
 func _stream_chunks(center: Vector2i) -> void:
@@ -262,7 +390,7 @@ func _generate_chunk_corners(chunk: WorldChunk) -> void:
 	var in_world = _region_in_world(region_pos)
 	var biome = chunk.biome
 
-	##if this chunk is ABOVE world (higher than surface row) and 
+	##if this chunk is ABOVE world (higher than surface row) and
 	##surface region directly below it has open sky make chunk above empty (air)
 	var above_open_sky = false
 	if not in_world and region_pos.y < _region_min.y \
@@ -361,6 +489,16 @@ func _generate_chunk_corners(chunk: WorldChunk) -> void:
 					else:
 						solid = noise.get_noise_2d(wx, wy) > thr
 
+			#PREBUILT ROOMS override the generated noise
+			#but dont override player made corner overrides so player can break
+			#spawn and boss roms if he feels like it or maybe bombs or idk
+			if not locked:
+				var rs = _room_corner_state(wx, wy)
+				if rs == 1:
+					solid = true    # room wall
+				elif rs == 2:
+					solid = false   # room interior (air)
+
 			#player edits override normal world but NEVER override border (this makes them unbreakable even if we break them via code/bugusing)
 			if not locked and _corner_overrides.has(key):
 				solid = _corner_overrides[key]
@@ -383,15 +521,15 @@ func _surface_height_at(biome: BiomeData, world_x: int, region_top_tile_y: int) 
 
 
 ##decides if a tile is cave-noise generated or surface-noise generated
-##near the surface ground is almost fully solid, at cave_fade_depth it's full cave noise.
+##near the surface ground is almost fully solid, at cave_fade_depth its full cave noise.
 func _solid_with_cave_fade(biome: BiomeData, noise: FastNoiseLite, wx: int, wy: int, surface_y: int, thr: float) -> bool:
 	var depth = wy - surface_y
 	var fade = float(biome.cave_fade_depth)
-	#t = 0 at the surface, 1 once we're at/below cave_fade_depth
+	#t = 0 at the surface, 1 once were at/below cave_fade_depth
 	var t = clampf(float(depth) / maxf(fade, 1.0), 0.0, 1.0)
 	#a cell is solid when noise > eff_thr. to make the shallow ground a solid crust,
 	#the threshold starts very LOW (-1 => almost everything solid) and rises to the
-	#biome's real threshold as we go deeper, letting the caves open up gradually.
+	#biomes real threshold as we go deeper, letting the caves open up gradually
 	var eff_thr = lerpf(-1.0, thr, t)
 	return noise.get_noise_2d(wx, wy) > eff_thr
 
@@ -532,3 +670,25 @@ func refresh_chunk_at(world_x: int, world_y: int) -> void:
 		return
 	_generate_chunk_corners(chunk)
 	_render_chunk(chunk)
+
+
+##does a spawn room exist in this world?
+func has_spawn_point() -> bool:
+	return _spawn_tile.x != 0x7FFFFFFF
+
+
+##tile coordinate where player spawns
+func get_spawn_tile() -> Vector2i:
+	if not has_spawn_point():
+		return Vector2i.ZERO
+	return _spawn_tile
+
+
+##PIXEL coordinate where player spaens
+func get_spawn_position() -> Vector2:
+	if not has_spawn_point():
+		return Vector2.ZERO
+	return Vector2(
+		(_spawn_tile.x + 0.5) * tile_pixel_size,
+		_spawn_tile.y * tile_pixel_size
+	)
