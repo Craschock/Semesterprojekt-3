@@ -26,15 +26,12 @@ var apply_gravity: bool = true
 func _ready() -> void:
 	# Setup Singleton PlayerManager
 	PlayerManager.player = self
-	var cam := get_viewport().get_camera_2d()
-	print("[Player] active camera=", cam, " at ", cam.global_position if cam else "NONE")
 	# Connect signals
 	health_component.health_changed.connect(_on_health_changed)
 	health_component.health_depleted.connect(_on_health_depleted)
 
 func _physics_process(delta: float) -> void:
 	var cam := get_viewport().get_camera_2d()
-	print("[Player] pos=", global_position, " cam=", cam.global_position, " top_level=", cam.top_level)
 	# Jump buffer
 	if is_on_floor():
 		jump_buffer_timer = jump_buffer_time

@@ -98,7 +98,8 @@ func _place_player_at_spawn() -> void:
 func _process(_delta: float) -> void:
 	if player == null or biomes.is_empty():
 		return
-	var player_chunk = _world_pixel_to_chunk(player.global_position)
+	var local_player_pos = to_local(player.global_position)
+	var player_chunk = _world_pixel_to_chunk(local_player_pos)
 	if player_chunk == _last_player_chunk:
 		return
 	_last_player_chunk = player_chunk
@@ -687,8 +688,11 @@ func get_spawn_tile() -> Vector2i:
 ##PIXEL coordinate where player spaens
 func get_spawn_position() -> Vector2:
 	if not has_spawn_point():
-		return Vector2.ZERO
-	return Vector2(
+		return global_position
+	
+	var local_pos = Vector2(
 		(_spawn_tile.x + 0.5) * tile_pixel_size,
 		_spawn_tile.y * tile_pixel_size
 	)
+	
+	return to_global(local_pos)
