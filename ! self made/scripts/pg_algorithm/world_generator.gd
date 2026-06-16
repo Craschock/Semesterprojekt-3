@@ -81,18 +81,38 @@ var _last_player_chunk: Vector2i = Vector2i(0x7FFFFFFF, 0x7FFFFFFF)
 
 
 #MAIN
+
+# Function von Erik
+#func _ready() -> void:
+	#_build_world_layout()
+	##drop player into spawn room
+	##called with one tick delay so if melvin has his own spawn function, i
+	##dont override anything (at least normally this should work like that)
+	#if player != null and has_spawn_point():
+		#_place_player_at_spawn.call_deferred()
+
+# Function von Melvin
 func _ready() -> void:
 	_build_world_layout()
-	#drop player into spawn room
-	#called with one tick delay so if melvin has his own spawn function, i
-	#dont override anything (at least normally this should work like that)
-	if player != null and has_spawn_point():
-		_place_player_at_spawn.call_deferred()
+	
+	if has_spawn_point():
+		_create_spawn_marker.call_deferred()
 
-
-func _place_player_at_spawn() -> void:
-	if player != null and has_spawn_point():
-		player.global_position = get_spawn_position()
+func _create_spawn_marker() -> void:
+	if not has_spawn_point():
+		return
+		
+	var spawn_marker = Marker2D.new()
+	spawn_marker.name = "SpawnMarker"
+	spawn_marker.global_position = get_spawn_position()
+	
+	# Add it to a group for future it can easily find it 
+	# (können dann halt mehrere spawnpunkte haben, ohne 
+	# den direkt referencen zu müssen. mal schauen, ob das 
+	# relevant wird für "checkpoints" oder so)
+	spawn_marker.add_to_group("spawn_point")
+	
+	add_child(spawn_marker)
 
 
 func _process(_delta: float) -> void:
