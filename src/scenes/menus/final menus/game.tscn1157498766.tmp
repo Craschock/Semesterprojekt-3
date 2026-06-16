@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://ckdifw6x0om4h"]
+
+[ext_resource type="Script" uid="uid://cegk7h7irgixa" path="res://! self made/scenes/menus/final scenes/GameManager.gd" id="1_pr1v7"]
+[ext_resource type="PackedScene" uid="uid://bh6kjgw51fv7u" path="res://! self made/scenes/entities/player/player.tscn" id="3_s4t1n"]
+[ext_resource type="PackedScene" uid="uid://dfd10kendyi1g" path="res://! self made/scenes/pg_scenes/world_generation.tscn" id="8_owfvr"]
+
+[node name="Game" type="Node" unique_id=109101168]
+
+[node name="GameManager" type="Node" parent="." unique_id=1435991061 node_paths=PackedStringArray("world_generator", "player")]
+script = ExtResource("1_pr1v7")
+world_generator = NodePath("../World")
+player = NodePath("../Player")
+
+[node name="World" parent="." unique_id=1622799569 node_paths=PackedStringArray("player") instance=ExtResource("8_owfvr")]
+player = NodePath("../Player")
+
+[node name="Player" parent="." unique_id=80359539 instance=ExtResource("3_s4t1n")]

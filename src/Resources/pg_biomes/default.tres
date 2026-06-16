@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="BiomeData" format=3 uid="uid://dgpj1ix4nrm4"]
+
+[ext_resource type="Script" uid="uid://cqegu44a14mma" path="res://src/scenes/procedural generation/biome_data.gd" id="1_asad2"]
+
+[resource]
+script = ExtResource("1_asad2")
+biome_name = "Default"
+placement = 1
+has_open_sky = true
+cave_fade_depth = 80
+is_spawn_biome = true
+spawn_room_size = Vector2i(30, 20)
+boss_room_size = Vector2i(50, 25)
+seed_offset = 100
+frequency = 0.073
+threshold = 0.15000000000000002
+fractal_octaves = 2
+bg_source_id = 0

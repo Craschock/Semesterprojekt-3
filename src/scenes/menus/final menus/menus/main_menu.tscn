@@ -1,0 +1,49 @@
+[gd_scene format=3 uid="uid://b3ivrpnr5vk0g"]
+
+[ext_resource type="FontFile" uid="uid://ww3qpbbtk4gc" path="res://src/assets/fonts/PixelOperator8.ttf" id="1_30681"]
+[ext_resource type="Script" uid="uid://cass8aku7j022" path="res://src/scenes/ui/buttons/B_SceneSwitcher.gd" id="2_b1hgy"]
+[ext_resource type="PackedScene" uid="uid://coselkpkg4ik4" path="res://src/scenes/menus/test_scenes/test_game.tscn" id="3_t0sjb"]
+
+[node name="Main Menu" type="Control" unique_id=153052924]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=328148026]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="B_Start" type="Button" parent="VBoxContainer" unique_id=1978294108]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_30681")
+theme_override_font_sizes/font_size = 64
+text = "Start"
+script = ExtResource("2_b1hgy")
+game_scene = ExtResource("3_t0sjb")
+
+[node name="B_Settings" type="Button" parent="VBoxContainer" unique_id=868862888]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_30681")
+theme_override_font_sizes/font_size = 64
+text = "Settings"
+
+[node name="B_Quit" type="Button" parent="VBoxContainer" unique_id=918394061]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_30681")
+theme_override_font_sizes/font_size = 64
+text = "Quit"

@@ -28,21 +28,18 @@ enabled=PackedStringArray()
 [file_customization]
 
 folder_colors={
-"res://! self made/Resources/": "green",
-"res://! self made/abilities/": "pink",
-"res://! self made/assets/": "purple",
-"res://! self made/scenes/": "gray",
-"res://! self made/scenes/entities/": "gray",
-"res://! self made/scenes/entities/Enemies/": "gray",
-"res://! self made/scenes/entities/Enemies/basic enemies/": "gray",
-"res://! self made/scenes/entities/Enemies/basic enemies/small_slime_green/": "gray",
-"res://! self made/scenes/entities/player/": "gray",
-"res://! self made/scenes/environment/": "gray",
-"res://! self made/scenes/items/": "gray",
-"res://! self made/scenes/world/": "gray",
-"res://! self made/scenes/world/final scenes/": "gray",
-"res://! self made/scenes/world/traps/": "gray",
-"res://! self made/scripts/": "yellow"
+"res://src/Resources/": "green",
+"res://src/assets/": "purple",
+"res://src/scenes/": "gray",
+"res://src/scenes/entities/": "gray",
+"res://src/scenes/entities/Enemies/": "gray",
+"res://src/scenes/entities/Enemies/basic enemies/": "gray",
+"res://src/scenes/entities/Enemies/basic enemies/small_slime_green/": "gray",
+"res://src/scenes/entities/Enemies/environment/": "gray",
+"res://src/scenes/entities/player/": "gray",
+"res://src/scenes/item prefabs/": "gray",
+"res://src/scenes/menus/": "gray",
+"res://src/scenes/menus/final menus/": "gray"
 }
 
 [input]
