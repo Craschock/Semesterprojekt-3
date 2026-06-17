@@ -3,20 +3,20 @@
 [ext_resource type="Script" uid="uid://81ckxyu5ky6r" path="res://src/scenes/entities/player/PlayerMovement.gd" id="1_12pno"]
 [ext_resource type="PackedScene" uid="uid://pnpqmi4np2b" path="res://src/scenes/components/health_component.tscn" id="2_22ku6"]
 [ext_resource type="PackedScene" uid="uid://bhjypj2tgq0md" path="res://src/scenes/components/hitbox_component.tscn" id="3_iohne"]
-[ext_resource type="Texture2D" uid="uid://khtnmtomqtsd" path="res://src/assets/sprites/test/knight.png" id="4_1cbat"]
+[ext_resource type="Texture2D" uid="uid://khtnmtomqtsd" path="res://assets/sprites/test/knight.png" id="4_1cbat"]
 [ext_resource type="Script" uid="uid://dik0xieka724p" path="res://src/scenes/entities/player/PlayerInteractor.gd" id="4_7cutu"]
 [ext_resource type="PackedScene" uid="uid://cb14ws6lv4t4k" path="res://src/scenes/components/inventory_component.tscn" id="4_sgjri"]
 [ext_resource type="PackedScene" uid="uid://dhirfpuogr2q8" path="res://src/scenes/components/state_machine.tscn" id="5_8ghov"]
 [ext_resource type="Script" uid="uid://60iiuqamlxgb" path="res://src/scenes/entities/player/states/PlayerIdle.gd" id="6_lopw5"]
-[ext_resource type="Texture2D" uid="uid://762qnrnnxvue" path="res://src/assets/sprites/entities/player/player_scratch.png" id="6_yd64i"]
+[ext_resource type="Texture2D" uid="uid://762qnrnnxvue" path="res://assets/sprites/entities/player/player_scratch.png" id="6_yd64i"]
 [ext_resource type="Script" uid="uid://dc5jhqq4snryw" path="res://src/scenes/entities/player/states/PlayerRun.gd" id="7_20qlv"]
 [ext_resource type="Script" uid="uid://t7evwvg3k14a" path="res://src/scenes/entities/player/states/PlayerJump.gd" id="8_20qlv"]
-[ext_resource type="Texture2D" uid="uid://bfrn7wa54a8ib" path="res://src/assets/sprites/entities/player/player_idle1.png" id="8_csrv5"]
+[ext_resource type="Texture2D" uid="uid://bfrn7wa54a8ib" path="res://assets/sprites/entities/player/player_idle1.png" id="8_csrv5"]
 [ext_resource type="Script" uid="uid://bu4j21y8vkx0a" path="res://src/scenes/entities/player/states/PlayerAttack_Scratch.gd" id="9_084ju"]
 [ext_resource type="PackedScene" uid="uid://dp2uswhllarmo" path="res://src/scenes/components/attack_component.tscn" id="9_mfh6n"]
-[ext_resource type="Texture2D" uid="uid://dg7t4kmyryq4s" path="res://src/assets/sprites/entities/player/player_jump.png" id="9_twcrf"]
-[ext_resource type="Texture2D" uid="uid://c8e7jtqd3o43f" path="res://src/assets/sprites/entities/player/player_run.png" id="10_johpv"]
-[ext_resource type="Texture2D" uid="uid://cuiinucel1hlw" path="res://src/assets/sprites/test/Scratch.png" id="11_5u4ll"]
+[ext_resource type="Texture2D" uid="uid://dg7t4kmyryq4s" path="res://assets/sprites/entities/player/player_jump.png" id="9_twcrf"]
+[ext_resource type="Texture2D" uid="uid://c8e7jtqd3o43f" path="res://assets/sprites/entities/player/player_run.png" id="10_johpv"]
+[ext_resource type="Texture2D" uid="uid://cuiinucel1hlw" path="res://assets/sprites/test/Scratch.png" id="11_5u4ll"]
 [ext_resource type="Script" uid="uid://dhtvumcptsihl" path="res://src/scenes/entities/player/states/PlayerHit.gd" id="12_kcn1i"]
 [ext_resource type="Script" uid="uid://br02wb3mg1uj6" path="res://src/scenes/entities/player/states/PlayerDeath.gd" id="13_hd8kc"]
 [ext_resource type="Script" uid="uid://bho7ii4d1uesh" path="res://src/scenes/entities/player/states/PlayerAction.gd" id="18_twcrf"]
@@ -520,7 +520,9 @@ shape = SubResource("RectangleShape2D_5u4ll")
 position = Vector2(0, -15)
 scale = Vector2(0.5, 0.5)
 sprite_frames = SubResource("SpriteFrames_084ju")
-animation = &"attack_scratch"
+animation = &"jump"
+frame = 6
+frame_progress = 0.37965342
 
 [node name="StateMachine" parent="." unique_id=1551728817 node_paths=PackedStringArray("initial_state") instance=ExtResource("5_8ghov")]
 initial_state = NodePath("Idle")

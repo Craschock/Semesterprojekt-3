@@ -28,18 +28,18 @@ enabled=PackedStringArray()
 [file_customization]
 
 folder_colors={
-"res://src/Resources/": "green",
-"res://src/assets/": "purple",
-"res://src/scenes/": "gray",
-"res://src/scenes/entities/": "gray",
-"res://src/scenes/entities/Enemies/": "gray",
-"res://src/scenes/entities/Enemies/basic enemies/": "gray",
-"res://src/scenes/entities/Enemies/basic enemies/small_slime_green/": "gray",
-"res://src/scenes/entities/Enemies/environment/": "gray",
-"res://src/scenes/entities/player/": "gray",
-"res://src/scenes/item prefabs/": "gray",
-"res://src/scenes/menus/": "gray",
-"res://src/scenes/menus/final menus/": "gray"
+"res://assets/fonts/": "purple",
+"res://assets/sounds/": "purple",
+"res://assets/sprites/": "purple",
+"res://src/resources/": "green",
+"res://src/scenes/": "yellow",
+"res://src/scenes/entities/": "yellow",
+"res://src/scenes/entities/Enemies/": "red",
+"res://src/scenes/entities/Enemies/small/": "red",
+"res://src/scenes/entities/Enemies/small/small_slime_green/": "gray",
+"res://src/scenes/entities/player/": "blue",
+"res://src/scenes/menus/final menus/": "green",
+"res://src/scenes/menus/test_scenes/": "red"
 }
 
 [input]

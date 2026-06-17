@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://cbskxdkpog3fj"]
 
 [ext_resource type="Script" uid="uid://kq8l5d0v0oxw" path="res://src/scenes/ui/text labels/DamageNumber.gd" id="1_x1vie"]
-[ext_resource type="FontFile" uid="uid://ww3qpbbtk4gc" path="res://src/assets/fonts/PixelOperator8.ttf" id="2_yk3um"]
+[ext_resource type="FontFile" uid="uid://ww3qpbbtk4gc" path="res://assets/fonts/PixelOperator8.ttf" id="2_yk3um"]
 
 [node name="DamageNumber" type="Marker2D" unique_id=1607216402]
 scale = Vector2(0.4, 0.4)
