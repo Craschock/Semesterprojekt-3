@@ -23,7 +23,7 @@
 [ext_resource type="Script" uid="uid://8y7lon3xrh43" path="res://src/scenes/entities/player/states/PlayerItemConsume.gd" id="19_johpv"]
 [ext_resource type="PackedScene" uid="uid://hi0oqc1o8nv2" path="res://src/scenes/ui/overlay/inventory/inventory_ui.tscn" id="20_csrv5"]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_dbsne"]
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_oknxn"]
 radius = 3.0
 height = 18.0
 
@@ -497,9 +497,9 @@ collision_mask = 0
 health_component = NodePath("../HealthComponent")
 invincibility_time = 0.6
 
-[node name="Hitbox" type="CollisionShape2D" parent="HitboxComponent" unique_id=300017236]
+[node name="CollisionShape2D" parent="HitboxComponent" index="0" unique_id=1698255179]
 position = Vector2(2, -9)
-shape = SubResource("CapsuleShape2D_dbsne")
+shape = SubResource("CapsuleShape2D_oknxn")
 
 [node name="Interactor" type="Area2D" parent="." unique_id=376303030]
 collision_layer = 0
@@ -585,3 +585,5 @@ zoom = Vector2(5, 5)
 
 [node name="InventoryUI" parent="PlayerUI" unique_id=22996944 node_paths=PackedStringArray("inventory_component") instance=ExtResource("20_csrv5")]
 inventory_component = NodePath("../../InventoryComponent")
+
+[editable path="HitboxComponent"]

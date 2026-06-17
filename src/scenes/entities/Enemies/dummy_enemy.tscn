@@ -1,13 +1,13 @@
 [gd_scene format=3 uid="uid://b88w0xmg2surt"]
 
-[ext_resource type="PackedScene" uid="uid://c301qejfle2yq" path="res://src/scenes/base/base_enemy.tscn" id="1_xo5e0"]
+[ext_resource type="PackedScene" uid="uid://c301qejfle2yq" path="res://src/scenes/entities/Enemies/base_enemy.tscn" id="1_xo5e0"]
 [ext_resource type="Texture2D" uid="uid://cfxhvbh18jx42" path="res://assets/sprites/test/slime_green.png" id="2_2n3ph"]
-[ext_resource type="Script" uid="uid://cqpjnrn3ciqwc" path="res://src/scenes/entities/Enemies/small/SlimeAwake.gd" id="3_qtubj"]
-[ext_resource type="Script" uid="uid://cppgrl0mtrf4d" path="res://src/scenes/entities/Enemies/small/SlimeIdle.gd" id="4_edxnk"]
+[ext_resource type="Script" uid="uid://cqpjnrn3ciqwc" path="res://src/scenes/entities/Enemies/small/small_slime_green/SlimeAwake.gd" id="3_qtubj"]
+[ext_resource type="Script" uid="uid://cppgrl0mtrf4d" path="res://src/scenes/entities/Enemies/small/small_slime_green/SlimeIdle.gd" id="4_edxnk"]
 [ext_resource type="Script" uid="uid://b4wfr5jd3n4dn" path="res://src/scenes/entities/Enemies/EnemyHit.gd" id="5_nduv1"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_xo5e0"]
-radius = 8.0
+[sub_resource type="CircleShape2D" id="CircleShape2D_rk7rw"]
+radius = 8.062258
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xo5e0"]
 size = Vector2(10, 13)
@@ -128,9 +128,9 @@ animations = [{
 
 [node name="DummyEnemy" unique_id=961012920 instance=ExtResource("1_xo5e0")]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent" parent_id_path=PackedInt32Array(232939803) index="0" unique_id=1799667279]
+[node name="CollisionShape2D" parent="HitboxComponent" parent_id_path=PackedInt32Array(232939803) index="0" unique_id=1698255179]
 position = Vector2(0, -7)
-shape = SubResource("CircleShape2D_xo5e0")
+shape = SubResource("CircleShape2D_rk7rw")
 
 [node name="Body" parent="." index="2" unique_id=748019568]
 position = Vector2(0, -6.5)
@@ -153,3 +153,5 @@ script = ExtResource("4_edxnk")
 
 [node name="Hit" type="Node" parent="StateMachine" index="2" unique_id=1925495385]
 script = ExtResource("5_nduv1")
+
+[editable path="HitboxComponent"]

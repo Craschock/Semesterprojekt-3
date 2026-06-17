@@ -1,12 +1,12 @@
 [gd_scene format=3 uid="uid://bycye4tdrlmf3"]
 
-[ext_resource type="PackedScene" uid="uid://c301qejfle2yq" path="res://src/scenes/base/base_enemy.tscn" id="1_rxxpk"]
+[ext_resource type="PackedScene" uid="uid://c301qejfle2yq" path="res://src/scenes/entities/Enemies/base_enemy.tscn" id="1_rxxpk"]
 [ext_resource type="Texture2D" uid="uid://cfxhvbh18jx42" path="res://assets/sprites/test/slime_green.png" id="2_wtis3"]
 [ext_resource type="Script" uid="uid://b4wfr5jd3n4dn" path="res://src/scenes/entities/Enemies/EnemyHit.gd" id="3_sx5d1"]
 [ext_resource type="PackedScene" uid="uid://dp2uswhllarmo" path="res://src/scenes/components/attack_component.tscn" id="3_wtis3"]
 [ext_resource type="Script" uid="uid://dpirx7l7grmkj" path="res://src/scenes/entities/Enemies/behavior_components/EnemyPatrol.gd" id="4_t6nti"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_rxxpk"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_bmpjx"]
 radius = 4.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wtis3"]
@@ -134,9 +134,9 @@ radius = 4.0
 [node name="HitboxComponent" parent="." index="1" unique_id=232939803]
 invincibility_time = 0.5
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent" index="0" unique_id=903402860]
+[node name="CollisionShape2D" parent="HitboxComponent" index="0" unique_id=1698255179]
 position = Vector2(0, -3)
-shape = SubResource("CircleShape2D_rxxpk")
+shape = SubResource("CircleShape2D_bmpjx")
 
 [node name="Body" parent="." index="2" unique_id=748019568]
 position = Vector2(0, -3.5)
@@ -167,3 +167,5 @@ continuous_damage = true
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackComponent" index="0" unique_id=1811076309]
 position = Vector2(0, -3)
 shape = SubResource("CircleShape2D_2glt2")
+
+[editable path="HitboxComponent"]
