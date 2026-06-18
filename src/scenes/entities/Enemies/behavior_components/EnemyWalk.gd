@@ -3,6 +3,12 @@ class_name EnemyWalk
 
 var enemy: BaseEnemy
 
+@export_category("State Configuration")
+## Name of Animation to be played from Animated Sprite 2D (String)
+@export var animation_name: String = "walk"
+## Next State Node to transition to
+@export var next_state: State
+
 @export_category("Walk Settings")
 @export var speed: float = 30.0
 @export var min_walk_time: float = 0.3
@@ -16,7 +22,7 @@ func _ready() -> void:
 	enemy = owner
 
 func enter() -> void:
-	enemy.get_node("AnimatedSprite2D").play("run")
+	enemy.get_node("AnimatedSprite2D").play(animation_name)
 	
 	# Pick random walk time
 	timer = randf_range(min_walk_time, max_walk_time)
@@ -34,7 +40,7 @@ func physics_update(delta: float) -> void:
 	enemy.velocity.x = direction * speed
 	
 	if timer <= 0.0:
-		transitioned.emit(self, "idle")
+		transitioned.emit(self, next_state.name)
 
 # Flip logic
 func _flip_visuals() -> void:

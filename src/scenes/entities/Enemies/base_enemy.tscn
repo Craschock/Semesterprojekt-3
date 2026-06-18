@@ -4,6 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://pnpqmi4np2b" path="res://src/scenes/components/health_component.tscn" id="1_qnakn"]
 [ext_resource type="PackedScene" uid="uid://bhjypj2tgq0md" path="res://src/scenes/components/hitbox_component.tscn" id="2_4qdbe"]
 [ext_resource type="PackedScene" uid="uid://dhirfpuogr2q8" path="res://src/scenes/components/state_machine.tscn" id="4_ikqgl"]
+[ext_resource type="Script" uid="uid://b4wfr5jd3n4dn" path="res://src/scenes/entities/Enemies/EnemyHit.gd" id="5_jg6wm"]
 
 [node name="BaseEnemy" type="CharacterBody2D" unique_id=961012920]
 collision_layer = 4
@@ -21,3 +22,6 @@ health_component = NodePath("../HealthComponent")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1281959025]
 
 [node name="StateMachine" parent="." unique_id=1551728817 instance=ExtResource("4_ikqgl")]
+
+[node name="Hit" type="Node" parent="StateMachine" unique_id=1304688525]
+script = ExtResource("5_jg6wm")

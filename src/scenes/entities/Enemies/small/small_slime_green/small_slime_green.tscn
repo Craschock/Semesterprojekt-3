@@ -2,7 +2,6 @@
 
 [ext_resource type="PackedScene" uid="uid://c301qejfle2yq" path="res://src/scenes/entities/Enemies/base_enemy.tscn" id="1_rxxpk"]
 [ext_resource type="Texture2D" uid="uid://cfxhvbh18jx42" path="res://assets/sprites/test/slime_green.png" id="2_wtis3"]
-[ext_resource type="Script" uid="uid://b4wfr5jd3n4dn" path="res://src/scenes/entities/Enemies/EnemyHit.gd" id="3_sx5d1"]
 [ext_resource type="PackedScene" uid="uid://dp2uswhllarmo" path="res://src/scenes/components/attack_component.tscn" id="3_wtis3"]
 [ext_resource type="Script" uid="uid://dpirx7l7grmkj" path="res://src/scenes/entities/Enemies/behavior_components/EnemyPatrol.gd" id="4_t6nti"]
 
@@ -152,11 +151,7 @@ frame_progress = 0.47480926
 [node name="StateMachine" parent="." index="4" unique_id=1551728817 node_paths=PackedStringArray("initial_state")]
 initial_state = NodePath("Patrol")
 
-[node name="Hit" type="Node" parent="StateMachine" index="0" unique_id=637601170]
-script = ExtResource("3_sx5d1")
-next_state = "Patrol"
-
-[node name="Patrol" type="Node" parent="StateMachine" index="1" unique_id=956256477]
+[node name="Patrol" type="Node" parent="StateMachine" index="0" unique_id=956256477]
 script = ExtResource("4_t6nti")
 
 [node name="AttackComponent" parent="." index="5" unique_id=1829374878 instance=ExtResource("3_wtis3")]
