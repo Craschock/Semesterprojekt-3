@@ -4,8 +4,10 @@
 [ext_resource type="Texture2D" uid="uid://cojn5veho4yi8" path="res://assets/sprites/entities/enemies/small/enemy_s_rat_run.png" id="2_cl87m"]
 [ext_resource type="Texture2D" uid="uid://d3ij8qcv2afxs" path="res://assets/sprites/entities/enemies/small/enemy_s_rat_hit.png" id="2_svtd1"]
 [ext_resource type="Texture2D" uid="uid://dl5p6jfrotawk" path="res://assets/sprites/entities/enemies/small/enemy_s_rat_death.png" id="2_wd0n8"]
-[ext_resource type="Script" uid="uid://b1llifetbvfpl" path="res://src/scenes/entities/Enemies/behavior_components/EnemyIdle.gd" id="5_r3pu5"]
 [ext_resource type="Script" uid="uid://crxt81u8m6s2t" path="res://src/scenes/entities/Enemies/behavior_components/EnemyWalk.gd" id="6_5v7a8"]
+[ext_resource type="Script" uid="uid://dpty4j8elextd" path="res://src/scenes/entities/Enemies/behavior_components/EnemyAttack.gd" id="7_60o6b"]
+[ext_resource type="Script" uid="uid://dsys1lxnete83" path="res://src/scenes/entities/Enemies/behavior_components/EnemyChase.gd" id="7_w64q1"]
+[ext_resource type="PackedScene" uid="uid://dp2uswhllarmo" path="res://src/scenes/components/attack_component.tscn" id="8_ig603"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_wd0n8"]
 radius = 8.0
@@ -169,33 +171,55 @@ animations = [{
 "speed": 8.0
 }]
 
-[node name="Rat" unique_id=961012920 instance=ExtResource("1_n5j4j")]
+[node name="Rat" unique_id=961012920 node_paths=PackedStringArray("chase_state") instance=ExtResource("1_n5j4j")]
+chase_state = NodePath("StateMachine/EnemyChase")
 
-[node name="CollisionShape2D" parent="HitboxComponent" parent_id_path=PackedInt32Array(232939803) index="0" unique_id=1698255179]
-position = Vector2(0, -5)
+[node name="HealthComponent" parent="." index="0" unique_id=1881424083]
+scale = Vector2(0.75, 0.75)
+
+[node name="HitboxComponent" parent="." index="1" unique_id=232939803]
+position = Vector2(0, -3)
+scale = Vector2(0.75, 0.75)
+
+[node name="CollisionShape2D" parent="HitboxComponent" index="0" unique_id=1698255179]
 shape = SubResource("CircleShape2D_wd0n8")
 
 [node name="Body" parent="." index="2" unique_id=748019568]
-position = Vector2(0, -4)
+position = Vector2(0, -3)
+scale = Vector2(0.75, 0.75)
 shape = SubResource("RectangleShape2D_wd0n8")
 
 [node name="AnimatedSprite2D" parent="." index="3" unique_id=1281959025]
-position = Vector2(0, -12)
+position = Vector2(0, -9)
+scale = Vector2(0.75, 0.75)
 sprite_frames = SubResource("SpriteFrames_cl87m")
-animation = &"walk"
+animation = &"hit"
 
-[node name="StateMachine" parent="." index="4" unique_id=1551728817 node_paths=PackedStringArray("initial_state")]
-initial_state = NodePath("EnemyIdle")
+[node name="Hit" parent="StateMachine" parent_id_path=PackedInt32Array(1551728817) index="0" unique_id=1304688525 node_paths=PackedStringArray("next_state")]
+next_state = NodePath("../EnemyChase")
 
-[node name="Hit" parent="StateMachine" index="0" unique_id=1304688525]
-next_state = "EnemyIdle"
-
-[node name="EnemyIdle" type="Node" parent="StateMachine" index="1" unique_id=436298391]
-script = ExtResource("5_r3pu5")
-metadata/_custom_type_script = "uid://b1llifetbvfpl"
-
-[node name="EnemyWalk" type="Node" parent="StateMachine" index="2" unique_id=2654838]
+[node name="EnemyWalk" type="Node" parent="StateMachine" parent_id_path=PackedInt32Array(1551728817) index="1" unique_id=2654838 node_paths=PackedStringArray("next_state")]
 script = ExtResource("6_5v7a8")
+next_state = NodePath("../EnemyIdle")
 metadata/_custom_type_script = "uid://crxt81u8m6s2t"
+
+[node name="EnemyChase" type="Node" parent="StateMachine" parent_id_path=PackedInt32Array(1551728817) index="2" unique_id=499529484]
+script = ExtResource("7_w64q1")
+metadata/_custom_type_script = "uid://dsys1lxnete83"
+
+[node name="EnemyIdle" parent="StateMachine" parent_id_path=PackedInt32Array(1551728817) index="3" unique_id=1319766842 node_paths=PackedStringArray("next_state")]
+next_state = NodePath("../EnemyWalk")
+
+[node name="EnemyAttack" type="Node" parent="StateMachine" parent_id_path=PackedInt32Array(1551728817) index="4" unique_id=1354805761 node_paths=PackedStringArray("next_state")]
+script = ExtResource("7_60o6b")
+next_state = NodePath("../EnemyChase")
+metadata/_custom_type_script = "uid://dpty4j8elextd"
+
+[node name="DetectionComponent" parent="WeaponPivot" parent_id_path=PackedInt32Array(1288338269) index="0" unique_id=120105529]
+position = Vector2(0, -4)
+
+[node name="AttackComponent" parent="WeaponPivot" parent_id_path=PackedInt32Array(1288338269) index="1" unique_id=1829374878 instance=ExtResource("8_ig603")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WeaponPivot/AttackComponent" index="0" unique_id=2052655993]
 
 [editable path="HitboxComponent"]

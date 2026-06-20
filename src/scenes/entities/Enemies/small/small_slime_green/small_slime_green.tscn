@@ -154,6 +154,9 @@ initial_state = NodePath("Patrol")
 [node name="Patrol" type="Node" parent="StateMachine" index="0" unique_id=956256477]
 script = ExtResource("4_t6nti")
 
+[node name="Hit" parent="StateMachine" index="1" unique_id=1304688525 node_paths=PackedStringArray("next_state")]
+next_state = NodePath("../Patrol")
+
 [node name="AttackComponent" parent="." index="5" unique_id=1829374878 instance=ExtResource("3_wtis3")]
 collision_layer = 128
 collision_mask = 16

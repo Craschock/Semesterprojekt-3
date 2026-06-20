@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://b17p735ram0ly"]
+
+[ext_resource type="Script" uid="uid://btvorevp0f5es" path="res://src/scenes/components/DetectionComponent.gd" id="1_yqjf7"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_oirxh"]
+radius = 50.01
+
+[node name="DetectionComponent" type="Area2D" unique_id=120105529]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("1_yqjf7")
+proximity_radius = 10.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1855702548]
+shape = SubResource("CircleShape2D_oirxh")
+
+[node name="RayCast2D" type="RayCast2D" parent="." unique_id=1749112539]
+target_position = Vector2(50, 0)

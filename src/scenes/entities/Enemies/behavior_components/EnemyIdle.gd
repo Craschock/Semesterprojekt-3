@@ -30,4 +30,5 @@ func physics_update(delta: float) -> void:
 	timer -= delta
 	
 	if timer <= 0.0:
-		transitioned.emit(self, next_state.name)
+		if next_state:
+			transitioned.emit(self, next_state.name)

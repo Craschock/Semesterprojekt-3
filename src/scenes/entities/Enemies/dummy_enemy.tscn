@@ -2,8 +2,8 @@
 
 [ext_resource type="PackedScene" uid="uid://c301qejfle2yq" path="res://src/scenes/entities/Enemies/base_enemy.tscn" id="1_xo5e0"]
 [ext_resource type="Texture2D" uid="uid://cfxhvbh18jx42" path="res://assets/sprites/test/slime_green.png" id="2_2n3ph"]
-[ext_resource type="Script" uid="uid://cqpjnrn3ciqwc" path="res://src/scenes/entities/Enemies/small/small_slime_green/SlimeAwake.gd" id="3_qtubj"]
-[ext_resource type="Script" uid="uid://cppgrl0mtrf4d" path="res://src/scenes/entities/Enemies/small/small_slime_green/SlimeIdle.gd" id="4_edxnk"]
+[ext_resource type="Script" path="res://src/scenes/entities/Enemies/small/small_slime_green/SlimeAwake.gd" id="3_qtubj"]
+[ext_resource type="Script" path="res://src/scenes/entities/Enemies/small/small_slime_green/SlimeIdle.gd" id="4_edxnk"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_rk7rw"]
 radius = 8.062258
@@ -150,7 +150,7 @@ script = ExtResource("3_qtubj")
 [node name="Idle" type="Node" parent="StateMachine" index="1" unique_id=1388782654]
 script = ExtResource("4_edxnk")
 
-[node name="Hit" parent="StateMachine" index="2" unique_id=1304688525]
-next_state = "Idle"
+[node name="Hit" parent="StateMachine" index="2" unique_id=1304688525 node_paths=PackedStringArray("next_state")]
+next_state = NodePath("../Idle")
 
 [editable path="HitboxComponent"]

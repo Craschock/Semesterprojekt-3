@@ -30,23 +30,14 @@ func enter() -> void:
 	# Pick random direction
 	direction = [-1, 1].pick_random()
 	
-	# Handle sprite flipping
-	_flip_visuals()
 
 func physics_update(delta: float) -> void:
 	timer -= delta
 	
 	# Apply movement
 	enemy.velocity.x = direction * speed
+	enemy.update_facing(direction)
 	
 	if timer <= 0.0:
-		transitioned.emit(self, next_state.name)
-
-# Flip logic
-func _flip_visuals() -> void:
-	var sprite = enemy.get_node("AnimatedSprite2D")
-	
-	if flip_sprite:
-		sprite.flip_h = (direction > 0)
-	else:
-		sprite.flip_h = (direction < 0)
+		if next_state:
+			transitioned.emit(self, next_state.name)
