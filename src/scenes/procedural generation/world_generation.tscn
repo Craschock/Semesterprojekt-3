@@ -2,9 +2,9 @@
 
 [ext_resource type="Script" uid="uid://co1x8yk4a2syi" path="res://src/scenes/procedural generation/world_generator.gd" id="1_3r8k2"]
 [ext_resource type="Script" uid="uid://cqegu44a14mma" path="res://src/scenes/procedural generation/biome_data.gd" id="2_22d72"]
-[ext_resource type="Resource" uid="uid://dgpj1ix4nrm4" path="res://src/resources/pg_biomes/default.tres" id="3_6vgho"]
-[ext_resource type="Resource" uid="uid://bxwdh4dvm31ny" path="res://src/resources/pg_biomes/yellow.tres" id="4_22d72"]
-[ext_resource type="Resource" uid="uid://uy8usd2jj104" path="res://src/resources/pg_biomes/border.tres" id="5_3r8k2"]
+[ext_resource type="Resource" uid="uid://dgpj1ix4nrm4" path="res://src/Resources/pg_biomes/default.tres" id="3_6vgho"]
+[ext_resource type="Resource" uid="uid://bxwdh4dvm31ny" path="res://src/Resources/pg_biomes/yellow.tres" id="4_22d72"]
+[ext_resource type="Resource" uid="uid://uy8usd2jj104" path="res://src/Resources/pg_biomes/border.tres" id="5_3r8k2"]
 [ext_resource type="Texture2D" uid="uid://delq2h3473ggd" path="res://assets/sprites/pg_sprites/tiles/tilesetdefault.png" id="5_27gof"]
 [ext_resource type="Texture2D" uid="uid://cia1xnkbhhsnu" path="res://assets/sprites/pg_sprites/tiles/tilesetyellow.png" id="6_rfy0p"]
 [ext_resource type="Texture2D" uid="uid://b70oij0ytkvg8" path="res://assets/sprites/pg_sprites/tiles/defaultbackground.png" id="7_cwxq3"]
@@ -118,7 +118,7 @@ sources/0 = SubResource("TileSetAtlasSource_0h7mo")
 sources/1 = SubResource("TileSetAtlasSource_nr8wp")
 sources/2 = SubResource("TileSetAtlasSource_87qdy")
 
-[node name="World" type="Node2D" unique_id=1622799569 node_paths=PackedStringArray("fg_layer", "bg_layer", "player")]
+[node name="World" type="Node2D" unique_id=1622799569 node_paths=PackedStringArray("fg_layer", "bg_layer")]
 script = ExtResource("1_3r8k2")
 fg_layer = NodePath("Foreground")
 bg_layer = NodePath("Background")
@@ -127,7 +127,6 @@ biomes = Array[ExtResource("2_22d72")]([ExtResource("3_6vgho"), ExtResource("4_2
 region_size_chunks = 12
 border_thickness = 1
 filler_biome = ExtResource("5_3r8k2")
-player = NodePath("")
 
 [node name="Foreground" type="TileMapLayer" parent="." unique_id=1532146895]
 z_index = 1

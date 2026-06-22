@@ -327,9 +327,13 @@ func _room_tile_kind(tx: int, ty: int) -> int:
 		if not outer.has_point(Vector2i(tx, ty)):
 			continue
 		if interior.has_point(Vector2i(tx, ty)):
-			#interior wins outright; an air tile carves through any nearby wall
 			return 1
-		#inside the wall ring of this room
+		# Only treat as wall if we're in the TOP or BOTTOM wall band.
+		# Left/right bands return 0 so terrain noise fills those sides naturally (open entrance).
+		var in_left_band  = tx < interior.position.x
+		var in_right_band = tx >= interior.position.x + interior.size.x
+		if in_left_band or in_right_band:
+			continue   # left/right sides: let terrain decide
 		kind = 2
 	return kind
 
