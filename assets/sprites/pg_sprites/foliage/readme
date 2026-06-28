@@ -1,0 +1,21 @@
+Decoration: Serves no use other than decoration
+    Rare: Spawns (much) less often than the other
+Light: Later emits light (if we decide to add that), for now same as Decoration, but also rare
+
+small:
+exactly 7px width
+exactly 9px high
+
+medium:
+exactly 16px width
+exactly 22px high
+
+medium+:
+exactly 20px width
+exactly 22px high
+
+
+
+
+
+(ignore OE, its the collection)

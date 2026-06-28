@@ -92,6 +92,9 @@ enum Placement {
 @export_range(1.0, 4.0, 0.01) var fractal_lacunarity: float = 2.0
 @export_range(0.0, 1.0, 0.01) var fractal_gain: float = 0.5
 
+@export_group("Decorations")
+##all decorations that can spawn in this biome
+@export var decorations: Array[DecorationData] = []
 
 @export_group("Tile Atlas")
 

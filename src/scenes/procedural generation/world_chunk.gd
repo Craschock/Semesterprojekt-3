@@ -19,6 +19,8 @@ var state: int = State.PENDING
 var corner_solid: PackedByteArray    ##0=air, 1=solid
 var corner_locked: PackedByteArray   ##0=normal, 1=bedrock
 
+var decorations: Array[Node] = []
+
 func _init(p_chunk_pos: Vector2i, p_size: int, p_biome: BiomeData, p_region_pos: Vector2i) -> void:
 	chunk_pos = p_chunk_pos
 	size = p_size

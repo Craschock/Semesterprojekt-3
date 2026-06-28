@@ -50,6 +50,14 @@ class_name WorldGenerator
 
 
 #LOCAL VARIABLES
+const DECO_SIZE: Dictionary = {
+	DecorationData.SizeCategory.SMALL: Vector2i(7,  9),
+	DecorationData.SizeCategory.MEDIUM: Vector2i(16, 22),
+	DecorationData.SizeCategory.MEDIUM_PLUS: Vector2i(20, 22),
+}
+
+var _enemy_spawns: Dictionary = {}
+
 ##chunk_pos -> WorldChunk
 var _loaded_chunks: Dictionary = {}
 
@@ -125,7 +133,8 @@ func _process(_delta: float) -> void:
 		return
 	_last_player_chunk = player_chunk
 	_stream_chunks(player_chunk)
-
+	
+	#debug_draw_enemy_spawns() //melvin kannst du anmahen wenn du willst
 
 #WORLD LAYOUT (runs once)
 ##decides which biome generates in which region cell, obeys the placement rules like a good boy
@@ -380,6 +389,8 @@ func _stream_chunks(center: Vector2i) -> void:
 			to_unload.append(cp)
 	for cp in to_unload:
 		_unload_chunk(cp)
+	
+	print("enemy spawns loaded: ", _enemy_spawns.size())
 
 
 func _load_chunk(chunk_pos: Vector2i) -> void:
@@ -390,6 +401,7 @@ func _load_chunk(chunk_pos: Vector2i) -> void:
 	_generate_chunk_corners(chunk)
 	chunk.state = WorldChunk.State.GENERATED
 	_render_chunk(chunk)
+	_spawn_decorations(chunk)
 	chunk.state = WorldChunk.State.RENDERED
 	_loaded_chunks[chunk_pos] = chunk
 
@@ -404,6 +416,10 @@ func _unload_chunk(chunk_pos: Vector2i) -> void:
 			var wp = Vector2i(origin.x + lx, origin.y + ly)
 			fg_layer.erase_cell(wp)
 			bg_layer.erase_cell(wp)
+	for node in chunk.decorations:
+		node.queue_free()
+		chunk.decorations.clear()
+	_enemy_spawns.erase(chunk_pos)
 	_loaded_chunks.erase(chunk_pos)
 
 
@@ -594,9 +610,17 @@ func _render_chunk(chunk: WorldChunk) -> void:
 				bg_coord = biome.bg_atlas_coord
 
 			if chunk.get_corner(tx, ty):
-				bg_layer.set_cell(wp, bg_src, bg_coord)
+				var bg_pick: Vector2i
+				if use_border:
+					bg_pick = bg_coord  # border stays fixed, only 1 tile
+				else:
+					var h = (wp.x * 2246822519 ^ wp.y * 3266489917 ^ world_seed) & 0x7FFFFFFF
+					var idx = h % 8
+					bg_pick = Vector2i(bg_coord.x + idx % 4, bg_coord.y + idx / 4)
+				bg_layer.set_cell(wp, bg_src, bg_pick)
 			else:
 				bg_layer.erase_cell(wp)
+				
 			var atlas = Vector2i(mask % cols, mask / cols)
 			fg_layer.set_cell(wp, src, atlas)
 
@@ -654,7 +678,164 @@ func is_corner_locked(world_corner: Vector2i) -> bool:
 	if lx < 0 or ly < 0 or lx > chunk_size or ly > chunk_size:
 		return false
 	return chunk.get_locked(lx, ly)
+	
+	
+#DECORATIONS
+func _spawn_decorations(chunk: WorldChunk) -> void:
+	if chunk.biome == null or chunk.biome.decorations.is_empty():
+		return
 
+	var origin = chunk.world_origin()
+
+	for ty in range(chunk_size):
+		for tx in range(chunk_size):
+			#this tile has to be air
+			if chunk.get_corner(tx, ty):
+				continue
+
+			#tile below must be solid
+			if not chunk.get_corner(tx, ty + 1):
+				continue
+
+			#rng per tile
+			var wx = origin.x + tx
+			var wy = origin.y + ty
+			var h = (wx * 2246822519 ^ wy * 3266489917 ^ world_seed) & 0x7FFFFFFF #holy math
+
+			#pick a decoration out of the list
+			#each decoration gets an independent rng roll so weights are independent
+			#danke minecraft wow ihr seid die geilsten, komplett abgeschaut
+			for i in range(chunk.biome.decorations.size()):
+				var deco: DecorationData = chunk.biome.decorations[i]
+				if deco.texture == null:
+					continue
+				if deco.placement != DecorationData.Placement.FLOOR:
+					continue
+
+				#roll per dec
+				var roll_hash = (h ^ (i * 2654435761)) & 0x7FFFFFFF
+				var roll = float(roll_hash) / float(0x7FFFFFFF)
+				if roll > deco.spawn_chance:
+					continue
+
+				var size: Vector2i = DECO_SIZE[deco.size_category]
+
+				#PIXEL position of tiles bottomleftest pixel
+				#wx/wy are tile coords ->  bottom of tile (ty) = (wy+1) * tile_pixel_size
+				var floor_pixel_y = (wy + 1) * tile_pixel_size
+
+				#center the decoration on the tile
+				var left_pixel_x = wx * tile_pixel_size + tile_pixel_size / 2 - size.x / 2
+
+				#every tile the deco touches needs solid floor (danke johannna das alle unterschiedlich groß sind du bist so tuff)
+				#same for air above
+				var first_tile_x = floori(float(left_pixel_x) / tile_pixel_size)
+				var last_tile_x  = floori(float(left_pixel_x + size.x - 1) / tile_pixel_size)
+				var top_tile_y   = floori(float(floor_pixel_y - size.y) / tile_pixel_size)
+
+				var fits = true
+				for cx in range(first_tile_x, last_tile_x + 1):
+					var lcx = cx - origin.x
+					var lcy_floor = ty + 1   #solid floor at local coords
+					var lcy_top   = top_tile_y - origin.y
+
+					#check if floor tile exists in chnk and and is solid
+					if lcx < 0 or lcx >= chunk_size or lcy_floor > chunk_size:
+						fits = false
+						break
+					if not chunk.get_corner(lcx, lcy_floor):
+						fits = false
+						break
+
+					#cycle through all tiles from top to bottom and check if air
+					#so now we can add big decorations without them stuck in ceiling
+					for cy in range(maxi(lcy_top, 0), lcy_floor):
+						if cy < 0 or cy > chunk_size:
+							continue
+						if chunk.get_corner(lcx, cy):
+							fits = false
+							break
+					if not fits:
+						break
+
+				if not fits:
+					continue
+
+				#spawn the sprite
+				var sprite = Sprite2D.new()
+				sprite.texture = deco.texture
+				sprite.centered = false
+				sprite.position = Vector2(left_pixel_x, floor_pixel_y - size.y)
+				add_child(sprite)
+				chunk.decorations.append(sprite)
+
+				#only one decoration per tile (first one that gets here wins the seed (sperm race ahh moment))
+				break
+				
+
+#ENEMY SPAWN MARKERS — max 1 per chunk
+	#ja wieder random gen
+	var enemy_hash = (origin.x * 2246822519 ^ origin.y * 3266489917 ^ world_seed) & 0x7FFFFFFF
+	var enemy_roll = float(enemy_hash) / float(0x7FFFFFFF)
+	if true:
+		#scan tiles
+		var candidates: Array[Vector2i] = []
+		for ty in range(chunk_size):
+			for tx in range(chunk_size):
+				# floor tile below must be solid
+				if not chunk.get_corner(tx, ty + 1):
+					continue
+				# tile itself must be air
+				if chunk.get_corner(tx, ty):
+					continue
+				# left and right floor tiles must be solid (no platform edge)
+				if tx == 0 or tx >= chunk_size - 1:
+					continue
+				if not chunk.get_corner(tx - 1, ty + 1):
+					continue
+				if not chunk.get_corner(tx + 1, ty + 1):
+					continue
+				# must have 4 tiles of air clearance above
+				var fits = true
+				for cy in range(ty - 3, ty + 1):
+					if cy < 0 or cy > chunk_size:
+						continue
+					if chunk.get_corner(tx, cy):
+						fits = false
+						break
+				if not fits:
+					continue
+				candidates.append(Vector2i(tx, ty))
+
+		if not candidates.is_empty():
+			# pick from candidates
+			var pick = candidates[enemy_hash % candidates.size()]
+			var wx = origin.x + pick.x
+			var wy = origin.y + pick.y
+			var marker = Marker2D.new()
+			marker.name = "EnemySpawn_%d_%d" % [wx, wy]
+			marker.position = Vector2(
+				(wx + 0.5) * tile_pixel_size,
+				(wy + 1) * tile_pixel_size
+			)
+			marker.add_to_group("enemy_spawn")
+			add_child(marker)
+			_enemy_spawns[chunk.chunk_pos] = [marker.position]
+			chunk.decorations.append(marker)
+
+func debug_draw_enemy_spawns() -> void:
+	for positions in _enemy_spawns.values():
+		for pos in positions:
+			var dot = Node2D.new()
+			dot.global_position = pos
+			dot.z_index = 100
+			add_child(dot) 
+			dot.add_to_group("debug_enemy_spawn_dots")
+		
+			var circle = func():
+				dot.draw_circle(Vector2.ZERO, 8, Color.RED)
+			dot.connect("draw", circle)
+			dot.queue_redraw()
 
 # FUNCTIONS TO CALL FROM OUTSIDE. NEVER CALL ANY OTHER FUNCTION FROM OUTSIDE PLS
 # AND NEVER NEVER NEVER MODIFY ANY CODE INSIDE THIS FILE AAAAAAAAAAAAAAAAAAA

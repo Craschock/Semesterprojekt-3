@@ -7,9 +7,9 @@
 [ext_resource type="Resource" uid="uid://uy8usd2jj104" path="res://src/Resources/pg_biomes/border.tres" id="5_3r8k2"]
 [ext_resource type="Texture2D" uid="uid://delq2h3473ggd" path="res://assets/sprites/pg_sprites/tiles/tilesetdefault.png" id="5_27gof"]
 [ext_resource type="Texture2D" uid="uid://cia1xnkbhhsnu" path="res://assets/sprites/pg_sprites/tiles/tilesetyellow.png" id="6_rfy0p"]
-[ext_resource type="Texture2D" uid="uid://b70oij0ytkvg8" path="res://assets/sprites/pg_sprites/tiles/defaultbackground.png" id="7_cwxq3"]
 [ext_resource type="Texture2D" uid="uid://bojaa0j64371d" path="res://assets/sprites/pg_sprites/tiles/tilesetborder.png" id="8_22d72"]
-[ext_resource type="Texture2D" uid="uid://0k13xo3u6fmp" path="res://assets/sprites/pg_sprites/tiles/yellowbackground.png" id="8_d3m8n"]
+[ext_resource type="Texture2D" uid="uid://dm01dj46bv8yc" path="res://assets/sprites/pg_sprites/tiles/backgroundtilesv2.png" id="9_uh56i"]
+[ext_resource type="Texture2D" uid="uid://lpspuf575xw7" path="res://assets/sprites/pg_sprites/tiles/yellowbackgroundtilesv2.png" id="10_uh56i"]
 [ext_resource type="Texture2D" uid="uid://d07kk07u6mdmb" path="res://assets/sprites/pg_sprites/tiles/borderbackground.png" id="11_6vgho"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_hqns4"]
@@ -102,12 +102,30 @@ sources/1 = SubResource("TileSetAtlasSource_x0ka3")
 sources/2 = SubResource("TileSetAtlasSource_6vgho")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_0h7mo"]
-texture = ExtResource("7_cwxq3")
+texture = ExtResource("9_uh56i")
 0:0/0 = 0
+1:0/0 = 0
+2:0/0 = 0
+2:1/0 = 0
+0:1/0 = 0
+1:1/0 = 0
+3:1/0 = 0
+3:0/0 = 0
+4:0/0 = 0
+4:1/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_nr8wp"]
-texture = ExtResource("8_d3m8n")
+texture = ExtResource("10_uh56i")
 0:0/0 = 0
+1:0/0 = 0
+2:0/0 = 0
+3:0/0 = 0
+4:0/0 = 0
+0:1/0 = 0
+1:1/0 = 0
+2:1/0 = 0
+3:1/0 = 0
+4:1/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_87qdy"]
 texture = ExtResource("11_6vgho")

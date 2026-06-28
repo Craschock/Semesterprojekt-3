@@ -1,6 +1,8 @@
 [gd_resource type="Resource" script_class="BiomeData" format=3 uid="uid://dgpj1ix4nrm4"]
 
+[ext_resource type="Script" uid="uid://bg0j21vco3sjm" path="res://src/scenes/procedural generation/decoration_data.gd" id="1_6h5pl"]
 [ext_resource type="Script" uid="uid://cqegu44a14mma" path="res://src/scenes/procedural generation/biome_data.gd" id="1_asad2"]
+[ext_resource type="Resource" uid="uid://cwrmp5nthyb7" path="res://src/Resources/decorations/test.tres" id="2_uy36g"]
 
 [resource]
 script = ExtResource("1_asad2")
@@ -12,7 +14,9 @@ is_spawn_biome = true
 spawn_room_size = Vector2i(30, 20)
 boss_room_size = Vector2i(50, 25)
 seed_offset = 100
-frequency = 0.073
-threshold = 0.15000000000000002
-fractal_octaves = 2
+frequency = 0.041
+threshold = 0.20999999999999996
+fractal_octaves = 4
+fractal_gain = 0.39
+decorations = Array[ExtResource("1_6h5pl")]([ExtResource("2_uy36g")])
 bg_source_id = 0
