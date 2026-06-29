@@ -6,6 +6,7 @@ class_name PlayerMovement
 @onready var inventory_component: InventoryComponent = $InventoryComponent
 
 # Movement 
+@export_category("Movement")
 @export var speed: float = 70.0
 @export var acceleration: float = 600.0
 @export var friction: float = 800.0
@@ -13,7 +14,15 @@ class_name PlayerMovement
 @export var step_height: float = 8.0
 var stored_velocity: Vector2
 
+# Physics
+@export_category("Physics")
+@export var max_fall_velocity: float = 500.0
+var gravity: float = ProjectSettings.get_setting("physics/2d/default_gravity")
+var apply_gravity: bool = true
+var is_frozen: bool = false
+
 #Jump
+@export_category("Jump")
 ## Maximum jump height
 @export var min_jump_velocity: float = -150.0
 ## Minimum jump height
@@ -28,11 +37,6 @@ var current_jump_charge: float = 0.0
 
 # Inventory
 const ITEM_HOTKEY_OFFSET: int = 5
-
-var gravity: float = ProjectSettings.get_setting("physics/2d/default_gravity")
-var apply_gravity: bool = true
-var is_frozen: bool = false
-
 
 func _ready() -> void:
 	# Setup Singleton PlayerManager

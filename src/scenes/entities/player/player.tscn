@@ -32,8 +32,9 @@ height = 18.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_sgjri"]
 radius = 20.0
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_5u4ll"]
-size = Vector2(8, 19)
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_jasd0"]
+radius = 4.0
+height = 19.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_fiexf"]
 atlas = ExtResource("6_yd64i")
@@ -505,13 +506,13 @@ shape = SubResource("CircleShape2D_sgjri")
 
 [node name="Body" type="CollisionShape2D" parent="." unique_id=1785599104]
 position = Vector2(2, -9.5)
-shape = SubResource("RectangleShape2D_5u4ll")
+shape = SubResource("CapsuleShape2D_jasd0")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1170618590]
 position = Vector2(0, -10)
 scale = Vector2(0.5, 0.5)
 sprite_frames = SubResource("SpriteFrames_084ju")
-animation = &"jump_up"
+animation = &"idle"
 
 [node name="StateMachine" parent="." unique_id=1551728817 node_paths=PackedStringArray("initial_state") instance=ExtResource("5_8ghov")]
 initial_state = NodePath("Idle")
