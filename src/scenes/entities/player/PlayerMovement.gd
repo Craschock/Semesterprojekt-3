@@ -9,6 +9,8 @@ class_name PlayerMovement
 @export var speed: float = 70.0
 @export var acceleration: float = 600.0
 @export var friction: float = 800.0
+##Maximum step height
+@export var step_height: float = 8.0
 var stored_velocity: Vector2
 
 #Jump
@@ -38,7 +40,7 @@ func _ready() -> void:
 	# Connect signals
 	health_component.health_changed.connect(_on_health_changed)
 	health_component.health_depleted.connect(_on_health_depleted)
-
+	floor_snap_length = step_height
 func _physics_process(delta: float) -> void:
 	if is_frozen:
 		return
@@ -59,6 +61,7 @@ func _physics_process(delta: float) -> void:
 		var vertical_dir := Input.get_axis("move_up", "move_down")
 		velocity.y = vertical_dir * speed
 
+	try_step_up()
 	move_and_slide()
 
 
@@ -92,7 +95,15 @@ func can_jump() -> bool:
 func consume_jump() -> void:
 	jump_buffer_timer = 0.0 # Removes jump buffer so player cannot double jump
 
+# Step height
+func try_step_up() -> void:
+	if not is_on_floor() or abs(velocity.x) < 1.0:
+		return
+	var forward := Vector2(sign(velocity.x) * 2, 0)
 
+	if test_move(transform, forward) and \
+	   not test_move(transform.translated(Vector2(0, -step_height)), forward):
+		position.y -= step_height
 
 # Attack freeze
 func freeze() -> void:
