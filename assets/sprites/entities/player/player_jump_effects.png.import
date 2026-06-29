@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://h7f0es3ilghq"
-path="res://.godot/imported/player_jump_claw.png-fcbacfe239fa995c517b4e50dae36e60.ctex"
+uid="uid://drgig1na2iay2"
+path="res://.godot/imported/player_jump_effects.png-824c12bd2f2c018ccc9428abebb707a7.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/entities/player/player_jump_claw.png"
-dest_files=["res://.godot/imported/player_jump_claw.png-fcbacfe239fa995c517b4e50dae36e60.ctex"]
+source_file="res://assets/sprites/entities/player/player_jump_effects.png"
+dest_files=["res://.godot/imported/player_jump_effects.png-824c12bd2f2c018ccc9428abebb707a7.ctex"]
 
 [params]
 

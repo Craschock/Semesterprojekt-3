@@ -22,7 +22,7 @@ func physics_update(delta: float) -> void:
 		transitioned.emit(self, "run")
 	
 	if Input.is_action_just_pressed("jump") and player.can_jump():
-		transitioned.emit(self, "jump")
+		transitioned.emit(self, "jumpcharge")
 	
 	if Input.is_action_just_pressed("attack"):
 		transitioned.emit(self, "action")

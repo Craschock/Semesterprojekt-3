@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://brdxqe0qskvib"]
+
+[ext_resource type="Script" uid="uid://ci4mudtmdcom7" path="res://src/scenes/ui/huds/MainHUD.gd" id="1_mtgyu"]
+[ext_resource type="PackedScene" uid="uid://dc4ht6n2otjoy" path="res://src/scenes/ui/huds/debug_ui.tscn" id="2_7o5lx"]
+
+[node name="MainHUD" type="CanvasLayer" unique_id=1196255063]
+script = ExtResource("1_mtgyu")
+
+[node name="DebugUI" parent="." unique_id=1096292168 instance=ExtResource("2_7o5lx")]

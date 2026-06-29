@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://ckdifw6x0om4h"]
 
 [ext_resource type="Script" uid="uid://cegk7h7irgixa" path="res://src/scenes/menus/final menus/worlds/GameManager.gd" id="1_pr1v7"]
+[ext_resource type="PackedScene" uid="uid://brdxqe0qskvib" path="res://src/scenes/ui/huds/main_hud.tscn" id="2_oivod"]
 [ext_resource type="PackedScene" uid="uid://bh6kjgw51fv7u" path="res://src/scenes/entities/player/player.tscn" id="3_s4t1n"]
 [ext_resource type="PackedScene" uid="uid://dfd10kendyi1g" path="res://src/scenes/procedural generation/world_generation.tscn" id="8_owfvr"]
 
@@ -10,6 +11,8 @@
 script = ExtResource("1_pr1v7")
 world_generator = NodePath("../World")
 player = NodePath("../Player")
+
+[node name="MainHUD" parent="." unique_id=1196255063 instance=ExtResource("2_oivod")]
 
 [node name="Player" parent="." unique_id=80359539 instance=ExtResource("3_s4t1n")]
 

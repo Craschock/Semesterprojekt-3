@@ -12,15 +12,24 @@ class_name PlayerMovement
 var stored_velocity: Vector2
 
 #Jump
-@export var jump_velocity: float = -250.0
-@export var jump_buffer_time = 0.15
-var jump_buffer_timer = 0.0
+## Maximum jump height
+@export var min_jump_velocity: float = -150.0
+## Minimum jump height
+@export var max_jump_velocity: float = -350.0
+## How many seconds to reach max jump charge
+@export var time_to_max_charge: float = 0.4
+## How long player can jump after leaving platform
+@export var jump_buffer_time: float = 0.15
+
+var jump_buffer_timer: float = 0.0
+var current_jump_charge: float = 0.0
 
 # Inventory
 const ITEM_HOTKEY_OFFSET: int = 5
 
 var gravity: float = ProjectSettings.get_setting("physics/2d/default_gravity")
 var apply_gravity: bool = true
+var is_frozen: bool = false
 
 
 func _ready() -> void:
@@ -31,6 +40,9 @@ func _ready() -> void:
 	health_component.health_depleted.connect(_on_health_depleted)
 
 func _physics_process(delta: float) -> void:
+	if is_frozen:
+		return
+	
 	var cam := get_viewport().get_camera_2d()
 	# Jump buffer
 	if is_on_floor():
@@ -38,9 +50,14 @@ func _physics_process(delta: float) -> void:
 	else:
 		jump_buffer_timer -= delta
 	
-	# Apply Gravity
-	if not is_on_floor() and apply_gravity:
-		velocity.y += gravity * delta
+	# Apply Gravity or Fly Mode
+	if apply_gravity:
+		if not is_on_floor():
+			velocity.y += gravity * delta
+	else:
+		# Debug fly movement
+		var vertical_dir := Input.get_axis("move_up", "move_down")
+		velocity.y = vertical_dir * speed
 
 	move_and_slide()
 
@@ -81,8 +98,8 @@ func consume_jump() -> void:
 func freeze() -> void:
 	stored_velocity = velocity
 	velocity = Vector2.ZERO
-	apply_gravity = false
+	is_frozen = true
 
 func unfreeze() -> void:
 	velocity = stored_velocity
-	apply_gravity = true
+	is_frozen = false
