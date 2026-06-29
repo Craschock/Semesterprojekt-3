@@ -7,15 +7,19 @@ class_name PlayerMovement
 
 # Movement 
 @export_category("Movement")
+## Movement Speed of Player
 @export var speed: float = 70.0
-@export var acceleration: float = 600.0
+## Acceleration of Player
+@export var acceleration: float = 600.0#
+## Decceleration of Player
 @export var friction: float = 800.0
-##Maximum step height
+## Maximum step height
 @export var step_height: float = 8.0
 var stored_velocity: Vector2
 
 # Physics
 @export_category("Physics")
+## Terminal Velocity for Player
 @export var max_fall_velocity: float = 500.0
 var gravity: float = ProjectSettings.get_setting("physics/2d/default_gravity")
 var apply_gravity: bool = true
@@ -59,7 +63,7 @@ func _physics_process(delta: float) -> void:
 	# Apply Gravity or Fly Mode
 	if apply_gravity:
 		if not is_on_floor():
-			velocity.y += gravity * delta
+			velocity.y = min(velocity.y + gravity * delta, max_fall_velocity)
 	else:
 		# Debug fly movement
 		var vertical_dir := Input.get_axis("move_up", "move_down")
