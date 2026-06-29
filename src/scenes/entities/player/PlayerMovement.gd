@@ -14,7 +14,7 @@ class_name PlayerMovement
 ## Decceleration of Player
 @export var friction: float = 800.0
 ## Maximum step height
-@export var step_height: float = 8.0
+@export var step_height: float = 4.0
 var stored_velocity: Vector2
 
 # Physics

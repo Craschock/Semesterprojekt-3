@@ -478,6 +478,8 @@ _data = {
 collision_layer = 2
 collision_mask = 5
 script = ExtResource("1_12pno")
+speed = 85.0
+step_height = 4.0
 max_jump_velocity = -400.0
 time_to_max_charge = 0.67
 
@@ -573,6 +575,7 @@ libraries/ = SubResource("AnimationLibrary_lrig1")
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1042958842]
 offset = Vector2(0, -8)
 zoom = Vector2(5, 5)
+position_smoothing_enabled = true
 
 [node name="PlayerUI" type="CanvasLayer" parent="." unique_id=893019572]
 visible = false
