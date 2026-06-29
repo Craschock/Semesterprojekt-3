@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="DecorationData" format=3 uid="uid://bbuv6tob3rwwp"]
+
+[ext_resource type="Script" uid="uid://bg0j21vco3sjm" path="res://src/scenes/procedural generation/decoration_data.gd" id="1_gloju"]
+[ext_resource type="Texture2D" uid="uid://c3kw1yp1s6ice" path="res://assets/sprites/pg_sprites/foliage/decoration_medium_01.png" id="2_kuubv"]
+
+[resource]
+script = ExtResource("1_gloju")
+texture = ExtResource("2_kuubv")
+spawn_chance = 0.01
+metadata/_custom_type_script = "uid://bg0j21vco3sjm"
