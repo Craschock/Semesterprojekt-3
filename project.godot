@@ -21,6 +21,11 @@ PlayerManager="*uid://dgopauq4501ns"
 EffectManager="*uid://qcib5dvtt62x"
 UIManager="*uid://do2tlfwl68vut"
 
+[display]
+
+window/size/viewport_width=1920
+window/size/viewport_height=1080
+
 [editor_plugins]
 
 enabled=PackedStringArray()

@@ -13,17 +13,13 @@ func _ready() -> void:
 	fly_btn.focus_mode = Control.FOCUS_NONE
 	noclip_btn.focus_mode = Control.FOCUS_NONE
 	godmode_btn.focus_mode = Control.FOCUS_NONE
-	
-	fly_btn.toggled.connect(_on_fly_toggled)
-	noclip_btn.toggled.connect(_on_noclip_toggled)
-	godmode_btn.toggled.connect(_on_godmode_toggled)
 
-func _on_fly_toggled(toggled_on: bool) -> void:
+func _on_fly_button_toggled(toggled_on: bool) -> void:
 	var player = PlayerManager.player
 	if player:
 		player.apply_gravity = !toggled_on
 
-func _on_noclip_toggled(toggled_on: bool) -> void:
+func _on_noclip_button_toggled(toggled_on: bool) -> void:
 	var player = PlayerManager.player
 	if player:
 		if toggled_on:
@@ -44,7 +40,7 @@ func _on_noclip_toggled(toggled_on: bool) -> void:
 			if not fly_btn.button_pressed:
 				player.apply_gravity = true
 
-func _on_godmode_toggled(toggled_on: bool) -> void:
+func _on_godmode_button_toggled(toggled_on: bool) -> void:
 	var player = PlayerManager.player
 	if player:
 		var hitbox = player.get_node_or_null("HitboxComponent")

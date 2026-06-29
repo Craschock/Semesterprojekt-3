@@ -27,3 +27,7 @@ text = "Noclip"
 [node name="GodmodeButton" type="CheckButton" parent="VBoxContainer" unique_id=652441829]
 layout_mode = 2
 text = "Godmode"
+
+[connection signal="toggled" from="VBoxContainer/FlyButton" to="." method="_on_fly_button_toggled"]
+[connection signal="toggled" from="VBoxContainer/NoclipButton" to="." method="_on_noclip_button_toggled"]
+[connection signal="toggled" from="VBoxContainer/GodmodeButton" to="." method="_on_godmode_button_toggled"]
