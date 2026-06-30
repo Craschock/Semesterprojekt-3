@@ -10,7 +10,7 @@ func enter() -> void:
 	player.freeze()
 	
 	# Turn off the hitbox so dead bodies block attacks
-	player.get_node("HitboxComponent/Hitbox").set_deferred("disabled", true)
+	player.get_node("HitboxComponent/CollisionShape2D").set_deferred("disabled", true)
 	
 	player.get_node("AnimatedSprite2D").play("death")
 	
