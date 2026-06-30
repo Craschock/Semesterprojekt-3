@@ -72,46 +72,46 @@ theme = ExtResource("3_b7twt")
 text = "Quit"
 flat = true
 
-[node name="ButtonsOverlay" type="Node" parent="." unique_id=842952347]
-
-[node name="Button" type="Sprite2D" parent="ButtonsOverlay" unique_id=308064891]
-position = Vector2(960, 593.45)
+[node name="Button" type="Sprite2D" parent="VBoxContainer" unique_id=308064891]
+position = Vector2(212, 30.449768)
 scale = Vector2(3.3, 3.3)
 texture = ExtResource("6_b7twt")
 
-[node name="Button2" type="Sprite2D" parent="ButtonsOverlay" unique_id=685952341]
-position = Vector2(960, 722.45)
+[node name="Button2" type="Sprite2D" parent="VBoxContainer" unique_id=685952341]
+position = Vector2(212, 159.44977)
 scale = Vector2(3.3, 3.3)
 texture = ExtResource("6_b7twt")
 
-[node name="Button3" type="Sprite2D" parent="ButtonsOverlay" unique_id=701584757]
-position = Vector2(960, 853.45)
+[node name="Button3" type="Sprite2D" parent="VBoxContainer" unique_id=701584757]
+position = Vector2(212, 290.44977)
 scale = Vector2(3.3, 3.3)
 texture = ExtResource("6_b7twt")
 
-[node name="Button4" type="Sprite2D" parent="ButtonsOverlay" unique_id=287939566]
-position = Vector2(960, 984.45)
+[node name="Button4" type="Sprite2D" parent="VBoxContainer" unique_id=287939566]
+position = Vector2(212, 421.44977)
 scale = Vector2(3.3, 3.3)
 texture = ExtResource("6_b7twt")
 
-[node name="ButtonsIcons" type="Node" parent="." unique_id=1890250058]
-
-[node name="Sprite2D" type="Sprite2D" parent="ButtonsIcons" unique_id=104090859]
-position = Vector2(809, 594)
+[node name="Icon" type="Sprite2D" parent="VBoxContainer" unique_id=104090859]
+position = Vector2(61, 30.999756)
 scale = Vector2(4, 4)
 texture = ExtResource("7_fmnjn")
 
-[node name="Sprite2D2" type="Sprite2D" parent="ButtonsIcons" unique_id=870387593]
-position = Vector2(805, 723)
+[node name="Icon2" type="Sprite2D" parent="VBoxContainer" unique_id=870387593]
+position = Vector2(57, 159.99976)
 scale = Vector2(4, 4)
 texture = ExtResource("8_y7y0f")
 
-[node name="Sprite2D3" type="Sprite2D" parent="ButtonsIcons" unique_id=2088540467]
-position = Vector2(806, 854)
+[node name="Icon3" type="Sprite2D" parent="VBoxContainer" unique_id=2088540467]
+position = Vector2(58, 290.99976)
 scale = Vector2(4, 4)
 texture = ExtResource("9_wd6aq")
 
-[node name="Sprite2D4" type="Sprite2D" parent="ButtonsIcons" unique_id=171060649]
-position = Vector2(808, 985)
+[node name="Icon4" type="Sprite2D" parent="VBoxContainer" unique_id=171060649]
+position = Vector2(60, 421.99976)
 scale = Vector2(4, 4)
 texture = ExtResource("10_mqm0f")
+
+[node name="ButtonsOverlay" type="Node" parent="." unique_id=842952347]
+
+[node name="ButtonsIcons" type="Node" parent="." unique_id=1890250058]
