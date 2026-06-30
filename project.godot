@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Ditto Dungeon"
-run/main_scene="uid://coselkpkg4ik4"
+run/main_scene="uid://b3ivrpnr5vk0g"
 config/features=PackedStringArray("4.6", "Forward Plus")
 config/icon="res://icon.svg"
 
@@ -36,6 +36,7 @@ folder_colors={
 "res://assets/fonts/": "purple",
 "res://assets/sounds/": "purple",
 "res://assets/sprites/": "purple",
+"res://assets/themes/": "purple",
 "res://src/resources/": "green",
 "res://src/scenes/": "yellow",
 "res://src/scenes/entities/": "yellow",

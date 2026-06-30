@@ -2,8 +2,13 @@
 
 [ext_resource type="Script" uid="uid://ci4mudtmdcom7" path="res://src/scenes/ui/huds/MainHUD.gd" id="1_mtgyu"]
 [ext_resource type="PackedScene" uid="uid://dc4ht6n2otjoy" path="res://src/scenes/ui/huds/debug_ui.tscn" id="2_7o5lx"]
+[ext_resource type="PackedScene" uid="uid://dr5dccykwm2qn" path="res://src/scenes/ui/huds/player_ui.tscn" id="3_xgegl"]
 
 [node name="MainHUD" type="CanvasLayer" unique_id=1196255063]
 script = ExtResource("1_mtgyu")
+
+[node name="PlayerUI" parent="." unique_id=913120310 instance=ExtResource("3_xgegl")]
+offset_right = -1920.0
+offset_bottom = -1080.0
 
 [node name="DebugUI" parent="." unique_id=1096292168 instance=ExtResource("2_7o5lx")]

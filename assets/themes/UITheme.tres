@@ -1,0 +1,14 @@
+[gd_resource type="Theme" format=3 uid="uid://b6yinfg10qg2e"]
+
+[ext_resource type="FontFile" uid="uid://ww3qpbbtk4gc" path="res://assets/fonts/PixelOperator8.ttf" id="1_by5hd"]
+
+[sub_resource type="FontVariation" id="FontVariation_by5hd"]
+base_font = ExtResource("1_by5hd")
+spacing_glyph = -10
+
+[resource]
+Button/colors/font_color = Color(1, 1, 1, 1)
+Button/colors/font_focus_color = Color(1, 1, 1, 1)
+Button/colors/font_hover_color = Color(1, 1, 1, 1)
+Button/font_sizes/font_size = 48
+Button/fonts/font = SubResource("FontVariation_by5hd")

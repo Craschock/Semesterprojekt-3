@@ -1,8 +1,15 @@
 [gd_scene format=3 uid="uid://b3ivrpnr5vk0g"]
 
-[ext_resource type="FontFile" uid="uid://ww3qpbbtk4gc" path="res://assets/fonts/PixelOperator8.ttf" id="1_30681"]
+[ext_resource type="Texture2D" uid="uid://c3t83ovwgt0od" path="res://assets/sprites/UI/Main Menu/Main_Menu.png" id="1_mvs8x"]
+[ext_resource type="Texture2D" uid="uid://7oe7q25wrv4o" path="res://assets/sprites/UI/Main Menu/Logo.png" id="1_ubtoy"]
 [ext_resource type="Script" uid="uid://cass8aku7j022" path="res://src/scenes/ui/buttons/B_SceneSwitcher.gd" id="2_b1hgy"]
-[ext_resource type="PackedScene" uid="uid://coselkpkg4ik4" path="res://src/scenes/menus/test_scenes/test_game.tscn" id="3_t0sjb"]
+[ext_resource type="Theme" uid="uid://b6yinfg10qg2e" path="res://assets/themes/UITheme.tres" id="3_b7twt"]
+[ext_resource type="PackedScene" uid="uid://ckdifw6x0om4h" path="res://src/scenes/menus/final menus/worlds/game.tscn" id="3_xxi7i"]
+[ext_resource type="Texture2D" uid="uid://p4wjoehasvse" path="res://assets/sprites/UI/Main Menu/ButtonBase.png" id="6_b7twt"]
+[ext_resource type="Texture2D" uid="uid://6e5gtpm7nvwg" path="res://assets/sprites/UI/Main Menu/IconPlay.png" id="7_fmnjn"]
+[ext_resource type="Texture2D" uid="uid://dtmcue54v6te1" path="res://assets/sprites/UI/Main Menu/IconSettings.png" id="8_y7y0f"]
+[ext_resource type="Texture2D" uid="uid://jiba4gvobe3u" path="res://assets/sprites/UI/Main Menu/IconCredits.png" id="9_wd6aq"]
+[ext_resource type="Texture2D" uid="uid://b330th2m2pe5" path="res://assets/sprites/UI/Main Menu/IconQuit.png" id="10_mqm0f"]
 
 [node name="Main Menu" type="Control" unique_id=153052924]
 layout_mode = 3
@@ -14,6 +21,16 @@ grow_vertical = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
+[node name="Background" type="Sprite2D" parent="." unique_id=1246181462]
+scale = Vector2(2.8111272, 2.8124998)
+texture = ExtResource("1_mvs8x")
+centered = false
+
+[node name="Title" type="Sprite2D" parent="." unique_id=193314272]
+position = Vector2(960, 180)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("1_ubtoy")
+
 [node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=328148026]
 layout_mode = 1
 anchors_preset = 8
@@ -21,29 +38,80 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -20.0
-offset_top = -20.0
-offset_right = 20.0
-offset_bottom = 20.0
+offset_left = -212.0
+offset_top = 23.000244
+offset_right = 212.0
+offset_bottom = 503.00024
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_constants/separation = 76
 
 [node name="B_Start" type="Button" parent="VBoxContainer" unique_id=1978294108]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("1_30681")
-theme_override_font_sizes/font_size = 64
+theme = ExtResource("3_b7twt")
 text = "Start"
+flat = true
 script = ExtResource("2_b1hgy")
-game_scene = ExtResource("3_t0sjb")
+game_scene = ExtResource("3_xxi7i")
 
 [node name="B_Settings" type="Button" parent="VBoxContainer" unique_id=868862888]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("1_30681")
-theme_override_font_sizes/font_size = 64
+theme = ExtResource("3_b7twt")
 text = "Settings"
+flat = true
+
+[node name="B_Credits" type="Button" parent="VBoxContainer" unique_id=51329535]
+layout_mode = 2
+theme = ExtResource("3_b7twt")
+text = "Credits"
+flat = true
 
 [node name="B_Quit" type="Button" parent="VBoxContainer" unique_id=918394061]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("1_30681")
-theme_override_font_sizes/font_size = 64
+theme = ExtResource("3_b7twt")
 text = "Quit"
+flat = true
+
+[node name="ButtonsOverlay" type="Node" parent="." unique_id=842952347]
+
+[node name="Button" type="Sprite2D" parent="ButtonsOverlay" unique_id=308064891]
+position = Vector2(960, 593.45)
+scale = Vector2(3.3, 3.3)
+texture = ExtResource("6_b7twt")
+
+[node name="Button2" type="Sprite2D" parent="ButtonsOverlay" unique_id=685952341]
+position = Vector2(960, 722.45)
+scale = Vector2(3.3, 3.3)
+texture = ExtResource("6_b7twt")
+
+[node name="Button3" type="Sprite2D" parent="ButtonsOverlay" unique_id=701584757]
+position = Vector2(960, 853.45)
+scale = Vector2(3.3, 3.3)
+texture = ExtResource("6_b7twt")
+
+[node name="Button4" type="Sprite2D" parent="ButtonsOverlay" unique_id=287939566]
+position = Vector2(960, 984.45)
+scale = Vector2(3.3, 3.3)
+texture = ExtResource("6_b7twt")
+
+[node name="ButtonsIcons" type="Node" parent="." unique_id=1890250058]
+
+[node name="Sprite2D" type="Sprite2D" parent="ButtonsIcons" unique_id=104090859]
+position = Vector2(809, 594)
+scale = Vector2(4, 4)
+texture = ExtResource("7_fmnjn")
+
+[node name="Sprite2D2" type="Sprite2D" parent="ButtonsIcons" unique_id=870387593]
+position = Vector2(805, 723)
+scale = Vector2(4, 4)
+texture = ExtResource("8_y7y0f")
+
+[node name="Sprite2D3" type="Sprite2D" parent="ButtonsIcons" unique_id=2088540467]
+position = Vector2(806, 854)
+scale = Vector2(4, 4)
+texture = ExtResource("9_wd6aq")
+
+[node name="Sprite2D4" type="Sprite2D" parent="ButtonsIcons" unique_id=171060649]
+position = Vector2(808, 985)
+scale = Vector2(4, 4)
+texture = ExtResource("10_mqm0f")
