@@ -83,9 +83,23 @@ func _on_health_depleted() -> void:
 	state_machine.force_transition("death")
 
 func _unhandled_input(event: InputEvent) -> void:
+	# Existing inventory hotkeys
 	for i in range(ITEM_HOTKEY_OFFSET, 10):
 		if event.is_action_pressed("slot_" + str(i)):
 			inventory_component.toggle_slot(i - ITEM_HOTKEY_OFFSET)
+
+	#DEBUG scroll to zoom
+	if event is InputEventMouseButton and event.is_pressed():
+		var cam := get_viewport().get_camera_2d()
+		if cam:
+			var zoom_step := Vector2(0.1, 0.1)
+			if event.button_index == MOUSE_BUTTON_WHEEL_UP:
+				cam.zoom += zoom_step
+			elif event.button_index == MOUSE_BUTTON_WHEEL_DOWN:
+				cam.zoom -= zoom_step
+			
+			#limit zoom
+			cam.zoom = cam.zoom.clamp(Vector2(0.2, 0.2), Vector2(5.0, 5.0))
 
 # Flip Logic
 func update_facing(direction: float) -> void:
