@@ -309,7 +309,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mfh6n"]
-size = Vector2(46, 38)
+size = Vector2(58, 38)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_uctre"]
 atlas = ExtResource("11_5u4ll")
@@ -476,10 +476,8 @@ _data = {
 
 [node name="Player" type="CharacterBody2D" unique_id=80359539]
 collision_layer = 2
-collision_mask = 5
 script = ExtResource("1_12pno")
 speed = 85.0
-step_height = 4.0
 max_jump_velocity = -400.0
 time_to_max_charge = 0.67
 
@@ -558,7 +556,7 @@ collision_layer = 32
 collision_mask = 64
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="WeaponPivot/Scratch" unique_id=1668101493]
-position = Vector2(17.5, -9.5)
+position = Vector2(14.5, -9.5)
 scale = Vector2(0.5, 0.5)
 shape = SubResource("RectangleShape2D_mfh6n")
 disabled = true

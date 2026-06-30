@@ -12,6 +12,8 @@ var enemy: BaseEnemy
 @export_category("Attack Settings")
 ## How long attack lasts. Temp for future animation player
 @export var attack_duration: float = 0.5
+## Attack Component
+@export var attack_component: AttackComponent
 
 var timer: float = 0.0
 
@@ -24,19 +26,22 @@ func enter() -> void:
 	timer = attack_duration
 	
 	# Enable damage hitbox and clear memory
-	var attack_comp = enemy.get_node_or_null("WeaponPivot/AttackComponent")
-	if attack_comp:
-		attack_comp.clear_hit_list()
-		attack_comp.get_node("CollisionShape2D").set_deferred("disabled", false)
+	if attack_component:
+		attack_component.clear_hit_list()
+		_set_hitbox_disabled(false)
 
 func exit() -> void:
 	# Disable damage hitbox
-	var attack_comp = enemy.get_node_or_null("WeaponPivot/AttackComponent")
-	if attack_comp:
-		attack_comp.get_node("CollisionShape2D").set_deferred("disabled", true)
+	_set_hitbox_disabled(true)
 
 func physics_update(delta: float) -> void:
 	timer -= delta
 	
 	if timer <= 0.0 and next_state:
 		transitioned.emit(self, next_state.name)
+
+func _set_hitbox_disabled(is_disabled: bool) -> void:
+	if attack_component:
+		for child in attack_component.get_children():
+			if child is CollisionShape2D or child is CollisionPolygon2D:
+				child.set_deferred("disabled", is_disabled)

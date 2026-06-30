@@ -15,17 +15,17 @@ radius = 8.0
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wd0n8"]
 size = Vector2(14, 8)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_ig603"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_4gqxh"]
 atlas = ExtResource("2_wd0n8")
-region = Rect2(0, 0, 40, 40)
+region = Rect2(80, 0, 40, 40)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_jn06q"]
 atlas = ExtResource("2_wd0n8")
 region = Rect2(40, 0, 40, 40)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_4gqxh"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_ig603"]
 atlas = ExtResource("2_wd0n8")
-region = Rect2(80, 0, 40, 40)
+region = Rect2(0, 0, 40, 40)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_5caw2"]
 atlas = ExtResource("2_wd0n8")
@@ -93,6 +93,17 @@ region = Rect2(120, 0, 40, 40)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_cl87m"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4gqxh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jn06q")
+}],
+"loop": false,
+"name": &"attack_bite",
+"speed": 2.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_ig603")
@@ -171,7 +182,11 @@ animations = [{
 "speed": 8.0
 }]
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_60o6b"]
+radius = 20.0
+
 [node name="Rat" unique_id=961012920 node_paths=PackedStringArray("chase_state") instance=ExtResource("1_n5j4j")]
+collision_mask = 3
 chase_state = NodePath("StateMachine/EnemyChase")
 
 [node name="HealthComponent" parent="." index="0" unique_id=1881424083]
@@ -193,7 +208,7 @@ shape = SubResource("RectangleShape2D_wd0n8")
 position = Vector2(0, -9)
 scale = Vector2(0.75, 0.75)
 sprite_frames = SubResource("SpriteFrames_cl87m")
-animation = &"hit"
+animation = &"attack_bite"
 
 [node name="Hit" parent="StateMachine" parent_id_path=PackedInt32Array(1551728817) index="0" unique_id=1304688525 node_paths=PackedStringArray("next_state")]
 next_state = NodePath("../EnemyChase")
@@ -203,23 +218,31 @@ script = ExtResource("6_5v7a8")
 next_state = NodePath("../EnemyIdle")
 metadata/_custom_type_script = "uid://crxt81u8m6s2t"
 
-[node name="EnemyChase" type="Node" parent="StateMachine" parent_id_path=PackedInt32Array(1551728817) index="2" unique_id=499529484]
+[node name="EnemyChase" type="Node" parent="StateMachine" parent_id_path=PackedInt32Array(1551728817) index="2" unique_id=499529484 node_paths=PackedStringArray("attack_state")]
 script = ExtResource("7_w64q1")
+attack_range = 15.0
+attack_state = NodePath("../EnemyAttack")
 metadata/_custom_type_script = "uid://dsys1lxnete83"
 
 [node name="EnemyIdle" parent="StateMachine" parent_id_path=PackedInt32Array(1551728817) index="3" unique_id=1319766842 node_paths=PackedStringArray("next_state")]
 next_state = NodePath("../EnemyWalk")
 
-[node name="EnemyAttack" type="Node" parent="StateMachine" parent_id_path=PackedInt32Array(1551728817) index="4" unique_id=1354805761 node_paths=PackedStringArray("next_state")]
+[node name="EnemyAttack" type="Node" parent="StateMachine" parent_id_path=PackedInt32Array(1551728817) index="4" unique_id=1354805761 node_paths=PackedStringArray("next_state", "attack_component")]
 script = ExtResource("7_60o6b")
 next_state = NodePath("../EnemyChase")
+attack_component = NodePath("../../WeaponPivot/Bite")
 metadata/_custom_type_script = "uid://dpty4j8elextd"
 
 [node name="DetectionComponent" parent="WeaponPivot" parent_id_path=PackedInt32Array(1288338269) index="0" unique_id=120105529]
 position = Vector2(0, -4)
 
-[node name="AttackComponent" parent="WeaponPivot" parent_id_path=PackedInt32Array(1288338269) index="1" unique_id=1829374878 instance=ExtResource("8_ig603")]
+[node name="Bite" parent="WeaponPivot" parent_id_path=PackedInt32Array(1288338269) index="1" unique_id=1829374878 instance=ExtResource("8_ig603")]
+collision_layer = 128
+collision_mask = 16
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="WeaponPivot/AttackComponent" index="0" unique_id=2052655993]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WeaponPivot/Bite" index="0" unique_id=2052655993]
+position = Vector2(0, -3)
+shape = SubResource("CircleShape2D_60o6b")
+disabled = true
 
 [editable path="HitboxComponent"]
