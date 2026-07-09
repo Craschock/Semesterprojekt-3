@@ -8,7 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://cp2ripfp2aq3j" path="res://src/scenes/item prefabs/plump_grub_item.tscn" id="6_tts3r"]
 [ext_resource type="PackedScene" uid="uid://bqiiord2qchy1" path="res://src/scenes/environment/sign/readable_sign.tscn" id="7_kw1th"]
 [ext_resource type="PackedScene" uid="uid://bycye4tdrlmf3" path="res://src/scenes/entities/Enemies/small/small_slime_green/small_slime_green.tscn" id="8_orgs4"]
-[ext_resource type="PackedScene" uid="uid://dek6vjxqshgg4" path="res://src/scenes/entities/Enemies/small/rat/rat.tscn" id="9_njvi3"]
+[ext_resource type="PackedScene" uid="uid://b0g1yof6kihvq" path="res://src/scenes/entities/Enemies/elite/AxolotlBear/axolotl_bear.tscn" id="10_rh28r"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_uvovq"]
 texture = ExtResource("3_5vp6o")
@@ -258,5 +258,5 @@ shape = SubResource("RectangleShape2D_1o2q3")
 [node name="SmallSlimeGreen" parent="." unique_id=927085607 instance=ExtResource("8_orgs4")]
 position = Vector2(93, -40)
 
-[node name="Rat" parent="." unique_id=1863802447 instance=ExtResource("9_njvi3")]
-position = Vector2(-222, 16)
+[node name="AxolotlBear" parent="." unique_id=2080909123 instance=ExtResource("10_rh28r")]
+position = Vector2(-173, 16)

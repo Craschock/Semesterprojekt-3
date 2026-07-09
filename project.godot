@@ -41,6 +41,7 @@ folder_colors={
 "res://src/scenes/": "yellow",
 "res://src/scenes/entities/": "yellow",
 "res://src/scenes/entities/Enemies/": "red",
+"res://src/scenes/entities/Enemies/elite/AxolotlBear/": "gray",
 "res://src/scenes/entities/Enemies/small/": "red",
 "res://src/scenes/entities/Enemies/small/rat/": "gray",
 "res://src/scenes/entities/Enemies/small/small_slime_green/": "gray",
