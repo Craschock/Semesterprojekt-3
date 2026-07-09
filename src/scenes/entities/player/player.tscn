@@ -37,37 +37,13 @@ radius = 20.0
 radius = 4.0
 height = 19.0
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_fiexf"]
-atlas = ExtResource("6_yd64i")
-region = Rect2(0, 0, 60, 60)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_4slnv"]
-atlas = ExtResource("6_yd64i")
-region = Rect2(60, 0, 60, 60)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_j70gu"]
-atlas = ExtResource("6_yd64i")
-region = Rect2(120, 0, 60, 60)
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_ja1tm"]
 atlas = ExtResource("6_yd64i")
 region = Rect2(180, 0, 60, 60)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_872y1"]
-atlas = ExtResource("6_yd64i")
-region = Rect2(240, 0, 60, 60)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_w8fe5"]
-atlas = ExtResource("6_yd64i")
-region = Rect2(300, 0, 60, 60)
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_wmak5"]
 atlas = ExtResource("6_yd64i")
 region = Rect2(360, 0, 60, 60)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_sgryq"]
-atlas = ExtResource("6_yd64i")
-region = Rect2(420, 0, 60, 60)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_yjc7t"]
 atlas = ExtResource("7_sdsf3")
@@ -277,32 +253,14 @@ region = Rect2(300, 0, 60, 60)
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_fiexf")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_4slnv")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_j70gu")
-}, {
-"duration": 1.0,
 "texture": SubResource("AtlasTexture_ja1tm")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_872y1")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_w8fe5")
-}, {
-"duration": 1.0,
 "texture": SubResource("AtlasTexture_wmak5")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_sgryq")
 }],
 "loop": false,
 "name": &"attack_scratch",
-"speed": 17.5
+"speed": 7.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -570,34 +528,10 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("WeaponPivot/Scratch/EffectSprite:visible")
+tracks/0/path = NodePath("WeaponPivot/Scratch/CollisionShape2D:disabled")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("WeaponPivot/Scratch/EffectSprite:frame")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [0]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("WeaponPivot/Scratch/CollisionShape2D:disabled")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
 "times": PackedFloat32Array(0.0009999999),
 "transitions": PackedFloat32Array(1),
 "update": 1,
@@ -606,7 +540,7 @@ tracks/2/keys = {
 
 [sub_resource type="Animation" id="Animation_rqaru"]
 resource_name = "scratch"
-length = 0.24
+length = 0.08
 step = 0.01
 tracks/0/type = "method"
 tracks/0/imported = false
@@ -629,34 +563,10 @@ tracks/1/path = NodePath("WeaponPivot/Scratch/CollisionShape2D:disabled")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.07, 0.17),
+"times": PackedFloat32Array(0, 0.01, 0.06),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
 "values": [true, false, true]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("WeaponPivot/Scratch/EffectSprite:visible")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.24),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [true, false]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("WeaponPivot/Scratch/EffectSprite:frame")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0, 0.03, 0.06, 0.09, 0.12, 0.15, 0.18, 0.21),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [0, 1, 2, 3, 4, 5, 6, 7]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_lrig1"]
@@ -704,7 +614,7 @@ position = Vector2(0, -10)
 scale = Vector2(0.5, 0.5)
 sprite_frames = SubResource("SpriteFrames_084ju")
 animation = &"attack_scratch"
-frame = 7
+frame = 1
 frame_progress = 1.0
 
 [node name="StateMachine" parent="." unique_id=1551728817 node_paths=PackedStringArray("initial_state") instance=ExtResource("5_8ghov")]
@@ -755,7 +665,6 @@ shape = SubResource("RectangleShape2D_mfh6n")
 disabled = true
 
 [node name="EffectSprite" type="AnimatedSprite2D" parent="WeaponPivot/Scratch" unique_id=1195896280]
-visible = false
 position = Vector2(19.5, -9.500001)
 scale = Vector2(0.59375, 0.59374994)
 sprite_frames = SubResource("SpriteFrames_7k7j4")
