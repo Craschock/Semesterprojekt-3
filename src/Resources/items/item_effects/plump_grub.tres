@@ -1,9 +1,9 @@
 [gd_resource type="Resource" script_class="ItemData" format=3 uid="uid://dkm1av16bny22"]
 
 [ext_resource type="Texture2D" uid="uid://dss2teep3vg2m" path="res://assets/sprites/items/plump_grub.png" id="1_2sw7x"]
-[ext_resource type="Script" uid="uid://qo1ogchardm2" path="res://src/resources/items/ItemEffect.gd" id="1_ntogw"]
-[ext_resource type="Script" uid="uid://cytj0n2h6v2fp" path="res://src/resources/items/ItemData.gd" id="1_wkji0"]
-[ext_resource type="Script" uid="uid://ci1x8tyjfbbpa" path="res://src/resources/items/item_effects/Effect_Heal.gd" id="2_aygn7"]
+[ext_resource type="Script" uid="uid://qo1ogchardm2" path="res://src/Resources/items/ItemEffect.gd" id="1_ntogw"]
+[ext_resource type="Script" uid="uid://cytj0n2h6v2fp" path="res://src/Resources/items/ItemData.gd" id="1_wkji0"]
+[ext_resource type="Script" uid="uid://ci1x8tyjfbbpa" path="res://src/Resources/items/item_effects/Effect_Heal.gd" id="2_aygn7"]
 
 [sub_resource type="Resource" id="Resource_8r7kf"]
 script = ExtResource("2_aygn7")

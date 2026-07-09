@@ -29,5 +29,7 @@ max_jump_velocity = -325.0
 [node name="World" parent="." unique_id=1622799569 node_paths=PackedStringArray("player") instance=ExtResource("8_owfvr")]
 scale = Vector2(0.35, 0.35)
 world_seed = 73
+view_radius_chunks = 2
+unload_radius_chunks = 3
 region_size_chunks = 24
 player = NodePath("../Player")
