@@ -5,7 +5,7 @@ class_name EnemySpawner
 ## WorldGenerator node 
 @export var world_generator: WorldGenerator
 ## Enemy scene
-@export var enemy_scene: PackedScene
+@export var enemy_scene: Array[PackedScene]
 ## Where to place enemies in tree 
 # Also einfach nur eine node als "folder". 
 # Hier einfach die Root node einfügen. Funktioniert sonst nicht
@@ -38,7 +38,7 @@ func _check_for_spawns() -> void:
 				_spawn_enemy(local_pos)
 
 func _spawn_enemy(local_pos: Vector2) -> void:
-	var enemy = enemy_scene.instantiate()
+	var enemy = enemy_scene.pick_random().instantiate()
 	var global_spawn_pos = world_generator.to_global(local_pos)
 	
 	enemy.global_position = global_spawn_pos

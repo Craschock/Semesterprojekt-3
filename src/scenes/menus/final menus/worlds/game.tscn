@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://cegk7h7irgixa" path="res://src/scenes/menus/final menus/worlds/GameManager.gd" id="1_pr1v7"]
 [ext_resource type="PackedScene" uid="uid://brdxqe0qskvib" path="res://src/scenes/ui/huds/main_hud.tscn" id="2_oivod"]
 [ext_resource type="Script" uid="uid://dq2jcmsb1g1d3" path="res://src/scenes/procedural generation/EnemySpawner.gd" id="2_rakx4"]
+[ext_resource type="PackedScene" uid="uid://b0g1yof6kihvq" path="res://src/scenes/entities/Enemies/elite/AxolotlBear/axolotl_bear.tscn" id="3_awl1k"]
 [ext_resource type="PackedScene" uid="uid://dek6vjxqshgg4" path="res://src/scenes/entities/Enemies/small/rat/rat.tscn" id="3_hldpo"]
 [ext_resource type="PackedScene" uid="uid://bh6kjgw51fv7u" path="res://src/scenes/entities/player/player.tscn" id="3_s4t1n"]
 [ext_resource type="PackedScene" uid="uid://dfd10kendyi1g" path="res://src/scenes/procedural generation/world_generation.tscn" id="8_owfvr"]
@@ -17,7 +18,7 @@ player = NodePath("../Player")
 [node name="EnemySpawner" type="Node" parent="GameManager" unique_id=1808774082 node_paths=PackedStringArray("world_generator", "entity_container")]
 script = ExtResource("2_rakx4")
 world_generator = NodePath("../../World")
-enemy_scene = ExtResource("3_hldpo")
+enemy_scene = Array[PackedScene]([ExtResource("3_awl1k"), ExtResource("3_hldpo")])
 entity_container = NodePath("../..")
 metadata/_custom_type_script = "uid://dq2jcmsb1g1d3"
 
