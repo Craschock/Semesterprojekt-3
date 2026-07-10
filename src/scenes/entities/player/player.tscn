@@ -185,10 +185,6 @@ region = Rect2(240, 0, 60, 60)
 atlas = ExtResource("8_csrv5")
 region = Rect2(300, 0, 60, 60)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_jasd0"]
-atlas = ExtResource("9_ims5k")
-region = Rect2(0, 0, 60, 60)
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_sdsf3"]
 atlas = ExtResource("9_ims5k")
 region = Rect2(60, 0, 60, 60)
@@ -383,9 +379,6 @@ animations = [{
 "speed": 5.0
 }, {
 "frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_jasd0")
-}, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_sdsf3")
 }],
