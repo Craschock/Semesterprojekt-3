@@ -10,6 +10,8 @@
 
 [node name="Game" type="Node" unique_id=109101168]
 
+[node name="Enemies" type="Node" parent="." unique_id=702154899]
+
 [node name="GameManager" type="Node" parent="." unique_id=1435991061 node_paths=PackedStringArray("world_generator", "player")]
 script = ExtResource("1_pr1v7")
 world_generator = NodePath("../World")
@@ -19,7 +21,7 @@ player = NodePath("../Player")
 script = ExtResource("2_rakx4")
 world_generator = NodePath("../../World")
 enemy_scene = Array[PackedScene]([ExtResource("3_awl1k"), ExtResource("3_hldpo")])
-entity_container = NodePath("../..")
+entity_container = NodePath("../../Enemies")
 metadata/_custom_type_script = "uid://dq2jcmsb1g1d3"
 
 [node name="MainHUD" parent="." unique_id=1196255063 instance=ExtResource("2_oivod")]

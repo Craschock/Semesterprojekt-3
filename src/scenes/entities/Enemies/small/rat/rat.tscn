@@ -186,7 +186,9 @@ animations = [{
 radius = 20.0
 
 [node name="Rat" unique_id=961012920 node_paths=PackedStringArray("chase_state") instance=ExtResource("1_n5j4j")]
+scale = Vector2(0.67999995, 0.67999995)
 chase_state = NodePath("StateMachine/EnemyChase")
+metadata/_edit_group_ = true
 
 [node name="HealthComponent" parent="." index="0" unique_id=1881424083]
 scale = Vector2(0.75, 0.75)

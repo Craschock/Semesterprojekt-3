@@ -517,7 +517,9 @@ animations = [{
 size = Vector2(59, 46)
 
 [node name="AxolotlBear" unique_id=961012920 node_paths=PackedStringArray("chase_state") instance=ExtResource("1_xoqvr")]
+scale = Vector2(0.6796323, 0.6796323)
 chase_state = NodePath("StateMachine/EnemyChase")
+metadata/_edit_group_ = true
 
 [node name="CollisionShape2D" parent="HitboxComponent" parent_id_path=PackedInt32Array(232939803) index="0" unique_id=1698255179]
 position = Vector2(0, -18.5)
@@ -531,7 +533,7 @@ shape = SubResource("RectangleShape2D_5qadu")
 position = Vector2(0, -22)
 scale = Vector2(0.75, 0.75)
 sprite_frames = SubResource("SpriteFrames_xoqvr")
-animation = &"attack_bubbles"
+animation = &"walk"
 
 [node name="Hit" parent="StateMachine" parent_id_path=PackedInt32Array(1551728817) index="0" unique_id=1304688525 node_paths=PackedStringArray("next_state")]
 next_state = NodePath("../EnemyChase")
