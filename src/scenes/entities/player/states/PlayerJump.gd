@@ -27,7 +27,13 @@ func physics_update(delta: float) -> void:
 		elif not sprite.is_playing() or sprite.animation != "jump_landing":
 			transitioned.emit(self, "idle")
 		return
-
+	
+	
+	if Input.is_action_just_pressed("jump") and player.current_air_jumps < player.max_air_jumps:
+		player.current_air_jumps += 1
+		player.velocity.y = player.double_jump_velocity
+	
+	
 	if direction != 0:
 		player.velocity.x = move_toward(player.velocity.x, direction * player.speed, player.acceleration * delta)
 	else:

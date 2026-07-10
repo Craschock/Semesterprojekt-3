@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://bqiiord2qchy1" path="res://src/scenes/environment/sign/readable_sign.tscn" id="7_kw1th"]
 [ext_resource type="PackedScene" uid="uid://bycye4tdrlmf3" path="res://src/scenes/entities/Enemies/small/small_slime_green/small_slime_green.tscn" id="8_orgs4"]
 [ext_resource type="PackedScene" uid="uid://b0g1yof6kihvq" path="res://src/scenes/entities/Enemies/elite/AxolotlBear/axolotl_bear.tscn" id="10_rh28r"]
+[ext_resource type="PackedScene" uid="uid://brdxqe0qskvib" path="res://src/scenes/ui/huds/main_hud.tscn" id="10_yx43d"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_uvovq"]
 texture = ExtResource("3_5vp6o")
@@ -260,3 +261,6 @@ position = Vector2(93, -40)
 
 [node name="AxolotlBear" parent="." unique_id=2080909123 instance=ExtResource("10_rh28r")]
 position = Vector2(-173, 16)
+
+[node name="MainHUD" parent="." unique_id=1196255063 instance=ExtResource("10_yx43d")]
+visible = false

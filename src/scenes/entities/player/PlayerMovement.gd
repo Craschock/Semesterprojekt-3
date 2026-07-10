@@ -35,9 +35,17 @@ var is_frozen: bool = false
 @export var time_to_max_charge: float = 0.4
 ## How long player can jump after leaving platform
 @export var jump_buffer_time: float = 0.15
+## How long a jump is a press before it's changing into a charged jumnp
+@export var tap_window: float = 0.1
+## Double jump height
+@export var double_jump_velocity: float = -250.0
+## Amount of mid-air jumps (double jump)
+@export var max_air_jumps: int = 1
+
 
 var jump_buffer_timer: float = 0.0
 var current_jump_charge: float = 0.0
+var current_air_jumps: int = 0
 
 # Inventory
 const ITEM_HOTKEY_OFFSET: int = 5
@@ -49,6 +57,7 @@ func _ready() -> void:
 	health_component.health_changed.connect(_on_health_changed)
 	health_component.health_depleted.connect(_on_health_depleted)
 	floor_snap_length = step_height
+
 func _physics_process(delta: float) -> void:
 	if is_frozen:
 		return
@@ -57,6 +66,7 @@ func _physics_process(delta: float) -> void:
 	# Jump buffer
 	if is_on_floor():
 		jump_buffer_timer = jump_buffer_time
+		current_air_jumps = 0
 	else:
 		jump_buffer_timer -= delta
 	
