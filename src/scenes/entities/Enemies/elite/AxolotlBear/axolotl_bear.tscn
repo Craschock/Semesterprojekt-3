@@ -532,7 +532,6 @@ position = Vector2(0, -22)
 scale = Vector2(0.75, 0.75)
 sprite_frames = SubResource("SpriteFrames_xoqvr")
 animation = &"attack_bubbles"
-frame = 17
 
 [node name="Hit" parent="StateMachine" parent_id_path=PackedInt32Array(1551728817) index="0" unique_id=1304688525 node_paths=PackedStringArray("next_state")]
 next_state = NodePath("../EnemyChase")
