@@ -24,8 +24,6 @@ enemy_scene = Array[PackedScene]([ExtResource("3_awl1k"), ExtResource("3_hldpo")
 entity_container = NodePath("../../Enemies")
 metadata/_custom_type_script = "uid://dq2jcmsb1g1d3"
 
-[node name="MainHUD" parent="." unique_id=1196255063 instance=ExtResource("2_oivod")]
-
 [node name="Player" parent="." unique_id=80359539 instance=ExtResource("3_s4t1n")]
 max_jump_velocity = -325.0
 
@@ -36,3 +34,5 @@ view_radius_chunks = 2
 unload_radius_chunks = 3
 region_size_chunks = 24
 player = NodePath("../Player")
+
+[node name="MainHUD" parent="." unique_id=1196255063 instance=ExtResource("2_oivod")]

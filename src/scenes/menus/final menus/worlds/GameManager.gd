@@ -5,6 +5,8 @@ class_name GameManager
 @export_category("Systems")
 @export var world_generator: WorldGenerator
 @export var player: CharacterBody2D
+
+
 func _ready() -> void:
 	# Init Player
 	if player:
@@ -25,6 +27,9 @@ func spawn_player() -> void:
 	
 	if spawn_marker:
 		player.global_position = spawn_marker.global_position
+		var camera = player.get_node_or_null("Camera2D")
+		if camera:
+			camera.reset_smoothing()
 	else:
 		push_warning("GameManager: No spawn marker found")
 		
