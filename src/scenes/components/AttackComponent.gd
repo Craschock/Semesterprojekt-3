@@ -1,7 +1,12 @@
 extends Area2D
 class_name AttackComponent
 
+
+## Amount of Damage an attack deals
 @export var damage: int = 10
+## Amount of knockback an attack applies
+@export var knockback_force: float = 100.0
+## Changes attack behavior. True applies damage over attack duration. False applies damage in one instance
 @export var continuous_damage: bool = false
 
 # array for "multiple enemies hit"

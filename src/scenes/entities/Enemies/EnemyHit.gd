@@ -9,15 +9,20 @@ var enemy: BaseEnemy
 ## Next State Node to transition to
 @export var next_state: State
 
+@export_category("Values")
+## Friction for enemy movement
+@export var friction: float = 800 
+
 func _ready() -> void:
 	enemy = owner
 
 func enter() -> void:
 	# Stop moving when hit
-	enemy.velocity.x = 0 
-	enemy.get_node("AnimatedSprite2D").play("hit")
+	enemy.get_node("AnimatedSprite2D").play(animation_name)
 
-func physics_update(_delta: float) -> void:
+func physics_update(delta: float) -> void:
+	enemy.velocity.x = move_toward(enemy.velocity.x, 0, friction * delta)
+	
 	# Return Idle when animation finishes
 	if not enemy.get_node("AnimatedSprite2D").is_playing():
 		if next_state:

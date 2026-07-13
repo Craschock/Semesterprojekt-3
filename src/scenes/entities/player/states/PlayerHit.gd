@@ -7,8 +7,6 @@ func _ready() -> void:
 	player = owner
 
 func enter() -> void:
-	player.freeze()
-	
 	if player.state_machine.current_state is PlayerJumpCharge:
 		player.was_interrupted_while_charging = true
 	else:
@@ -17,9 +15,11 @@ func enter() -> void:
 	player.get_node("AnimatedSprite2D").play("hit")
 
 func exit() -> void:
-	player.unfreeze()
+	pass
 
-func physics_update(_delta: float) -> void:
+func physics_update(delta: float) -> void:
+	player.velocity.x = move_toward(player.velocity.x, 0, player.friction * delta)
+	
 	# Wait for hit animation end, then return jump/idle
 	if not player.get_node("AnimatedSprite2D").is_playing():
 		if player.was_interrupted_while_charging:
