@@ -21,8 +21,10 @@ func physics_update(delta: float) -> void:
 	if Input.get_axis("move_left", "move_right") != 0:
 		transitioned.emit(self, "run")
 	
-	if Input.is_action_just_pressed("jump") and player.can_jump():
+	if player.jump_input_buffer_timer > 0.0 and player.can_jump():
+		player.jump_input_buffer_timer = 0.0
 		transitioned.emit(self, "jumpcharge")
+		return
 	
 	if Input.is_action_just_pressed("attack"):
 		transitioned.emit(self, "action")

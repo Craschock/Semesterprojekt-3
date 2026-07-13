@@ -33,6 +33,8 @@ var is_frozen: bool = false
 @export var max_jump_velocity: float = -350.0
 ## How many seconds to reach max jump charge
 @export var time_to_max_charge: float = 0.4
+## How early a player can jump before landing on a platform that he can jump off
+@export var jump_input_buffer: float = 0.15
 ## How long player can jump after leaving platform
 @export var jump_buffer_time: float = 0.15
 ## How long a jump is a press before it's changing into a charged jumnp
@@ -43,9 +45,12 @@ var is_frozen: bool = false
 @export var max_air_jumps: int = 1
 
 
+
+var jump_input_buffer_timer: float = 0.0
 var jump_buffer_timer: float = 0.0
 var current_jump_charge: float = 0.0
 var current_air_jumps: int = 0
+var was_interrupted_while_charging: bool = false
 
 # Inventory
 const ITEM_HOTKEY_OFFSET: int = 5
@@ -59,16 +64,25 @@ func _ready() -> void:
 	floor_snap_length = step_height
 
 func _physics_process(delta: float) -> void:
+	var cam := get_viewport().get_camera_2d()
+	# Input Buffer
+	if Input.is_action_just_pressed("jump"):
+			jump_input_buffer_timer = jump_input_buffer
+	
+	# Jump buffer
 	if is_frozen:
 		return
 	
-	var cam := get_viewport().get_camera_2d()
-	# Jump buffer
+	
+	# Decreasing Buffers
 	if is_on_floor():
 		jump_buffer_timer = jump_buffer_time
 		current_air_jumps = 0
 	else:
 		jump_buffer_timer -= delta
+	
+	if jump_input_buffer_timer > 0.0:
+		jump_input_buffer_timer -= delta
 	
 	# Apply Gravity or Fly Mode
 	if apply_gravity:
