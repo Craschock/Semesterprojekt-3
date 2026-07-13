@@ -1,15 +1,15 @@
 [gd_scene format=3 uid="uid://b3ivrpnr5vk0g"]
 
+[ext_resource type="Script" uid="uid://csi44h81aal2i" path="res://src/scenes/menus/final menus/menus/MainMenu.gd" id="1_lj2fs"]
 [ext_resource type="Texture2D" uid="uid://c3t83ovwgt0od" path="res://assets/sprites/UI/Main Menu/Main_Menu.png" id="1_mvs8x"]
 [ext_resource type="Texture2D" uid="uid://7oe7q25wrv4o" path="res://assets/sprites/UI/Main Menu/Logo.png" id="1_ubtoy"]
-[ext_resource type="Script" uid="uid://cass8aku7j022" path="res://src/scenes/ui/buttons/B_SceneSwitcher.gd" id="2_b1hgy"]
+[ext_resource type="PackedScene" uid="uid://ckdifw6x0om4h" path="res://src/scenes/menus/final menus/worlds/game.tscn" id="2_wd6aq"]
 [ext_resource type="Theme" uid="uid://b6yinfg10qg2e" path="res://assets/themes/UITheme.tres" id="3_b7twt"]
-[ext_resource type="PackedScene" uid="uid://ckdifw6x0om4h" path="res://src/scenes/menus/final menus/worlds/game.tscn" id="3_xxi7i"]
-[ext_resource type="Texture2D" uid="uid://p4wjoehasvse" path="res://assets/sprites/UI/Main Menu/ButtonBase.png" id="6_b7twt"]
+[ext_resource type="Texture2D" uid="uid://p4wjoehasvse" path="res://assets/sprites/UI/Main Menu/ButtonBase.png" id="4_ubtoy"]
 [ext_resource type="Texture2D" uid="uid://6e5gtpm7nvwg" path="res://assets/sprites/UI/Main Menu/IconPlay.png" id="7_fmnjn"]
+[ext_resource type="Texture2D" uid="uid://jiba4gvobe3u" path="res://assets/sprites/UI/Main Menu/IconCredits.png" id="7_y7y0f"]
+[ext_resource type="Texture2D" uid="uid://b330th2m2pe5" path="res://assets/sprites/UI/Main Menu/IconQuit.png" id="8_lj2fs"]
 [ext_resource type="Texture2D" uid="uid://dtmcue54v6te1" path="res://assets/sprites/UI/Main Menu/IconSettings.png" id="8_y7y0f"]
-[ext_resource type="Texture2D" uid="uid://jiba4gvobe3u" path="res://assets/sprites/UI/Main Menu/IconCredits.png" id="9_wd6aq"]
-[ext_resource type="Texture2D" uid="uid://b330th2m2pe5" path="res://assets/sprites/UI/Main Menu/IconQuit.png" id="10_mqm0f"]
 
 [node name="Main Menu" type="Control" unique_id=153052924]
 layout_mode = 3
@@ -18,100 +18,206 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
+script = ExtResource("1_lj2fs")
+game_scene = ExtResource("2_wd6aq")
 
-[node name="Background" type="Sprite2D" parent="." unique_id=1246181462]
-scale = Vector2(2.8111272, 2.8124998)
+[node name="Background" type="TextureRect" parent="." unique_id=745557963]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 texture = ExtResource("1_mvs8x")
-centered = false
 
-[node name="Title" type="Sprite2D" parent="." unique_id=193314272]
-position = Vector2(960, 180)
-scale = Vector2(0.25, 0.25)
+[node name="TextureRect" type="TextureRect" parent="." unique_id=1375030452]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -2147.5
+offset_top = -823.0
+offset_right = 2147.5
+offset_bottom = 113.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.35, 0.35)
+pivot_offset = Vector2(2147, 468)
 texture = ExtResource("1_ubtoy")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=328148026]
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=364013323]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -163.5
+offset_top = -97.0
+offset_right = 163.5
+offset_bottom = 597.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.8, 0.8)
+pivot_offset_ratio = Vector2(0.5, 0.5)
+theme_override_constants/separation = 50
+alignment = 1
+
+[node name="B_Start" type="Button" parent="VBoxContainer" unique_id=1886310318]
+layout_mode = 2
+theme = ExtResource("3_b7twt")
+text = "Play"
+flat = true
+expand_icon = true
+
+[node name="ButtonFrame" type="TextureRect" parent="VBoxContainer/B_Start" unique_id=498161491]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -212.0
-offset_top = 23.000244
-offset_right = 212.0
-offset_bottom = 503.00024
+offset_left = -67.5
+offset_top = -16.5
+offset_right = 67.5
+offset_bottom = 16.5
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/separation = 76
+scale = Vector2(4, 4)
+pivot_offset = Vector2(67.5, 16)
+texture = ExtResource("4_ubtoy")
 
-[node name="B_Start" type="Button" parent="VBoxContainer" unique_id=1978294108]
-layout_mode = 2
-theme = ExtResource("3_b7twt")
-text = "Start"
-flat = true
-script = ExtResource("2_b1hgy")
-game_scene = ExtResource("3_xxi7i")
+[node name="ButtonIcon" type="TextureRect" parent="VBoxContainer/B_Start/ButtonFrame" unique_id=1995930404]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.114
+anchor_top = 0.29
+anchor_right = 0.206
+anchor_bottom = 0.657
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(4.5, 4.5)
+texture = ExtResource("7_fmnjn")
 
-[node name="B_Settings" type="Button" parent="VBoxContainer" unique_id=868862888]
+[node name="B_Settings" type="Button" parent="VBoxContainer" unique_id=1969887154]
 layout_mode = 2
 theme = ExtResource("3_b7twt")
 text = "Settings"
 flat = true
+expand_icon = true
 
-[node name="B_Credits" type="Button" parent="VBoxContainer" unique_id=51329535]
+[node name="ButtonFrame" type="TextureRect" parent="VBoxContainer/B_Settings" unique_id=1251799468]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -67.5
+offset_top = -16.5
+offset_right = 67.5
+offset_bottom = 16.5
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(4, 4)
+pivot_offset = Vector2(67.5, 16)
+texture = ExtResource("4_ubtoy")
+
+[node name="ButtonIcon" type="TextureRect" parent="VBoxContainer/B_Settings/ButtonFrame" unique_id=1620604948]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.114
+anchor_top = 0.29
+anchor_right = 0.206
+anchor_bottom = 0.657
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(4.5, 4.5)
+texture = ExtResource("8_y7y0f")
+
+[node name="B_Credits" type="Button" parent="VBoxContainer" unique_id=110780781]
 layout_mode = 2
 theme = ExtResource("3_b7twt")
 text = "Credits"
 flat = true
 
-[node name="B_Quit" type="Button" parent="VBoxContainer" unique_id=918394061]
+[node name="ButtonFrame" type="TextureRect" parent="VBoxContainer/B_Credits" unique_id=444757459]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -67.5
+offset_top = -16.5
+offset_right = 67.5
+offset_bottom = 16.5
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(4, 4)
+pivot_offset = Vector2(67.5, 16)
+texture = ExtResource("4_ubtoy")
+
+[node name="ButtonIcon" type="TextureRect" parent="VBoxContainer/B_Credits/ButtonFrame" unique_id=239629409]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.114
+anchor_top = 0.29
+anchor_right = 0.206
+anchor_bottom = 0.657
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(4.5, 4.5)
+texture = ExtResource("7_y7y0f")
+
+[node name="B_Quit" type="Button" parent="VBoxContainer" unique_id=1640893591]
 layout_mode = 2
 theme = ExtResource("3_b7twt")
 text = "Quit"
 flat = true
 
-[node name="Button" type="Sprite2D" parent="VBoxContainer" unique_id=308064891]
-position = Vector2(212, 30.449768)
-scale = Vector2(3.3, 3.3)
-texture = ExtResource("6_b7twt")
-
-[node name="Button2" type="Sprite2D" parent="VBoxContainer" unique_id=685952341]
-position = Vector2(212, 159.44977)
-scale = Vector2(3.3, 3.3)
-texture = ExtResource("6_b7twt")
-
-[node name="Button3" type="Sprite2D" parent="VBoxContainer" unique_id=701584757]
-position = Vector2(212, 290.44977)
-scale = Vector2(3.3, 3.3)
-texture = ExtResource("6_b7twt")
-
-[node name="Button4" type="Sprite2D" parent="VBoxContainer" unique_id=287939566]
-position = Vector2(212, 421.44977)
-scale = Vector2(3.3, 3.3)
-texture = ExtResource("6_b7twt")
-
-[node name="Icon" type="Sprite2D" parent="VBoxContainer" unique_id=104090859]
-position = Vector2(61, 30.999756)
+[node name="ButtonFrame" type="TextureRect" parent="VBoxContainer/B_Quit" unique_id=1911552910]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -67.5
+offset_top = -16.5
+offset_right = 67.5
+offset_bottom = 16.5
+grow_horizontal = 2
+grow_vertical = 2
 scale = Vector2(4, 4)
-texture = ExtResource("7_fmnjn")
+pivot_offset = Vector2(67.5, 16)
+texture = ExtResource("4_ubtoy")
 
-[node name="Icon2" type="Sprite2D" parent="VBoxContainer" unique_id=870387593]
-position = Vector2(57, 159.99976)
-scale = Vector2(4, 4)
-texture = ExtResource("8_y7y0f")
+[node name="ButtonIcon" type="TextureRect" parent="VBoxContainer/B_Quit/ButtonFrame" unique_id=106611721]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.114
+anchor_top = 0.29
+anchor_right = 0.206
+anchor_bottom = 0.657
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(4.5, 4.5)
+texture = ExtResource("8_lj2fs")
 
-[node name="Icon3" type="Sprite2D" parent="VBoxContainer" unique_id=2088540467]
-position = Vector2(58, 290.99976)
-scale = Vector2(4, 4)
-texture = ExtResource("9_wd6aq")
+[node name="BlackoutEffect" type="ColorRect" parent="." unique_id=218879034]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
 
-[node name="Icon4" type="Sprite2D" parent="VBoxContainer" unique_id=171060649]
-position = Vector2(60, 421.99976)
-scale = Vector2(4, 4)
-texture = ExtResource("10_mqm0f")
-
-[node name="ButtonsOverlay" type="Node" parent="." unique_id=842952347]
-
-[node name="ButtonsIcons" type="Node" parent="." unique_id=1890250058]
+[connection signal="pressed" from="VBoxContainer/B_Start" to="." method="_on_b_start_pressed"]
+[connection signal="pressed" from="VBoxContainer/B_Settings" to="." method="_on_b_settings_pressed"]
+[connection signal="pressed" from="VBoxContainer/B_Credits" to="." method="_on_b_credits_pressed"]
+[connection signal="pressed" from="VBoxContainer/B_Quit" to="." method="_on_b_quit_pressed"]

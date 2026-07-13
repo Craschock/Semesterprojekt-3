@@ -19,7 +19,6 @@ config/icon="res://icon.svg"
 
 PlayerManager="*uid://dgopauq4501ns"
 EffectManager="*uid://qcib5dvtt62x"
-UIManager="*uid://do2tlfwl68vut"
 
 [display]
 
