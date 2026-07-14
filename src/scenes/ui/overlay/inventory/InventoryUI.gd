@@ -2,7 +2,7 @@ extends MarginContainer
 class_name InventoryUI
 
 ## Player Inventory data
-@export var inventory_component: InventoryComponent
+var inventory_component: InventoryComponent
 
 ## Inventory Slot
 @export var slot_scene: PackedScene 
@@ -11,6 +11,13 @@ class_name InventoryUI
 var slots: Array[InventorySlot] = []
 
 func _ready() -> void:
+	
+	await get_tree().process_frame
+	
+	if PlayerManager.player:
+		inventory_component = PlayerManager.player.inventory_component
+		
+	
 	if inventory_component:
 		_initialize_ui()
 		# Listen for changes
