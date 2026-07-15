@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://cjtoh21p1776a"]
+
+[ext_resource type="PackedScene" uid="uid://cb5v77dqqm2og" path="res://src/scenes/item prefabs/base_item.tscn" id="1_wxc7e"]
+[ext_resource type="Resource" uid="uid://cryh2m8uh3u26" path="res://src/Resources/items/item_effects/Larva.tres" id="2_5pcy6"]
+
+[node name="Larva" unique_id=1088472823 instance=ExtResource("1_wxc7e")]
+item_data = ExtResource("2_5pcy6")

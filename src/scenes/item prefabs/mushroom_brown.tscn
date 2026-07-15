@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://bwnb4tbly5vtr"]
+
+[ext_resource type="PackedScene" uid="uid://cb5v77dqqm2og" path="res://src/scenes/item prefabs/base_item.tscn" id="1_5sshx"]
+[ext_resource type="Resource" uid="uid://8rwfawsk5fpv" path="res://src/Resources/items/item_effects/Mushroom_Brown.tres" id="2_2lsyp"]
+
+[node name="Mushroom_Brown" unique_id=1088472823 instance=ExtResource("1_5sshx")]
+item_data = ExtResource("2_2lsyp")
