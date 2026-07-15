@@ -6,5 +6,5 @@
 [resource]
 script = ExtResource("1_25q3j")
 texture = ExtResource("2_25q3j")
-spawn_chance = 0.08
+spawn_chance = 0.1
 metadata/_custom_type_script = "uid://bg0j21vco3sjm"
