@@ -36,6 +36,7 @@ folder_colors={
 "res://assets/sounds/": "purple",
 "res://assets/sprites/": "purple",
 "res://assets/themes/": "purple",
+"res://src/Resources/": "green",
 "res://src/resources/": "green",
 "res://src/scenes/": "yellow",
 "res://src/scenes/entities/": "yellow",

@@ -5,7 +5,6 @@
 [ext_resource type="Texture2D" uid="uid://ddp62b0mwne0p" path="res://assets/sprites/test/tilemap_packed.png" id="3_5vp6o"]
 [ext_resource type="PackedScene" uid="uid://bh6kjgw51fv7u" path="res://src/scenes/entities/player/player.tscn" id="4_rtu0v"]
 [ext_resource type="PackedScene" uid="uid://b88w0xmg2surt" path="res://src/scenes/entities/Enemies/dummy_enemy.tscn" id="5_klrxi"]
-[ext_resource type="PackedScene" uid="uid://cp2ripfp2aq3j" path="res://src/scenes/item prefabs/plump_grub_item.tscn" id="6_tts3r"]
 [ext_resource type="PackedScene" uid="uid://bqiiord2qchy1" path="res://src/scenes/environment/sign/readable_sign.tscn" id="7_kw1th"]
 [ext_resource type="PackedScene" uid="uid://bycye4tdrlmf3" path="res://src/scenes/entities/Enemies/small/small_slime_green/small_slime_green.tscn" id="8_orgs4"]
 [ext_resource type="PackedScene" uid="uid://b0g1yof6kihvq" path="res://src/scenes/entities/Enemies/elite/AxolotlBear/axolotl_bear.tscn" id="10_rh28r"]
@@ -244,9 +243,6 @@ tile_set = SubResource("TileSet_w5yh6")
 
 [node name="DummyEnemy" parent="." unique_id=961012920 instance=ExtResource("5_klrxi")]
 position = Vector2(-28, 0)
-
-[node name="PlumpGrubItem" parent="." unique_id=1088472823 instance=ExtResource("6_tts3r")]
-position = Vector2(-65, -20)
 
 [node name="ReadableSign" parent="." unique_id=2107295159 instance=ExtResource("7_kw1th")]
 position = Vector2(33, -5)
