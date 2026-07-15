@@ -3,89 +3,87 @@ class_name BiomeData
 extends Resource
 
 
-##where in the world this biome is allowed to be placed (world generator always obeys what u put here)
+##Where in the world this biome may be placed. The world generator always honours this.
 enum Placement {
-	ANYWHERE,      ##can be placed in any region slot
-	SURFACE_ONLY,  ##must be in the top row (gets open sky + terrain surface instead of top wall)
-	DEEP_ONLY,     ##must be in the bottom row (e.g. Underworld biome)
+	ANYWHERE,      ##Can be placed in any region slot.
+	SURFACE_ONLY,  ##Must be in the top row. Gets open sky and a terrain surface instead of a top wall.
+	DEEP_ONLY,     ##Must be in the bottom row (e.g. an underworld biome).
 }
-#good boy world generator
 
 @export_group("Identification")
 
-##human-readable name, not used in code only for debug and for fun i guess
+##Human-readable name. Not used by any logic; shown for debugging and inspector clarity.
 @export var biome_name: String = "Unnamed Biome"
 
 
 @export_group("Placement")
 
-##where this biome is allowed to live in the world grid
+##Where this biome is allowed to live in the world grid.
 @export var placement: Placement = Placement.ANYWHERE
 
-##if true and this biome sits on the surface row, the top wall is replaced by
-##an open sky with a terrain surface 
-##(only has an effect for SURFACE_ONLY biomes / top row)
+##If true and this biome sits on the surface row, the top wall is replaced by
+##an open sky with a terrain surface.
+##Only has an effect for SURFACE_ONLY biomes in the top row.
 @export var has_open_sky: bool = false
 
-##how high (in tiles) the sky reaches before the AVERAGE ground level
-##(only has an effect for SURFACE_ONLY biomes / top row)
+##How high, in tiles, the sky reaches above the average ground level.
+##Only has an effect for SURFACE_ONLY biomes in the top row.
 @export var surface_air_height: int = 24
 
-##max hill amplitude in tiles (how high hills can be from average base level)
+##Maximum hill amplitude in tiles, measured from the average base level.
 @export_range(0, 64) var surface_variation: int = 10
 
-##frequency of the hill heightmap
-##lower = smoother hills
-##higher = spiky mountains
+##Frequency of the hill heightmap.
+##Lower values give smoother hills.
+##Higher values give spiky mountains.
 @export_range(0.001, 0.2, 0.001) var surface_hill_frequency: float = 0.02
-# higher haha  (ich war higher als ich dass gecoded hab haha)
 
-##how many octaves hills have 
-##(lowkey weiß ich nicht GENAU was das heißt, aber es ist mehr realistisch bei 3 und weniger bei 2 oder 4)
+##Number of octaves used for the hill heightmap.
+##3 tends to look the most natural; 2 is smoother and 4 or more gets noisy.
 @export_range(1, 6) var surface_hill_octaves: int = 3
 
-##depth in tiles below average ground before caves start
-##from y 0 to this depth, the ground is mostly solid, beyond the cave noise takes over
-##it is not EXACT, because it slowly fades but should be pretty accurate
+##Depth in tiles below the average ground level before caves start.
+##Above this depth the ground is mostly solid; below it the cave noise takes over.
+##The transition fades gradually, so this is an approximate boundary rather than an exact one.
 @export_range(1, 256) var cave_fade_depth: int = 40
 
 
 @export_group("Prebuilt Rooms")
 
-##if true, player spawns inside THIS biomes spawn room
-##make sure to give this flag to only one biome at a time
-##(this biome should be SURFACE_ONLY and have open sky)
+##If true, the player spawns inside this biome's spawn room.
+##Only one biome should carry this flag at a time.
+##This biome should be SURFACE_ONLY and have open sky.
 @export var is_spawn_biome: bool = false
 
-##carves a spawn room in the top of the cave area
-##has no effect if this biomeisnt spawn biome
+##Carves a spawn room at the top of the cave area.
+##Has no effect unless this biome is the spawn biome.
 @export var has_spawn_room: bool = true
 
-##INTERIOR size of the spawn room
+##Interior size of the spawn room, excluding walls.
 @export var spawn_room_size: Vector2i = Vector2i(20, 10)
 
-##carves a boss room in the bottom of the cave area
+##Carves a boss room at the bottom of the cave area.
 @export var has_boss_room: bool = true
 
-##INTERIOR size of the boss room
+##Interior size of the boss room, excluding walls.
 @export var boss_room_size: Vector2i = Vector2i(40, 24)
 
-##thickness of the wall-border of spawn and boss room
+##Wall thickness of the spawn and boss rooms.
 @export_range(1, 8) var room_wall_thickness: int = 2
 
 
 @export_group("Terrain Noise")
 
-##so all biomes are different even if parameters would be the same (keep at 0 if you want no change visible)
+##Offsets this biome's noise seed so biomes differ even with identical parameters. Leave at 0 for no offset.
 @export var seed_offset: int = 0
 
 @export var noise_type: FastNoiseLite.NoiseType = FastNoiseLite.TYPE_PERLIN
 
-##the lower, the bigger the features in world, the higher the more noise like lol
+##Lower values produce larger terrain features; higher values produce noisier terrain.
 @export_range(0.001, 0.5, 0.001) var frequency: float = 0.04
 
-##cells with nouse value above treshold are solid.
-##the lower the more solid blocks in biome, the higher the more open space
+##Cells with a noise value above this threshold are solid.
+##Lower values give more solid rock; higher values give more open space.
 @export_range(-1.0, 1.0, 0.01) var threshold: float = 0.0
 
 @export_range(1, 8) var fractal_octaves: int = 3
@@ -93,31 +91,31 @@ enum Placement {
 @export_range(0.0, 1.0, 0.01) var fractal_gain: float = 0.5
 
 @export_group("Decorations")
-##all decorations that can spawn in this biome
+##All decorations that can spawn in this biome.
 @export var decorations: Array[DecorationData] = []
 
 @export_group("Tile Atlas")
 
-##atlas source id of foreground TileMapLayer (edges)
+##Atlas source id of the foreground TileMapLayer (tile edges).
 @export var fg_source_id: int = 0
 
-##atlas source id of background TileMapLayer (inner fillout)
+##Atlas source id of the background TileMapLayer (inner fill).
 @export var bg_source_id: int = 1
 
-##atlas coord of background tile. (is always 0 idk why u'd need this but why not)
+##Atlas coordinate of the background tile. Normally (0, 0); exposed for flexibility.
 @export var bg_atlas_coord: Vector2i = Vector2i(0, 0)
 
-##number of columns. so if 16 textures and 4 cols -> 4x4 grid u get it (just dont change this)
+##Number of columns in the foreground atlas (e.g. 16 tiles in 4 columns = a 4x4 grid). Must match the atlas layout.
 @export var fg_atlas_cols: int = 4
 
-##probability of a cell being solid before smoothing.
+##Probability of a cell being solid before smoothing.
 @export_range(0.0, 1.0, 0.01) var ca_initial_fill: float = 0.45
 
-##how often u smooth it (0 = not smooth at all, 10 = smooth like a baby ass)
+##Number of smoothing passes. 0 applies no smoothing, 10 is the maximum.
 @export_range(0, 10) var ca_iterations: int = 4
 
 
-##creates new fastnoiselite for this biome
+##Creates a FastNoiseLite instance configured for this biome.
 func create_noise(world_seed: int) -> FastNoiseLite:
 	var n = FastNoiseLite.new()
 	n.seed = world_seed + seed_offset
@@ -129,10 +127,10 @@ func create_noise(world_seed: int) -> FastNoiseLite:
 	return n
 
 
-##noise used for the shape of hilly surface (separate from cave noise)
+##Noise used for the shape of the hilly surface, kept separate from the cave noise.
 func create_surface_noise(world_seed: int) -> FastNoiseLite:
 	var n = FastNoiseLite.new()
-	#offset the seed so the hill line doesnt correlate with the cave pattern
+	# Offset the seed so the hill line does not correlate with the cave pattern.
 	n.seed = world_seed + seed_offset + 9173
 	n.noise_type = FastNoiseLite.TYPE_PERLIN
 	n.frequency = surface_hill_frequency

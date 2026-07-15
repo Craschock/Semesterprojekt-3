@@ -20,8 +20,8 @@ func _unhandled_input(event):
 			zoom_camera(-zoom_speed)
 
 func zoom_camera(delta):
-	# Adjust the zoom vector (x and y must change together)
+	# Adjust the zoom vector; x and y must change together.
 	var new_zoom = camera.zoom.x + delta
-	# Clamp the value so you don't zoom in/out forever
+	# Clamp so the camera cannot zoom in or out indefinitely.
 	new_zoom = clamp(new_zoom, min_zoom, max_zoom)
 	camera.zoom = Vector2(new_zoom, new_zoom)
