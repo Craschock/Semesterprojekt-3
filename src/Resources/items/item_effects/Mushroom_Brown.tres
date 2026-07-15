@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="ItemData" format=3 uid="uid://8rwfawsk5fpv"]
+
+[ext_resource type="Script" uid="uid://qo1ogchardm2" path="res://src/Resources/items/ItemEffect.gd" id="1_ctssu"]
+[ext_resource type="Script" uid="uid://cytj0n2h6v2fp" path="res://src/Resources/items/ItemData.gd" id="2_aosgi"]
+[ext_resource type="Script" uid="uid://igrj8om6ucb7" path="res://src/Resources/items/item_effects/Effect_Buff.gd" id="2_tvhln"]
+[ext_resource type="Texture2D" uid="uid://b501pm2ckfjgx" path="res://assets/sprites/items/PilzBraun.png" id="3_mh7gk"]
+[ext_resource type="Texture2D" uid="uid://bl5baelxpm3tn" path="res://assets/sprites/items/PilzBraunOL.png" id="4_i3fua"]
+
+[sub_resource type="Resource" id="Resource_mh7gk"]
+script = ExtResource("2_tvhln")
+type_stat = 1
+duration = 15.0
+metadata/_custom_type_script = "uid://igrj8om6ucb7"
+
+[resource]
+script = ExtResource("2_aosgi")
+item_name = "Brown Mushroom"
+description = "Brown Mushroom. Looks dirty and unapetizing"
+icon = Array[Texture2D]([ExtResource("3_mh7gk"), ExtResource("4_i3fua")])
+consume_effects = Array[ExtResource("1_ctssu")]([SubResource("Resource_mh7gk")])
+metadata/_custom_type_script = "uid://cytj0n2h6v2fp"

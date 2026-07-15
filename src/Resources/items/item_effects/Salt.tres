@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="ItemData" format=3 uid="uid://cq3lw2ee8kol2"]
+
+[ext_resource type="Script" uid="uid://qo1ogchardm2" path="res://src/Resources/items/ItemEffect.gd" id="1_vhp41"]
+[ext_resource type="Script" uid="uid://igrj8om6ucb7" path="res://src/Resources/items/item_effects/Effect_Buff.gd" id="2_5rnko"]
+[ext_resource type="Script" uid="uid://cytj0n2h6v2fp" path="res://src/Resources/items/ItemData.gd" id="2_lu0ho"]
+[ext_resource type="Texture2D" uid="uid://cvd00tc4e2pm7" path="res://assets/sprites/items/Salz.png" id="3_fafj6"]
+[ext_resource type="Texture2D" uid="uid://dl7i00rpbrv5k" path="res://assets/sprites/items/SalzOL.png" id="4_rs7iw"]
+
+[sub_resource type="Resource" id="Resource_28dwu"]
+script = ExtResource("2_5rnko")
+type_stat = 3
+duration = 10.0
+metadata/_custom_type_script = "uid://igrj8om6ucb7"
+
+[resource]
+script = ExtResource("2_lu0ho")
+item_name = "Salt"
+description = "Smelling it hurts! I wonder what it would taste like..."
+icon = Array[Texture2D]([ExtResource("3_fafj6"), ExtResource("4_rs7iw")])
+consume_effects = Array[ExtResource("1_vhp41")]([SubResource("Resource_28dwu")])
+metadata/_custom_type_script = "uid://cytj0n2h6v2fp"

@@ -6,7 +6,7 @@ enum ItemType { WEAPON, THROWABLE, CONSUMABLE}
 
 @export var item_name: String = "Unknown Item"
 @export_multiline var description: String = ""
-@export var icon: Texture2D
+@export var icon: Array[Texture2D] = []
 @export var max_stack_size: int = 99
 
 @export_category("Usage Effect")

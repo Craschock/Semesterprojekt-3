@@ -15,7 +15,8 @@ func _ready() -> void:
 	
 	# Update Item
 	if item_data:
-		sprite.texture = item_data.icon
+		if item_data.icon.size() > 0:
+			sprite.texture = item_data.icon[0]
 		interactable.prompt_message = pickup_message + item_data.item_name
 	
 	# Connect Signal
