@@ -3,15 +3,33 @@
 [ext_resource type="Script" uid="uid://kq8l5d0v0oxw" path="res://src/scenes/ui/text labels/DamageNumber.gd" id="1_x1vie"]
 [ext_resource type="FontFile" uid="uid://ww3qpbbtk4gc" path="res://assets/fonts/PixelOperator8.ttf" id="2_yk3um"]
 
+[sub_resource type="FontVariation" id="FontVariation_5s1sg"]
+base_font = ExtResource("2_yk3um")
+spacing_glyph = -1
+
 [node name="DamageNumber" type="Marker2D" unique_id=1607216402]
-scale = Vector2(0.4, 0.4)
 script = ExtResource("1_x1vie")
 
 [node name="Label" type="Label" parent="." unique_id=102029132]
-offset_right = 40.0
-offset_bottom = 23.0
-theme_override_colors/font_color = Color(0.69919515, 3.742166e-06, 2.0214916e-06, 1)
+texture_filter = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -6.5
+offset_top = -4.0
+offset_right = 6.5
+offset_bottom = 4.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.57, 0.57)
+pivot_offset_ratio = Vector2(0.5, 0.5)
+theme_override_colors/font_color = Color(0.87038726, 2.8878452e-07, 1.2513996e-06, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 8
-theme_override_fonts/font = ExtResource("2_yk3um")
+theme_override_constants/outline_size = 4
+theme_override_fonts/font = SubResource("FontVariation_5s1sg")
 theme_override_font_sizes/font_size = 8
+text = "3"
+horizontal_alignment = 1
+vertical_alignment = 1

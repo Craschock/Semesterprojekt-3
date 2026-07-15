@@ -2,8 +2,8 @@ extends CharacterBody2D
 class_name PlayerMovement
 
 @onready var health_component: HealthComponent = $HealthComponent
-@onready var state_machine: StateMachine = $StateMachine
 @onready var inventory_component: InventoryComponent = $InventoryComponent
+@onready var state_machine: StateMachine = $StateMachine
 
 # Movement 
 @export_category("Movement")

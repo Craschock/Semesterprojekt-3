@@ -24,7 +24,6 @@
 [ext_resource type="Script" uid="uid://dve2sqb3uk5fk" path="res://src/scenes/entities/player/states/PlayerJumpCharge.gd" id="14_ims5k"]
 [ext_resource type="Script" uid="uid://bho7ii4d1uesh" path="res://src/scenes/entities/player/states/PlayerAction.gd" id="18_twcrf"]
 [ext_resource type="Script" uid="uid://8y7lon3xrh43" path="res://src/scenes/entities/player/states/PlayerItemConsume.gd" id="19_johpv"]
-[ext_resource type="PackedScene" uid="uid://hi0oqc1o8nv2" path="res://src/scenes/ui/overlay/inventory/inventory_ui.tscn" id="20_csrv5"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_oknxn"]
 radius = 3.0
@@ -667,11 +666,5 @@ libraries/ = SubResource("AnimationLibrary_lrig1")
 offset = Vector2(0, -8)
 zoom = Vector2(5, 5)
 position_smoothing_enabled = true
-
-[node name="PlayerUI" type="CanvasLayer" parent="." unique_id=893019572]
-visible = false
-
-[node name="InventoryUI" parent="PlayerUI" unique_id=22996944 node_paths=PackedStringArray("inventory_component") instance=ExtResource("20_csrv5")]
-inventory_component = NodePath("../../InventoryComponent")
 
 [editable path="HitboxComponent"]
