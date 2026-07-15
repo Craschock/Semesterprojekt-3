@@ -7,11 +7,18 @@
 [ext_resource type="Script" uid="uid://b4wfr5jd3n4dn" path="res://src/scenes/entities/Enemies/EnemyHit.gd" id="5_jg6wm"]
 [ext_resource type="Script" uid="uid://b1llifetbvfpl" path="res://src/scenes/entities/Enemies/behavior_components/EnemyIdle.gd" id="6_bv0u3"]
 [ext_resource type="PackedScene" uid="uid://b17p735ram0ly" path="res://src/scenes/components/detection_component.tscn" id="6_cqa0d"]
+[ext_resource type="Script" uid="uid://ckiamh2oybkg3" path="res://src/scenes/components/LootDropComponent.gd" id="8_ke3wq"]
 
 [node name="BaseEnemy" type="CharacterBody2D" unique_id=961012920 node_paths=PackedStringArray("idle_state")]
 collision_layer = 4
 script = ExtResource("1_4qdbe")
 idle_state = NodePath("StateMachine/EnemyIdle")
+step_height = 5.0
+
+[node name="LootDropComponent" type="Node2D" parent="." unique_id=715616856 node_paths=PackedStringArray("health_component")]
+script = ExtResource("8_ke3wq")
+health_component = NodePath("../HealthComponent")
+metadata/_custom_type_script = "uid://ckiamh2oybkg3"
 
 [node name="HealthComponent" parent="." unique_id=1881424083 instance=ExtResource("1_qnakn")]
 

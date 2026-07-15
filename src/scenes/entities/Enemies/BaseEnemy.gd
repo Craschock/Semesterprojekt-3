@@ -1,7 +1,7 @@
 extends CharacterBody2D
 class_name BaseEnemy
 
-var gravity: float = ProjectSettings.get_setting("physics/2d/default_gravity")
+var gravity: float = ProjectSettings.get_setting("physics/2d/default_gravity") * 0.67
 
 var apply_gravity: bool = true
 var stored_velocity: Vector2
@@ -14,6 +14,10 @@ var stored_velocity: Vector2
 ## State for chasing the player
 @export var chase_state: State = null
 
+@export_category("Values")
+## Maximum step height
+@export var step_height: float = 4.0
+
 func _ready() -> void:
 	# Connect health depleted signal
 	health_component.health_depleted.connect(die)
@@ -24,6 +28,7 @@ func _ready() -> void:
 		detection.player_spotted.connect(_on_player_spotted)
 		detection.player_lost.connect(_on_player_lost)
 	
+	floor_snap_length = step_height
 
 func _on_player_spotted() -> void:
 	if chase_state:
@@ -35,9 +40,20 @@ func _on_player_lost() -> void:
 func _physics_process(delta: float) -> void:
 	if not is_on_floor():
 		velocity.y += gravity * delta
+	
+	try_step_up()
 	move_and_slide()
 
-func freeze_in_place() -> void:
+func try_step_up() -> void:
+	if not is_on_floor() or abs(velocity.x) < 1.0:
+		return
+	var forward := Vector2(sign(velocity.x) * 2, 0)
+
+	if test_move(transform, forward) and \
+	   not test_move(transform.translated(Vector2(0, -step_height)), forward):
+		position.y -= step_height
+
+func freeze() -> void:
 	stored_velocity = velocity
 	velocity = Vector2.ZERO
 	apply_gravity = false
