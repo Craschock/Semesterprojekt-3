@@ -150,6 +150,8 @@ filler_biome = ExtResource("5_3r8k2")
 z_index = 1
 position = Vector2(8, 8)
 tile_set = SubResource("TileSet_0h7mo")
+navigation_enabled = false
 
 [node name="Background" type="TileMapLayer" parent="." unique_id=1324659571]
 tile_set = SubResource("TileSet_hqns4")
+navigation_enabled = false

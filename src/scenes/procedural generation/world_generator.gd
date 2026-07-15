@@ -48,12 +48,16 @@ class_name WorldGenerator
 ##the player character, the chunks will laod/unload around this node
 @export var player: Node2D
 
+@export_group("Decorations")
+##scale of decorations to match tile rescaling 
+@export var decoration_scale: float = 1.6
 
 #LOCAL VARIABLES
 const DECO_SIZE: Dictionary = {
 	DecorationData.SizeCategory.SMALL: Vector2i(7,  9),
 	DecorationData.SizeCategory.MEDIUM: Vector2i(16, 22),
 	DecorationData.SizeCategory.MEDIUM_PLUS: Vector2i(20, 22),
+	DecorationData.SizeCategory.LARGE: Vector2i(32,32)
 }
 
 var _enemy_spawns: Dictionary = {}
@@ -87,6 +91,8 @@ var _spawn_tile: Vector2i = Vector2i(0x7FFFFFFF, 0x7FFFFFFF)
 ##last chunk player was in
 var _last_player_chunk: Vector2i = Vector2i(0x7FFFFFFF, 0x7FFFFFFF)
 
+#performance fixes
+var _load_queue: Array[Vector2i] = []
 
 #MAIN
 
@@ -127,14 +133,14 @@ func _create_spawn_marker() -> void:
 func _process(_delta: float) -> void:
 	if player == null or biomes.is_empty():
 		return
-	var local_player_pos = to_local(player.global_position)
-	var player_chunk = _world_pixel_to_chunk(local_player_pos)
-	if player_chunk == _last_player_chunk:
-		return
-	_last_player_chunk = player_chunk
-	_stream_chunks(player_chunk)
-	
-	#debug_draw_enemy_spawns() //melvin kannst du anmahen wenn du willst
+	_dbg_reset_frame()
+	var player_chunk = _world_pixel_to_chunk(to_local(player.global_position))
+	if player_chunk != _last_player_chunk:
+		_last_player_chunk = player_chunk
+		_refresh_load_queue(player_chunk)
+		_unload_far_chunks(player_chunk)
+	_process_load_queue()
+	_dbg_report(_delta)
 
 #WORLD LAYOUT (runs once)
 ##decides which biome generates in which region cell, obeys the placement rules like a good boy
@@ -370,18 +376,59 @@ func _room_corner_state(wx: int, wy: int) -> int:
 
 #ab jetzt wieder "mein" code (also alles was mein code ist ist ja auch 50% copy pasted irgendwo aber du checkst ja eh)
 
+##checks if tile is in spawn or boss room (useful e.g. to prevent enemies being spawned on these tiles)
+func _tile_in_any_room(tx: int, ty: int, padding: int = 0) -> bool:
+	var p := Vector2i(tx, ty)
+	for room in _rooms:
+		var interior: Rect2i = room["rect"]
+		var grow: int = room["wall"] + padding
+		var outer := Rect2i(
+			interior.position - Vector2i(grow, grow),
+			interior.size + Vector2i(grow * 2, grow * 2)
+		)
+		if outer.has_point(p):
+			return true
+	return false
+
+##checks if chunk is in spawn or boss room (useful e.g. to prevent enemies being spawned in these chunks)
+func _chunk_touches_room(origin: Vector2i, margin: int = 1) -> bool:
+	var chunk_rect := Rect2i(
+		origin.x - margin, origin.y - margin,
+		chunk_size + margin * 2, chunk_size + margin * 2
+	)
+	for room in _rooms:
+		var interior: Rect2i = room["rect"]
+		var wall: int = room["wall"]
+		var outer := Rect2i(
+			interior.position - Vector2i(wall, wall),
+			interior.size + Vector2i(wall * 2, wall * 2)
+		)
+		if outer.intersects(chunk_rect):
+			return true
+	return false
+
 #CHUNK STREAMING
-func _stream_chunks(center: Vector2i) -> void:
-	var to_load: Array[Vector2i] = []
+func _refresh_load_queue(center: Vector2i) -> void:
+	_load_queue.clear()
 	for dy in range(-view_radius_chunks, view_radius_chunks + 1):
 		for dx in range(-view_radius_chunks, view_radius_chunks + 1):
 			var cp = center + Vector2i(dx, dy)
 			if not _loaded_chunks.has(cp):
-				to_load.append(cp)
+				_load_queue.append(cp)
+	#load the chunk closest to player first and not all at same time (another huge thanks to minecraft)
+	_load_queue.sort_custom(func(a, b):
+		return (a - center).length_squared() < (b - center).length_squared())
 
-	for cp in to_load:
-		_load_chunk(cp)
-
+func _process_load_queue() -> void:
+	var budget = 1   #amnt of chunks we load per frame. the lower the more performant.
+	while budget > 0 and not _load_queue.is_empty():
+		var cp: Vector2i = _load_queue.pop_front()
+		if not _loaded_chunks.has(cp):
+			_load_chunk(cp)
+			budget -= 1
+			
+func _unload_far_chunks(center: Vector2i) -> void:
+	var t0 = Time.get_ticks_usec()
 	var to_unload: Array[Vector2i] = []
 	for cp in _loaded_chunks.keys():
 		var d: Vector2i = cp - center
@@ -389,19 +436,29 @@ func _stream_chunks(center: Vector2i) -> void:
 			to_unload.append(cp)
 	for cp in to_unload:
 		_unload_chunk(cp)
-	
-	print("enemy spawns loaded: ", _enemy_spawns.size())
-
+	_dbg_unloaded_this_frame = to_unload.size()
+	_dbg_frame_usec += Time.get_ticks_usec() - t0
 
 func _load_chunk(chunk_pos: Vector2i) -> void:
 	var region_pos = _chunk_to_region(chunk_pos)
 	var biome = _biome_for_region(region_pos)
-	#chunks outside the world just render bedrock everywhere
 	var chunk = WorldChunk.new(chunk_pos, chunk_size, biome, region_pos)
+
+	var t0 = Time.get_ticks_usec()
 	_generate_chunk_corners(chunk)
+	var t1 = Time.get_ticks_usec()
 	chunk.state = WorldChunk.State.GENERATED
 	_render_chunk(chunk)
+	var t2 = Time.get_ticks_usec()
 	_spawn_decorations(chunk)
+	var t3 = Time.get_ticks_usec()
+
+	_dbg_gen += t1 - t0
+	_dbg_render += t2 - t1
+	_dbg_deco += t3 - t2
+	_dbg_frame_usec += t3 - t0
+	_dbg_loaded_this_frame += 1
+
 	chunk.state = WorldChunk.State.RENDERED
 	_loaded_chunks[chunk_pos] = chunk
 
@@ -418,7 +475,7 @@ func _unload_chunk(chunk_pos: Vector2i) -> void:
 			bg_layer.erase_cell(wp)
 	for node in chunk.decorations:
 		node.queue_free()
-		chunk.decorations.clear()
+	chunk.decorations.clear()
 	_enemy_spawns.erase(chunk_pos)
 	_loaded_chunks.erase(chunk_pos)
 
@@ -466,11 +523,27 @@ func _generate_chunk_corners(chunk: WorldChunk) -> void:
 		noise = _get_biome_noise(biome)
 	var thr = biome.threshold if biome != null else 0.0
 
+	#does this chunk touch ANY room? if not, skip all per-corner room checks
+	var chunk_touches_room := false
+	var chunk_rect := Rect2i(
+		origin.x - 1, origin.y - 1,
+		chunk_size + 2, chunk_size + 2   # +1 margin each side for corner sampling
+	)
+	for room in _rooms:
+		var r_interior: Rect2i = room["rect"]
+		var r_wall: int = room["wall"]
+		var r_outer := Rect2i(
+			r_interior.position - Vector2i(r_wall, r_wall),
+			r_interior.size + Vector2i(r_wall * 2, r_wall * 2)
+		)
+		if r_outer.intersects(chunk_rect):
+			chunk_touches_room = true
+			break
+
 	for ly in range(chunk_size + 1):
 		for lx in range(chunk_size + 1):
 			var wx = origin.x + lx
 			var wy = origin.y + ly
-			var key = Vector2i(wx, wy)
 
 			var solid: bool
 			var locked: bool = false
@@ -534,7 +607,7 @@ func _generate_chunk_corners(chunk: WorldChunk) -> void:
 			#PREBUILT ROOMS override the generated noise
 			#but dont override player made corner overrides so player can break
 			#spawn and boss roms if he feels like it or maybe bombs or idk
-			if not locked:
+			if not locked and chunk_touches_room:
 				var rs = _room_corner_state(wx, wy)
 				if rs == 1:
 					solid = true    # room wall
@@ -542,8 +615,10 @@ func _generate_chunk_corners(chunk: WorldChunk) -> void:
 					solid = false   # room interior (air)
 
 			#player edits override normal world but NEVER override border (this makes them unbreakable even if we break them via code/bugusing)
-			if not locked and _corner_overrides.has(key):
-				solid = _corner_overrides[key]
+			if not locked and not _corner_overrides.is_empty():
+				var key = Vector2i(wx, wy)
+				if _corner_overrides.has(key):
+					solid = _corner_overrides[key]
 
 			chunk.set_corner(lx, ly, solid)
 			chunk.set_locked(lx, ly, locked)
@@ -686,6 +761,8 @@ func _spawn_decorations(chunk: WorldChunk) -> void:
 		return
 
 	var origin = chunk.world_origin()
+	
+	var occupied: Array[Rect2i] = []
 
 	for ty in range(chunk_size):
 		for tx in range(chunk_size):
@@ -718,7 +795,11 @@ func _spawn_decorations(chunk: WorldChunk) -> void:
 				if roll > deco.spawn_chance:
 					continue
 
-				var size: Vector2i = DECO_SIZE[deco.size_category]
+				var base_size: Vector2i = DECO_SIZE[deco.size_category]
+				var size := Vector2i(
+					int(ceil(base_size.x * decoration_scale)),
+					int(ceil(base_size.y * decoration_scale))
+				)
 
 				#PIXEL position of tiles bottomleftest pixel
 				#wx/wy are tile coords ->  bottom of tile (ty) = (wy+1) * tile_pixel_size
@@ -761,13 +842,26 @@ func _spawn_decorations(chunk: WorldChunk) -> void:
 				if not fits:
 					continue
 
+				#dont overlap a deco we already placed
+				var my_rect := Rect2i(left_pixel_x, floor_pixel_y - size.y, size.x, size.y)
+				var overlaps := false
+				for r in occupied:
+					if r.intersects(my_rect):
+						overlaps = true
+						break
+				if overlaps:
+					continue
+				
 				#spawn the sprite
 				var sprite = Sprite2D.new()
 				sprite.texture = deco.texture
 				sprite.centered = false
+				sprite.scale = Vector2(decoration_scale, decoration_scale)
+				sprite.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
 				sprite.position = Vector2(left_pixel_x, floor_pixel_y - size.y)
 				add_child(sprite)
 				chunk.decorations.append(sprite)
+				occupied.append(my_rect)
 
 				#only one decoration per tile (first one that gets here wins the seed (sperm race ahh moment))
 				break
@@ -777,6 +871,7 @@ func _spawn_decorations(chunk: WorldChunk) -> void:
 	#ja wieder random gen
 	var enemy_hash = (origin.x * 2246822519 ^ origin.y * 3266489917 ^ world_seed) & 0x7FFFFFFF
 	var enemy_roll = float(enemy_hash) / float(0x7FFFFFFF)
+	var near_room := _chunk_touches_room(origin, 2)
 	if true:
 		#scan tiles
 		var candidates: Array[Vector2i] = []
@@ -787,6 +882,9 @@ func _spawn_decorations(chunk: WorldChunk) -> void:
 					continue
 				# tile itself must be air
 				if chunk.get_corner(tx, ty):
+					continue
+				# never spawn enemies inside spawn/boss rooms
+				if near_room and _tile_in_any_room(origin.x + tx, origin.y + ty, 1):
 					continue
 				# left and right floor tiles must be solid (no platform edge)
 				if tx == 0 or tx >= chunk_size - 1:
@@ -902,3 +1000,35 @@ func get_spawn_position() -> Vector2:
 	)
 	
 	return local_pos
+
+
+
+# --- DEBUG TIMING ---
+var _dbg_frame_usec: int = 0
+var _dbg_loaded_this_frame: int = 0
+var _dbg_unloaded_this_frame: int = 0
+# accumulators for load sub-phases (usec)
+var _dbg_gen: int = 0
+var _dbg_render: int = 0
+var _dbg_deco: int = 0
+
+var _dbg_worst := 0.0
+var _dbg_accum := 0.0
+
+
+func _dbg_reset_frame() -> void:
+	_dbg_frame_usec = 0
+	_dbg_loaded_this_frame = 0
+	_dbg_unloaded_this_frame = 0
+	_dbg_gen = 0
+	_dbg_render = 0
+	_dbg_deco = 0
+
+func _dbg_report(delta: float) -> void:
+	_dbg_accum += delta
+	if _dbg_frame_usec / 1000.0 > _dbg_worst:
+		_dbg_worst = _dbg_frame_usec / 1000.0
+	if _dbg_accum >= 1.0:
+		print("[WORLDGEN] worst work this second: %.2fms" % _dbg_worst)
+		_dbg_worst = 0.0
+		_dbg_accum = 0.0

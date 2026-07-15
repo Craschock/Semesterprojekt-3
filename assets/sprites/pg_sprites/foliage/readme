@@ -14,6 +14,10 @@ medium+:
 exactly 20px width
 exactly 22px high
 
+large:
+exactly 32px width
+exactly 32px high
+
 
 
 

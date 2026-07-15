@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="DecorationData" format=3 uid="uid://j05dmsbiopnr"]
+
+[ext_resource type="Script" uid="uid://bg0j21vco3sjm" path="res://src/scenes/procedural generation/decoration_data.gd" id="1_eld6q"]
+[ext_resource type="Texture2D" uid="uid://dphg27wqlao2a" path="res://assets/sprites/pg_sprites/foliage/rare_decoration_medium_04.png" id="2_eld6q"]
+
+[resource]
+script = ExtResource("1_eld6q")
+texture = ExtResource("2_eld6q")
+spawn_chance = 0.009
+metadata/_custom_type_script = "uid://bg0j21vco3sjm"
