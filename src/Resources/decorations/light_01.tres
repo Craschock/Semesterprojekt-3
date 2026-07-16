@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="DecorationData" format=3 uid="uid://brqn5qq5tqmjb"]
+
+[ext_resource type="Script" uid="uid://bg0j21vco3sjm" path="res://src/scenes/procedural generation/decoration_data.gd" id="1_qo78x"]
+[ext_resource type="Texture2D" uid="uid://ctle42ua8bp35" path="res://assets/sprites/pg_sprites/foliage/light_medium_01.png" id="2_j2fbh"]
+
+[resource]
+script = ExtResource("1_qo78x")
+texture = ExtResource("2_j2fbh")
+spawn_chance = 0.07
+is_light_source = true
+light_color = Color(0.8653533, 0.80438006, 0.34629, 1)
+light_energy = 0.75
+light_offset = Vector2(0, 5)
+metadata/_custom_type_script = "uid://bg0j21vco3sjm"

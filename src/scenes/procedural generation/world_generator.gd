@@ -853,6 +853,21 @@ func _spawn_decorations(chunk: WorldChunk) -> void:
 				add_child(sprite)
 				chunk.decorations.append(sprite)
 				occupied.append(my_rect)
+				
+				# Lightsource
+				if deco.is_light_source:
+					var light = PointLight2D.new()
+					light.texture = deco.light_texture
+					light.color = deco.light_color
+					light.energy = deco.light_energy
+					light.texture_scale = deco.light_texture_scale
+					light.z_index = 2
+					light.position = Vector2(
+						left_pixel_x + size.x * 0.5,
+						floor_pixel_y - size.y * 0.5
+					) + deco.light_offset * decoration_scale
+					add_child(light)
+					chunk.decorations.append(light)
 
 				# Only one decoration per tile: the first eligible entry wins.
 				break
