@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://djbhr2wetrtgk"]
+
+[ext_resource type="PackedScene" uid="uid://cb5v77dqqm2og" path="res://src/scenes/item prefabs/base_item.tscn" id="1_nrmgm"]
+[ext_resource type="Resource" uid="uid://lofsbaxjs4mm" path="res://src/Resources/items/item_effects/Worm.tres" id="2_ryvs5"]
+
+[node name="Worm" unique_id=1088472823 instance=ExtResource("1_nrmgm")]
+item_data = ExtResource("2_ryvs5")

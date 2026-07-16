@@ -1,0 +1,27 @@
+[gd_resource type="Resource" script_class="ItemData" format=3 uid="uid://brl56lcwgp1nb"]
+
+[ext_resource type="Script" uid="uid://qo1ogchardm2" path="res://src/Resources/items/ItemEffect.gd" id="1_7mwoo"]
+[ext_resource type="Script" uid="uid://ci1x8tyjfbbpa" path="res://src/Resources/items/item_effects/Effect_Heal.gd" id="2_d4usa"]
+[ext_resource type="Script" uid="uid://cytj0n2h6v2fp" path="res://src/Resources/items/ItemData.gd" id="2_k15wm"]
+[ext_resource type="Texture2D" uid="uid://muoxt5ajme7h" path="res://assets/sprites/items/Fisch.png" id="2_pfvb3"]
+[ext_resource type="Texture2D" uid="uid://bad8phhub0dul" path="res://assets/sprites/items/FischOL.png" id="3_d4usa"]
+[ext_resource type="Script" uid="uid://igrj8om6ucb7" path="res://src/Resources/items/item_effects/Effect_Buff.gd" id="3_vghwb"]
+
+[sub_resource type="Resource" id="Resource_vghwb"]
+script = ExtResource("2_d4usa")
+metadata/_custom_type_script = "uid://ci1x8tyjfbbpa"
+
+[sub_resource type="Resource" id="Resource_dwwq1"]
+script = ExtResource("3_vghwb")
+type_stat = 2
+multiplier = 1.5
+duration = 30.0
+metadata/_custom_type_script = "uid://igrj8om6ucb7"
+
+[resource]
+script = ExtResource("2_k15wm")
+item_name = "Fish"
+description = "Unknown Fish from unknown depths."
+icon = Array[Texture2D]([ExtResource("2_pfvb3"), ExtResource("3_d4usa")])
+consume_effects = Array[ExtResource("1_7mwoo")]([SubResource("Resource_vghwb"), SubResource("Resource_dwwq1")])
+metadata/_custom_type_script = "uid://cytj0n2h6v2fp"

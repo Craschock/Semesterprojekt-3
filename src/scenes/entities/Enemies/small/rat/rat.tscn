@@ -2,6 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://c301qejfle2yq" path="res://src/scenes/entities/Enemies/base_enemy.tscn" id="1_n5j4j"]
 [ext_resource type="Texture2D" uid="uid://cojn5veho4yi8" path="res://assets/sprites/entities/enemies/small/enemy_s_rat_run.png" id="2_cl87m"]
+[ext_resource type="PackedScene" uid="uid://by4omnyc6c73y" path="res://src/scenes/item prefabs/salt.tscn" id="2_ig603"]
 [ext_resource type="Texture2D" uid="uid://d3ij8qcv2afxs" path="res://assets/sprites/entities/enemies/small/enemy_s_rat_hit.png" id="2_svtd1"]
 [ext_resource type="Texture2D" uid="uid://dl5p6jfrotawk" path="res://assets/sprites/entities/enemies/small/enemy_s_rat_death.png" id="2_wd0n8"]
 [ext_resource type="Script" uid="uid://crxt81u8m6s2t" path="res://src/scenes/entities/Enemies/behavior_components/EnemyWalk.gd" id="6_5v7a8"]
@@ -190,22 +191,25 @@ scale = Vector2(0.67999995, 0.67999995)
 chase_state = NodePath("StateMachine/EnemyChase")
 metadata/_edit_group_ = true
 
-[node name="HealthComponent" parent="." index="0" unique_id=1881424083]
+[node name="LootDropComponent" parent="." index="0" unique_id=715616856]
+possible_drops = Array[PackedScene]([ExtResource("2_ig603")])
+
+[node name="HealthComponent" parent="." index="1" unique_id=1881424083]
 scale = Vector2(0.75, 0.75)
 
-[node name="HitboxComponent" parent="." index="1" unique_id=232939803]
+[node name="HitboxComponent" parent="." index="2" unique_id=232939803]
 position = Vector2(0, -3)
 scale = Vector2(0.75, 0.75)
 
 [node name="CollisionShape2D" parent="HitboxComponent" index="0" unique_id=1698255179]
 shape = SubResource("CircleShape2D_wd0n8")
 
-[node name="Body" parent="." index="2" unique_id=748019568]
+[node name="Body" parent="." index="3" unique_id=748019568]
 position = Vector2(0, -3)
 scale = Vector2(0.75, 0.75)
 shape = SubResource("RectangleShape2D_wd0n8")
 
-[node name="AnimatedSprite2D" parent="." index="3" unique_id=1281959025]
+[node name="AnimatedSprite2D" parent="." index="4" unique_id=1281959025]
 position = Vector2(0, -9)
 scale = Vector2(0.75, 0.75)
 sprite_frames = SubResource("SpriteFrames_cl87m")

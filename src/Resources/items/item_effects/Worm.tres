@@ -1,0 +1,26 @@
+[gd_resource type="Resource" script_class="ItemData" format=3 uid="uid://lofsbaxjs4mm"]
+
+[ext_resource type="Script" uid="uid://qo1ogchardm2" path="res://src/Resources/items/ItemEffect.gd" id="1_tolmw"]
+[ext_resource type="Texture2D" uid="uid://dcr1j5l2qr6yo" path="res://assets/sprites/items/Wurm.png" id="2_2cwow"]
+[ext_resource type="Script" uid="uid://cytj0n2h6v2fp" path="res://src/Resources/items/ItemData.gd" id="2_5vg2b"]
+[ext_resource type="Script" uid="uid://ci1x8tyjfbbpa" path="res://src/Resources/items/item_effects/Effect_Heal.gd" id="2_45jq0"]
+[ext_resource type="Texture2D" uid="uid://bhk8vhflv0aua" path="res://assets/sprites/items/WurmOL.png" id="3_hjgrt"]
+[ext_resource type="Script" uid="uid://igrj8om6ucb7" path="res://src/Resources/items/item_effects/Effect_Buff.gd" id="3_o1v4x"]
+
+[sub_resource type="Resource" id="Resource_ohosh"]
+script = ExtResource("2_45jq0")
+heal_amount = 15
+metadata/_custom_type_script = "uid://ci1x8tyjfbbpa"
+
+[sub_resource type="Resource" id="Resource_o4krx"]
+script = ExtResource("3_o1v4x")
+multiplier = 1.5
+metadata/_custom_type_script = "uid://igrj8om6ucb7"
+
+[resource]
+script = ExtResource("2_5vg2b")
+item_name = "Worm"
+description = "A worm with legs. Weird creature."
+icon = Array[Texture2D]([ExtResource("2_2cwow"), ExtResource("3_hjgrt")])
+consume_effects = Array[ExtResource("1_tolmw")]([SubResource("Resource_ohosh"), SubResource("Resource_o4krx")])
+metadata/_custom_type_script = "uid://cytj0n2h6v2fp"

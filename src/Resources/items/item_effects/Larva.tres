@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="ItemData" format=3 uid="uid://cryh2m8uh3u26"]
+
+[ext_resource type="Script" uid="uid://qo1ogchardm2" path="res://src/Resources/items/ItemEffect.gd" id="1_s56xb"]
+[ext_resource type="Script" uid="uid://cytj0n2h6v2fp" path="res://src/Resources/items/ItemData.gd" id="2_j7ctw"]
+[ext_resource type="Script" uid="uid://ci1x8tyjfbbpa" path="res://src/Resources/items/item_effects/Effect_Heal.gd" id="2_v7gng"]
+[ext_resource type="Texture2D" uid="uid://qh2c6xvouo80" path="res://assets/sprites/items/Larve.png" id="3_l5thd"]
+[ext_resource type="Texture2D" uid="uid://c8wfb11ceqhfj" path="res://assets/sprites/items/LarveOL.png" id="4_cw6fa"]
+
+[sub_resource type="Resource" id="Resource_7qlo3"]
+script = ExtResource("2_v7gng")
+heal_amount = 5
+isRegen = true
+metadata/_custom_type_script = "uid://ci1x8tyjfbbpa"
+
+[resource]
+script = ExtResource("2_j7ctw")
+item_name = "Larva"
+description = "Thicc Larva. Looks disgusting."
+icon = Array[Texture2D]([ExtResource("3_l5thd"), ExtResource("4_cw6fa")])
+consume_effects = Array[ExtResource("1_s56xb")]([SubResource("Resource_7qlo3")])
+metadata/_custom_type_script = "uid://cytj0n2h6v2fp"

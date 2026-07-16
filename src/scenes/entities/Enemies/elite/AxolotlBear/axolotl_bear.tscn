@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://577lsevqopyw" path="res://assets/sprites/entities/enemies/elite/enemy_e_axolotlBear_bubbles.png" id="2_5qadu"]
 [ext_resource type="Texture2D" uid="uid://cks8s1etit0li" path="res://assets/sprites/entities/enemies/elite/enemy_e_axolotlbear_death.png" id="2_56ayk"]
 [ext_resource type="Texture2D" uid="uid://ga3v8k3v12n4" path="res://assets/sprites/entities/enemies/elite/enemy_e_axolotlbear_hit.png" id="2_atyx1"]
+[ext_resource type="PackedScene" uid="uid://qdekhakrwp1w" path="res://src/scenes/item prefabs/fish.tscn" id="2_jic0s"]
 [ext_resource type="Texture2D" uid="uid://c52055p4s7l5x" path="res://assets/sprites/entities/enemies/elite/enemy_e_axolotlBear_run.png" id="2_tmeps"]
 [ext_resource type="Script" uid="uid://crxt81u8m6s2t" path="res://src/scenes/entities/Enemies/behavior_components/EnemyWalk.gd" id="6_2n81r"]
 [ext_resource type="Script" uid="uid://dsys1lxnete83" path="res://src/scenes/entities/Enemies/behavior_components/EnemyChase.gd" id="7_fbim3"]
@@ -14,7 +15,7 @@
 size = Vector2(58, 37)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5qadu"]
-size = Vector2(34, 37)
+size = Vector2(44.141514, 32.370445)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_qattg"]
 atlas = ExtResource("2_5qadu")
@@ -521,15 +522,18 @@ scale = Vector2(0.6796323, 0.6796323)
 chase_state = NodePath("StateMachine/EnemyChase")
 metadata/_edit_group_ = true
 
+[node name="LootDropComponent" parent="." index="0" unique_id=715616856]
+possible_drops = Array[PackedScene]([ExtResource("2_jic0s")])
+
 [node name="CollisionShape2D" parent="HitboxComponent" parent_id_path=PackedInt32Array(232939803) index="0" unique_id=1698255179]
 position = Vector2(0, -18.5)
 shape = SubResource("RectangleShape2D_2n81r")
 
-[node name="Body" parent="." index="2" unique_id=748019568]
-position = Vector2(0, -18.5)
+[node name="Body" parent="." index="3" unique_id=748019568]
+position = Vector2(0, -16.185223)
 shape = SubResource("RectangleShape2D_5qadu")
 
-[node name="AnimatedSprite2D" parent="." index="3" unique_id=1281959025]
+[node name="AnimatedSprite2D" parent="." index="4" unique_id=1281959025]
 position = Vector2(0, -22)
 scale = Vector2(0.75, 0.75)
 sprite_frames = SubResource("SpriteFrames_xoqvr")
