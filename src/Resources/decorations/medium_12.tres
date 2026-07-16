@@ -7,4 +7,8 @@
 script = ExtResource("1_3dhqm")
 texture = ExtResource("2_3dhqm")
 spawn_chance = 0.009
+is_light_source = true
+light_color = Color(0.7921569, 0.28627452, 0.80784315, 1)
+light_energy = 0.7
+light_texture_scale = 0.65
 metadata/_custom_type_script = "uid://bg0j21vco3sjm"
