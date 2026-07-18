@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="DecorationData" format=3 uid="uid://bu0epdrsuci2n"]
+
+[ext_resource type="Script" uid="uid://bg0j21vco3sjm" path="res://src/scenes/procedural generation/decoration_data.gd" id="1_4nxs6"]
+[ext_resource type="Texture2D" uid="uid://bshbl0317vwtv" path="res://assets/sprites/pg_sprites/foliage/decoration_hanging_01.png" id="2_4nxs6"]
+
+[resource]
+script = ExtResource("1_4nxs6")
+texture = ExtResource("2_4nxs6")
+size_category = 4
+placement = 1
+spawn_chance = 0.02
+is_light_source = true
+light_color = Color(0.8666667, 0.8039216, 0.34509805, 1)
+light_offset = Vector2(0, 24)
+metadata/_custom_type_script = "uid://bg0j21vco3sjm"

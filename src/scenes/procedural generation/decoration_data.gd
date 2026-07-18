@@ -3,7 +3,7 @@ class_name DecorationData
 
 enum Placement { FLOOR, CEILING }
 
-enum SizeCategory { SMALL, MEDIUM, MEDIUM_PLUS, LARGE }
+enum SizeCategory { SMALL, MEDIUM, MEDIUM_PLUS, LARGE, HANGING }
 
 ##Texture used for this decoration.
 @export var texture: Texture2D

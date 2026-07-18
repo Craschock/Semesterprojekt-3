@@ -28,6 +28,8 @@
 [ext_resource type="Resource" uid="uid://dqxu07wg353ra" path="res://src/Resources/decorations/medium_14.tres" id="25_5mfag"]
 [ext_resource type="Resource" uid="uid://wsxgv0yyuf5p" path="res://src/Resources/decorations/light_02.tres" id="26_5mfag"]
 [ext_resource type="Resource" uid="uid://brqn5qq5tqmjb" path="res://src/Resources/decorations/light_01.tres" id="26_gcpon"]
+[ext_resource type="Resource" uid="uid://bu0epdrsuci2n" path="res://src/Resources/decorations/hanging_01.tres" id="28_3rdvo"]
+[ext_resource type="Resource" uid="uid://ca7kcyrrvbew2" path="res://src/Resources/decorations/vines_01.tres" id="29_tpe12"]
 
 [resource]
 script = ExtResource("1_asad2")
@@ -43,5 +45,5 @@ frequency = 0.03
 threshold = 0.10000000000000007
 fractal_octaves = 2
 fractal_gain = 0.39
-decorations = Array[ExtResource("1_6h5pl")]([ExtResource("2_umaqw"), ExtResource("3_62rkv"), ExtResource("4_1tmdg"), ExtResource("5_7uyfi"), ExtResource("6_yy2ic"), ExtResource("7_250n5"), ExtResource("8_2x8j5"), ExtResource("9_2e5t8"), ExtResource("10_b1d0f"), ExtResource("11_d7vb1"), ExtResource("12_250n5"), ExtResource("13_2x8j5"), ExtResource("14_2e5t8"), ExtResource("15_b1d0f"), ExtResource("16_d7vb1"), ExtResource("17_2e5t8"), ExtResource("18_b1d0f"), ExtResource("19_d7vb1"), ExtResource("20_vht78"), ExtResource("21_yqdpi"), ExtResource("22_w7bay"), ExtResource("23_8bpom"), ExtResource("24_gcpon"), ExtResource("25_5mfag"), ExtResource("26_5mfag"), ExtResource("26_gcpon")])
+decorations = Array[ExtResource("1_6h5pl")]([ExtResource("2_umaqw"), ExtResource("3_62rkv"), ExtResource("4_1tmdg"), ExtResource("5_7uyfi"), ExtResource("6_yy2ic"), ExtResource("7_250n5"), ExtResource("8_2x8j5"), ExtResource("9_2e5t8"), ExtResource("10_b1d0f"), ExtResource("11_d7vb1"), ExtResource("12_250n5"), ExtResource("13_2x8j5"), ExtResource("14_2e5t8"), ExtResource("15_b1d0f"), ExtResource("16_d7vb1"), ExtResource("17_2e5t8"), ExtResource("18_b1d0f"), ExtResource("19_d7vb1"), ExtResource("20_vht78"), ExtResource("21_yqdpi"), ExtResource("22_w7bay"), ExtResource("23_8bpom"), ExtResource("24_gcpon"), ExtResource("25_5mfag"), ExtResource("26_5mfag"), ExtResource("26_gcpon"), ExtResource("28_3rdvo"), ExtResource("29_tpe12")])
 bg_source_id = 0

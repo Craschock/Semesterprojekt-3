@@ -18,6 +18,9 @@ large:
 exactly 32px width
 exactly 32px high
 
+hanging:
+exactly 16px width
+exactly 64px high
 
 
 

@@ -58,7 +58,8 @@ const DECO_SIZE: Dictionary = {
 	DecorationData.SizeCategory.SMALL: Vector2i(7,  9),
 	DecorationData.SizeCategory.MEDIUM: Vector2i(16, 22),
 	DecorationData.SizeCategory.MEDIUM_PLUS: Vector2i(20, 22),
-	DecorationData.SizeCategory.LARGE: Vector2i(32,32)
+	DecorationData.SizeCategory.LARGE: Vector2i(32,32),
+	DecorationData.SizeCategory.HANGING: Vector2i(16,64)
 }
 
 var _enemy_spawns: Dictionary = {}
@@ -371,11 +372,11 @@ func _room_corner_state(wx: int, wy: int) -> int:
 
 ##Returns true if the tile lies in a spawn or boss room. Used, for example, to keep enemies out of them.
 func _tile_in_any_room(tx: int, ty: int, padding: int = 0) -> bool:
-	var p := Vector2i(tx, ty)
+	var p = Vector2i(tx, ty)
 	for room in _rooms:
 		var interior: Rect2i = room["rect"]
 		var grow: int = room["wall"] + padding
-		var outer := Rect2i(
+		var outer = Rect2i(
 			interior.position - Vector2i(grow, grow),
 			interior.size + Vector2i(grow * 2, grow * 2)
 		)
@@ -385,14 +386,14 @@ func _tile_in_any_room(tx: int, ty: int, padding: int = 0) -> bool:
 
 ##Returns true if the chunk overlaps a spawn or boss room. Lets per-tile room checks be skipped entirely.
 func _chunk_touches_room(origin: Vector2i, margin: int = 1) -> bool:
-	var chunk_rect := Rect2i(
+	var chunk_rect = Rect2i(
 		origin.x - margin, origin.y - margin,
 		chunk_size + margin * 2, chunk_size + margin * 2
 	)
 	for room in _rooms:
 		var interior: Rect2i = room["rect"]
 		var wall: int = room["wall"]
-		var outer := Rect2i(
+		var outer = Rect2i(
 			interior.position - Vector2i(wall, wall),
 			interior.size + Vector2i(wall * 2, wall * 2)
 		)
@@ -516,15 +517,15 @@ func _generate_chunk_corners(chunk: WorldChunk) -> void:
 	var thr = biome.threshold if biome != null else 0.0
 
 	# If the chunk touches no room at all, the per-corner room checks can be skipped.
-	var chunk_touches_room := false
-	var chunk_rect := Rect2i(
+	var chunk_touches_room = false
+	var chunk_rect = Rect2i(
 		origin.x - 1, origin.y - 1,
 		chunk_size + 2, chunk_size + 2   # +1 margin each side for corner sampling
 	)
 	for room in _rooms:
 		var r_interior: Rect2i = room["rect"]
 		var r_wall: int = room["wall"]
-		var r_outer := Rect2i(
+		var r_outer = Rect2i(
 			r_interior.position - Vector2i(r_wall, r_wall),
 			r_interior.size + Vector2i(r_wall * 2, r_wall * 2)
 		)
@@ -746,82 +747,221 @@ func is_corner_locked(world_corner: Vector2i) -> bool:
 		return false
 	return chunk.get_locked(lx, ly)
 	
+# --- Vines ---
+##true if every tile this pixel rect touches is air and inside the chunks corner cache
+func _pixel_rect_is_air(chunk: WorldChunk, origin: Vector2i, rect: Rect2i) -> bool:
+	var first_tx = floori(float(rect.position.x) / tile_pixel_size) - origin.x
+	var last_tx  = floori(float(rect.position.x + rect.size.x - 1) / tile_pixel_size) - origin.x
+	var first_ty = floori(float(rect.position.y) / tile_pixel_size) - origin.y
+	var last_ty  = floori(float(rect.position.y + rect.size.y - 1) / tile_pixel_size) - origin.y
+	for cx in range(first_tx, last_tx + 1):
+		if cx < 0 or cx >= chunk_size:
+			return false
+		for cy in range(first_ty, last_ty + 1):
+			if cy < 0 or cy >= chunk_size:
+				return false
+			if chunk.get_corner(cx, cy):
+				return false
+	return true
+
+
+##grows a vine downwards from the ceiling at tile (tx, ty)
+##random length, random parts, random ending. returns true if one got placed
+func _try_spawn_vine(chunk: WorldChunk, vine: VineData, tx: int, ty: int, origin: Vector2i, occupied: Array[Rect2i], seed_hash: int) -> bool:
+	if vine.segment_textures.is_empty() or vine.end_textures.is_empty():
+		return false
+
+	#own rng seeded from the tile, so the exact same vine regrows on every chunk reload
+	var rng = RandomNumberGenerator.new()
+	rng.seed = seed_hash
+
+	var want = rng.randi_range(vine.min_segments, maxi(vine.min_segments, vine.max_segments))
+	var base_center_x = tx * tile_pixel_size + origin.x * tile_pixel_size + tile_pixel_size / 2
+	var y = (origin.y + ty) * tile_pixel_size   #vine starts flush at the ceiling
+	var pieces: Array[Dictionary] = []
+
+	#grow segment by segment, stop early if we run into terrain / the chunk edge
+	for s in range(want):
+		var tex: Texture2D = vine.segment_textures[rng.randi() % vine.segment_textures.size()]
+		var tsize = Vector2i(tex.get_size())
+		var sw = int(ceil(tsize.x * decoration_scale))
+		var sh = int(ceil(tsize.y * decoration_scale))
+		var jitter = 0
+		if vine.wiggle > 0:
+			jitter = int(round(rng.randi_range(-vine.wiggle, vine.wiggle) * decoration_scale))
+		var rect = Rect2i(base_center_x - sw / 2 + jitter, y, sw, sh)
+		if not _pixel_rect_is_air(chunk, origin, rect):
+			break
+		pieces.append({"tex": tex, "rect": rect})
+		y += sh - int(round(vine.segment_overlap * decoration_scale))
+		
+		#taper off early sometimes so not every vine hits its rolled length
+		if pieces.size() >= vine.min_segments and rng.randf() < vine.early_stop_chance:
+			break
+
+	#cap it off. if the tip doesnt fit, drop the last segment and try one step higher
+	var end_tex: Texture2D = vine.end_textures[rng.randi() % vine.end_textures.size()]
+	var e_size = Vector2i(end_tex.get_size())
+	var ew = int(ceil(e_size.x * decoration_scale))
+	var eh = int(ceil(e_size.y * decoration_scale))
+	var capped = false
+	while not pieces.is_empty():
+		var e_rect = Rect2i(base_center_x - ew / 2, y, ew, eh)
+		if _pixel_rect_is_air(chunk, origin, e_rect):
+			pieces.append({"tex": end_tex, "rect": e_rect})
+			capped = true
+			break
+		var last: Dictionary = pieces.pop_back()
+		var last_rect: Rect2i = last["rect"]
+		y = last_rect.position.y
+
+	if not capped:
+		return false
+	#pieces includes the ending, so -1 = actual segment count
+	if pieces.size() - 1 < vine.min_segments:
+		return false
+
+	var bounds: Rect2i = pieces[0]["rect"]
+	for p in pieces:
+		bounds = bounds.merge(p["rect"])
+	if not vine.allow_overlap:
+		for r in occupied:
+			if r.intersects(bounds):
+				return false
+
+	#one root node per vine so unloading frees the whole thing in one go
+	var root = Node2D.new()
+	add_child(root)
+	for p in pieces:
+		var sprite = Sprite2D.new()
+		sprite.texture = p["tex"]
+		sprite.centered = false
+		sprite.scale = Vector2(decoration_scale, decoration_scale)
+		sprite.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
+		sprite.position = Vector2((p["rect"] as Rect2i).position)
+		root.add_child(sprite)
+
+	if vine.is_light_source:
+		var tip: Rect2i = pieces[pieces.size() - 1]["rect"]
+		var light = PointLight2D.new()
+		light.texture = vine.light_texture if vine.light_texture != null else DecorationData._get_default_light_texture()
+		light.color = vine.light_color
+		light.energy = vine.light_energy
+		light.texture_scale = vine.light_texture_scale
+		light.z_index = 2
+		light.position = Vector2(tip.position) + Vector2(tip.size) * 0.5 + vine.light_offset * decoration_scale
+		root.add_child(light)
+
+	chunk.decorations.append(root)
+	if not vine.allow_overlap:
+		occupied.append(bounds)
+	return true
 	
+
 # --- Decorations ---
 func _spawn_decorations(chunk: WorldChunk) -> void:
 	if chunk.biome == null or chunk.biome.decorations.is_empty():
 		return
 
 	var origin = chunk.world_origin()
-	
+
+	#pixel rects of decos already placed in this chunk so they dont clip into each other
 	var occupied: Array[Rect2i] = []
 
 	for ty in range(chunk_size):
 		for tx in range(chunk_size):
-			# This tile must be air.
+			#this tile has to be air
 			if chunk.get_corner(tx, ty):
 				continue
 
-			# The tile below must be solid.
-			if not chunk.get_corner(tx, ty + 1):
+			#needs solid ground below (floor decos) or a solid ceiling above (hanging decos)
+			#ty == 0 has no tile above inside this chunks corner cache -> no ceiling decos there
+			var has_floor = chunk.get_corner(tx, ty + 1)
+			var has_ceiling = ty > 0 and chunk.get_corner(tx, ty - 1)
+			if not has_floor and not has_ceiling:
 				continue
 
-			# Deterministic per-tile hash, used in place of an RNG so results are seed-stable.
+			#rng per tile
 			var wx = origin.x + tx
 			var wy = origin.y + ty
-			var h = (wx * 2246822519 ^ wy * 3266489917 ^ world_seed) & 0x7FFFFFFF
+			var h = (wx * 2246822519 ^ wy * 3266489917 ^ world_seed) & 0x7FFFFFFF #holy math
 
-			# Pick a decoration from the list.
-			# Each decoration gets its own roll so the spawn chances stay independent.
+			#pick a decoration out of the list
+			#each decoration gets an independent rng roll so weights are independent
+			#danke minecraft wow ihr seid die geilsten, komplett abgeschaut
 			for i in range(chunk.biome.decorations.size()):
 				var deco: DecorationData = chunk.biome.decorations[i]
+				
+				#vines bring their own textures and build themselves
+				if deco is VineData:
+					if not has_ceiling:
+						continue
+					var v_hash = (h ^ (i * 2654435761)) & 0x7FFFFFFF
+					var v_roll = float(v_hash) / float(0x7FFFFFFF)
+					if v_roll > deco.spawn_chance:
+						continue
+					if _try_spawn_vine(chunk, deco, tx, ty, origin, occupied, v_hash):
+						break
+					continue
+				
 				if deco.texture == null:
 					continue
-				if deco.placement != DecorationData.Placement.FLOOR:
+
+				var is_floor = deco.placement == DecorationData.Placement.FLOOR
+				if is_floor and not has_floor:
+					continue
+				if not is_floor and not has_ceiling:
 					continue
 
-				# Roll for this decoration.
+				#roll per dec
 				var roll_hash = (h ^ (i * 2654435761)) & 0x7FFFFFFF
 				var roll = float(roll_hash) / float(0x7FFFFFFF)
 				if roll > deco.spawn_chance:
 					continue
 
 				var base_size: Vector2i = DECO_SIZE[deco.size_category]
-				var size := Vector2i(
+				var size = Vector2i(
 					int(ceil(base_size.x * decoration_scale)),
 					int(ceil(base_size.y * decoration_scale))
 				)
 
-				# Pixel position of the tile's bottom edge.
-				# wx/wy are tile coords, so the bottom of tile ty is (wy + 1) * tile_pixel_size.
-				var floor_pixel_y = (wy + 1) * tile_pixel_size
+				#FLOOR: bottom of the deco rests on the solid tile below -> grow upwards
+				#CEILING: top of the deco sticks to the solid tile above -> hang downwards
+				var top_pixel_y: int
+				if is_floor:
+					top_pixel_y = (wy + 1) * tile_pixel_size - size.y
+				else:
+					top_pixel_y = wy * tile_pixel_size
 
-				# Centre the decoration on the tile.
+				#center the decoration on the tile
 				var left_pixel_x = wx * tile_pixel_size + tile_pixel_size / 2 - size.x / 2
 
-				# Decorations vary in size, so every tile the sprite touches needs a solid floor
-				# below it and air above it.
+				#tile span the deco body covers
 				var first_tile_x = floori(float(left_pixel_x) / tile_pixel_size)
 				var last_tile_x  = floori(float(left_pixel_x + size.x - 1) / tile_pixel_size)
-				var top_tile_y   = floori(float(floor_pixel_y - size.y) / tile_pixel_size)
+				var first_tile_y = floori(float(top_pixel_y) / tile_pixel_size)
+				var last_tile_y  = floori(float(top_pixel_y + size.y - 1) / tile_pixel_size)
 
+				#local row of the solid surface the deco anchors to
+				var lcy_anchor = (ty + 1) if is_floor else (ty - 1)
+
+				#every tile the deco touches needs a solid anchor (danke johannna das alle unterschiedlich groß sind du bist so tuff)
+				#same for air across the body
 				var fits = true
 				for cx in range(first_tile_x, last_tile_x + 1):
 					var lcx = cx - origin.x
-					var lcy_floor = ty + 1   # Solid floor, in local coordinates.
-					var lcy_top   = top_tile_y - origin.y
 
-					# The floor tile must exist within the chunk and be solid.
-					if lcx < 0 or lcx >= chunk_size or lcy_floor > chunk_size:
+					#check if anchor tile exists in chnk and is solid
+					if lcx < 0 or lcx >= chunk_size or lcy_anchor < 0 or lcy_anchor > chunk_size:
 						fits = false
 						break
-					if not chunk.get_corner(lcx, lcy_floor):
+					if not chunk.get_corner(lcx, lcy_anchor):
 						fits = false
 						break
 
-					# Walk the full height the sprite spans and check every tile is air, so that
-					# tall decorations do not end up embedded in the ceiling.
-					for cy in range(maxi(lcy_top, 0), lcy_floor):
+					#cycle through every tile the deco body covers and check if air
+					#so now we can add big decorations without them stuck in ceiling/floor
+					for cy in range(first_tile_y - origin.y, last_tile_y - origin.y + 1):
 						if cy < 0 or cy > chunk_size:
 							continue
 						if chunk.get_corner(lcx, cy):
@@ -833,43 +973,43 @@ func _spawn_decorations(chunk: WorldChunk) -> void:
 				if not fits:
 					continue
 
-				# Do not overlap a decoration that was already placed.
-				var my_rect := Rect2i(left_pixel_x, floor_pixel_y - size.y, size.x, size.y)
-				var overlaps := false
+				#dont overlap a deco we already placed in this chunk
+				var my_rect = Rect2i(left_pixel_x, top_pixel_y, size.x, size.y)
+				var overlaps = false
 				for r in occupied:
 					if r.intersects(my_rect):
 						overlaps = true
 						break
 				if overlaps:
 					continue
-				
-				# Spawn the sprite.
+
+				#spawn the sprite
 				var sprite = Sprite2D.new()
 				sprite.texture = deco.texture
 				sprite.centered = false
 				sprite.scale = Vector2(decoration_scale, decoration_scale)
 				sprite.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
-				sprite.position = Vector2(left_pixel_x, floor_pixel_y - size.y)
+				sprite.position = Vector2(left_pixel_x, top_pixel_y)
 				add_child(sprite)
 				chunk.decorations.append(sprite)
 				occupied.append(my_rect)
-				
-				# Lightsource
+
+				#optional light source
 				if deco.is_light_source:
 					var light = PointLight2D.new()
-					light.texture = deco.light_texture
+					light.texture = deco.light_texture if deco.light_texture != null else DecorationData._get_default_light_texture()
 					light.color = deco.light_color
 					light.energy = deco.light_energy
 					light.texture_scale = deco.light_texture_scale
 					light.z_index = 2
 					light.position = Vector2(
 						left_pixel_x + size.x * 0.5,
-						floor_pixel_y - size.y * 0.5
+						top_pixel_y + size.y * 0.5
 					) + deco.light_offset * decoration_scale
 					add_child(light)
 					chunk.decorations.append(light)
 
-				# Only one decoration per tile: the first eligible entry wins.
+				#only one decoration per tile (first one that gets here wins the seed (sperm race ahh moment))
 				break
 				
 
@@ -877,7 +1017,7 @@ func _spawn_decorations(chunk: WorldChunk) -> void:
 	# Deterministic per-chunk hash again, same approach as the decorations.
 	var enemy_hash = (origin.x * 2246822519 ^ origin.y * 3266489917 ^ world_seed) & 0x7FFFFFFF
 	var enemy_roll = float(enemy_hash) / float(0x7FFFFFFF)
-	var near_room := _chunk_touches_room(origin, 2)
+	var near_room = _chunk_touches_room(origin, 2)
 	if true:
 		# Scan the chunk for tiles an enemy could stand on.
 		var candidates: Array[Vector2i] = []
@@ -1016,8 +1156,8 @@ var _dbg_gen: int = 0
 var _dbg_render: int = 0
 var _dbg_deco: int = 0
 
-var _dbg_worst := 0.0
-var _dbg_accum := 0.0
+var _dbg_worst = 0.0
+var _dbg_accum = 0.0
 
 
 func _dbg_reset_frame() -> void:
