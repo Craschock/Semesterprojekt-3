@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://immabpf6mnog"]
 
 [ext_resource type="Texture2D" uid="uid://c8jl4or3earob" path="res://assets/sprites/background/1Layer.png" id="1_5wi1k"]
+[ext_resource type="Script" uid="uid://cy1g61bf0fj8u" path="res://src/scenes/environment/bg/parallax_effect(mine_dungeon).gd" id="1_g55f3"]
 [ext_resource type="Texture2D" uid="uid://byo0amg18alra" path="res://assets/sprites/background/2Layer.1.png" id="2_mplnn"]
 [ext_resource type="Texture2D" uid="uid://cyj5h4i6gpdlp" path="res://assets/sprites/background/2Layer.2.png" id="3_ygqj8"]
 [ext_resource type="Texture2D" uid="uid://jty50qcaoptr" path="res://assets/sprites/background/2Layer.3.png" id="4_wt61k"]
@@ -17,6 +18,7 @@
 [ext_resource type="Texture2D" uid="uid://su8ppkiw03b2" path="res://assets/sprites/background/Dust4.png" id="12_ghn7d"]
 
 [node name="ParallaxEffect(Mine_Dungeon)" type="Node2D" unique_id=1250214574]
+script = ExtResource("1_g55f3")
 
 [node name="Layer1" type="Parallax2D" parent="." unique_id=1787063993]
 scroll_scale = Vector2(0.2, 0)
