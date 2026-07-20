@@ -9,7 +9,7 @@ var current_item: ItemData = null
 func update_slot(item: ItemData, amount: int) -> void:
 	current_item = item
 	
-	if item.size() > 0:
+	if item.icon.size() > 0:
 		icon.texture = item.icon[0]
 	
 	# Only show the number if amount > 1
@@ -25,8 +25,6 @@ func clear_slot() -> void:
 	amount_label.hide()
 
 func set_selected(is_selected: bool) -> void:
-	$Highlight.visible = is_selected
-	
 	if current_item == null:
 		return
 	

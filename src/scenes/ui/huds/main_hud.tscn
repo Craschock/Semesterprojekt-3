@@ -8,10 +8,10 @@
 script = ExtResource("1_mtgyu")
 
 [node name="PlayerUI" parent="." unique_id=913120310 instance=ExtResource("3_xgegl")]
-offset_right = -1920.0
-offset_bottom = -1080.0
+anchors_preset = -1
 
 [node name="DebugUI" parent="." unique_id=1096292168 instance=ExtResource("2_7o5lx")]
+anchors_preset = -1
 
 [node name="BlackoutEffect" type="ColorRect" parent="." unique_id=871056766]
 visible = false

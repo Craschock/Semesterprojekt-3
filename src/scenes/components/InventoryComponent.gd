@@ -4,7 +4,7 @@ class_name InventoryComponent
 signal inventory_changed(item: ItemData, new_amount: int)
 signal active_slot_changed(slot_index: int)
 
-@export var max_slots: int = 5
+@export var max_slots: int = 3
 
 # Key = ItemData resource, Value = integer (amount)
 var contents: Dictionary = {}
