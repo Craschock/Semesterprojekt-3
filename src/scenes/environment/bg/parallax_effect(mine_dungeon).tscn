@@ -1,0 +1,117 @@
+[gd_scene format=3 uid="uid://immabpf6mnog"]
+
+[ext_resource type="Texture2D" uid="uid://c8jl4or3earob" path="res://assets/sprites/background/1Layer.png" id="1_5wi1k"]
+[ext_resource type="Texture2D" uid="uid://byo0amg18alra" path="res://assets/sprites/background/2Layer.1.png" id="2_mplnn"]
+[ext_resource type="Texture2D" uid="uid://cyj5h4i6gpdlp" path="res://assets/sprites/background/2Layer.2.png" id="3_ygqj8"]
+[ext_resource type="Texture2D" uid="uid://jty50qcaoptr" path="res://assets/sprites/background/2Layer.3.png" id="4_wt61k"]
+[ext_resource type="Texture2D" uid="uid://cqx40mncm2sh1" path="res://assets/sprites/background/3Layer.1.png" id="5_y6v65"]
+[ext_resource type="Texture2D" uid="uid://cn13o8485m74o" path="res://assets/sprites/background/3Layer.2.png" id="6_f6p5b"]
+[ext_resource type="Texture2D" uid="uid://bg6irbvghy0ow" path="res://assets/sprites/background/3Layer.3.png" id="7_4bluk"]
+[ext_resource type="Texture2D" uid="uid://cl30gr16i2hyf" path="res://assets/sprites/background/4Layer.1.png" id="8_cmsmy"]
+[ext_resource type="Texture2D" uid="uid://c70lnr86p405r" path="res://assets/sprites/background/4Layer.2.png" id="9_olb7a"]
+[ext_resource type="Texture2D" uid="uid://dyo6v11pvufxw" path="res://assets/sprites/background/Dust1.png" id="9_xpivu"]
+[ext_resource type="Texture2D" uid="uid://bni1cxjxsx6y6" path="res://assets/sprites/background/Dust2.png" id="10_g55f3"]
+[ext_resource type="Texture2D" uid="uid://b2hklhhoktk8v" path="res://assets/sprites/background/4Layer.3.png" id="10_wlwje"]
+[ext_resource type="Texture2D" uid="uid://b681wqk2jyabw" path="res://assets/sprites/background/LightRey.png" id="11_olb7a"]
+[ext_resource type="Texture2D" uid="uid://b7c77fmrtt7rg" path="res://assets/sprites/background/Dust3.png" id="11_poq5f"]
+[ext_resource type="Texture2D" uid="uid://su8ppkiw03b2" path="res://assets/sprites/background/Dust4.png" id="12_ghn7d"]
+
+[node name="ParallaxEffect(Mine_Dungeon)" type="Node2D" unique_id=1250214574]
+
+[node name="Layer1" type="Parallax2D" parent="." unique_id=1787063993]
+scroll_scale = Vector2(0.2, 0)
+repeat_size = Vector2(389.31, 0)
+
+[node name="Sprite2D1" type="Sprite2D" parent="Layer1" unique_id=1763161891]
+position = Vector2(0, -7.5)
+scale = Vector2(0.57, 0.57)
+texture = ExtResource("1_5wi1k")
+
+[node name="Layer2" type="Parallax2D" parent="." unique_id=1018001454]
+scroll_scale = Vector2(0.4, 0)
+repeat_size = Vector2(1167.93, 0)
+
+[node name="Sprite2D1" type="Sprite2D" parent="Layer2" unique_id=1403266757]
+position = Vector2(0, -7.5)
+scale = Vector2(0.57, 0.57)
+texture = ExtResource("2_mplnn")
+
+[node name="Sprite2D2" type="Sprite2D" parent="Layer2" unique_id=1843616776]
+position = Vector2(-389.31, -7.5)
+scale = Vector2(0.57, 0.57)
+texture = ExtResource("3_ygqj8")
+
+[node name="Sprite2D3" type="Sprite2D" parent="Layer2" unique_id=689964137]
+position = Vector2(389.31, -7.5)
+scale = Vector2(0.57, 0.57)
+texture = ExtResource("4_wt61k")
+
+[node name="Layer3" type="Parallax2D" parent="." unique_id=600865771]
+scroll_scale = Vector2(0.6, 0)
+repeat_size = Vector2(1167.93, 0)
+
+[node name="Sprite2D1" type="Sprite2D" parent="Layer3" unique_id=1405165089]
+position = Vector2(0, -7.5)
+scale = Vector2(0.57, 0.57)
+texture = ExtResource("5_y6v65")
+
+[node name="Sprite2D2" type="Sprite2D" parent="Layer3" unique_id=904197336]
+position = Vector2(-389.31, -7.5)
+scale = Vector2(0.57, 0.57)
+texture = ExtResource("6_f6p5b")
+
+[node name="Sprite2D3" type="Sprite2D" parent="Layer3" unique_id=1377584060]
+position = Vector2(389.31, -7.5)
+scale = Vector2(0.57, 0.57)
+texture = ExtResource("7_4bluk")
+
+[node name="LightRays" type="Parallax2D" parent="." unique_id=1973278328]
+scroll_scale = Vector2(0, 0)
+
+[node name="Sprite2D1" type="Sprite2D" parent="LightRays" unique_id=2040474885]
+position = Vector2(0, -7.5)
+scale = Vector2(0.57, 0.57)
+texture = ExtResource("11_olb7a")
+
+[node name="Dust" type="Parallax2D" parent="." unique_id=1952035303]
+scroll_scale = Vector2(0.7, 0)
+repeat_size = Vector2(389.31, 0)
+
+[node name="Sprite2D1" type="Sprite2D" parent="Dust" unique_id=438482678]
+position = Vector2(0, -7.5)
+scale = Vector2(0.57, 0.57)
+texture = ExtResource("9_xpivu")
+
+[node name="Sprite2D2" type="Sprite2D" parent="Dust" unique_id=1196328576]
+position = Vector2(0, -7.5)
+scale = Vector2(0.57, 0.57)
+texture = ExtResource("10_g55f3")
+
+[node name="Sprite2D3" type="Sprite2D" parent="Dust" unique_id=2038039315]
+position = Vector2(0, -7.5)
+scale = Vector2(0.57, 0.57)
+texture = ExtResource("11_poq5f")
+
+[node name="Sprite2D4" type="Sprite2D" parent="Dust" unique_id=1016548485]
+position = Vector2(0, -7.5)
+scale = Vector2(0.57, 0.57)
+texture = ExtResource("12_ghn7d")
+
+[node name="Layer4" type="Parallax2D" parent="." unique_id=1159501413]
+scroll_scale = Vector2(0.8, 0)
+repeat_size = Vector2(1167.93, 0)
+
+[node name="Sprite2D1" type="Sprite2D" parent="Layer4" unique_id=1936319287]
+position = Vector2(0, -7.5)
+scale = Vector2(0.57, 0.57)
+texture = ExtResource("8_cmsmy")
+
+[node name="Sprite2D2" type="Sprite2D" parent="Layer4" unique_id=897670114]
+position = Vector2(-389.31, -7.5)
+scale = Vector2(0.57, 0.57)
+texture = ExtResource("9_olb7a")
+
+[node name="Sprite2D3" type="Sprite2D" parent="Layer4" unique_id=1104533744]
+position = Vector2(389.31, -7.5)
+scale = Vector2(0.57, 0.57)
+texture = ExtResource("10_wlwje")

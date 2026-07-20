@@ -5,6 +5,7 @@ class_name GameManager
 @export_category("Systems")
 @export var world_generator: WorldGenerator
 @export var player: CharacterBody2D
+@export var parallaxEffect: Node2D
 
 
 func _ready() -> void:
@@ -27,9 +28,12 @@ func spawn_player() -> void:
 	
 	if spawn_marker:
 		player.global_position = spawn_marker.global_position
+		parallaxEffect.position.y = player.position.y / 1.275
+		parallaxEffect.position.x = player.position.x / 6.75
 		var camera = player.get_node_or_null("Camera2D")
 		if camera:
 			camera.reset_smoothing()
+			camera.force_update_scroll()
 	else:
 		push_warning("GameManager: No spawn marker found")
 		
