@@ -1,5 +1,6 @@
 [gd_scene format=3 uid="uid://ckdifw6x0om4h"]
 
+[ext_resource type="PackedScene" uid="uid://immabpf6mnog" path="res://src/scenes/environment/bg/parallax_effect(mine_dungeon).tscn" id="1_its74"]
 [ext_resource type="Script" uid="uid://cegk7h7irgixa" path="res://src/scenes/menus/final menus/worlds/GameManager.gd" id="1_pr1v7"]
 [ext_resource type="PackedScene" uid="uid://brdxqe0qskvib" path="res://src/scenes/ui/huds/main_hud.tscn" id="2_oivod"]
 [ext_resource type="Script" uid="uid://dq2jcmsb1g1d3" path="res://src/scenes/procedural generation/EnemySpawner.gd" id="2_rakx4"]
@@ -10,12 +11,15 @@
 
 [node name="Game" type="Node" unique_id=109101168]
 
+[node name="ParallaxEffect(Mine_Dungeon)" parent="." unique_id=1250214574 instance=ExtResource("1_its74")]
+
 [node name="Enemies" type="Node" parent="." unique_id=702154899]
 
-[node name="GameManager" type="Node" parent="." unique_id=1435991061 node_paths=PackedStringArray("world_generator", "player")]
+[node name="GameManager" type="Node" parent="." unique_id=1435991061 node_paths=PackedStringArray("world_generator", "player", "parallaxEffect")]
 script = ExtResource("1_pr1v7")
 world_generator = NodePath("../World")
 player = NodePath("../Player")
+parallaxEffect = NodePath("../ParallaxEffect(Mine_Dungeon)")
 
 [node name="EnemySpawner" type="Node" parent="GameManager" unique_id=1808774082 node_paths=PackedStringArray("world_generator", "entity_container")]
 script = ExtResource("2_rakx4")
