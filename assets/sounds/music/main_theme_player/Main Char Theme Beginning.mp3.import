@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://chpgmsswgowb5"
+path="res://.godot/imported/Main Char Theme Beginning.mp3-33b04b73c69083d26e80361b5546be8a.mp3str"
+
+[deps]
+
+source_file="res://assets/sounds/music/main_theme_player/Main Char Theme Beginning.mp3"
+dest_files=["res://.godot/imported/Main Char Theme Beginning.mp3-33b04b73c69083d26e80361b5546be8a.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

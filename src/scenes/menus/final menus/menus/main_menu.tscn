@@ -10,6 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://jiba4gvobe3u" path="res://assets/sprites/UI/Main Menu/IconCredits.png" id="7_y7y0f"]
 [ext_resource type="Texture2D" uid="uid://b330th2m2pe5" path="res://assets/sprites/UI/Main Menu/IconQuit.png" id="8_lj2fs"]
 [ext_resource type="Texture2D" uid="uid://dtmcue54v6te1" path="res://assets/sprites/UI/Main Menu/IconSettings.png" id="8_y7y0f"]
+[ext_resource type="AudioStream" uid="uid://chpgmsswgowb5" path="res://assets/sounds/music/main_theme_player/Main Char Theme Beginning.mp3" id="11_mqm0f"]
 
 [node name="Main Menu" type="Control" unique_id=153052924]
 layout_mode = 3
@@ -216,6 +217,12 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 1)
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1643905481]
+stream = ExtResource("11_mqm0f")
+autoplay = true
+bus = &"Music"
+parameters/looping = true
 
 [connection signal="pressed" from="VBoxContainer/B_Start" to="." method="_on_b_start_pressed"]
 [connection signal="pressed" from="VBoxContainer/B_Settings" to="." method="_on_b_settings_pressed"]
