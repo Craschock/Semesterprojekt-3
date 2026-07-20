@@ -2,6 +2,9 @@ extends State
 class_name PlayerItemConsume
 
 var player: PlayerMovement
+#Izzy here:made the sound a variable
+@onready var sfx_player_consume: AudioStreamPlayer2D = $"../../sfx_player_consume"	
+
 
 func _ready() -> void:
 	player = owner
@@ -16,7 +19,8 @@ func enter() -> void:
 	if held_Item != null:
 		for effect in held_Item.consume_effects:
 			effect.apply_effect(player)
-		
+			#Izzy here: plays consume sound upon consuming
+			sfx_player_consume.play()
 		# Remove 1 Item from Stack
 		player.inventory_component.remove_item(held_Item, 1)
 	

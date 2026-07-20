@@ -24,6 +24,10 @@
 [ext_resource type="Script" uid="uid://dve2sqb3uk5fk" path="res://src/scenes/entities/player/states/PlayerJumpCharge.gd" id="14_ims5k"]
 [ext_resource type="Script" uid="uid://bho7ii4d1uesh" path="res://src/scenes/entities/player/states/PlayerAction.gd" id="18_twcrf"]
 [ext_resource type="Script" uid="uid://8y7lon3xrh43" path="res://src/scenes/entities/player/states/PlayerItemConsume.gd" id="19_johpv"]
+[ext_resource type="AudioStream" uid="uid://bed6ygk1uujlj" path="res://assets/sounds/entity_sound/player_sounds/player_attack_sound (1).mp3" id="25_7265o"]
+[ext_resource type="AudioStream" uid="uid://c5oup8hdmb7qy" path="res://assets/sounds/entity_sound/player_sounds/player_run_sound.mp3" id="26_aomop"]
+[ext_resource type="AudioStream" uid="uid://s5306i5yird1" path="res://assets/sounds/entity_sound/player_sounds/player_consume_sound.mp3" id="27_0aevd"]
+[ext_resource type="AudioStream" uid="uid://br0yqp2pt67tb" path="res://assets/sounds/entity_sound/player_sounds/player_death_sound.mp3" id="28_aomop"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_oknxn"]
 radius = 3.0
@@ -666,5 +670,27 @@ libraries/ = SubResource("AnimationLibrary_lrig1")
 offset = Vector2(0, -8)
 zoom = Vector2(5, 5)
 position_smoothing_enabled = true
+
+[node name="AudioListener2D" type="AudioListener2D" parent="." unique_id=1716945193]
+
+[node name="sfx_player_attack" type="AudioStreamPlayer2D" parent="." unique_id=223593913]
+stream = ExtResource("25_7265o")
+volume_db = -26.173
+bus = &"Sounds"
+
+[node name="sfx_player_run" type="AudioStreamPlayer2D" parent="." unique_id=870772094]
+stream = ExtResource("26_aomop")
+volume_db = -34.019
+bus = &"Sounds"
+
+[node name="sfx_player_consume" type="AudioStreamPlayer2D" parent="." unique_id=1486658591]
+stream = ExtResource("27_0aevd")
+volume_db = -29.159
+bus = &"Sounds"
+
+[node name="sfx_player_death" type="AudioStreamPlayer2D" parent="." unique_id=1699894116]
+stream = ExtResource("28_aomop")
+volume_db = -29.159
+bus = &"Sounds"
 
 [editable path="HitboxComponent"]

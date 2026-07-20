@@ -2,6 +2,8 @@ extends State
 class_name PlayerAttack_Scratch
 
 var player: PlayerMovement
+#Izzy here: made player_attack a variable
+@onready var sfx_player_attack: AudioStreamPlayer2D = $"../../sfx_player_attack"
 
 func _ready() -> void:
 	player = owner
@@ -12,6 +14,8 @@ func enter() -> void:
 	# Play animations
 	player.get_node("AnimatedSprite2D").play("attack_scratch")
 	player.get_node("AnimationPlayer").play("scratch")
+	#Izzy here: plays sound as soon as animation plays
+	sfx_player_attack.play()
 
 func exit() -> void:
 	player.unfreeze()

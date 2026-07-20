@@ -31,7 +31,6 @@ segment_textures = Array[Texture2D]([ExtResource("8_xgjhf"), ExtResource("9_7am5
 end_textures = Array[Texture2D]([ExtResource("1_gdk8w"), ExtResource("2_ii56r"), ExtResource("3_leqgv"), ExtResource("4_hxmek"), ExtResource("5_j6tf1"), ExtResource("6_ei0am")])
 min_segments = 2
 max_segments = 32
-wiggle = null
 spawn_chance = 1.0
 light_texture = SubResource("GradientTexture2D_vn5pi")
 metadata/_custom_type_script = "uid://dhq0t5bd8jhc0"
