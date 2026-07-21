@@ -434,7 +434,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"jump_landing",
-"speed": 5.0
+"speed": 6.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -628,7 +628,9 @@ shape = SubResource("CapsuleShape2D_jasd0")
 position = Vector2(0, -10)
 scale = Vector2(0.5, 0.5)
 sprite_frames = SubResource("SpriteFrames_084ju")
-animation = &"block"
+animation = &"jump_landing"
+frame = 3
+frame_progress = 1.0
 
 [node name="StateMachine" parent="." unique_id=1551728817 node_paths=PackedStringArray("initial_state") instance=ExtResource("5_8ghov")]
 initial_state = NodePath("Idle")

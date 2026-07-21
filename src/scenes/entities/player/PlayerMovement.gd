@@ -33,8 +33,6 @@ var is_frozen: bool = false
 @export var max_jump_velocity: float = -350.0
 ## How many seconds to reach max jump charge
 @export var time_to_max_charge: float = 0.4
-## How early a player can jump before landing on a platform that he can jump off
-@export var jump_input_buffer: float = 0.15
 ## How long player can jump after leaving platform
 @export var jump_buffer_time: float = 0.15
 ## How long a jump is a press before it's changing into a charged jumnp
@@ -44,8 +42,17 @@ var is_frozen: bool = false
 ## Amount of mid-air jumps (double jump)
 @export var max_air_jumps: int = 1
 
+# Input Buffers
+@export_category("Input Buffers")
+## How early a player can use an action before it actually can happen
+@export var action_input_buffer: float = 0.3
+## How early a player can block before actually being able to block
+@export var block_input_buffer: float = 0.3
+## How early a player can jump before landing on a platform that he can jump off
+@export var jump_input_buffer: float = 0.3
 
-
+var action_input_buffer_timer: float = 0.0
+var block_input_buffer_timer: float = 0.0
 var jump_input_buffer_timer: float = 0.0
 var jump_buffer_timer: float = 0.0
 var current_jump_charge: float = 0.0
@@ -66,6 +73,10 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	var cam := get_viewport().get_camera_2d()
 	# Input Buffer
+	if Input.is_action_just_pressed("attack"):
+			action_input_buffer_timer = action_input_buffer
+	if Input.is_action_just_pressed("block"):
+			block_input_buffer_timer = block_input_buffer
 	if Input.is_action_just_pressed("jump"):
 			jump_input_buffer_timer = jump_input_buffer
 	
@@ -81,6 +92,10 @@ func _physics_process(delta: float) -> void:
 	else:
 		jump_buffer_timer -= delta
 	
+	if action_input_buffer_timer > 0.0:
+		action_input_buffer_timer -= delta
+	if block_input_buffer_timer > 0.0:
+		block_input_buffer_timer -= delta
 	if jump_input_buffer_timer > 0.0:
 		jump_input_buffer_timer -= delta
 	
