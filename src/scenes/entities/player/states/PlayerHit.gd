@@ -26,4 +26,8 @@ func physics_update(delta: float) -> void:
 			player.was_interrupted_while_charging = false
 			transitioned.emit(self, "jump")
 		else:
-			transitioned.emit(self, "idle")
+			if player.block_input_buffer_timer > 0.0:
+				player.block_input_buffer_timer = 0.0
+				transitioned.emit(self, "block")
+			else:
+				transitioned.emit(self, "idle")
