@@ -45,7 +45,8 @@ func physics_update(delta: float) -> void:
 	
 	if timer <= 0.0:
 		if next_state:
-			transitioned.emit(self, next_state.name)
 			#Izzy here: If the enemy contains sfx_enemy_walk AudioStreamer2d, it will stop as it transitions tot the next statee
 			if sfx_enemy_walk:
 				sfx_enemy_walk.stop()
+			transitioned.emit(self, next_state.name)
+			

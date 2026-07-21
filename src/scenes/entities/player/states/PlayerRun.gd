@@ -26,22 +26,26 @@ func physics_update(delta: float) -> void:
 	if direction != 0:
 		player.velocity.x = move_toward(player.velocity.x, direction * player.speed, player.acceleration * delta)
 	else:
-		transitioned.emit(self, "idle")
+		#Izzy here: as animation changes, sound stops
 		sfx_player_run.stop()
+		transitioned.emit(self, "idle")
+	
 	
 	# Other Transitions
 	if player.jump_input_buffer_timer > 0.0 and player.can_jump():
 		player.jump_input_buffer_timer = 0.0
-		transitioned.emit(self, "jumpcharge")
 		#Izzy here: The running sound stops playing when the player jumps (temporary solution)
 		sfx_player_run.stop()
+		transitioned.emit(self, "jumpcharge")
+		
 		return
 	
 	if player.action_input_buffer_timer > 0.0:
 		player.action_input_buffer_timer = 0.0
-		transitioned.emit(self, "action")
 		#Izzy here: The running sound stops playing when the player attacks (temporary solution)
 		sfx_player_run.stop()
+		transitioned.emit(self, "action")
+	
 	
 	if player.block_input_buffer_timer > 0.0:
 		player.block_input_buffer_timer = 0.0

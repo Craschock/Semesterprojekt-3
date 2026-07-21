@@ -704,7 +704,7 @@ bus = &"Sounds"
 
 [node name="sfx_player_run" type="AudioStreamPlayer2D" parent="." unique_id=870772094]
 stream = ExtResource("26_aomop")
-volume_db = -15.932
+volume_db = -12.346
 bus = &"Sounds"
 
 [node name="sfx_player_consume" type="AudioStreamPlayer2D" parent="." unique_id=1486658591]
