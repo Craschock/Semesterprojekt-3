@@ -22,6 +22,7 @@ func _ready() -> void:
 
 func enter() -> void:
 	enemy.velocity.x = 0 # Stop movement
+	
 	enemy.get_node("AnimatedSprite2D").play(animation_name)
 	timer = attack_duration
 	
