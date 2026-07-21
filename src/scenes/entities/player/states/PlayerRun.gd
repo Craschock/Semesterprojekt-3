@@ -41,3 +41,6 @@ func physics_update(delta: float) -> void:
 		transitioned.emit(self, "action")
 		#Izzy here: The running sound stops playing when the player attacks (temporary solution)
 		sfx_player_run.stop()
+	
+	if Input.is_action_just_pressed("block"):
+		transitioned.emit(self, "block")
