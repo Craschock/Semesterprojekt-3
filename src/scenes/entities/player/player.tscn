@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://dhirfpuogr2q8" path="res://src/scenes/components/state_machine.tscn" id="5_8ghov"]
 [ext_resource type="Script" uid="uid://60iiuqamlxgb" path="res://src/scenes/entities/player/states/PlayerIdle.gd" id="6_lopw5"]
 [ext_resource type="Texture2D" uid="uid://762qnrnnxvue" path="res://assets/sprites/entities/player/player_scratch.png" id="6_yd64i"]
+[ext_resource type="Texture2D" uid="uid://b6bgyle76ldcg" path="res://assets/sprites/entities/player/player_block.png" id="7_0aevd"]
 [ext_resource type="Script" uid="uid://dc5jhqq4snryw" path="res://src/scenes/entities/player/states/PlayerRun.gd" id="7_20qlv"]
 [ext_resource type="Texture2D" uid="uid://dncmini3bbgab" path="res://assets/sprites/entities/player/player_death.png" id="7_sdsf3"]
 [ext_resource type="Script" uid="uid://t7evwvg3k14a" path="res://src/scenes/entities/player/states/PlayerJump.gd" id="8_20qlv"]
@@ -24,6 +25,7 @@
 [ext_resource type="Script" uid="uid://dve2sqb3uk5fk" path="res://src/scenes/entities/player/states/PlayerJumpCharge.gd" id="14_ims5k"]
 [ext_resource type="Script" uid="uid://bho7ii4d1uesh" path="res://src/scenes/entities/player/states/PlayerAction.gd" id="18_twcrf"]
 [ext_resource type="Script" uid="uid://8y7lon3xrh43" path="res://src/scenes/entities/player/states/PlayerItemConsume.gd" id="19_johpv"]
+[ext_resource type="Script" uid="uid://i71bwmpomdpw" path="res://src/scenes/entities/player/states/PlayerBlock.gd" id="23_gf154"]
 [ext_resource type="AudioStream" uid="uid://bed6ygk1uujlj" path="res://assets/sounds/entity_sound/player_sounds/player_attack_sound (1).mp3" id="25_7265o"]
 [ext_resource type="AudioStream" uid="uid://c5oup8hdmb7qy" path="res://assets/sounds/entity_sound/player_sounds/player_run_sound.mp3" id="26_aomop"]
 [ext_resource type="AudioStream" uid="uid://s5306i5yird1" path="res://assets/sounds/entity_sound/player_sounds/player_consume_sound.mp3" id="27_0aevd"]
@@ -47,6 +49,10 @@ region = Rect2(180, 0, 60, 60)
 [sub_resource type="AtlasTexture" id="AtlasTexture_wmak5"]
 atlas = ExtResource("6_yd64i")
 region = Rect2(360, 0, 60, 60)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8rgh3"]
+atlas = ExtResource("7_0aevd")
+region = Rect2(0, 0, 60, 60)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_yjc7t"]
 atlas = ExtResource("7_sdsf3")
@@ -260,6 +266,19 @@ animations = [{
 "loop": false,
 "name": &"attack_scratch",
 "speed": 7.0
+}, {
+"frames": [],
+"loop": false,
+"name": &"attack_scratch2",
+"speed": 7.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8rgh3")
+}],
+"loop": true,
+"name": &"block",
+"speed": 1.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -609,7 +628,7 @@ shape = SubResource("CapsuleShape2D_jasd0")
 position = Vector2(0, -10)
 scale = Vector2(0.5, 0.5)
 sprite_frames = SubResource("SpriteFrames_084ju")
-animation = &"jump_charging"
+animation = &"block"
 
 [node name="StateMachine" parent="." unique_id=1551728817 node_paths=PackedStringArray("initial_state") instance=ExtResource("5_8ghov")]
 initial_state = NodePath("Idle")
@@ -626,9 +645,6 @@ script = ExtResource("14_ims5k")
 [node name="Jump" type="Node" parent="StateMachine" unique_id=653964851]
 script = ExtResource("8_20qlv")
 
-[node name="Attack_Scratch" type="Node" parent="StateMachine" unique_id=622868855]
-script = ExtResource("9_084ju")
-
 [node name="Hit" type="Node" parent="StateMachine" unique_id=242835789]
 script = ExtResource("12_kcn1i")
 
@@ -637,6 +653,12 @@ script = ExtResource("13_hd8kc")
 
 [node name="Action" type="Node" parent="StateMachine" unique_id=1836115425]
 script = ExtResource("18_twcrf")
+
+[node name="Attack_Scratch" type="Node" parent="StateMachine" unique_id=622868855]
+script = ExtResource("9_084ju")
+
+[node name="Block" type="Node" parent="StateMachine" unique_id=998086391]
+script = ExtResource("23_gf154")
 
 [node name="Item_Consume" type="Node" parent="StateMachine" unique_id=1060968053]
 script = ExtResource("19_johpv")
