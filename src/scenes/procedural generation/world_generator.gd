@@ -33,7 +33,6 @@ class_name WorldGenerator
 @export_range(1, 16) var border_thickness: int = 3
 
 ##Atlas source id of the bedrock tileset used for region borders.
-##Known issue: foreground border tiles do not render correctly in every case.
 @export var border_fg_source_id: int = 2
 ##Number of columns in the border foreground atlas. Same meaning as BiomeData.fg_atlas_cols.
 @export var border_fg_atlas_cols: int = 4
@@ -52,6 +51,19 @@ class_name WorldGenerator
 @export_group("Decorations")
 ##Scale applied to decoration sprites so they match the tile scaling.
 @export var decoration_scale: float = 1.6
+
+@export_group("Depth Shading")
+##off by default.
+##the depth shading is very laggy and the current version is cooked
+##turn on at your own risk (idk maybe u need a quantum computer)
+@export var depth_shading_enabled: bool = false
+##how many tiles into solid rock until it reaches full darkness
+@export_range(1, 32) var depth_darkness_range: int = 6
+##0 = no darkening, 1 = pitch black at full depth
+@export_range(0.0, 1.0, 0.01) var depth_max_darkness: float = 0.9
+##1 = per-tile (sharp, but very slow) 2 = quarter the work
+@export_range(1, 4) var depth_shading_downsample: int = 2
+
 
 # --- Internal state ---
 const DECO_SIZE: Dictionary = {
@@ -94,6 +106,10 @@ var _last_player_chunk: Vector2i = Vector2i(0x7FFFFFFF, 0x7FFFFFFF)
 
 # Chunks queued for loading. Processed a few per frame to avoid frame spikes.
 var _load_queue: Array[Vector2i] = []
+
+#darkness
+var _darkness_overlay: Sprite2D = null
+var _darkness_dirty: bool = false
 
 # --- Lifecycle ---
 
@@ -138,7 +154,12 @@ func _process(_delta: float) -> void:
 		_last_player_chunk = player_chunk
 		_refresh_load_queue(player_chunk)
 		_unload_far_chunks(player_chunk)
-	_process_load_queue()
+	
+	var did_load = _process_load_queue()
+	if _darkness_dirty and _load_queue.is_empty() and not did_load:
+		_update_darkness_overlay()
+		_darkness_dirty = false
+	
 	_dbg_report(_delta)
 
 # --- World layout (runs once) ---
@@ -413,13 +434,16 @@ func _refresh_load_queue(center: Vector2i) -> void:
 	_load_queue.sort_custom(func(a, b):
 		return (a - center).length_squared() < (b - center).length_squared())
 
-func _process_load_queue() -> void:
-	var budget = 1   # Chunks loaded per frame. Lower values spread the cost over more frames.
+func _process_load_queue() -> bool:
+	var loaded = false
+	var budget = 1
 	while budget > 0 and not _load_queue.is_empty():
 		var cp: Vector2i = _load_queue.pop_front()
 		if not _loaded_chunks.has(cp):
 			_load_chunk(cp)
 			budget -= 1
+			loaded = true
+	return loaded
 			
 func _unload_far_chunks(center: Vector2i) -> void:
 	var t0 = Time.get_ticks_usec()
@@ -456,6 +480,7 @@ func _load_chunk(chunk_pos: Vector2i) -> void:
 	chunk.state = WorldChunk.State.RENDERED
 	_loaded_chunks[chunk_pos] = chunk
 
+	_darkness_dirty = true
 
 func _unload_chunk(chunk_pos: Vector2i) -> void:
 	var chunk: WorldChunk = _loaded_chunks.get(chunk_pos)
@@ -470,8 +495,11 @@ func _unload_chunk(chunk_pos: Vector2i) -> void:
 	for node in chunk.decorations:
 		node.queue_free()
 	chunk.decorations.clear()
+	
 	_enemy_spawns.erase(chunk_pos)
 	_loaded_chunks.erase(chunk_pos)
+	
+	_darkness_dirty = true
 
 
 # --- Chunk generation ---
@@ -857,6 +885,120 @@ func _try_spawn_vine(chunk: WorldChunk, vine: VineData, tx: int, ty: int, origin
 		occupied.append(bounds)
 	return true
 	
+	
+# --- Depth Shading ---
+func _darkness_wall_at(wx: int, wy: int) -> bool:
+	var cp = Vector2i(floori(float(wx) / chunk_size), floori(float(wy) / chunk_size))
+	var chunk: WorldChunk = _loaded_chunks.get(cp)
+	if chunk == null:
+		return true   # off-screen frontier -> treat as solid
+	var origin = chunk.world_origin()
+	var lx = wx - origin.x
+	var ly = wy - origin.y
+	return chunk.get_corner(lx, ly) and chunk.get_corner(lx + 1, ly) \
+		and chunk.get_corner(lx, ly + 1) and chunk.get_corner(lx + 1, ly + 1)
+
+
+##rebuilds ONE darkness texture spanning every loaded chunk. one distance field,
+##so there are no per-chunk seams. called at most once per frame when dirty.
+func _update_darkness_overlay() -> void:
+	if not depth_shading_enabled or _loaded_chunks.is_empty():
+		if _darkness_overlay != null:
+			_darkness_overlay.visible = false
+		return
+
+	var t0 = Time.get_ticks_usec()
+
+	var step = maxi(1, depth_shading_downsample)
+	var pad = maxi(1, depth_darkness_range)
+
+	var pc = _last_player_chunk
+	var cmin = pc - Vector2i(view_radius_chunks, view_radius_chunks)
+	var cmax = pc + Vector2i(view_radius_chunks, view_radius_chunks)
+
+	var tmin = Vector2i(cmin.x * chunk_size - pad, cmin.y * chunk_size - pad)
+	var tile_w = (cmax.x - cmin.x + 1) * chunk_size + pad * 2
+	var tile_h = (cmax.y - cmin.y + 1) * chunk_size + pad * 2
+
+	#low-res grid: one cell per `step` tiles
+	var w = (tile_w + step - 1) / step
+	var h = (tile_h + step - 1) / step
+	if w <= 0 or h <= 0:
+		return
+
+	var big = 1 << 20
+	var dist = PackedInt32Array()
+	dist.resize(w * h)
+	dist.fill(big)
+
+	#seed: a low-res cell is air (0) if ANY tile in its block is air.
+	#read corner_solid directly -> no per-tile get_corner() method calls
+	for cp in _loaded_chunks.keys():
+		if cp.x < cmin.x or cp.x > cmax.x or cp.y < cmin.y or cp.y > cmax.y:
+			continue
+		var chunk: WorldChunk = _loaded_chunks[cp]
+		var cs = chunk.corner_solid
+		var stride = chunk_size + 1
+		var base_tx = cp.x * chunk_size - tmin.x
+		var base_ty = cp.y * chunk_size - tmin.y
+		for ly in range(chunk_size):
+			var lo_row = ((base_ty + ly) / step) * w
+			var row_c = ly * stride
+			var row_n = (ly + 1) * stride
+			for lx in range(chunk_size):
+				#tile is opaque only if all 4 corners solid -> otherwise the block is air
+				if cs[row_c + lx] != 0 and cs[row_c + lx + 1] != 0 \
+					and cs[row_n + lx] != 0 and cs[row_n + lx + 1] != 0:
+					continue
+				dist[lo_row + (base_tx + lx) / step] = 0
+
+	#chamfer 3-4 distance transform, in low-res cells
+	for y in range(h):
+		for x in range(w):
+			var i = y * w + x
+			var d = dist[i]
+			if d == 0: continue
+			if x > 0: d = mini(d, dist[i - 1] + 3)
+			if y > 0: d = mini(d, dist[i - w] + 3)
+			if x > 0 and y > 0: d = mini(d, dist[i - w - 1] + 4)
+			if x < w - 1 and y > 0: d = mini(d, dist[i - w + 1] + 4)
+			dist[i] = d
+	for y in range(h - 1, -1, -1):
+		for x in range(w - 1, -1, -1):
+			var i = y * w + x
+			var d = dist[i]
+			if d == 0: continue
+			if x < w - 1: d = mini(d, dist[i + 1] + 3)
+			if y < h - 1: d = mini(d, dist[i + w] + 3)
+			if x < w - 1 and y < h - 1: d = mini(d, dist[i + w + 1] + 4)
+			if x > 0 and y < h - 1: d = mini(d, dist[i + w - 1] + 4)
+			dist[i] = d
+
+	var range_units = maxf(1.0, float(depth_darkness_range) / float(step) * 3.0)
+	var buf = PackedByteArray()
+	buf.resize(w * h * 4)
+	for i in range(w * h):
+		var t = clampf(float(dist[i]) / range_units, 0.0, 1.0)
+		buf[i * 4 + 3] = int(round(t * depth_max_darkness * 255.0))
+
+	var img = Image.create_from_data(w, h, false, Image.FORMAT_RGBA8, buf)
+	var tex = ImageTexture.create_from_image(img)
+
+	if _darkness_overlay == null:
+		_darkness_overlay = Sprite2D.new()
+		_darkness_overlay.centered = false
+		_darkness_overlay.texture_filter = CanvasItem.TEXTURE_FILTER_LINEAR
+		_darkness_overlay.z_index = 2
+		add_child(_darkness_overlay)
+	_darkness_overlay.texture = tex
+	_darkness_overlay.scale = Vector2(tile_pixel_size * step, tile_pixel_size * step)
+	_darkness_overlay.position = Vector2(tmin.x * tile_pixel_size, tmin.y * tile_pixel_size)
+	_darkness_overlay.visible = true
+
+	var dt = Time.get_ticks_usec() - t0
+	_dbg_darkness_usec = dt
+	_dbg_frame_usec += dt
+
 
 # --- Decorations ---
 func _spawn_decorations(chunk: WorldChunk) -> void:
@@ -1119,6 +1261,7 @@ func refresh_chunk_at(world_x: int, world_y: int) -> void:
 		return
 	_generate_chunk_corners(chunk)
 	_render_chunk(chunk)
+	_darkness_dirty = true
 
 
 ##Returns true if a spawn room exists in this world.
@@ -1159,6 +1302,9 @@ var _dbg_deco: int = 0
 var _dbg_worst = 0.0
 var _dbg_accum = 0.0
 
+var _dbg_darkness_usec: int = 0
+var _dbg_darkness_worst = 0.0
+
 
 func _dbg_reset_frame() -> void:
 	_dbg_frame_usec = 0
@@ -1167,12 +1313,18 @@ func _dbg_reset_frame() -> void:
 	_dbg_gen = 0
 	_dbg_render = 0
 	_dbg_deco = 0
+	_dbg_darkness_usec = 0
 
 func _dbg_report(delta: float) -> void:
 	_dbg_accum += delta
-	if _dbg_frame_usec / 1000.0 > _dbg_worst:
-		_dbg_worst = _dbg_frame_usec / 1000.0
+	var frame_ms = _dbg_frame_usec / 1000.0
+	if frame_ms > _dbg_worst:
+		_dbg_worst = frame_ms
+	var dark_ms = _dbg_darkness_usec / 1000.0
+	if dark_ms > _dbg_darkness_worst:
+		_dbg_darkness_worst = dark_ms
 	if _dbg_accum >= 1.0:
-		print("[WORLDGEN] worst work this second: %.2fms" % _dbg_worst)
+		print("[WORLDGEN] worst frame %.2fms | worst darkness %.2fms | unloaded %d" % [_dbg_worst, _dbg_darkness_worst, _dbg_unloaded_this_frame])
 		_dbg_worst = 0.0
+		_dbg_darkness_worst = 0.0
 		_dbg_accum = 0.0
