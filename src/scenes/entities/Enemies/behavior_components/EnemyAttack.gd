@@ -26,6 +26,7 @@ func enter() -> void:
 	enemy.velocity.x = 0 # Stop movement
 	enemy.get_node("AnimatedSprite2D").play(animation_name)
 	timer = attack_duration
+	#Izzy here: if enemy has sound, it will be played here
 	if sfx_enemy_attack:
 		sfx_enemy_attack.play()
 
