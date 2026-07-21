@@ -53,7 +53,7 @@ var current_air_jumps: int = 0
 var was_interrupted_while_charging: bool = false
 
 # Inventory
-const ITEM_HOTKEY_OFFSET: int = 5
+const ITEM_HOTKEY_OFFSET: int = 1
 
 func _ready() -> void:
 	# Setup Singleton PlayerManager
@@ -108,7 +108,7 @@ func _on_health_depleted() -> void:
 
 func _unhandled_input(event: InputEvent) -> void:
 	# Existing inventory hotkeys
-	for i in range(ITEM_HOTKEY_OFFSET, 10):
+	for i in range(ITEM_HOTKEY_OFFSET, 4):
 		if event.is_action_pressed("slot_" + str(i)):
 			inventory_component.toggle_slot(i - ITEM_HOTKEY_OFFSET)
 

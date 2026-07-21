@@ -28,3 +28,6 @@ func physics_update(delta: float) -> void:
 	
 	if Input.is_action_just_pressed("attack"):
 		transitioned.emit(self, "action")
+	
+	if Input.is_action_just_pressed("block"):
+		transitioned.emit(self, "block")

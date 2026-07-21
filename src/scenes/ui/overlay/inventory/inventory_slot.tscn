@@ -2,7 +2,6 @@
 
 [ext_resource type="FontFile" uid="uid://ww3qpbbtk4gc" path="res://assets/fonts/PixelOperator8.ttf" id="1_ptrjb"]
 [ext_resource type="Script" uid="uid://dsdh7fql6k31m" path="res://src/scenes/ui/overlay/inventory/InventorySlot.gd" id="1_q14r6"]
-[ext_resource type="Texture2D" uid="uid://ck5dgoubsp2gx" path="res://icon.svg" id="3_a6ykr"]
 
 [node name="InventorySlot" type="PanelContainer" unique_id=188580842]
 custom_minimum_size = Vector2(32, 32)
@@ -20,9 +19,3 @@ size_flags_horizontal = 4
 size_flags_vertical = 8
 theme_override_fonts/font = ExtResource("1_ptrjb")
 theme_override_font_sizes/font_size = 8
-
-[node name="Highlight" type="TextureRect" parent="." unique_id=1794266778]
-visible = false
-layout_mode = 2
-texture = ExtResource("3_a6ykr")
-expand_mode = 1
