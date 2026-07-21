@@ -585,13 +585,17 @@ position = Vector2(44.5, -25)
 shape = SubResource("RectangleShape2D_jic0s")
 disabled = true
 
-[node name="sfx_axolotlBear_walk" type="AudioStreamPlayer2D" parent="." index="7" unique_id=2118794191]
+[node name="sfx_enemy_walk" type="AudioStreamPlayer2D" parent="." index="7" unique_id=2118794191]
 position = Vector2(44.499996, -25)
 stream = ExtResource("11_ccpkp")
+volume_db = -23.31
+max_distance = 100.0
 
-[node name="sfx_axolotlBear_attack" type="AudioStreamPlayer2D" parent="." index="8" unique_id=971707655]
+[node name="sfx_enemy_attack" type="AudioStreamPlayer2D" parent="." index="8" unique_id=971707655]
 position = Vector2(44.499996, -25)
 stream = ExtResource("11_ojuji")
+volume_db = 5.38
+max_distance = 500.0
 bus = &"Sounds"
 
 [editable path="HitboxComponent"]
