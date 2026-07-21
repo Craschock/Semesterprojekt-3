@@ -1,6 +1,9 @@
 extends State
 class_name EnemyWalk
 
+#Izzy here: established sfx_enemy_walk as a variable
+@onready var sfx_enemy_walk: AudioStreamPlayer2D = $"../../sfx_enemy_walk"
+
 var enemy: BaseEnemy
 
 @export_category("State Configuration")
@@ -29,7 +32,9 @@ func enter() -> void:
 	
 	# Pick random direction
 	direction = [-1, 1].pick_random()
-	
+	#Izzy here: If the enemy walking has a sfx_enemy_walk, it will start playing the sound heree
+	if sfx_enemy_walk:
+		sfx_enemy_walk.play()
 
 func physics_update(delta: float) -> void:
 	timer -= delta
@@ -41,3 +46,6 @@ func physics_update(delta: float) -> void:
 	if timer <= 0.0:
 		if next_state:
 			transitioned.emit(self, next_state.name)
+			#Izzy here: If the enemy contains sfx_enemy_walk AudioStreamer2d, it will stop as it transitions tot the next statee
+			if sfx_enemy_walk:
+				sfx_enemy_walk.stop()

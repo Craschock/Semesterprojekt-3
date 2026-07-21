@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://b6s3w17g3hccl"
+path="res://.godot/imported/Minen Boss Theme.mp3-e4f5e72287d227859e73467f966a1d23.mp3str"
+
+[deps]
+
+source_file="res://assets/sounds/music/mine_music/mine_boss_theme/Minen Boss Theme.mp3"
+dest_files=["res://.godot/imported/Minen Boss Theme.mp3-e4f5e72287d227859e73467f966a1d23.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

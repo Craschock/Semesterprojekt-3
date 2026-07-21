@@ -697,22 +697,22 @@ position_smoothing_enabled = true
 
 [node name="sfx_player_attack" type="AudioStreamPlayer2D" parent="." unique_id=223593913]
 stream = ExtResource("25_7265o")
-volume_db = -26.173
+volume_db = -0.98
 bus = &"Sounds"
 
 [node name="sfx_player_run" type="AudioStreamPlayer2D" parent="." unique_id=870772094]
 stream = ExtResource("26_aomop")
-volume_db = -34.019
+volume_db = -15.932
 bus = &"Sounds"
 
 [node name="sfx_player_consume" type="AudioStreamPlayer2D" parent="." unique_id=1486658591]
 stream = ExtResource("27_0aevd")
-volume_db = -29.159
+volume_db = 0.555
 bus = &"Sounds"
 
 [node name="sfx_player_death" type="AudioStreamPlayer2D" parent="." unique_id=1699894116]
 stream = ExtResource("28_aomop")
-volume_db = -29.159
+volume_db = 3.139
 bus = &"Sounds"
 
 [editable path="HitboxComponent"]

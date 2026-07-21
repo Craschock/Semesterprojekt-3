@@ -10,6 +10,8 @@
 [ext_resource type="Script" uid="uid://dsys1lxnete83" path="res://src/scenes/entities/Enemies/behavior_components/EnemyChase.gd" id="7_fbim3"]
 [ext_resource type="Script" uid="uid://dpty4j8elextd" path="res://src/scenes/entities/Enemies/behavior_components/EnemyAttack.gd" id="8_vplfo"]
 [ext_resource type="Script" uid="uid://cy85r20fkc1tr" path="res://src/scenes/components/AttackComponent.gd" id="9_ukh7j"]
+[ext_resource type="AudioStream" uid="uid://bjqvmdhhfvrwn" path="res://assets/sounds/entity_sound/enemies_sounds/elite/enemy_e_axolotlBear_walk(1).mp3" id="11_ccpkp"]
+[ext_resource type="AudioStream" uid="uid://j5275k208d3y" path="res://assets/sounds/entity_sound/enemies_sounds/elite/enemy_e_axolotlBear_attack.mp3" id="11_ojuji"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2n81r"]
 size = Vector2(58, 37)
@@ -582,5 +584,18 @@ metadata/_custom_type_script = "uid://cy85r20fkc1tr"
 position = Vector2(44.5, -25)
 shape = SubResource("RectangleShape2D_jic0s")
 disabled = true
+
+[node name="sfx_enemy_walk" type="AudioStreamPlayer2D" parent="." index="7" unique_id=2118794191]
+position = Vector2(44.499996, -25)
+stream = ExtResource("11_ccpkp")
+volume_db = -23.31
+max_distance = 100.0
+
+[node name="sfx_enemy_attack" type="AudioStreamPlayer2D" parent="." index="8" unique_id=971707655]
+position = Vector2(44.499996, -25)
+stream = ExtResource("11_ojuji")
+volume_db = 5.38
+max_distance = 500.0
+bus = &"Sounds"
 
 [editable path="HitboxComponent"]

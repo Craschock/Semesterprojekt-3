@@ -1,4 +1,5 @@
 extends Control
+
 class_name MainMenu
 
 ## Scene the game loads when pressing "Start"
@@ -12,7 +13,6 @@ class_name MainMenu
 
 # ColorRect for creating Fade-in and Fade-Out effects
 @onready var BlackoutEffect: ColorRect = $BlackoutEffect
-
 
 
 func _ready() -> void:

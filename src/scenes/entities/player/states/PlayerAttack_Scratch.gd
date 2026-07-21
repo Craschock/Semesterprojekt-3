@@ -11,11 +11,13 @@ func _ready() -> void:
 func enter() -> void:
 	player.freeze()
 	
+	#Izzy here: plays sound before animation plays, for timing
+	sfx_player_attack.play()
+	
 	# Play animations
 	player.get_node("AnimatedSprite2D").play("attack_scratch")
 	player.get_node("AnimationPlayer").play("scratch")
-	#Izzy here: plays sound as soon as animation plays
-	sfx_player_attack.play()
+
 
 func exit() -> void:
 	player.unfreeze()

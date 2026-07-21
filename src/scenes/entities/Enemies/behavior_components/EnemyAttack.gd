@@ -16,6 +16,8 @@ var enemy: BaseEnemy
 @export var attack_component: AttackComponent
 
 var timer: float = 0.0
+#Izzy here: establishing the attack sound as a variable
+@onready var sfx_enemy_attack: AudioStreamPlayer2D = $"../../sfx_enemy_attack"
 
 func _ready() -> void:
 	enemy = owner
@@ -24,7 +26,9 @@ func enter() -> void:
 	enemy.velocity.x = 0 # Stop movement
 	enemy.get_node("AnimatedSprite2D").play(animation_name)
 	timer = attack_duration
-	
+	if sfx_enemy_attack:
+		sfx_enemy_attack.play()
+
 	# Enable damage hitbox and clear memory
 	if attack_component:
 		attack_component.clear_hit_list()
