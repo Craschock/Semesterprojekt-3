@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://tw4103u56nmt"
-path="res://.godot/imported/player_digging.png-94d54742a3fc687c05049ddd5f4333b4.ctex"
+uid="uid://34ilgv7gxc7c"
+path="res://.godot/imported/player_digging(120x60).png-dd07b4eda6716432d0bf4c2945b8badc.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/entities/player/player_digging.png"
-dest_files=["res://.godot/imported/player_digging.png-94d54742a3fc687c05049ddd5f4333b4.ctex"]
+source_file="res://assets/sprites/entities/player/player_digging(120x60).png"
+dest_files=["res://.godot/imported/player_digging(120x60).png-dd07b4eda6716432d0bf4c2945b8badc.ctex"]
 
 [params]
 

@@ -33,3 +33,15 @@ func physics_update(delta: float) -> void:
 	if player.block_input_buffer_timer > 0.0:
 		player.block_input_buffer_timer = 0.0
 		transitioned.emit(self, "block")
+	
+	if player.dig_input_buffer_timer > 0.0 and player.unlocked_digging:
+		var target = player.get_dig_target()
+		
+		if target != Vector2.INF: # If digging possible
+			player.dig_target_position = target
+			player.dig_input_buffer_timer = 0.0
+			transitioned.emit(self, "dig_in")
+		else:
+			player.dig_input_buffer_timer = 0.0
+			# For izzy in the future: kannst ja einen "not possible" sound abspielen
+		

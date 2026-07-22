@@ -25,6 +25,7 @@ var gravity: float = ProjectSettings.get_setting("physics/2d/default_gravity")
 var apply_gravity: bool = true
 var is_frozen: bool = false
 
+
 #Jump
 @export_category("Jump")
 ## Maximum jump height
@@ -50,17 +51,28 @@ var is_frozen: bool = false
 @export var block_input_buffer: float = 0.3
 ## How early a player can jump before landing on a platform that he can jump off
 @export var jump_input_buffer: float = 0.3
+## How early a player can dig into the ground before being able to perform a dig
+@export var dig_input_buffer: float = 0.3
+
+# Unlockables
+@export_category("Unlockables")
+## Check if player has digging unlocked (1st boss)
+@export var unlocked_digging: bool = true
 
 var action_input_buffer_timer: float = 0.0
 var block_input_buffer_timer: float = 0.0
 var jump_input_buffer_timer: float = 0.0
 var jump_buffer_timer: float = 0.0
+var dig_input_buffer_timer: float = 0.0
 var current_jump_charge: float = 0.0
 var current_air_jumps: int = 0
 var was_interrupted_while_charging: bool = false
+var dig_target_position: Vector2 = Vector2.ZERO
 
-# Inventory
+
+# Constants
 const ITEM_HOTKEY_OFFSET: int = 1
+const INVALID_POS: Vector2 = Vector2(-99999, -99999) # Error check
 
 func _ready() -> void:
 	# Setup Singleton PlayerManager
@@ -79,6 +91,8 @@ func _physics_process(delta: float) -> void:
 			block_input_buffer_timer = block_input_buffer
 	if Input.is_action_just_pressed("jump"):
 			jump_input_buffer_timer = jump_input_buffer
+	if Input.is_action_just_pressed("move_dig"):
+		dig_input_buffer_timer = dig_input_buffer
 	
 	# Jump buffer
 	if is_frozen:
@@ -98,6 +112,8 @@ func _physics_process(delta: float) -> void:
 		block_input_buffer_timer -= delta
 	if jump_input_buffer_timer > 0.0:
 		jump_input_buffer_timer -= delta
+	if dig_input_buffer_timer > 0.0:
+		dig_input_buffer_timer -= delta
 	
 	# Apply Gravity or Fly Mode
 	if apply_gravity:
@@ -175,3 +191,39 @@ func freeze() -> void:
 func unfreeze() -> void:
 	velocity = stored_velocity
 	is_frozen = false
+
+# Dig in Check
+func get_dig_target(required_depth: int = 10) -> Vector2:
+	var world = get_parent().get_node_or_null("World")
+	
+	if not world or not world.get("fg_layer"):
+		return Vector2.INF
+	
+	var fg_layer = world.fg_layer
+	var tile_pos = fg_layer.local_to_map(fg_layer.to_local(global_position))
+	
+	for i in range(1, required_depth + 1):
+		var check_pos = tile_pos + Vector2i(0, i)
+		
+		if fg_layer.get_cell_source_id(check_pos) == -1:
+			return Vector2.INF
+		
+	var target_tile = tile_pos + Vector2i(0, 1)
+	return fg_layer.to_global(fg_layer.map_to_local(target_tile))
+
+# Dig out Check
+func get_dig_out_target(max_upwards_scan: int = 5) -> Vector2:
+	var world = get_parent().get_node_or_null("World")
+	if not world or not world.get("fg_layer"):
+		return INVALID_POS
+		
+	var fg_layer = world.fg_layer
+	var tile_pos = fg_layer.local_to_map(fg_layer.to_local(global_position))
+	
+	for i in range(0, max_upwards_scan + 1):
+		var check_pos = tile_pos - Vector2i(0, i)
+		
+		if fg_layer.get_cell_source_id(check_pos) == -1:
+			return fg_layer.to_global(fg_layer.map_to_local(check_pos))
+			
+	return INVALID_POS
