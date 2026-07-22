@@ -235,17 +235,9 @@ region = Rect2(6760, 0, 260, 70)
 atlas = ExtResource("2_56ayk")
 region = Rect2(7020, 0, 260, 70)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_ojuji"]
-atlas = ExtResource("2_atyx1")
-region = Rect2(0, 0, 260, 70)
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_ccpkp"]
 atlas = ExtResource("2_atyx1")
 region = Rect2(260, 0, 260, 70)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_glac2"]
-atlas = ExtResource("2_atyx1")
-region = Rect2(520, 0, 260, 70)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_n38q6"]
 atlas = ExtResource("2_atyx1")
@@ -463,17 +455,11 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_ojuji")
-}, {
-"duration": 1.0,
 "texture": SubResource("AtlasTexture_ccpkp")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_glac2")
 }],
 "loop": false,
 "name": &"hit",
-"speed": 8.0
+"speed": 2.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -540,7 +526,7 @@ shape = SubResource("RectangleShape2D_5qadu")
 position = Vector2(0, -22)
 scale = Vector2(0.75, 0.75)
 sprite_frames = SubResource("SpriteFrames_xoqvr")
-animation = &"walk"
+animation = &"attack_bubbles"
 
 [node name="Hit" parent="StateMachine" parent_id_path=PackedInt32Array(1551728817) index="0" unique_id=1304688525 node_paths=PackedStringArray("next_state")]
 next_state = NodePath("../EnemyChase")
@@ -577,7 +563,7 @@ proximity_radius = 27.5
 collision_layer = 128
 collision_mask = 16
 script = ExtResource("9_ukh7j")
-damage = 1
+damage = 2
 continuous_damage = true
 metadata/_custom_type_script = "uid://cy85r20fkc1tr"
 
