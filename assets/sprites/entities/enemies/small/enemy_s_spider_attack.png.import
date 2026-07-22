@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://t8ax2sbjf3s6"
-path="res://.godot/imported/enemy_s_spider_run.png-27d90c855a6536c6c28049c27e94826e.ctex"
+uid="uid://cigv6i1we6c6l"
+path="res://.godot/imported/enemy_s_spider_attack.png-d294bfd36c054c235c9c0d8fab65d6cf.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/entities/enemies/small/enemy_s_spider_run.png"
-dest_files=["res://.godot/imported/enemy_s_spider_run.png-27d90c855a6536c6c28049c27e94826e.ctex"]
+source_file="res://assets/sprites/entities/enemies/small/enemy_s_spider_attack.png"
+dest_files=["res://.godot/imported/enemy_s_spider_attack.png-d294bfd36c054c235c9c0d8fab65d6cf.ctex"]
 
 [params]
 

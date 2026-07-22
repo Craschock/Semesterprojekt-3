@@ -49,6 +49,7 @@ folder_colors={
 "res://src/scenes/entities/Enemies/small/": "red",
 "res://src/scenes/entities/Enemies/small/rat/": "gray",
 "res://src/scenes/entities/Enemies/small/small_slime_green/": "gray",
+"res://src/scenes/entities/Enemies/small/spider/": "gray",
 "res://src/scenes/entities/player/": "blue",
 "res://src/scenes/menus/final menus/": "green",
 "res://src/scenes/menus/test_scenes/": "red"
