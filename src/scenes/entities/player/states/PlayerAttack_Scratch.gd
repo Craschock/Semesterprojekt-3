@@ -9,7 +9,8 @@ func _ready() -> void:
 	player = owner
 
 func enter() -> void:
-	player.freeze()
+	if player.velocity.y == 0:
+		player.freeze()
 	
 	#Izzy here: plays sound before animation plays, for timing
 	sfx_player_attack.play()
@@ -20,7 +21,8 @@ func enter() -> void:
 
 
 func exit() -> void:
-	player.unfreeze()
+	if player.is_frozen:
+		player.unfreeze()
 
 func physics_update(_delta: float) -> void:
 	# Wait for AnimationPlayer
