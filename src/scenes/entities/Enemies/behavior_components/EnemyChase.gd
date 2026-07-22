@@ -25,7 +25,8 @@ func physics_update(_delta: float) -> void:
 	var target = PlayerManager.player
 	
 	if target != null:
-		if attack_state and enemy.global_position.distance_to(target.global_position) <= attack_range:
+		if attack_state and enemy.global_position.distance_to(target.global_position) <= attack_range and enemy.attack_cooldown_timer <= 0.0:
+			enemy.attack_cooldown_timer = enemy.attack_cooldown
 			transitioned.emit(self, attack_state.name)
 			return
 		

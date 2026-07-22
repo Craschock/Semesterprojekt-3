@@ -6,7 +6,7 @@ var gravity: float = ProjectSettings.get_setting("physics/2d/default_gravity") *
 var apply_gravity: bool = true
 var stored_velocity: Vector2
 @onready var health_component: HealthComponent = $HealthComponent
-@onready var StateMachine: StateMachine = $StateMachine
+@onready var state_machine: StateMachine = $StateMachine
 
 @export_category("State Configuration")
 ## Idle state
@@ -17,6 +17,10 @@ var stored_velocity: Vector2
 @export_category("Values")
 ## Maximum step height
 @export var step_height: float = 4.0
+## Attack Cooldown (in seconds)
+@export var attack_cooldown: float = 2.0
+
+var attack_cooldown_timer: float = 0.0
 
 func _ready() -> void:
 	# Connect health depleted signal
@@ -32,14 +36,17 @@ func _ready() -> void:
 
 func _on_player_spotted() -> void:
 	if chase_state:
-		StateMachine.force_transition(chase_state.name)
+		state_machine.force_transition(chase_state.name)
 
 func _on_player_lost() -> void:
-	StateMachine.force_transition(idle_state.name)
+	state_machine.force_transition(idle_state.name)
 
 func _physics_process(delta: float) -> void:
 	if not is_on_floor():
 		velocity.y += gravity * delta
+	
+	if attack_cooldown_timer > 0.0:
+		attack_cooldown_timer -= delta
 	
 	try_step_up()
 	move_and_slide()
@@ -63,7 +70,7 @@ func unfreeze() -> void:
 	apply_gravity = true
 
 func _on_health_changed(_current: int, _max: int) -> void:
-	StateMachine.force_transition("hit")
+	state_machine.force_transition("hit")
 
 # Flipping left/right
 func update_facing(direction: float) -> void:

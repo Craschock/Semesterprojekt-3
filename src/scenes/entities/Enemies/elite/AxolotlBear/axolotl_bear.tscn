@@ -522,6 +522,7 @@ size = Vector2(59, 46)
 [node name="AxolotlBear" unique_id=961012920 node_paths=PackedStringArray("chase_state") instance=ExtResource("1_xoqvr")]
 scale = Vector2(0.6796323, 0.6796323)
 chase_state = NodePath("StateMachine/EnemyChase")
+attack_cooldown = 5.0
 metadata/_edit_group_ = true
 
 [node name="LootDropComponent" parent="." index="0" unique_id=715616856]
