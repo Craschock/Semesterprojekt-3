@@ -52,6 +52,14 @@ class_name WorldGenerator
 ##Scale applied to decoration sprites so they match the tile scaling.
 @export var decoration_scale: float = 1.6
 
+@export_group("Items")
+##List of all Item scenes that can spawn on the floor, each spawn point chooses one randomly
+@export var item_scenes: Array[PackedScene] = []
+##chance of an item spawning per chunk
+@export_range(0.0, 1.0, 0.01) var item_spawn_chance: float = 0.2
+##freeze spawned items so they stay exactly where placed instead of falling or rolling away like enemy drops would
+@export var freeze_spawned_items: bool = false
+
 @export_group("Depth Shading")
 ##off by default.
 ##the depth shading is very laggy and the current version is cooked
@@ -107,9 +115,13 @@ var _last_player_chunk: Vector2i = Vector2i(0x7FFFFFFF, 0x7FFFFFFF)
 # Chunks queued for loading. Processed a few per frame to avoid frame spikes.
 var _load_queue: Array[Vector2i] = []
 
+
 #darkness
 var _darkness_overlay: Sprite2D = null
 var _darkness_dirty: bool = false
+
+#Chunks whose item has been picked up, prevents respawn on chunk reload
+var _taken_items: Dictionary = {}
 
 # --- Lifecycle ---
 
@@ -342,6 +354,65 @@ func _region_has_open_sky(region_pos: Vector2i) -> bool:
 	var b = _biome_for_region(region_pos)
 	return b != null and b.has_open_sky
 
+# --- Items ---
+
+func _spawn_items(chunk: WorldChunk) -> void:
+	if item_scenes.is_empty():
+		return
+
+	var origin = chunk.world_origin()
+
+	# Own hash constants so items don't always land on the enemy marker's tile.
+	var h = (origin.x * 374761393 ^ origin.y * 668265263 ^ world_seed) & 0x7FFFFFFF
+	if float(h) / float(0x7FFFFFFF) > item_spawn_chance:
+		return
+
+	if _taken_items.has(chunk.chunk_pos):
+		return
+
+	var near_room = _chunk_touches_room(origin, 2)
+	var candidates: Array[Vector2i] = []
+	for ty in range(chunk_size):
+		for tx in range(chunk_size):
+			if chunk.get_corner(tx, ty):
+				continue
+			if not chunk.get_corner(tx, ty + 1):
+				continue
+			if ty > 0 and chunk.get_corner(tx, ty - 1):
+				continue
+			if near_room and _tile_in_any_room(origin.x + tx, origin.y + ty, 1):
+				continue
+			candidates.append(Vector2i(tx, ty))
+
+	if candidates.is_empty():
+		return
+
+	var pick = candidates[h % candidates.size()]
+	var scene: PackedScene = item_scenes[(h / 7) % item_scenes.size()]
+	var item = scene.instantiate()
+
+	# Sit on top of the floor tile, centred.
+	item.position = Vector2(
+		(origin.x + pick.x + 0.5) * tile_pixel_size,
+		(origin.y + pick.y + 0.5) * tile_pixel_size
+	)
+	#item.position = Vector2(
+		#(origin.x + pick.x + 0.5) * tile_pixel_size,
+		#(origin.y + pick.y + 1) * tile_pixel_size
+	#)
+	item.freeze = freeze_spawned_items
+	add_child(item)
+	chunk.decorations.append(item)
+
+	item.set_meta("wg_chunk", chunk.chunk_pos)
+	item.tree_exiting.connect(_on_item_exiting.bind(item))
+
+
+func _on_item_exiting(item: Node) -> void:
+	# Chunk unload also frees the item; only a real pickup should count.
+	if item.has_meta("wg_unloading"):
+		return
+	_taken_items[item.get_meta("wg_chunk")] = true
 
 # --- Prebuilt rooms ---
 ##Classifies a tile against all prebuilt rooms.
@@ -469,6 +540,7 @@ func _load_chunk(chunk_pos: Vector2i) -> void:
 	_render_chunk(chunk)
 	var t2 = Time.get_ticks_usec()
 	_spawn_decorations(chunk)
+	_spawn_items(chunk)
 	var t3 = Time.get_ticks_usec()
 
 	_dbg_gen += t1 - t0
@@ -493,6 +565,8 @@ func _unload_chunk(chunk_pos: Vector2i) -> void:
 			fg_layer.erase_cell(wp)
 			bg_layer.erase_cell(wp)
 	for node in chunk.decorations:
+		if node.has_meta("wg_chunk"):
+			node.set_meta("wg_unloading", true)
 		node.queue_free()
 	chunk.decorations.clear()
 	
@@ -1236,6 +1310,7 @@ func regenerate() -> void:
 	_loaded_chunks.clear()
 	_corner_overrides.clear()
 	_biome_noise_cache.clear()
+	_taken_items.clear()
 	_build_world_layout()
 	_last_player_chunk = Vector2i(0x7FFFFFFF, 0x7FFFFFFF)
 
