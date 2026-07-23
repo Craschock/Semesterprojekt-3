@@ -34,4 +34,10 @@ func _on_interacted(_interactor: Node) -> void:
 	print("Debug: story found")
 	print("Debug: title: ", story_title)
 	print("Debug: content: ", story_content)
+	
+	var hud = get_tree().get_first_node_in_group("HUD")
+	
+	if hud and hud.has_method("show_story"):
+		hud.show_story(story_title, story_content)
+	
 	queue_free()
