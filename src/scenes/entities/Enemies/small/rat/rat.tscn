@@ -9,6 +9,8 @@
 [ext_resource type="Script" uid="uid://dpty4j8elextd" path="res://src/scenes/entities/Enemies/behavior_components/EnemyAttack.gd" id="7_60o6b"]
 [ext_resource type="Script" uid="uid://dsys1lxnete83" path="res://src/scenes/entities/Enemies/behavior_components/EnemyChase.gd" id="7_w64q1"]
 [ext_resource type="PackedScene" uid="uid://dp2uswhllarmo" path="res://src/scenes/components/attack_component.tscn" id="8_ig603"]
+[ext_resource type="AudioStream" uid="uid://dvqesb0kro7lp" path="res://assets/sounds/entity_sound/enemies_sounds/small/enemy_s_rat_attack.mp3" id="10_4gqxh"]
+[ext_resource type="AudioStream" uid="uid://xu12yo4rodcl" path="res://assets/sounds/entity_sound/enemies_sounds/small/enemy_s_rat_walk.mp3" id="11_5caw2"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_wd0n8"]
 radius = 8.0
@@ -237,5 +239,13 @@ damage = 2
 position = Vector2(0, -3)
 shape = SubResource("CircleShape2D_60o6b")
 disabled = true
+
+[node name="sfx_enemy_attack" type="AudioStreamPlayer2D" parent="." index="7" unique_id=676200732]
+stream = ExtResource("10_4gqxh")
+
+[node name="sfx_enemy_walk" type="AudioStreamPlayer2D" parent="." index="8" unique_id=1354813693]
+stream = ExtResource("11_5caw2")
+volume_db = -25.0
+max_distance = 350.0
 
 [editable path="HitboxComponent"]

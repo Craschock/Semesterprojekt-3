@@ -218,8 +218,9 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 1)
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1643905481]
+[node name="sfx_main_menu_music" type="AudioStreamPlayer" parent="." unique_id=1643905481]
 stream = ExtResource("11_mqm0f")
+volume_db = -9.0
 autoplay = true
 bus = &"Music"
 parameters/looping = true

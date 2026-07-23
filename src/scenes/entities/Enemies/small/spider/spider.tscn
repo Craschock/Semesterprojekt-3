@@ -10,6 +10,8 @@
 [ext_resource type="Script" uid="uid://crxt81u8m6s2t" path="res://src/scenes/entities/Enemies/behavior_components/EnemyWalk.gd" id="7_6cd7q"]
 [ext_resource type="Script" uid="uid://dpty4j8elextd" path="res://src/scenes/entities/Enemies/behavior_components/EnemyAttack.gd" id="8_l5emd"]
 [ext_resource type="Script" uid="uid://cy85r20fkc1tr" path="res://src/scenes/components/AttackComponent.gd" id="9_8kkkb"]
+[ext_resource type="AudioStream" uid="uid://mc5t3pljxva3" path="res://assets/sounds/entity_sound/enemies_sounds/small/enemy_s_spider_attack.mp3" id="11_l5emd"]
+[ext_resource type="AudioStream" uid="uid://dq4gqfbp2f386" path="res://assets/sounds/entity_sound/enemies_sounds/small/enemy_s_spider_walk.mp3" id="12_8kkkb"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_shaue"]
 radius = 8.823528
@@ -327,5 +329,14 @@ position = Vector2(11.911764, -4.411764)
 scale = Vector2(0.99999976, 0.99999976)
 shape = SubResource("RectangleShape2D_77lx4")
 disabled = true
+
+[node name="sfx_enemy_attack" type="AudioStreamPlayer2D" parent="." index="7" unique_id=1538989544]
+stream = ExtResource("11_l5emd")
+
+[node name="sfx_enemy_walk" type="AudioStreamPlayer2D" parent="." index="8" unique_id=1790877251]
+scale = Vector2(0.9999998, 0.9999998)
+stream = ExtResource("12_8kkkb")
+volume_db = -25.0
+max_distance = 350.0
 
 [editable path="HitboxComponent"]

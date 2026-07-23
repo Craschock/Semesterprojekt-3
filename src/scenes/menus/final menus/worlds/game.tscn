@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://bh6kjgw51fv7u" path="res://src/scenes/entities/player/player.tscn" id="3_s4t1n"]
 [ext_resource type="PackedScene" uid="uid://ckcrqvaawf18p" path="res://src/scenes/entities/Enemies/small/spider/spider.tscn" id="6_cm510"]
 [ext_resource type="PackedScene" uid="uid://dfd10kendyi1g" path="res://src/scenes/procedural generation/world_generation.tscn" id="8_owfvr"]
+[ext_resource type="AudioStream" uid="uid://os4yuk7ncefu" path="res://assets/sounds/music/mine_music/atmo/Atmo Mine(1).mp3" id="10_hrigq"]
 
 [node name="Game" type="Node" unique_id=109101168]
 
@@ -41,3 +42,11 @@ region_size_chunks = 24
 player = NodePath("../Player")
 
 [node name="MainHUD" parent="." unique_id=1196255063 instance=ExtResource("2_oivod")]
+
+[node name="sfx_mine_atmo_music" type="AudioStreamPlayer2D" parent="." unique_id=594421042]
+scale = Vector2(0.99999994, 0.99999994)
+stream = ExtResource("10_hrigq")
+volume_db = 6.804
+autoplay = true
+max_distance = 4096.0
+bus = &"Music"
