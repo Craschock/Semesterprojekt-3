@@ -1394,6 +1394,7 @@ func _place_tutorial() -> void:
 		return
 	var node: Node2D = tutorial_scene.instantiate()
 	node.position = get_spawn_room_rect_px().position + tutorial_offset
+	print(world_seed)
 	add_child(node)
 
 # --- Debug timing ---
