@@ -13,19 +13,19 @@ func _ready() -> void:
 	if player:
 		player.hide()
 		player.freeze()
-	
+
 	# Init World
 	if world_generator:
 		world_generator.generate_world()
 	await get_tree().process_frame
-	
+
 	# TP Player to Spawnpoint
 	if player:
 		spawn_player()
 
 func spawn_player() -> void:
 	var spawn_marker = get_tree().get_first_node_in_group("spawn_point")
-	
+
 	if spawn_marker:
 		player.global_position = spawn_marker.global_position
 		parallaxEffect.position.y = player.position.y / 1.275
@@ -36,7 +36,7 @@ func spawn_player() -> void:
 			camera.force_update_scroll()
 	else:
 		push_warning("GameManager: No spawn marker found")
-		
+
 	# Unfreeze and reveal the player
 	player.unfreeze()
 	player.show()

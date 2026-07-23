@@ -1,4 +1,118 @@
 [gd_scene format=3 uid="uid://dv8qrnwefoxpp"]
 
+[ext_resource type="Texture2D" uid="uid://churcqp0q7rwo" path="res://assets/sprites/starting_area/a d.png" id="1_iyd0x"]
+[ext_resource type="FontFile" uid="uid://cy1y6m1xhhhvd" path="res://assets/fonts/Cinzel-VariableFont_wght.ttf" id="2_bpp5f"]
+[ext_resource type="Texture2D" uid="uid://dlkcwnfhcota2" path="res://assets/sprites/starting_area/right_click.png" id="3_8atnt"]
+[ext_resource type="Texture2D" uid="uid://bgtb4oowxhck5" path="res://assets/sprites/starting_area/space.png" id="3_mg4pj"]
+[ext_resource type="Texture2D" uid="uid://cky5rlpqa2syi" path="res://assets/sprites/starting_area/e.png" id="4_lsaq0"]
+[ext_resource type="Texture2D" uid="uid://jeduouaxxyem" path="res://assets/sprites/starting_area/left_click.png" id="6_wq28f"]
+
 [node name="SpawnRoom" type="Node2D" unique_id=1386508471]
 z_index = -1
+scale = Vector2(0.8, 0.8)
+
+[node name="Press" type="Label" parent="." unique_id=1380574022]
+offset_left = 261.24994
+offset_top = 511.75
+offset_right = 356.83612
+offset_bottom = 567.75
+theme_override_fonts/font = ExtResource("2_bpp5f")
+theme_override_font_sizes/font_size = 22
+text = "Press"
+
+[node name="A-D" type="Sprite2D" parent="." unique_id=463583644]
+texture_filter = 1
+position = Vector2(291.125, 571.5003)
+scale = Vector2(1.8124996, 1.8125005)
+texture = ExtResource("1_iyd0x")
+
+[node name="to move" type="Label" parent="." unique_id=942604617]
+offset_left = 242.24988
+offset_top = 599.75
+offset_right = 394.24988
+offset_bottom = 657.75
+theme_override_fonts/font = ExtResource("2_bpp5f")
+theme_override_font_sizes/font_size = 22
+text = "to move..."
+
+[node name="Press2" type="Label" parent="." unique_id=1394925008]
+offset_left = 683.0
+offset_top = 516.75
+offset_right = 778.5862
+offset_bottom = 572.75
+theme_override_fonts/font = ExtResource("2_bpp5f")
+theme_override_font_sizes/font_size = 22
+text = "Press"
+
+[node name="Space" type="Sprite2D" parent="." unique_id=6457756]
+texture_filter = 1
+position = Vector2(715, 572.75024)
+scale = Vector2(1.8124996, 1.8125005)
+texture = ExtResource("3_mg4pj")
+
+[node name="to jump" type="Label" parent="." unique_id=1655707973]
+offset_left = 599.9998
+offset_top = 603.75
+offset_right = 831.9999
+offset_bottom = 668.75
+theme_override_fonts/font = ExtResource("2_bpp5f")
+theme_override_font_sizes/font_size = 22
+text = "to Jump
+Hold to charge"
+horizontal_alignment = 1
+
+[node name="Press3" type="Label" parent="." unique_id=881939624]
+offset_left = 1116.75
+offset_top = 516.75
+offset_right = 1212.3362
+offset_bottom = 572.75
+theme_override_fonts/font = ExtResource("2_bpp5f")
+theme_override_font_sizes/font_size = 22
+text = "Press"
+
+[node name="E" type="Sprite2D" parent="." unique_id=1876385716]
+texture_filter = 1
+position = Vector2(1148.7498, 572.75024)
+scale = Vector2(1.8124996, 1.8125005)
+texture = ExtResource("4_lsaq0")
+
+[node name="to interact" type="Label" parent="." unique_id=1561872817]
+offset_left = 1033.75
+offset_top = 603.75
+offset_right = 1265.75
+offset_bottom = 668.75
+theme_override_fonts/font = ExtResource("2_bpp5f")
+theme_override_font_sizes/font_size = 22
+text = "to Interact"
+horizontal_alignment = 1
+
+[node name="LeftClick" type="Sprite2D" parent="." unique_id=1203056107]
+position = Vector2(447.50006, 678.7501)
+scale = Vector2(1.8125031, 1.8125031)
+texture = ExtResource("6_wq28f")
+
+[node name="Attack" type="Label" parent="." unique_id=429393227]
+offset_left = 401.25
+offset_top = 717.5
+offset_right = 501.25
+offset_bottom = 782.5
+theme_override_fonts/font = ExtResource("2_bpp5f")
+theme_override_font_sizes/font_size = 22
+text = "Attack
+USE ITEM"
+horizontal_alignment = 1
+
+[node name="RightClick" type="Sprite2D" parent="." unique_id=558574599]
+position = Vector2(987.4999, 677.8126)
+scale = Vector2(1.812503, 1.812503)
+texture = ExtResource("3_8atnt")
+
+[node name="Block" type="Label" parent="." unique_id=1752327729]
+offset_left = 951.2498
+offset_top = 717.5
+offset_right = 1033.25
+offset_bottom = 773.5
+theme_override_fonts/font = ExtResource("2_bpp5f")
+theme_override_font_sizes/font_size = 22
+text = "Block"
+horizontal_alignment = 1
