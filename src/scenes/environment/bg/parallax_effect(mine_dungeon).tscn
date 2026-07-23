@@ -18,6 +18,7 @@
 [ext_resource type="Texture2D" uid="uid://su8ppkiw03b2" path="res://assets/sprites/background/Dust4.png" id="12_ghn7d"]
 
 [node name="ParallaxEffect(Mine_Dungeon)" type="Node2D" unique_id=1250214574]
+z_index = -10
 script = ExtResource("1_g55f3")
 
 [node name="Layer1" type="Parallax2D" parent="." unique_id=1787063993]
