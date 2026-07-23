@@ -118,6 +118,8 @@ var _spawn_tile: Vector2i = Vector2i(0x7FFFFFFF, 0x7FFFFFFF)
 ##Interior rect of the spawn room (in tiles)
 var _spawn_room_rect: Rect2i = Rect2i(0, 0, 0, 0)
 
+var _boss_room_rect: Rect2i = Rect2i(0, 0, 0, 0)
+
 ##Chunk the player occupied during the previous check.
 var _last_player_chunk: Vector2i = Vector2i(0x7FFFFFFF, 0x7FFFFFFF)
 
@@ -150,6 +152,8 @@ func generate_world() -> void:
 	if has_spawn_point():
 		_create_spawn_marker()
 		_place_tutorial()
+	
+	_create_boss_marker()
 
 
 func _create_spawn_marker() -> void:
@@ -272,6 +276,7 @@ func _build_rooms() -> void:
 	_rooms.clear()
 	_spawn_tile = Vector2i(0x7FFFFFFF, 0x7FFFFFFF)
 	_spawn_room_rect = Rect2i(0, 0, 0, 0)
+	_boss_room_rect = Rect2i(0, 0, 0, 0)
 
 	# The first biome flagged as the spawn biome wins; warn if several are flagged.
 	var spawn_biome: BiomeData = null
@@ -329,6 +334,7 @@ func _build_rooms() -> void:
 				"wall": biome.room_wall_thickness,
 				"biome": biome,
 			})
+			_boss_room_rect = Rect2i(b_interior_x, b_interior_y, bw, bh)
 
 
 func _shuffle(arr: Array, rng: RandomNumberGenerator) -> void:
@@ -1314,6 +1320,19 @@ func debug_draw_enemy_spawns() -> void:
 				dot.draw_circle(Vector2.ZERO, 8, Color.RED)
 			dot.connect("draw", circle)
 			dot.queue_redraw()
+			
+func _create_boss_marker() -> void:
+	if _boss_room_rect.size.x <= 0:
+		return
+
+	var marker = Marker2D.new()
+	marker.name = "BossMarker"
+	marker.position = Vector2(
+		(_boss_room_rect.position.x + _boss_room_rect.size.x * 0.5) * tile_pixel_size,
+		(_boss_room_rect.position.y + _boss_room_rect.size.y) * tile_pixel_size
+	)
+	marker.add_to_group("boss_spawn")
+	add_child(marker)
 
 # --- Public API ---
 # Only the functions below are intended to be called from outside this file.
