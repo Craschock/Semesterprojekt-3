@@ -311,6 +311,9 @@ attack_duration = 1.0
 attack_component = NodePath("../../WeaponPivot/Webshot")
 metadata/_custom_type_script = "uid://dpty4j8elextd"
 
+[node name="sfx_enemy_attack" type="AudioStreamPlayer2D" parent="StateMachine" parent_id_path=PackedInt32Array(1551728817) index="5" unique_id=875902224]
+scale = Vector2(0.99999976, 0.99999976)
+
 [node name="Webshot" type="Area2D" parent="WeaponPivot" parent_id_path=PackedInt32Array(1288338269) index="1" unique_id=1479932820]
 collision_layer = 128
 collision_mask = 16
