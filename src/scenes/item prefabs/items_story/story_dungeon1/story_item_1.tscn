@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://bqtrgkf85mkao"]
+
+[ext_resource type="PackedScene" uid="uid://cjgno4a0akih6" path="res://src/scenes/item prefabs/items_story/story_item.tscn" id="1_2fqn6"]
+
+[node name="StoryItem1" unique_id=280462394 instance=ExtResource("1_2fqn6")]
+story_title = "First Page"
+story_content = "Today was my first day at my new job as a miner. Like most of us, I was drawn in by the high earning potential. The competition among us miners are less intense than I expected. Some even gave me a friendly welcome and showed me around. They explained how everything works here. I'm really looking forward to starting mining tomorrow. "

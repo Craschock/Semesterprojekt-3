@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://cp2ripfp2aq3j"]
 
-[ext_resource type="PackedScene" uid="uid://cb5v77dqqm2og" path="res://src/scenes/item prefabs/base_item.tscn" id="1_qxeaw"]
+[ext_resource type="PackedScene" uid="uid://cb5v77dqqm2og" path="res://src/scenes/item prefabs/item_pickup/base_item.tscn" id="1_qxeaw"]
 [ext_resource type="Resource" uid="uid://dkm1av16bny22" path="res://src/Resources/items/item_effects/plump_grub.tres" id="2_aggxr"]
 
 [node name="PlumpGrubItem" unique_id=1088472823 instance=ExtResource("1_qxeaw")]

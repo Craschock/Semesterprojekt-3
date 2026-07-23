@@ -5,11 +5,22 @@ class_name MainHUD
 
 @onready var BlackoutEffect: ColorRect = $BlackoutEffect
 @onready var debug_ui: Control = $DebugUI
+@onready var healthBar: TextureProgressBar = $PlayerUI/TextureProgressBar
+
+var player: PlayerMovement
 
 func _ready() -> void:
 	# Hide all UIs (Also auch für die zukunft alle hiden)
 	if debug_ui:
 		debug_ui.hide()
+	
+	await get_tree().process_frame
+	player = PlayerManager.player
+	
+	if player:
+		player.health_component.health_changed.connect(drawHealth)
+	
+	
 	
 	# Fade-in
 	fadeEffect(true)
@@ -36,3 +47,8 @@ func fadeEffect(fade_in: bool) -> void:
 		BlackoutEffect.modulate.a = 0.0
 		
 		tween.tween_property(BlackoutEffect, 'modulate:a', 1.0, fade_duration)
+
+# TODO: Change healthbar texture. Currently 0-10 and 90-100 
+# values are lost due to Healthbar progressbar texture length
+func drawHealth(_current: int, _max: int) -> void:
+	healthBar.value = (float(_current) / float(_max)) * 100

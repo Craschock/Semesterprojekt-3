@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://577lsevqopyw" path="res://assets/sprites/entities/enemies/elite/enemy_e_axolotlBear_bubbles.png" id="2_5qadu"]
 [ext_resource type="Texture2D" uid="uid://cks8s1etit0li" path="res://assets/sprites/entities/enemies/elite/enemy_e_axolotlbear_death.png" id="2_56ayk"]
 [ext_resource type="Texture2D" uid="uid://ga3v8k3v12n4" path="res://assets/sprites/entities/enemies/elite/enemy_e_axolotlbear_hit.png" id="2_atyx1"]
-[ext_resource type="PackedScene" uid="uid://qdekhakrwp1w" path="res://src/scenes/item prefabs/fish.tscn" id="2_jic0s"]
+[ext_resource type="PackedScene" uid="uid://qdekhakrwp1w" path="res://src/scenes/item prefabs/item_pickup/fish.tscn" id="2_jic0s"]
 [ext_resource type="Texture2D" uid="uid://c52055p4s7l5x" path="res://assets/sprites/entities/enemies/elite/enemy_e_axolotlBear_run.png" id="2_tmeps"]
 [ext_resource type="Script" uid="uid://crxt81u8m6s2t" path="res://src/scenes/entities/Enemies/behavior_components/EnemyWalk.gd" id="6_2n81r"]
 [ext_resource type="Script" uid="uid://dsys1lxnete83" path="res://src/scenes/entities/Enemies/behavior_components/EnemyChase.gd" id="7_fbim3"]

@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://c301qejfle2yq" path="res://src/scenes/entities/Enemies/base_enemy.tscn" id="1_ex5am"]
 [ext_resource type="Texture2D" uid="uid://dxbxsi1ygm25e" path="res://assets/sprites/entities/enemies/small/enemy_s_spider_hit.png" id="2_0dnm1"]
-[ext_resource type="PackedScene" uid="uid://djbhr2wetrtgk" path="res://src/scenes/item prefabs/worm.tscn" id="2_6cd7q"]
+[ext_resource type="PackedScene" uid="uid://djbhr2wetrtgk" path="res://src/scenes/item prefabs/item_pickup/worm.tscn" id="2_6cd7q"]
 [ext_resource type="Texture2D" uid="uid://by133g7ibs5ua" path="res://assets/sprites/entities/enemies/small/enemy_s_spider_death.png" id="2_ngymv"]
 [ext_resource type="Texture2D" uid="uid://cigv6i1we6c6l" path="res://assets/sprites/entities/enemies/small/enemy_s_spider_attack.png" id="2_shaue"]
 [ext_resource type="Texture2D" uid="uid://cmn6gsg3t6l5d" path="res://assets/sprites/entities/enemies/small/enemy_s_spider_walk.png" id="3_j5ugu"]
@@ -261,8 +261,9 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_77lx4"]
 size = Vector2(23.235294, 8.823528)
 
-[node name="spider" unique_id=961012920 instance=ExtResource("1_ex5am")]
+[node name="spider" unique_id=961012920 node_paths=PackedStringArray("chase_state") instance=ExtResource("1_ex5am")]
 scale = Vector2(0.68, 0.68)
+chase_state = NodePath("StateMachine/EnemyChase")
 
 [node name="LootDropComponent" parent="." index="0" unique_id=715616856]
 possible_drops = Array[PackedScene]([ExtResource("2_6cd7q")])
@@ -293,6 +294,7 @@ next_state = NodePath("../EnemyWalk")
 
 [node name="EnemyChase" type="Node" parent="StateMachine" parent_id_path=PackedInt32Array(1551728817) index="2" unique_id=1376109809 node_paths=PackedStringArray("attack_state")]
 script = ExtResource("6_hk0ny")
+attack_range = 15.0
 attack_state = NodePath("../EnemyAttack")
 metadata/_custom_type_script = "uid://dsys1lxnete83"
 
@@ -303,17 +305,21 @@ metadata/_custom_type_script = "uid://crxt81u8m6s2t"
 
 [node name="EnemyAttack" type="Node" parent="StateMachine" parent_id_path=PackedInt32Array(1551728817) index="4" unique_id=1481893719 node_paths=PackedStringArray("next_state", "attack_component")]
 script = ExtResource("8_l5emd")
+animation_name = "attack_string"
 next_state = NodePath("../EnemyChase")
-attack_component = NodePath("../../WeaponPivot/AttackComponent")
+attack_duration = 1.0
+attack_component = NodePath("../../WeaponPivot/Webshot")
 metadata/_custom_type_script = "uid://dpty4j8elextd"
 
-[node name="AttackComponent" type="Area2D" parent="WeaponPivot" parent_id_path=PackedInt32Array(1288338269) index="1" unique_id=1479932820]
+[node name="Webshot" type="Area2D" parent="WeaponPivot" parent_id_path=PackedInt32Array(1288338269) index="1" unique_id=1479932820]
+collision_layer = 128
+collision_mask = 16
 script = ExtResource("9_8kkkb")
 damage = 4
 knockback_force = 150.0
 metadata/_custom_type_script = "uid://cy85r20fkc1tr"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="WeaponPivot/AttackComponent" index="0" unique_id=1458575480]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WeaponPivot/Webshot" index="0" unique_id=1458575480]
 position = Vector2(11.911764, -4.411764)
 scale = Vector2(0.99999976, 0.99999976)
 shape = SubResource("RectangleShape2D_77lx4")

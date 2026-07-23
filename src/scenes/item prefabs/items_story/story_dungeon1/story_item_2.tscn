@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://dfwovdgj1npmp"]
+
+[ext_resource type="PackedScene" uid="uid://cjgno4a0akih6" path="res://src/scenes/item prefabs/items_story/story_item.tscn" id="1_3v8sc"]
+
+[node name="StoryItem2" unique_id=280462394 instance=ExtResource("1_3v8sc")]
+story_title = "Second Page"
+story_content = "I've been here for a week now. It's hard work but that's ok.  
+
+The ore we're mining was originally considered useless. But now an investor has his eye on it. We're supposed to mine the ore and sell it to him. He himself apparently doesn't come by very often.  
+
+The mine supervisor handles all his responsibilities: buying the ore, providing food for us miners, and of course, making sure we work and don't idle. He keeps a close eye on everything and everyone. It's almost eerie how he sometimes just appears behind you when you want to take a short break. I'm slowly getting used to it, but it's still unsettling. "

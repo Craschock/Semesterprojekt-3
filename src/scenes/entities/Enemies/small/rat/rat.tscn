@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://c301qejfle2yq" path="res://src/scenes/entities/Enemies/base_enemy.tscn" id="1_n5j4j"]
 [ext_resource type="Texture2D" uid="uid://cojn5veho4yi8" path="res://assets/sprites/entities/enemies/small/enemy_s_rat_run.png" id="2_cl87m"]
-[ext_resource type="PackedScene" uid="uid://by4omnyc6c73y" path="res://src/scenes/item prefabs/salt.tscn" id="2_ig603"]
+[ext_resource type="PackedScene" uid="uid://by4omnyc6c73y" path="res://src/scenes/item prefabs/item_pickup/salt.tscn" id="2_ig603"]
 [ext_resource type="Texture2D" uid="uid://d3ij8qcv2afxs" path="res://assets/sprites/entities/enemies/small/enemy_s_rat_hit.png" id="2_svtd1"]
 [ext_resource type="Texture2D" uid="uid://dl5p6jfrotawk" path="res://assets/sprites/entities/enemies/small/enemy_s_rat_death.png" id="2_wd0n8"]
 [ext_resource type="Script" uid="uid://crxt81u8m6s2t" path="res://src/scenes/entities/Enemies/behavior_components/EnemyWalk.gd" id="6_5v7a8"]
@@ -212,7 +212,7 @@ metadata/_custom_type_script = "uid://crxt81u8m6s2t"
 
 [node name="EnemyChase" type="Node" parent="StateMachine" parent_id_path=PackedInt32Array(1551728817) index="2" unique_id=499529484 node_paths=PackedStringArray("attack_state")]
 script = ExtResource("7_w64q1")
-attack_range = 15.0
+attack_range = 12.5
 attack_state = NodePath("../EnemyAttack")
 metadata/_custom_type_script = "uid://dsys1lxnete83"
 

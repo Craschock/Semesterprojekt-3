@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://bfrvj77du1aeg"]
+
+[ext_resource type="PackedScene" uid="uid://cjgno4a0akih6" path="res://src/scenes/item prefabs/items_story/story_item.tscn" id="1_vhghg"]
+
+[node name="StoryItem5" unique_id=280462394 instance=ExtResource("1_vhghg")]
+story_title = "Fifth Page"
+story_content = "Something terrible happened today. A colleague told me that some miners were working at a deep ore deposit. Suddenly, they heard a loud squeak. One of the miners hit the mole, whom I've often seen here, on the back with his pickaxe. He was bleeding, apparently. But instead of helping him, they just laughed and went back to work. When my colleague went to check on the mole, he was apparently just sitting up.  
+
+He seemed furious and ran straight to a nearby pickaxe. It looked like he was trying to pick it up. Of course, he couldn't, but when the others saw that, they just laughed even louder. Suddenly, the mine supervisor came and asked what was keeping everyone from working. The others pointed at the mole. The supervisor got a small cage, locked the mole in it, and took him away.  
+
+After hearing this, I naturally went looking for him. Unfortunately, I couldn't find him anywhere. I can't ask the supervisor right now, as he's busy preparing for the investor's arrival. I hope he's alright. I'll talk to the supervisor tomorrow after the meeting with the investor. Hopefully, it won't be too late by then. "

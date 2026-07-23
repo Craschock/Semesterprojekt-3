@@ -6,13 +6,18 @@
 [ext_resource type="Resource" uid="uid://bxwdh4dvm31ny" path="res://src/Resources/pg_biomes/yellow.tres" id="4_22d72"]
 [ext_resource type="Resource" uid="uid://uy8usd2jj104" path="res://src/Resources/pg_biomes/border.tres" id="5_3r8k2"]
 [ext_resource type="Texture2D" uid="uid://delq2h3473ggd" path="res://assets/sprites/pg_sprites/tiles/tilesetdefault.png" id="5_27gof"]
+[ext_resource type="PackedScene" uid="uid://bqtrgkf85mkao" path="res://src/scenes/item prefabs/items_story/story_dungeon1/story_item_1.tscn" id="6_lsx4g"]
 [ext_resource type="Texture2D" uid="uid://cia1xnkbhhsnu" path="res://assets/sprites/pg_sprites/tiles/tilesetyellow.png" id="6_rfy0p"]
-[ext_resource type="PackedScene" uid="uid://qdekhakrwp1w" path="res://src/scenes/item prefabs/fish.tscn" id="6_tcd80"]
 [ext_resource type="PackedScene" uid="uid://dv8qrnwefoxpp" path="res://src/scenes/procedural generation/SpawnRoom.tscn" id="7_824eo"]
+[ext_resource type="PackedScene" uid="uid://dfwovdgj1npmp" path="res://src/scenes/item prefabs/items_story/story_dungeon1/story_item_2.tscn" id="7_8jlte"]
 [ext_resource type="Texture2D" uid="uid://bojaa0j64371d" path="res://assets/sprites/pg_sprites/tiles/tilesetborder.png" id="8_22d72"]
+[ext_resource type="PackedScene" uid="uid://bonuyykwmmjff" path="res://src/scenes/item prefabs/items_story/story_dungeon1/story_item_3.tscn" id="8_v6qut"]
+[ext_resource type="PackedScene" uid="uid://cuqofgk8wqotj" path="res://src/scenes/item prefabs/items_story/story_dungeon1/story_item_4.tscn" id="9_fgwm8"]
 [ext_resource type="Texture2D" uid="uid://dm01dj46bv8yc" path="res://assets/sprites/pg_sprites/tiles/backgroundtilesv2.png" id="9_uh56i"]
+[ext_resource type="PackedScene" uid="uid://bfrvj77du1aeg" path="res://src/scenes/item prefabs/items_story/story_dungeon1/story_item_5.tscn" id="10_u01k7"]
 [ext_resource type="Texture2D" uid="uid://lpspuf575xw7" path="res://assets/sprites/pg_sprites/tiles/yellowbackgroundtilesv2.png" id="10_uh56i"]
 [ext_resource type="Texture2D" uid="uid://d07kk07u6mdmb" path="res://assets/sprites/pg_sprites/tiles/borderbackground.png" id="11_6vgho"]
+[ext_resource type="PackedScene" uid="uid://bx6qa7p4i5i84" path="res://src/scenes/item prefabs/items_story/story_dungeon1/story_item_6.tscn" id="11_uk2ka"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_hqns4"]
 texture = ExtResource("5_27gof")
@@ -147,7 +152,7 @@ biomes = Array[ExtResource("2_22d72")]([ExtResource("3_6vgho"), ExtResource("4_2
 region_size_chunks = 12
 border_thickness = 1
 filler_biome = ExtResource("5_3r8k2")
-item_scenes = Array[PackedScene]([ExtResource("6_tcd80")])
+item_scenes = Array[PackedScene]([ExtResource("6_lsx4g"), ExtResource("7_8jlte"), ExtResource("8_v6qut"), ExtResource("9_fgwm8"), ExtResource("10_u01k7"), ExtResource("11_uk2ka")])
 depth_darkness_range = 5
 depth_shading_downsample = 1
 tutorial_scene = ExtResource("7_824eo")

@@ -10,7 +10,7 @@ radius = 5.0990195
 
 [node name="BaseItem" type="RigidBody2D" unique_id=1088472823]
 collision_layer = 8
-collision_mask = 7
+collision_mask = 3
 script = ExtResource("1_rvjsi")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=322286197]

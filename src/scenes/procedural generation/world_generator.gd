@@ -424,7 +424,11 @@ func _on_item_exiting(item: Node) -> void:
 	# Chunk unload also frees the item; only a real pickup should count.
 	if item.has_meta("wg_unloading"):
 		return
-	_taken_items[item.get_meta("wg_chunk")] = true
+	var cp: Vector2i = item.get_meta("wg_chunk")
+	_taken_items[cp] = true
+	var chunk: WorldChunk = _loaded_chunks.get(cp)
+	if chunk != null:
+		chunk.decorations.erase(item)
 
 # --- Prebuilt rooms ---
 ##Classifies a tile against all prebuilt rooms.
@@ -577,6 +581,8 @@ func _unload_chunk(chunk_pos: Vector2i) -> void:
 			fg_layer.erase_cell(wp)
 			bg_layer.erase_cell(wp)
 	for node in chunk.decorations:
+		if not is_instance_valid(node):
+			continue
 		if node.has_meta("wg_chunk"):
 			node.set_meta("wg_unloading", true)
 		node.queue_free()
