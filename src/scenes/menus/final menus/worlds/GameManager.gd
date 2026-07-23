@@ -28,8 +28,6 @@ func spawn_player() -> void:
 
 	if spawn_marker:
 		player.global_position = spawn_marker.global_position
-		parallaxEffect.position.y = player.position.y / 1.275
-		parallaxEffect.position.x = player.position.x / 6.75
 		var camera = player.get_node_or_null("Camera2D")
 		if camera:
 			camera.reset_smoothing()

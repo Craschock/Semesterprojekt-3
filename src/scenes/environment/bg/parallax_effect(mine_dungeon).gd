@@ -16,8 +16,8 @@ class_name parallax_effect_mine_dungeon
 ## Offset of animation start for all layers
 @export var anim_offset = 2.5
 
-
 func _ready() -> void:
+	_align_layers()
 	var dust_sprites = [dust1, dust2, dust3, dust4]
 	
 	for i in range (dust_sprites.size()):
@@ -45,3 +45,15 @@ func _animate_dust(sprite: Sprite2D, delay: float) -> void:
 	tween.tween_property(sprite, "modulate:a", min_alpha, half_duration) \
 		.set_trans(Tween.TRANS_SINE) \
 		.set_ease(Tween.EASE_IN_OUT)
+
+
+func _align_layers() -> void:
+	var cam = get_viewport().get_camera_2d()
+	var zoom = cam.zoom if cam else Vector2.ONE
+	var half_view: Vector2 = get_viewport_rect().size / zoom * 0.5
+	for layer in get_children():
+		if layer is Parallax2D:
+			for s in layer.get_children():
+				if s is Sprite2D:
+					s.position.y = half_view.y + 390
+					s.position.x += 880
