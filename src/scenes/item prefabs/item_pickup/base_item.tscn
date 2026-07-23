@@ -16,7 +16,6 @@ script = ExtResource("1_rvjsi")
 scale = Vector2(0.4, 0.4)
 
 [node name="Sprite2D_OL" type="Sprite2D" parent="." unique_id=1008908077]
-visible = false
 scale = Vector2(0.4, 0.4)
 
 [node name="Body" type="CollisionShape2D" parent="." unique_id=625328982]
