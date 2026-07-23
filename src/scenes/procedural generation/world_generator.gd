@@ -72,6 +72,12 @@ class_name WorldGenerator
 ##1 = per-tile (sharp, but very slow) 2 = quarter the work
 @export_range(1, 4) var depth_shading_downsample: int = 2
 
+@export_group("Spawn Room")
+##Scene to show inside the Spawning Area, containing tutorial elements
+@export var tutorial_scene: PackedScene
+##offset by pixels, (0,0) is the top löeft corner
+@export var tutorial_offset: Vector2 = Vector2.ZERO
+
 
 # --- Internal state ---
 const DECO_SIZE: Dictionary = {
@@ -109,6 +115,9 @@ var _rooms: Array[Dictionary] = []
 ##Tile coordinate of the player spawn point.
 var _spawn_tile: Vector2i = Vector2i(0x7FFFFFFF, 0x7FFFFFFF)
 
+##Interior rect of the spawn room (in tiles)
+var _spawn_room_rect: Rect2i = Rect2i(0, 0, 0, 0)
+
 ##Chunk the player occupied during the previous check.
 var _last_player_chunk: Vector2i = Vector2i(0x7FFFFFFF, 0x7FFFFFFF)
 
@@ -140,6 +149,7 @@ func generate_world() -> void:
 	
 	if has_spawn_point():
 		_create_spawn_marker()
+		_place_tutorial()
 
 
 func _create_spawn_marker() -> void:
@@ -261,6 +271,7 @@ func _build_world_layout() -> void:
 func _build_rooms() -> void:
 	_rooms.clear()
 	_spawn_tile = Vector2i(0x7FFFFFFF, 0x7FFFFFFF)
+	_spawn_room_rect = Rect2i(0, 0, 0, 0)
 
 	# The first biome flagged as the spawn biome wins; warn if several are flagged.
 	var spawn_biome: BiomeData = null
@@ -302,6 +313,7 @@ func _build_rooms() -> void:
 			})
 			# Drop the player near the middle of the room's floor.
 			_spawn_tile = Vector2i(center_x, interior_y + h - 1)
+			_spawn_room_rect = Rect2i(interior_x, interior_y, w, h)
 
 		# Boss room: at the very bottom interior of the region, just above the border.
 		if biome.has_boss_room:
@@ -1363,7 +1375,20 @@ func get_spawn_position() -> Vector2:
 	
 	return local_pos
 
+##Returns the spawn room interior as a pixel-space Rect2 (local coordinates).
+##Size is zero if there is no spawn room.
+func get_spawn_room_rect_px() -> Rect2:
+	return Rect2(
+		Vector2(_spawn_room_rect.position) * tile_pixel_size,
+		Vector2(_spawn_room_rect.size) * tile_pixel_size
+	)
 
+func _place_tutorial() -> void:
+	if tutorial_scene == null or not has_spawn_point():
+		return
+	var node: Node2D = tutorial_scene.instantiate()
+	node.position = get_spawn_room_rect_px().position + tutorial_offset
+	add_child(node)
 
 # --- Debug timing ---
 var _dbg_frame_usec: int = 0

@@ -1,0 +1,4 @@
+[gd_scene format=3 uid="uid://dv8qrnwefoxpp"]
+
+[node name="SpawnRoom" type="Node2D" unique_id=1386508471]
+z_index = -1

@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://delq2h3473ggd" path="res://assets/sprites/pg_sprites/tiles/tilesetdefault.png" id="5_27gof"]
 [ext_resource type="Texture2D" uid="uid://cia1xnkbhhsnu" path="res://assets/sprites/pg_sprites/tiles/tilesetyellow.png" id="6_rfy0p"]
 [ext_resource type="PackedScene" uid="uid://qdekhakrwp1w" path="res://src/scenes/item prefabs/fish.tscn" id="6_tcd80"]
+[ext_resource type="PackedScene" uid="uid://dv8qrnwefoxpp" path="res://src/scenes/procedural generation/SpawnRoom.tscn" id="7_824eo"]
 [ext_resource type="Texture2D" uid="uid://bojaa0j64371d" path="res://assets/sprites/pg_sprites/tiles/tilesetborder.png" id="8_22d72"]
 [ext_resource type="Texture2D" uid="uid://dm01dj46bv8yc" path="res://assets/sprites/pg_sprites/tiles/backgroundtilesv2.png" id="9_uh56i"]
 [ext_resource type="Texture2D" uid="uid://lpspuf575xw7" path="res://assets/sprites/pg_sprites/tiles/yellowbackgroundtilesv2.png" id="10_uh56i"]
@@ -149,6 +150,7 @@ filler_biome = ExtResource("5_3r8k2")
 item_scenes = Array[PackedScene]([ExtResource("6_tcd80")])
 depth_darkness_range = 5
 depth_shading_downsample = 1
+tutorial_scene = ExtResource("7_824eo")
 
 [node name="Foreground" type="TileMapLayer" parent="." unique_id=1532146895]
 z_index = 1
