@@ -3,16 +3,31 @@ class_name MainHUD
 
 @export var fade_duration: float = 2.0
 
-@onready var BlackoutEffect: ColorRect = $BlackoutEffect
 @onready var debug_ui: Control = $DebugUI
+@onready var BlackoutEffect: ColorRect = $BlackoutEffect
 @onready var healthBar: TextureProgressBar = $PlayerUI/TextureProgressBar
+
+# Story Stuff
+@onready var story_panel: Control = $StoryPanel
+@onready var story_title_label: Label = $StoryPanel/TitleLabel
+@onready var story_content_label: Label = $StoryPanel/ContentLabel
+
+
+var isFrozen: bool = false
+var isShowing_Story: bool = false
 
 var player: PlayerMovement
 
 func _ready() -> void:
+	process_mode = Node.PROCESS_MODE_ALWAYS
+	add_to_group("HUD")
+	
 	# Hide all UIs (Also auch für die zukunft alle hiden)
 	if debug_ui:
 		debug_ui.hide()
+	
+	if story_panel:
+		story_panel.hide()
 	
 	await get_tree().process_frame
 	player = PlayerManager.player
@@ -29,6 +44,13 @@ func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("toggle_debug"):
 		if debug_ui:
 			debug_ui.visible = !debug_ui.visible
+	
+	# all escape things
+	if event.is_action_pressed("pause"):
+		if isShowing_Story:
+			close_story()
+			return
+
 
 
 
@@ -52,3 +74,24 @@ func fadeEffect(fade_in: bool) -> void:
 # values are lost due to Healthbar progressbar texture length
 func drawHealth(_current: int, _max: int) -> void:
 	healthBar.value = (float(_current) / float(_max)) * 100
+
+# Story methods
+func show_story(title: String, content: String) -> void:
+	isShowing_Story = true
+	
+	story_title_label.text = title
+	story_content_label.text = content
+	story_panel.show()
+	freeze_game(true)
+
+func close_story() -> void:
+	isShowing_Story = false
+	
+	story_panel.hide()
+	freeze_game(false)
+
+
+# Helper
+func freeze_game(variable: bool) -> void:
+	get_tree().paused = variable
+	isFrozen = variable

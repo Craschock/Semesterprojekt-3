@@ -13,18 +13,20 @@ radius = 36.0
 
 [node name="StoryItem" type="RigidBody2D" unique_id=280462394]
 collision_layer = 8
-collision_mask = 3
 script = ExtResource("1_3pmj3")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1061060691]
+scale = Vector2(0.67, 0.67)
 texture = ExtResource("2_2n275")
 
 [node name="Sprite2D_OL" type="Sprite2D" parent="." unique_id=863260917]
 visible = false
+scale = Vector2(0.67, 0.67)
 texture = ExtResource("3_2n275")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=606864681]
 rotation = 0.2617994
+scale = Vector2(0.67, 0.67)
 shape = SubResource("RectangleShape2D_w5qaf")
 
 [node name="InteractableComponent" type="Area2D" parent="." unique_id=709400210]
@@ -34,4 +36,5 @@ script = ExtResource("3_453w1")
 metadata/_custom_type_script = "uid://skqpnfklkhjx"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="InteractableComponent" unique_id=140662451]
+scale = Vector2(0.67, 0.67)
 shape = SubResource("CircleShape2D_0wvym")

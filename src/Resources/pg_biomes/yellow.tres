@@ -10,6 +10,7 @@ placement = 1
 has_open_sky = true
 cave_fade_depth = 80
 has_spawn_room = false
+has_boss_room = false
 boss_room_size = Vector2i(100, 40)
 seed_offset = 101
 frequency = 0.073
