@@ -1082,7 +1082,7 @@ libraries/ = SubResource("AnimationLibrary_lrig1")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1042958842]
 offset = Vector2(0, -8)
-zoom = Vector2(5, 5)
+zoom = Vector2(4.75, 4.75)
 position_smoothing_enabled = true
 
 [node name="AudioListener2D" type="AudioListener2D" parent="." unique_id=1716945193]
