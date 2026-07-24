@@ -37,12 +37,20 @@ func _ready() -> void:
 	floor_snap_length = step_height
 
 func _on_player_spotted() -> void:
-	if chase_state and not is_dead:
-		state_machine.force_transition(chase_state.name)
+	if is_dead:
+		return
+		
+	var current = state_machine.current_state
+	# Enemy darf nur chasen, wenn er am laufen oder patrolieren war
+	if current == idle_state or current.name == "EnemyWalk" or current.name == "EnemyPatrol":
+		if chase_state:
+			state_machine.force_transition(chase_state.name)
 
 func _on_player_lost() -> void:
 	if not is_dead:
-		state_machine.force_transition(idle_state.name)
+		var current = state_machine.current_state
+		if current == chase_state:
+			state_machine.force_transition(idle_state.name)
 
 func _physics_process(delta: float) -> void:
 	if not is_on_floor():
