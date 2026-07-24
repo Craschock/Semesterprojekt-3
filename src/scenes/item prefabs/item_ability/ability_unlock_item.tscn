@@ -1,0 +1,31 @@
+[gd_scene format=3 uid="uid://du23sq8747gmb"]
+
+[ext_resource type="Script" uid="uid://c7aknpdlbedi6" path="res://src/scenes/item prefabs/item_ability/AbilityUnlockItem.gd" id="1_nxkvp"]
+[ext_resource type="Script" uid="uid://skqpnfklkhjx" path="res://src/scenes/components/InteractableComponent.gd" id="3_041fg"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hi2eb"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_n6xhc"]
+radius = 36.0
+
+[node name="AbilityUnlockItem" type="RigidBody2D" unique_id=1619955324]
+script = ExtResource("1_nxkvp")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=443318379]
+
+[node name="Sprite2D_OL" type="Sprite2D" parent="." unique_id=1100118103]
+visible = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1083837325]
+scale = Vector2(0.67, 0.67)
+shape = SubResource("RectangleShape2D_hi2eb")
+
+[node name="InteractableComponent" type="Area2D" parent="." unique_id=1710507692]
+collision_layer = 256
+collision_mask = 2
+script = ExtResource("3_041fg")
+metadata/_custom_type_script = "uid://skqpnfklkhjx"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractableComponent" unique_id=1428855818]
+scale = Vector2(0.67, 0.67)
+shape = SubResource("CircleShape2D_n6xhc")

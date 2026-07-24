@@ -3,6 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://c301qejfle2yq" path="res://src/scenes/entities/Enemies/base_enemy.tscn" id="1_ysx8m"]
 [ext_resource type="Script" uid="uid://can5h6ek6pv8o" path="res://src/scenes/entities/Enemies/boss/boss_mole.gd" id="2_kryld"]
 [ext_resource type="Texture2D" uid="uid://ur1kp0awre70" path="res://assets/sprites/entities/enemies/boss/mole/enemy_b_mole_O_attack_roll.png" id="3_735nc"]
+[ext_resource type="PackedScene" uid="uid://dr8kybnx61y83" path="res://src/scenes/item prefabs/item_ability/abilities/new_claw.tscn" id="3_jag5r"]
 [ext_resource type="Texture2D" uid="uid://u481hckbt4nq" path="res://assets/sprites/entities/enemies/boss/mole/enemy_b_mole_death.png" id="3_y6v0t"]
 [ext_resource type="Texture2D" uid="uid://bt80vydv2xsmf" path="res://assets/sprites/entities/enemies/boss/mole/enemy_b_mole_digin.png" id="4_4tcsf"]
 [ext_resource type="Texture2D" uid="uid://dvemdr4o4d60h" path="res://assets/sprites/entities/enemies/boss/mole/enemy_b_mole_O_roll_stop.png" id="4_jm58j"]
@@ -1355,6 +1356,9 @@ idle_state = NodePath("StateMachine/MoleIdle")
 chase_state = NodePath("StateMachine/MoleMove")
 step_height = 4.0
 attack_cooldown = 5.0
+
+[node name="LootDropComponent" parent="." index="0" unique_id=715616856]
+possible_drops = Array[PackedScene]([ExtResource("3_jag5r")])
 
 [node name="HealthComponent" parent="." index="1" unique_id=1881424083]
 max_health = 500

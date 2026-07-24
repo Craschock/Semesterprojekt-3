@@ -57,7 +57,7 @@ var is_frozen: bool = false
 # Unlockables
 @export_category("Unlockables")
 ## Check if player has digging unlocked (1st boss)
-@export var unlocked_digging: bool = true
+@export var unlocked_digging: bool = false
 
 var action_input_buffer_timer: float = 0.0
 var block_input_buffer_timer: float = 0.0
