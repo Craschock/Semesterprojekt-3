@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://cjgno4a0akih6"]
 
-[ext_resource type="Script" uid="uid://ci5a4urrrj4s5" path="res://src/scenes/item prefabs/items_story/StoryItem.gd" id="1_3pmj3"]
+[ext_resource type="Script" uid="uid://ci5a4urrrj4s5" path="res://src/scenes/item prefabs/item_story/StoryItem.gd" id="1_3pmj3"]
 [ext_resource type="Texture2D" uid="uid://c2jfbb43d845n" path="res://assets/sprites/items/Schriftrolle.png" id="2_2n275"]
 [ext_resource type="Texture2D" uid="uid://bdy6itxv5l7yi" path="res://assets/sprites/items/Schriftrolle_OL.png" id="3_2n275"]
 [ext_resource type="Script" uid="uid://skqpnfklkhjx" path="res://src/scenes/components/InteractableComponent.gd" id="3_453w1"]

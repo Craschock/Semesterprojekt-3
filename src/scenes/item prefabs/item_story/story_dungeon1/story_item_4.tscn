@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://cuqofgk8wqotj"]
 
-[ext_resource type="PackedScene" uid="uid://cjgno4a0akih6" path="res://src/scenes/item prefabs/items_story/story_item.tscn" id="1_0xx7d"]
+[ext_resource type="PackedScene" uid="uid://cjgno4a0akih6" path="res://src/scenes/item prefabs/item_story/story_item.tscn" id="1_0xx7d"]
 
 [node name="StoryItem4" unique_id=280462394 instance=ExtResource("1_0xx7d")]
 story_title = "Fourth Page"

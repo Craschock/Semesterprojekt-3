@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://bqtrgkf85mkao"]
 
-[ext_resource type="PackedScene" uid="uid://cjgno4a0akih6" path="res://src/scenes/item prefabs/items_story/story_item.tscn" id="1_2fqn6"]
+[ext_resource type="PackedScene" uid="uid://cjgno4a0akih6" path="res://src/scenes/item prefabs/item_story/story_item.tscn" id="1_2fqn6"]
 
 [node name="StoryItem1" unique_id=280462394 instance=ExtResource("1_2fqn6")]
 story_title = "First Page"
