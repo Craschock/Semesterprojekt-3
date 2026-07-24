@@ -11,25 +11,56 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_2chjh")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=729392060]
-layout_mode = 0
-offset_left = 855.0
-offset_top = 435.0
-offset_right = 979.0
-offset_bottom = 536.0
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=1816936374]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(2, 2)
+pivot_offset_ratio = Vector2(0.5, 0.5)
 
-[node name="FlyButton" type="CheckButton" parent="VBoxContainer" unique_id=1828613651]
+[node name="Cheats" type="VBoxContainer" parent="HBoxContainer" unique_id=729392060]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="HBoxContainer/Cheats" unique_id=712814022]
+layout_mode = 2
+text = "Cheats"
+
+[node name="FlyButton" type="CheckButton" parent="HBoxContainer/Cheats" unique_id=1828613651]
 layout_mode = 2
 text = "Fly"
 
-[node name="NoclipButton" type="CheckButton" parent="VBoxContainer" unique_id=88912559]
+[node name="NoclipButton" type="CheckButton" parent="HBoxContainer/Cheats" unique_id=88912559]
 layout_mode = 2
 text = "Noclip"
 
-[node name="GodmodeButton" type="CheckButton" parent="VBoxContainer" unique_id=652441829]
+[node name="GodmodeButton" type="CheckButton" parent="HBoxContainer/Cheats" unique_id=652441829]
 layout_mode = 2
 text = "Godmode"
 
-[connection signal="toggled" from="VBoxContainer/FlyButton" to="." method="_on_fly_button_toggled"]
-[connection signal="toggled" from="VBoxContainer/NoclipButton" to="." method="_on_noclip_button_toggled"]
-[connection signal="toggled" from="VBoxContainer/GodmodeButton" to="." method="_on_godmode_button_toggled"]
+[node name="Unlocks" type="VBoxContainer" parent="HBoxContainer" unique_id=1559956190]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="HBoxContainer/Unlocks" unique_id=1209345353]
+layout_mode = 2
+text = "Unlocks"
+
+[node name="Unlock_Digging" type="CheckButton" parent="HBoxContainer/Unlocks" unique_id=266573418]
+layout_mode = 2
+text = "U_Digging"
+
+[node name="ColorRect" type="ColorRect" parent="HBoxContainer" unique_id=703088442]
+layout_mode = 2
+
+[connection signal="toggled" from="HBoxContainer/Cheats/FlyButton" to="." method="_on_fly_button_toggled"]
+[connection signal="toggled" from="HBoxContainer/Cheats/NoclipButton" to="." method="_on_noclip_button_toggled"]
+[connection signal="toggled" from="HBoxContainer/Cheats/GodmodeButton" to="." method="_on_godmode_button_toggled"]
+[connection signal="toggled" from="HBoxContainer/Unlocks/Unlock_Digging" to="." method="_on_unlock_digging_toggled"]

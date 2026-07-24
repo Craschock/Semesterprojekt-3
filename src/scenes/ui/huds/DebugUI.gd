@@ -1,26 +1,36 @@
 extends Control
 class_name DebugUI
 
-@onready var fly_btn: CheckButton = $VBoxContainer/FlyButton
-@onready var noclip_btn: CheckButton = $VBoxContainer/NoclipButton
-@onready var godmode_btn: CheckButton = $VBoxContainer/GodmodeButton
+# cheats
+@onready var fly_btn: CheckButton = $HBoxContainer/Cheats/FlyButton
+@onready var noclip_btn: CheckButton = $HBoxContainer/Cheats/NoclipButton
+@onready var godmode_btn: CheckButton = $HBoxContainer/Cheats/GodmodeButton
 
-# We store the original collision masks so we can restore them when noclip turns off!
+# unlocks
+@onready var u_digging_btn: CheckButton = $HBoxContainer/Unlocks/Unlock_Digging
+
+# We store the original collision masks so we can restore them when noclip turns off
 var original_layer: int = 2
 var original_mask: int = 5
+var player: PlayerMovement:
+	get:
+		return PlayerManager.player
 
 func _ready() -> void:
 	fly_btn.focus_mode = Control.FOCUS_NONE
 	noclip_btn.focus_mode = Control.FOCUS_NONE
 	godmode_btn.focus_mode = Control.FOCUS_NONE
 
+
+# Buttons
+
+
+# cheats
 func _on_fly_button_toggled(toggled_on: bool) -> void:
-	var player = PlayerManager.player
 	if player:
 		player.apply_gravity = !toggled_on
 
 func _on_noclip_button_toggled(toggled_on: bool) -> void:
-	var player = PlayerManager.player
 	if player:
 		if toggled_on:
 			# Save current collisions, then turn off
@@ -41,8 +51,12 @@ func _on_noclip_button_toggled(toggled_on: bool) -> void:
 				player.apply_gravity = true
 
 func _on_godmode_button_toggled(toggled_on: bool) -> void:
-	var player = PlayerManager.player
 	if player:
 		var hitbox = player.get_node_or_null("HitboxComponent")
 		if hitbox:
 			hitbox.is_invincible = toggled_on
+
+# unlocks
+func _on_unlock_digging_toggled(toggled_on: bool) -> void:
+	if player:
+		player.unlocked_digging = toggled_on
