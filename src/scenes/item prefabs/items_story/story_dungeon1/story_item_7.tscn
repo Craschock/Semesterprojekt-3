@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://ktg14fvvhxcg"]
+
+[ext_resource type="PackedScene" uid="uid://cjgno4a0akih6" path="res://src/scenes/item prefabs/items_story/story_item.tscn" id="1_2s34m"]
+
+[node name="StoryItem7" unique_id=280462394 instance=ExtResource("1_2s34m")]
+story_content = "After hearing this, I naturally went looking for him. Unfortunately, I couldn't find him anywhere. I can't ask the supervisor right now, as he's busy preparing for the investor's arrival. I hope he's alright. I'll talk to the supervisor tomorrow after the meeting with the investor. Hopefully, it won't be too late by then."
