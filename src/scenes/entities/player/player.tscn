@@ -534,12 +534,12 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_wmak5")
 }],
-"loop": false,
+"loop": 0,
 "name": &"attack_scratch",
 "speed": 7.0
 }, {
 "frames": [],
-"loop": false,
+"loop": 0,
 "name": &"attack_scratch2",
 "speed": 7.0
 }, {
@@ -550,7 +550,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_hsbqv")
 }],
-"loop": false,
+"loop": 0,
 "name": &"attack_scratch_claw",
 "speed": 7.0
 }, {
@@ -558,7 +558,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_8rgh3")
 }],
-"loop": true,
+"loop": 1,
 "name": &"block",
 "speed": 1.0
 }, {
@@ -644,7 +644,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_6ki4a")
 }],
-"loop": false,
+"loop": 0,
 "name": &"death",
 "speed": 16.0
 }, {
@@ -652,7 +652,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_cohfn")
 }],
-"loop": false,
+"loop": 0,
 "name": &"dig_idle",
 "speed": 0.0
 }, {
@@ -741,7 +741,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_es6kr")
 }],
-"loop": false,
+"loop": 0,
 "name": &"dig_in",
 "speed": 12.0
 }, {
@@ -761,7 +761,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_ko3o1")
 }],
-"loop": true,
+"loop": 1,
 "name": &"dig_move",
 "speed": 8.0
 }, {
@@ -817,7 +817,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_pcekm")
 }],
-"loop": false,
+"loop": 0,
 "name": &"dig_out",
 "speed": 12.0
 }, {
@@ -828,7 +828,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_i38os")
 }],
-"loop": false,
+"loop": 0,
 "name": &"hit",
 "speed": 10.0
 }, {
@@ -851,7 +851,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_xdi73")
 }],
-"loop": true,
+"loop": 1,
 "name": &"idle",
 "speed": 5.0
 }, {
@@ -874,7 +874,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_syi74")
 }],
-"loop": true,
+"loop": 1,
 "name": &"idle_claw",
 "speed": 5.0
 }, {
@@ -882,7 +882,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_sdsf3")
 }],
-"loop": false,
+"loop": 0,
 "name": &"jump_charging",
 "speed": 5.0
 }, {
@@ -893,7 +893,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_0aevd")
 }],
-"loop": false,
+"loop": 0,
 "name": &"jump_down",
 "speed": 5.0
 }, {
@@ -910,7 +910,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_fv6hk")
 }],
-"loop": false,
+"loop": 0,
 "name": &"jump_landing",
 "speed": 6.0
 }, {
@@ -921,7 +921,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_7265o")
 }],
-"loop": false,
+"loop": 0,
 "name": &"jump_up",
 "speed": 5.0
 }, {
@@ -944,7 +944,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_s6n62")
 }],
-"loop": true,
+"loop": 1,
 "name": &"run",
 "speed": 8.0
 }, {
@@ -967,7 +967,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_kpdqe")
 }],
-"loop": true,
+"loop": 1,
 "name": &"run_claw",
 "speed": 8.0
 }]
@@ -1034,7 +1034,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_fmfnc")
 }],
-"loop": false,
+"loop": 0,
 "name": &"default",
 "speed": 8.0
 }]
@@ -1204,7 +1204,7 @@ libraries/ = SubResource("AnimationLibrary_lrig1")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1042958842]
 offset = Vector2(0, -8)
-zoom = Vector2(4.75, 4.75)
+zoom = Vector2(5, 5)
 position_smoothing_enabled = true
 
 [node name="AudioListener2D" type="AudioListener2D" parent="." unique_id=1716945193]

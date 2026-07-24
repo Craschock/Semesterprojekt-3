@@ -12,7 +12,7 @@ config_version=5
 
 config/name="Ditto Dungeon"
 run/main_scene="uid://b3ivrpnr5vk0g"
-config/features=PackedStringArray("4.6", "Forward Plus")
+config/features=PackedStringArray("4.7", "Forward Plus")
 config/icon="res://icon.svg"
 
 [audio]
@@ -28,6 +28,7 @@ EffectManager="*uid://qcib5dvtt62x"
 
 window/size/viewport_width=1920
 window/size/viewport_height=1080
+window/size/mode=3
 
 [editor_plugins]
 

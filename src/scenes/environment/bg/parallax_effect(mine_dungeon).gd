@@ -55,5 +55,5 @@ func _align_layers() -> void:
 		if layer is Parallax2D:
 			for s in layer.get_children():
 				if s is Sprite2D:
-					s.position.y = half_view.y + 425
+					s.position.y = half_view.y + 580
 					s.position.x += 880
