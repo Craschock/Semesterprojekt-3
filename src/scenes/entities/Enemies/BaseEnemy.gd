@@ -2,11 +2,13 @@ extends CharacterBody2D
 class_name BaseEnemy
 
 var gravity: float = ProjectSettings.get_setting("physics/2d/default_gravity") * 0.67
-
+var is_dead: bool = false
 var apply_gravity: bool = true
 var stored_velocity: Vector2
 @onready var health_component: HealthComponent = $HealthComponent
 @onready var state_machine: StateMachine = $StateMachine
+@onready var hitbox_component: HitboxComponent = $HitboxComponent
+@onready var loot_drop_component: LootDropComponent = $LootDropComponent
 
 @export_category("State Configuration")
 ## Idle state
@@ -35,11 +37,12 @@ func _ready() -> void:
 	floor_snap_length = step_height
 
 func _on_player_spotted() -> void:
-	if chase_state:
+	if chase_state and not is_dead:
 		state_machine.force_transition(chase_state.name)
 
 func _on_player_lost() -> void:
-	state_machine.force_transition(idle_state.name)
+	if not is_dead:
+		state_machine.force_transition(idle_state.name)
 
 func _physics_process(delta: float) -> void:
 	if not is_on_floor():
@@ -70,6 +73,9 @@ func unfreeze() -> void:
 	apply_gravity = true
 
 func _on_health_changed(_current: int, _max: int) -> void:
+	if is_dead:
+		return
+	
 	state_machine.force_transition("hit")
 
 # Flipping left/right
@@ -86,5 +92,15 @@ func update_facing(direction: float) -> void:
 
 # Triggers when health hits 0
 func die() -> void:
-	# Add stuff later
-	queue_free()
+	if is_dead:
+		return
+		
+	is_dead = true
+	velocity = Vector2.ZERO
+	var col_shape = hitbox_component.get_node_or_null("CollisionShape2D")
+	
+	if col_shape:
+		col_shape.set_deferred("disabled", true)
+	
+	loot_drop_component._start_drop()
+	state_machine.force_transition("enemydeath")

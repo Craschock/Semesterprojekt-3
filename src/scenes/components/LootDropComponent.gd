@@ -13,11 +13,7 @@ class_name LootDropComponent
 ## Velocity/Strength of item flying into the air on drop (randomize in the future)
 @export var pop_force: float = 150.0
 
-func _ready() -> void:
-	if health_component:
-		health_component.health_depleted.connect(_on_health_depleted)
-
-func _on_health_depleted() -> void:
+func _start_drop() -> void:
 	if possible_drops.is_empty():
 		return
 	

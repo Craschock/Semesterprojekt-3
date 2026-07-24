@@ -55,6 +55,17 @@ func dig_in() -> void:
 func dig_out() -> void:
 	is_underground = false
 
+# Triggers when health hits 0
 func die() -> void:
-	# Add stuff later
-	queue_free()
+	if is_dead:
+		return
+		
+	is_dead = true
+	velocity = Vector2.ZERO
+	var col_shape = hitbox_component.get_node_or_null("CollisionShape2D")
+	
+	if col_shape:
+		col_shape.set_deferred("disabled", true)
+	
+	loot_drop_component._start_drop()
+	state_machine.force_transition("enemydeath")

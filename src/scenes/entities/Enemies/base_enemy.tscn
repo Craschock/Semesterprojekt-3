@@ -7,6 +7,7 @@
 [ext_resource type="Script" uid="uid://b4wfr5jd3n4dn" path="res://src/scenes/entities/Enemies/EnemyHit.gd" id="5_jg6wm"]
 [ext_resource type="Script" uid="uid://b1llifetbvfpl" path="res://src/scenes/entities/Enemies/behavior_components/EnemyIdle.gd" id="6_bv0u3"]
 [ext_resource type="PackedScene" uid="uid://b17p735ram0ly" path="res://src/scenes/components/detection_component.tscn" id="6_cqa0d"]
+[ext_resource type="Script" uid="uid://2em4t2sf5xtv" path="res://src/scenes/entities/Enemies/behavior_components/EnemyDeath.gd" id="8_3m4sl"]
 [ext_resource type="Script" uid="uid://ckiamh2oybkg3" path="res://src/scenes/components/LootDropComponent.gd" id="8_ke3wq"]
 
 [node name="BaseEnemy" type="CharacterBody2D" unique_id=961012920 node_paths=PackedStringArray("idle_state")]
@@ -40,6 +41,10 @@ script = ExtResource("5_jg6wm")
 [node name="EnemyIdle" type="Node" parent="StateMachine" unique_id=1319766842]
 script = ExtResource("6_bv0u3")
 metadata/_custom_type_script = "uid://b1llifetbvfpl"
+
+[node name="EnemyDeath" type="Node" parent="StateMachine" unique_id=764193855]
+script = ExtResource("8_3m4sl")
+metadata/_custom_type_script = "uid://2em4t2sf5xtv"
 
 [node name="WeaponPivot" type="Node2D" parent="." unique_id=1288338269]
 
