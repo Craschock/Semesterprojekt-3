@@ -48,5 +48,6 @@ func _on_body_entered(body: Node2D) -> void:
 			hitbox.is_invincible = false
 		
 		if boss and boss is boss_mole:
+			boss.unfreeze()
 			boss.is_playerInArena = true
 			print("Enable boss")

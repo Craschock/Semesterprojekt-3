@@ -9,7 +9,15 @@
 [ext_resource type="PackedScene" uid="uid://bh6kjgw51fv7u" path="res://src/scenes/entities/player/player.tscn" id="3_s4t1n"]
 [ext_resource type="PackedScene" uid="uid://ckcrqvaawf18p" path="res://src/scenes/entities/Enemies/small/spider/spider.tscn" id="6_cm510"]
 [ext_resource type="PackedScene" uid="uid://dfd10kendyi1g" path="res://src/scenes/procedural generation/world_generation.tscn" id="8_owfvr"]
+[ext_resource type="PackedScene" uid="uid://bqtrgkf85mkao" path="res://src/scenes/item prefabs/items_story/story_dungeon1/story_item_1.tscn" id="9_cydkl"]
+[ext_resource type="PackedScene" uid="uid://dfwovdgj1npmp" path="res://src/scenes/item prefabs/items_story/story_dungeon1/story_item_2.tscn" id="10_hbboa"]
 [ext_resource type="AudioStream" uid="uid://os4yuk7ncefu" path="res://assets/sounds/music/mine_music/atmo/Atmo Mine(1).mp3" id="10_hrigq"]
+[ext_resource type="PackedScene" uid="uid://bonuyykwmmjff" path="res://src/scenes/item prefabs/items_story/story_dungeon1/story_item_3.tscn" id="11_e85fw"]
+[ext_resource type="PackedScene" uid="uid://cuqofgk8wqotj" path="res://src/scenes/item prefabs/items_story/story_dungeon1/story_item_4.tscn" id="12_h8ths"]
+[ext_resource type="PackedScene" uid="uid://bfrvj77du1aeg" path="res://src/scenes/item prefabs/items_story/story_dungeon1/story_item_5.tscn" id="13_w3vmo"]
+[ext_resource type="PackedScene" uid="uid://bx6qa7p4i5i84" path="res://src/scenes/item prefabs/items_story/story_dungeon1/story_item_6.tscn" id="14_kjej0"]
+[ext_resource type="PackedScene" uid="uid://ktg14fvvhxcg" path="res://src/scenes/item prefabs/items_story/story_dungeon1/story_item_7.tscn" id="15_tuqsm"]
+[ext_resource type="PackedScene" uid="uid://djyui1vkp6o6t" path="res://src/scenes/entities/Enemies/boss/boss_mole.tscn" id="18_hbboa"]
 
 [node name="Game" type="Node" unique_id=109101168]
 
@@ -22,6 +30,7 @@ script = ExtResource("1_pr1v7")
 world_generator = NodePath("../World")
 player = NodePath("../Player")
 parallaxEffect = NodePath("../ParallaxEffect(Mine_Dungeon)")
+boss_scene = ExtResource("18_hbboa")
 
 [node name="EnemySpawner" type="Node" parent="GameManager" unique_id=1808774082 node_paths=PackedStringArray("world_generator", "entity_container")]
 script = ExtResource("2_rakx4")
@@ -40,6 +49,7 @@ view_radius_chunks = 2
 unload_radius_chunks = 3
 region_size_chunks = 24
 player = NodePath("../Player")
+item_scenes = Array[PackedScene]([ExtResource("9_cydkl"), ExtResource("10_hbboa"), ExtResource("11_e85fw"), ExtResource("12_h8ths"), ExtResource("13_w3vmo"), ExtResource("14_kjej0"), ExtResource("15_tuqsm")])
 
 [node name="MainHUD" parent="." unique_id=1196255063 instance=ExtResource("2_oivod")]
 

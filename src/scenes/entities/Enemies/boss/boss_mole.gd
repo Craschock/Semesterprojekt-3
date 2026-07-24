@@ -18,6 +18,7 @@ func _ready() -> void:
 	health_component.health_depleted.connect(die)
 	health_component.health_changed.connect(_on_health_changed)
 	
+	var apply_gravity = false
 	var detection = get_node_or_null("WeaponPivot/DetectionComponent")
 	if detection:
 		detection.player_spotted.connect(_on_player_spotted)
@@ -26,7 +27,7 @@ func _ready() -> void:
 	floor_snap_length = step_height
 
 func _physics_process(delta: float) -> void:
-	if not is_on_floor():
+	if apply_gravity and not is_on_floor():
 		velocity.y += gravity * delta
 	
 	if attack_cooldown_timer > 0.0:
