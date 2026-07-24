@@ -28,6 +28,10 @@
 [ext_resource type="Script" uid="uid://gqeb8nwhnam0" path="res://src/scenes/entities/Enemies/boss/states/MoleORollBrake.gd" id="26_dald7"]
 [ext_resource type="Script" uid="uid://ngfwax1ycwe0" path="res://src/scenes/entities/Enemies/boss/states/MoleORollStop.gd" id="27_kic0i"]
 [ext_resource type="PackedScene" uid="uid://dp2uswhllarmo" path="res://src/scenes/components/attack_component.tscn" id="28_2wlur"]
+[ext_resource type="Script" uid="uid://ca7qx8o7jslyp" path="res://src/scenes/entities/Enemies/boss/BossArenaTrigger.gd" id="29_26q5c"]
+[ext_resource type="Script" uid="uid://b416e0hwhsl28" path="res://src/scenes/ui/dialogue/DialogueLine.gd" id="30_qg2od"]
+[ext_resource type="FontFile" uid="uid://ww3qpbbtk4gc" path="res://assets/fonts/PixelOperator8.ttf" id="31_bv8l1"]
+[ext_resource type="Script" uid="uid://dv5tfkgu55epl" path="res://src/scenes/ui/dialogue/TextBubble.gd" id="32_bv8l1"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_wb7k7"]
 radius = 26.0
@@ -1252,6 +1256,97 @@ radius = 21.023796
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_26q5c"]
 size = Vector2(46, 36)
 
+[sub_resource type="Resource" id="Resource_bv8l1"]
+script = ExtResource("30_qg2od")
+speaker = 1
+text = "Du bist also der Störenfried..."
+metadata/_custom_type_script = "uid://b416e0hwhsl28"
+
+[sub_resource type="Resource" id="Resource_7cvx0"]
+script = ExtResource("30_qg2od")
+speaker = 1
+text = "Der hier alles durcheinander bringt."
+metadata/_custom_type_script = "uid://b416e0hwhsl28"
+
+[sub_resource type="Resource" id="Resource_jag5r"]
+script = ExtResource("30_qg2od")
+speaker = 1
+text = "*Sniff* Du.. *Sniff, Sniff*"
+metadata/_custom_type_script = "uid://b416e0hwhsl28"
+
+[sub_resource type="Resource" id="Resource_f1qt6"]
+script = ExtResource("30_qg2od")
+speaker = 1
+text = "Du bist auch eine Chimäre."
+metadata/_custom_type_script = "uid://b416e0hwhsl28"
+
+[sub_resource type="Resource" id="Resource_qg2od"]
+script = ExtResource("30_qg2od")
+speaker = 1
+text = "Was machst du.. "
+metadata/_custom_type_script = "uid://b416e0hwhsl28"
+
+[sub_resource type="Resource" id="Resource_dald7"]
+script = ExtResource("30_qg2od")
+speaker = 1
+text = "Ach nein..."
+metadata/_custom_type_script = "uid://b416e0hwhsl28"
+
+[sub_resource type="Resource" id="Resource_wn4q1"]
+script = ExtResource("30_qg2od")
+speaker = 1
+text = "Wurdest du etwa von unserem Meister vertrieben? "
+metadata/_custom_type_script = "uid://b416e0hwhsl28"
+
+[sub_resource type="Resource" id="Resource_kic0i"]
+script = ExtResource("30_qg2od")
+speaker = 1
+text = "Warst wohl zu schwach?"
+metadata/_custom_type_script = "uid://b416e0hwhsl28"
+
+[sub_resource type="Resource" id="Resource_sneba"]
+script = ExtResource("30_qg2od")
+speaker = 1
+text = "Riecht danach..."
+metadata/_custom_type_script = "uid://b416e0hwhsl28"
+
+[sub_resource type="Resource" id="Resource_vmebq"]
+script = ExtResource("30_qg2od")
+text = "Wer bist du?"
+metadata/_custom_type_script = "uid://b416e0hwhsl28"
+
+[sub_resource type="Resource" id="Resource_2luvn"]
+script = ExtResource("30_qg2od")
+speaker = 1
+text = " Ich?"
+metadata/_custom_type_script = "uid://b416e0hwhsl28"
+
+[sub_resource type="Resource" id="Resource_vjoqf"]
+script = ExtResource("30_qg2od")
+speaker = 1
+text = "Ich bin die vom Meister erst erschaffene Chimäre. "
+metadata/_custom_type_script = "uid://b416e0hwhsl28"
+
+[sub_resource type="Resource" id="Resource_mfl05"]
+script = ExtResource("30_qg2od")
+speaker = 1
+text = "Und die Stärkste noch dazu."
+metadata/_custom_type_script = "uid://b416e0hwhsl28"
+
+[sub_resource type="Resource" id="Resource_p3uhn"]
+script = ExtResource("30_qg2od")
+speaker = 1
+text = "Kleine Kostprobe gefällig?	"
+metadata/_custom_type_script = "uid://b416e0hwhsl28"
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_j8x64"]
+size = Vector2(204, 99)
+
+[sub_resource type="FontVariation" id="FontVariation_bv8l1"]
+base_font = ExtResource("31_bv8l1")
+variation_transform = Transform2D(1, 0, 0, 1, 0.04, 0)
+spacing_glyph = -1
+
 [node name="Boss_Mole" unique_id=961012920 node_paths=PackedStringArray("idle_state", "chase_state") instance=ExtResource("1_ysx8m")]
 script = ExtResource("2_kryld")
 wantsToSwitch_Time = 20.0
@@ -1367,5 +1462,32 @@ knockback_force = 150.0
 position = Vector2(0, -18)
 shape = SubResource("RectangleShape2D_26q5c")
 disabled = true
+
+[node name="BossArenaTrigger" type="Area2D" parent="." index="7" unique_id=1498616508]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("29_26q5c")
+dialogue_sequence = Array[ExtResource("30_qg2od")]([SubResource("Resource_bv8l1"), SubResource("Resource_7cvx0"), SubResource("Resource_jag5r"), SubResource("Resource_f1qt6"), SubResource("Resource_qg2od"), SubResource("Resource_dald7"), SubResource("Resource_wn4q1"), SubResource("Resource_kic0i"), SubResource("Resource_sneba"), SubResource("Resource_vmebq"), SubResource("Resource_2luvn"), SubResource("Resource_vjoqf"), SubResource("Resource_mfl05"), SubResource("Resource_p3uhn")])
+metadata/_custom_type_script = "uid://ca7qx8o7jslyp"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BossArenaTrigger" index="0" unique_id=671607519]
+position = Vector2(0, -49.5)
+shape = SubResource("RectangleShape2D_j8x64")
+
+[node name="TextBubble" type="Label" parent="." index="8" unique_id=171476866]
+anchors_preset = -1
+offset_left = -53.0
+offset_top = -80.0
+offset_right = 54.0
+offset_bottom = -57.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = SubResource("FontVariation_bv8l1")
+theme_override_font_sizes/font_size = 8
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+script = ExtResource("32_bv8l1")
+char_delay = 0.07
 
 [editable path="HitboxComponent"]

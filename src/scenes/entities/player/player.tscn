@@ -36,6 +36,8 @@
 [ext_resource type="Script" uid="uid://clwfqn0ju40t0" path="res://src/scenes/entities/player/states/PlayerDigOut.gd" id="27_i38os"]
 [ext_resource type="AudioStream" uid="uid://br0yqp2pt67tb" path="res://assets/sounds/entity_sound/player_sounds/player_death_sound.mp3" id="28_aomop"]
 [ext_resource type="AudioStream" uid="uid://bvba25tcmvc6u" path="res://assets/sounds/entity_sound/player_sounds/player_attack_sound.mp3" id="33_yjc7t"]
+[ext_resource type="FontFile" uid="uid://ww3qpbbtk4gc" path="res://assets/fonts/PixelOperator8.ttf" id="37_2bdcf"]
+[ext_resource type="Script" uid="uid://dv5tfkgu55epl" path="res://src/scenes/ui/dialogue/TextBubble.gd" id="38_2bdcf"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_oknxn"]
 radius = 3.0
@@ -973,6 +975,10 @@ _data = {
 &"scratch": SubResource("Animation_rqaru")
 }
 
+[sub_resource type="FontVariation" id="FontVariation_2bdcf"]
+base_font = ExtResource("37_2bdcf")
+spacing_glyph = -1
+
 [node name="Player" type="CharacterBody2D" unique_id=80359539]
 collision_layer = 2
 script = ExtResource("1_12pno")
@@ -1106,5 +1112,20 @@ bus = &"Sounds"
 stream = ExtResource("28_aomop")
 volume_db = 3.139
 bus = &"Sounds"
+
+[node name="TextBubble" type="Label" parent="." unique_id=370301571]
+anchors_preset = -1
+offset_left = -25.0
+offset_top = -37.0
+offset_right = 26.0
+offset_bottom = -21.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = SubResource("FontVariation_2bdcf")
+theme_override_font_sizes/font_size = 8
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+script = ExtResource("38_2bdcf")
 
 [editable path="HitboxComponent"]

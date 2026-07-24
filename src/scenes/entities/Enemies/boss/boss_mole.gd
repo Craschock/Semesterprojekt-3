@@ -12,6 +12,18 @@ var wantsToSwitch_time_timer: float = 0.0
 var is_underground: bool = false
 var is_playerInArena: bool = false
 
+func _ready() -> void:
+	add_to_group("boss")
+	
+	health_component.health_depleted.connect(die)
+	health_component.health_changed.connect(_on_health_changed)
+	
+	var detection = get_node_or_null("WeaponPivot/DetectionComponent")
+	if detection:
+		detection.player_spotted.connect(_on_player_spotted)
+		detection.player_lost.connect(_on_player_lost)
+	
+	floor_snap_length = step_height
 
 func _physics_process(delta: float) -> void:
 	if not is_on_floor():

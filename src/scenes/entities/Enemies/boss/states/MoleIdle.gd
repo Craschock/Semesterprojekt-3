@@ -18,6 +18,9 @@ func enter() -> void:
 		boss.get_node("AnimatedSprite2D").play("O_idle")
 
 func physics_update(_delta: float) -> void:
+	if !boss.is_playerInArena:
+		return
+	
 	if boss.wantsToSwitch_time_timer <= 0.0:
 		boss.wantsToSwitch_time_timer = boss.wantsToSwitch_Time
 		if boss.is_underground:
