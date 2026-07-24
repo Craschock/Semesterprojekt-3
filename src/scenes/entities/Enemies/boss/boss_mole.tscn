@@ -1357,7 +1357,7 @@ step_height = 4.0
 attack_cooldown = 5.0
 
 [node name="HealthComponent" parent="." index="1" unique_id=1881424083]
-max_health = 5
+max_health = 500
 
 [node name="CollisionShape2D" parent="HitboxComponent" parent_id_path=PackedInt32Array(232939803) index="0" unique_id=1698255179]
 position = Vector2(0, -24)
