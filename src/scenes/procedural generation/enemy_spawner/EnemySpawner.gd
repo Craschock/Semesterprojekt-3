@@ -4,13 +4,12 @@ class_name EnemySpawner
 @export_category("References")
 ## WorldGenerator node 
 @export var world_generator: WorldGenerator
-## Enemy scene
-@export var enemy_scene: Array[PackedScene]
 ## Where to place enemies in tree 
-# Also einfach nur eine node als "folder". 
-# Hier einfach die Root node einfügen. Funktioniert sonst nicht
-# Denke mal wegen den scalierungen. Änder ich wann anders mal
 @export var entity_container: Node 
+
+@export_category("Spawns")
+## Enemy scene
+@export var enemy_pool: Array[EnemySpawnData]
 
 # To keep track chunks
 var _processed_chunks: Array[Vector2i] = []
@@ -24,7 +23,7 @@ func _ready() -> void:
 	add_child(timer)
 
 func _check_for_spawns() -> void:
-	if world_generator == null or enemy_scene == null or entity_container == null:
+	if world_generator == null or enemy_pool.is_empty() or entity_container == null:
 		return
 
 	for chunk_pos in world_generator._enemy_spawns.keys():
@@ -38,8 +37,25 @@ func _check_for_spawns() -> void:
 				_spawn_enemy(local_pos)
 
 func _spawn_enemy(local_pos: Vector2) -> void:
-	var enemy = enemy_scene.pick_random().instantiate()
-	var global_spawn_pos = world_generator.to_global(local_pos)
+	var total_weight: float = 0.0
 	
-	enemy.global_position = global_spawn_pos
-	entity_container.add_child(enemy)
+	for enemy_data in enemy_pool:
+		total_weight += enemy_data.spawn_chance
+	
+	var random_value: float = randf_range(0.0, total_weight)
+	var current_weight: float = 0.0
+	var chosen_scene: PackedScene = null
+	
+	for enemy_data in enemy_pool:
+		current_weight += enemy_data.spawn_chance
+		if random_value <= current_weight:
+			chosen_scene = enemy_data.scene
+			break
+		
+	
+	if chosen_scene:
+		var enemy = chosen_scene.instantiate()
+		var global_spawn_pos = world_generator.to_global(local_pos)
+		
+		enemy.global_position = global_spawn_pos
+		entity_container.add_child(enemy)
