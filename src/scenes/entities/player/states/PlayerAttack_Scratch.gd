@@ -16,7 +16,10 @@ func enter() -> void:
 	sfx_player_attack.play()
 	
 	# Play animations
-	player.get_node("AnimatedSprite2D").play("attack_scratch")
+	if player.unlocked_digging:
+		player.get_node("AnimatedSprite2D").play("attack_scratch_claw")
+	else:
+		player.get_node("AnimatedSprite2D").play("attack_scratch")
 	player.get_node("AnimationPlayer").play("scratch")
 
 

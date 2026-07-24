@@ -8,7 +8,10 @@ func _ready() -> void:
 
 func enter() -> void:
 	# Play sprite animation
-	player.get_node("AnimatedSprite2D").play("idle")
+	if player.unlocked_digging:
+		player.get_node("AnimatedSprite2D").play("idle_claw")
+	else:
+		player.get_node("AnimatedSprite2D").play("idle")
 
 func physics_update(delta: float) -> void:
 	# Apply friction

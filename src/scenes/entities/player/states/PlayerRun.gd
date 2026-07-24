@@ -11,7 +11,10 @@ func _ready() -> void:
 
 func enter() -> void:
 	# Play sprite animation
-	player.get_node("AnimatedSprite2D").play("run")
+	if player.unlocked_digging:
+		player.get_node("AnimatedSprite2D").play("run_claw")
+	else:
+		player.get_node("AnimatedSprite2D").play("run")
 	#Izzy here: plays run sound as soon as running starts. Problem: Doesn't stop anymore, I am aware
 	sfx_player_run.play()
 

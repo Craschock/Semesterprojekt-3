@@ -35,4 +35,5 @@ func _on_interacted(interactor: Node) -> void:
 	if interactor is PlayerMovement:
 		if ability_to_unlock == Ability.DIGGING:
 			interactor.unlocked_digging = true
+			interactor.get_node_or_null("TextBubble").play_text("Press Q, Then Spacebar", 10)
 		queue_free()
