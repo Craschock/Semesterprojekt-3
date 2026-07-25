@@ -51,7 +51,7 @@ radius = 20.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_jasd0"]
 radius = 4.0
-height = 19.0
+height = 17.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ja1tm"]
 atlas = ExtResource("6_yd64i")
@@ -1126,7 +1126,7 @@ shape = SubResource("CircleShape2D_sgjri")
 [node name="InventoryComponent" parent="." unique_id=969716048 instance=ExtResource("4_sgjri")]
 
 [node name="Body" type="CollisionShape2D" parent="." unique_id=1785599104]
-position = Vector2(2, -9.5)
+position = Vector2(2, -8.5)
 shape = SubResource("CapsuleShape2D_jasd0")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1170618590]
