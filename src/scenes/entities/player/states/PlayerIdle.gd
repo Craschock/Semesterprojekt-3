@@ -19,10 +19,10 @@ func physics_update(delta: float) -> void:
 	
 	
 	
-	
 	# Other Transitions
-	if Input.get_axis("move_left", "move_right") != 0:
-		transitioned.emit(self, "run")
+	if player.is_input_allowed:
+		if Input.get_axis("move_left", "move_right") != 0:
+			transitioned.emit(self, "run")
 	
 	if player.jump_input_buffer_timer > 0.0 and player.can_jump():
 		player.jump_input_buffer_timer = 0.0

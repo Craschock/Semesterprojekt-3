@@ -19,8 +19,12 @@ func enter() -> void:
 	sfx_player_run.play()
 
 func physics_update(delta: float) -> void:
-	var direction := Input.get_axis("move_left", "move_right")
 	
+	if not player.is_input_allowed:
+		transitioned.emit(self, "idle")
+		pass
+	
+	var direction := Input.get_axis("move_left", "move_right")
 	
 	# Flip Sprite
 	player.update_facing(direction)

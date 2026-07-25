@@ -15,8 +15,7 @@ func _on_body_entered(body: Node2D) -> void:
 	
 	if body is PlayerMovement:
 		triggered = true
-		
-		body.freeze()
+		body.allow_input(false)
 		
 		var hitbox = body.get_node_or_null("HitboxComponent")
 		if hitbox:
@@ -42,7 +41,7 @@ func _on_body_entered(body: Node2D) -> void:
 		
 		
 		print("Cutscene end")
-		body.unfreeze()
+		body.allow_input(true)
 		
 		if hitbox:
 			hitbox.is_invincible = false
