@@ -24,6 +24,7 @@ var stored_velocity: Vector2
 var gravity: float = ProjectSettings.get_setting("physics/2d/default_gravity")
 var apply_gravity: bool = true
 var is_frozen: bool = false
+var is_input_allowed: bool = true
 
 
 #Jump
@@ -84,48 +85,24 @@ func _ready() -> void:
 
 func _physics_process(delta: float) -> void:
 	var cam := get_viewport().get_camera_2d()
-	# Input Buffer
-	if Input.is_action_just_pressed("attack"):
-			action_input_buffer_timer = action_input_buffer
-	if Input.is_action_just_pressed("block"):
-			block_input_buffer_timer = block_input_buffer
-	if Input.is_action_just_pressed("jump"):
-			jump_input_buffer_timer = jump_input_buffer
-	if Input.is_action_just_pressed("move_dig"):
-		dig_input_buffer_timer = dig_input_buffer
 	
-	# Jump buffer
+	# Input Buffer
+	if is_input_allowed:
+		handle_input()
+	
+	# If frozen, break here
 	if is_frozen:
 		return
 	
-	
+	# Apply gravity
+	apply_gravitation(delta)
 	# Decreasing Buffers
-	if is_on_floor():
-		jump_buffer_timer = jump_buffer_time
-		current_air_jumps = 0
-	else:
-		jump_buffer_timer -= delta
-	
-	if action_input_buffer_timer > 0.0:
-		action_input_buffer_timer -= delta
-	if block_input_buffer_timer > 0.0:
-		block_input_buffer_timer -= delta
-	if jump_input_buffer_timer > 0.0:
-		jump_input_buffer_timer -= delta
-	if dig_input_buffer_timer > 0.0:
-		dig_input_buffer_timer -= delta
-	
-	# Apply Gravity or Fly Mode
-	if apply_gravity:
-		if not is_on_floor():
-			velocity.y = min(velocity.y + gravity * delta, max_fall_velocity)
-	else:
-		# Debug fly movement
-		var vertical_dir := Input.get_axis("move_up", "move_down")
-		velocity.y = vertical_dir * speed
-
+	decrease_buffers(delta)
+	# Autostep
 	try_step_up()
+	# Apply movement
 	move_and_slide()
+
 
 
 
@@ -156,6 +133,8 @@ func _unhandled_input(event: InputEvent) -> void:
 			#limit zoom
 			cam.zoom = cam.zoom.clamp(Vector2(0.2, 0.2), Vector2(5.0, 5.0))
 
+
+
 # Flip Logic
 func update_facing(direction: float) -> void:
 	if direction > 0:
@@ -165,12 +144,16 @@ func update_facing(direction: float) -> void:
 		$WeaponPivot.scale.x = -1
 		$AnimatedSprite2D.flip_h = true
 
+
+
 # Jump functions
 func can_jump() -> bool:
 	return is_on_floor() or jump_buffer_timer > 0.0 # Returns if player is allowed to jump
 
 func consume_jump() -> void:
 	jump_buffer_timer = 0.0 # Removes jump buffer so player cannot double jump
+
+
 
 # Step height
 func try_step_up() -> void:
@@ -182,6 +165,67 @@ func try_step_up() -> void:
 	   not test_move(transform.translated(Vector2(0, -step_height)), forward):
 		position.y -= step_height
 
+
+
+# Physics
+func apply_gravitation(delta) -> void:
+	# Apply Gravity or Fly Mode
+	if apply_gravity:
+		if not is_on_floor():
+			velocity.y = min(velocity.y + gravity * delta, max_fall_velocity)
+	else:
+		# Debug fly movement
+		var vertical_dir := Input.get_axis("move_up", "move_down")
+		velocity.y = vertical_dir * speed
+
+
+
+
+#
+# Inputs
+#
+
+# Toggle input
+func allow_input(allowed: bool) -> void:
+	if allowed:
+		is_input_allowed = true
+	else:
+		is_input_allowed = false
+		
+		action_input_buffer_timer = 0.0
+		block_input_buffer_timer = 0.0
+		jump_input_buffer_timer = 0.0
+		dig_input_buffer_timer = 0.0
+	pass
+
+# Decreasing input buffers over time
+func decrease_buffers(delta) -> void:
+	if is_on_floor():
+		jump_buffer_timer = jump_buffer_time
+		current_air_jumps = 0
+	else:
+		jump_buffer_timer -= delta
+	
+	if action_input_buffer_timer > 0.0:
+		action_input_buffer_timer -= delta
+	if block_input_buffer_timer > 0.0:
+		block_input_buffer_timer -= delta
+	if jump_input_buffer_timer > 0.0:
+		jump_input_buffer_timer -= delta
+	if dig_input_buffer_timer > 0.0:
+		dig_input_buffer_timer -= delta
+
+func handle_input() -> void:
+	if Input.is_action_just_pressed("attack"):
+		action_input_buffer_timer = action_input_buffer
+	if Input.is_action_just_pressed("block"):
+			block_input_buffer_timer = block_input_buffer
+	if Input.is_action_just_pressed("jump"):
+			jump_input_buffer_timer = jump_input_buffer
+	if Input.is_action_just_pressed("move_dig"):
+		dig_input_buffer_timer = dig_input_buffer
+
+
 # Attack freeze
 func freeze() -> void:
 	stored_velocity = velocity
@@ -192,7 +236,9 @@ func unfreeze() -> void:
 	velocity = stored_velocity
 	is_frozen = false
 
-# Dig in Check
+
+
+# Digging ability
 func get_dig_target(required_depth: int = 10) -> Vector2:
 	var world = get_parent().get_node_or_null("World")
 	
@@ -211,7 +257,6 @@ func get_dig_target(required_depth: int = 10) -> Vector2:
 	var target_tile = tile_pos + Vector2i(0, 1)
 	return fg_layer.to_global(fg_layer.map_to_local(target_tile))
 
-# Dig out Check
 func get_dig_out_target(max_upwards_scan: int = 5) -> Vector2:
 	var world = get_parent().get_node_or_null("World")
 	if not world or not world.get("fg_layer"):
