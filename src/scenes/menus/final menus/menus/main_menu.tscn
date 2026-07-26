@@ -31,34 +31,26 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("1_mvs8x")
 
-[node name="TextureRect" type="TextureRect" parent="." unique_id=1375030452]
+[node name="Title" type="TextureRect" parent="." unique_id=1375030452]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -2147.5
-offset_top = -823.0
-offset_right = 2147.5
-offset_bottom = 113.0
+anchor_left = 0.108
+anchor_top = 0.020000001
+anchor_right = 0.89100003
+anchor_bottom = 0.323
 grow_horizontal = 2
 grow_vertical = 2
-scale = Vector2(0.35, 0.35)
-pivot_offset = Vector2(2147, 468)
+pivot_offset_ratio = Vector2(0.5, 0.5)
 texture = ExtResource("1_ubtoy")
+expand_mode = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=364013323]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -163.5
-offset_top = -97.0
-offset_right = 163.5
-offset_bottom = 597.0
+anchor_left = 0.432
+anchor_top = 0.47400004
+anchor_right = 0.568
+anchor_bottom = 0.989
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(0.8, 0.8)
@@ -75,19 +67,14 @@ expand_icon = true
 
 [node name="ButtonFrame" type="TextureRect" parent="VBoxContainer/B_Start" unique_id=498161491]
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -67.5
-offset_top = -16.5
-offset_right = 67.5
-offset_bottom = 16.5
+anchors_preset = -1
+anchor_left = -0.41500002
+anchor_top = -0.126
+anchor_right = 1.4150001
+anchor_bottom = 1.1550001
 grow_horizontal = 2
 grow_vertical = 2
-scale = Vector2(4, 4)
-pivot_offset = Vector2(67.5, 16)
+pivot_offset_ratio = Vector2(0.5, 0.5)
 texture = ExtResource("4_ubtoy")
 
 [node name="ButtonIcon" type="TextureRect" parent="VBoxContainer/B_Start/ButtonFrame" unique_id=1995930404]
@@ -111,19 +98,14 @@ expand_icon = true
 
 [node name="ButtonFrame" type="TextureRect" parent="VBoxContainer/B_Settings" unique_id=1251799468]
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -67.5
-offset_top = -16.5
-offset_right = 67.5
-offset_bottom = 16.5
+anchors_preset = -1
+anchor_left = -0.41500002
+anchor_top = -0.126
+anchor_right = 1.4150001
+anchor_bottom = 1.1550001
 grow_horizontal = 2
 grow_vertical = 2
-scale = Vector2(4, 4)
-pivot_offset = Vector2(67.5, 16)
+pivot_offset_ratio = Vector2(0.5, 0.5)
 texture = ExtResource("4_ubtoy")
 
 [node name="ButtonIcon" type="TextureRect" parent="VBoxContainer/B_Settings/ButtonFrame" unique_id=1620604948]
@@ -146,19 +128,14 @@ flat = true
 
 [node name="ButtonFrame" type="TextureRect" parent="VBoxContainer/B_Credits" unique_id=444757459]
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -67.5
-offset_top = -16.5
-offset_right = 67.5
-offset_bottom = 16.5
+anchors_preset = -1
+anchor_left = -0.41500002
+anchor_top = -0.141
+anchor_right = 1.4150001
+anchor_bottom = 1.141
 grow_horizontal = 2
 grow_vertical = 2
-scale = Vector2(4, 4)
-pivot_offset = Vector2(67.5, 16)
+pivot_offset_ratio = Vector2(0.5, 0.5)
 texture = ExtResource("4_ubtoy")
 
 [node name="ButtonIcon" type="TextureRect" parent="VBoxContainer/B_Credits/ButtonFrame" unique_id=239629409]
@@ -181,19 +158,14 @@ flat = true
 
 [node name="ButtonFrame" type="TextureRect" parent="VBoxContainer/B_Quit" unique_id=1911552910]
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -67.5
-offset_top = -16.5
-offset_right = 67.5
-offset_bottom = 16.5
+anchors_preset = -1
+anchor_left = -0.41500002
+anchor_top = -0.141
+anchor_right = 1.4150001
+anchor_bottom = 1.141
 grow_horizontal = 2
 grow_vertical = 2
-scale = Vector2(4, 4)
-pivot_offset = Vector2(67.5, 16)
+pivot_offset_ratio = Vector2(0.5, 0.5)
 texture = ExtResource("4_ubtoy")
 
 [node name="ButtonIcon" type="TextureRect" parent="VBoxContainer/B_Quit/ButtonFrame" unique_id=106611721]
@@ -211,7 +183,7 @@ texture = ExtResource("8_lj2fs")
 [node name="BlackoutEffect" type="ColorRect" parent="." unique_id=218879034]
 visible = false
 layout_mode = 1
-anchors_preset = 15
+anchors_preset = -1
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
