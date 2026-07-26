@@ -4,6 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://dc4ht6n2otjoy" path="res://src/scenes/ui/huds/debug_ui.tscn" id="2_7o5lx"]
 [ext_resource type="PackedScene" uid="uid://dr5dccykwm2qn" path="res://src/scenes/ui/huds/player_ui.tscn" id="3_xgegl"]
 [ext_resource type="Texture2D" uid="uid://cjrf165tcsatp" path="res://assets/sprites/UI/Scroll_Background.png" id="4_4r5g8"]
+[ext_resource type="PackedScene" uid="uid://oov8cl7dmvh6" path="res://src/scenes/ui/huds/pause_ui.tscn" id="4_qa6xb"]
 [ext_resource type="FontFile" uid="uid://cy1y6m1xhhhvd" path="res://assets/fonts/Cinzel-VariableFont_wght.ttf" id="5_27c7d"]
 
 [node name="MainHUD" type="CanvasLayer" unique_id=1196255063]
@@ -14,6 +15,8 @@ anchors_preset = -1
 
 [node name="DebugUI" parent="." unique_id=1096292168 instance=ExtResource("2_7o5lx")]
 anchors_preset = -1
+
+[node name="PauseUI" parent="." unique_id=293463871 instance=ExtResource("4_qa6xb")]
 
 [node name="BlackoutEffect" type="ColorRect" parent="." unique_id=871056766]
 visible = false

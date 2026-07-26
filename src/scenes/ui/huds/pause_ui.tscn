@@ -1,0 +1,133 @@
+[gd_scene format=3 uid="uid://oov8cl7dmvh6"]
+
+[ext_resource type="Script" uid="uid://p1rm07t2wecl" path="res://src/scenes/ui/huds/PauseUI.gd" id="1_k6tcr"]
+[ext_resource type="Texture2D" uid="uid://cdfqq7dgchx2w" path="res://assets/sprites/UI/Pause_Menu.png" id="2_hhhko"]
+[ext_resource type="Theme" uid="uid://b0parcs1lvieo" path="res://assets/themes/UIPauseTheme.tres" id="3_h6wdn"]
+[ext_resource type="Texture2D" uid="uid://dwvs3f34icpwf" path="res://assets/sprites/UI/Pause_Menu_Button.png" id="6_lus7q"]
+
+[node name="PauseUI" type="Control" unique_id=293463871]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_k6tcr")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1008930186]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+color = Color(0, 0, 0, 0.2627451)
+
+[node name="PauseBG" type="TextureRect" parent="." unique_id=1536157197]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_hhhko")
+
+[node name="B_Start" type="Button" parent="." unique_id=311463203]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.59000003
+anchor_top = 0.36100003
+anchor_right = 0.72200006
+anchor_bottom = 0.47100002
+rotation = 0.061086524
+pivot_offset_ratio = Vector2(0.5, 0.5)
+theme = ExtResource("3_h6wdn")
+text = "Resume"
+flat = true
+expand_icon = true
+
+[node name="PauseMenuButtonFrame" type="TextureRect" parent="B_Start" unique_id=1482461572]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -100.0
+offset_top = -30.0
+offset_right = 100.0
+offset_bottom = 30.0
+grow_horizontal = 2
+grow_vertical = 2
+rotation = -0.061086524
+scale = Vector2(3.0000002, 3.0000002)
+pivot_offset_ratio = Vector2(0.5, 0.5)
+texture = ExtResource("6_lus7q")
+
+[node name="B_Settings" type="Button" parent="." unique_id=1257640001]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.582
+anchor_top = 0.50100005
+anchor_right = 0.73200005
+anchor_bottom = 0.615
+rotation = 0.061086524
+pivot_offset_ratio = Vector2(0.5, 0.5)
+theme = ExtResource("3_h6wdn")
+text = "Settings"
+flat = true
+expand_icon = true
+
+[node name="PauseMenuButtonFrame" type="TextureRect" parent="B_Settings" unique_id=1347353426]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -100.0
+offset_top = -30.0
+offset_right = 100.0
+offset_bottom = 30.0
+grow_horizontal = 2
+grow_vertical = 2
+rotation = -0.061086524
+scale = Vector2(3.0000002, 3.0000002)
+pivot_offset_ratio = Vector2(0.5, 0.5)
+texture = ExtResource("6_lus7q")
+
+[node name="B_Quit" type="Button" parent="." unique_id=2058522949]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.619
+anchor_top = 0.64400005
+anchor_right = 0.697
+anchor_bottom = 0.748
+rotation = 0.061086524
+pivot_offset_ratio = Vector2(0.5, 0.5)
+theme = ExtResource("3_h6wdn")
+text = "Quit"
+flat = true
+
+[node name="PauseMenuButtonFrame" type="TextureRect" parent="B_Quit" unique_id=1616615046]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -100.0
+offset_top = -30.0
+offset_right = 100.0
+offset_bottom = 30.0
+grow_horizontal = 2
+grow_vertical = 2
+rotation = -0.061086524
+scale = Vector2(3.0000002, 3.0000002)
+pivot_offset_ratio = Vector2(0.5, 0.5)
+texture = ExtResource("6_lus7q")
+
+[connection signal="pressed" from="B_Start" to="." method="_on_b_start_pressed"]
+[connection signal="pressed" from="B_Settings" to="." method="_on_b_settings_pressed"]
+[connection signal="pressed" from="B_Quit" to="." method="_on_b_quit_pressed"]

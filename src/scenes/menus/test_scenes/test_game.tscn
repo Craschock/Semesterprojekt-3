@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://bh6kjgw51fv7u" path="res://src/scenes/entities/player/player.tscn" id="4_rtu0v"]
 [ext_resource type="PackedScene" uid="uid://djyui1vkp6o6t" path="res://src/scenes/entities/Enemies/boss/boss_mole.tscn" id="6_2pjx1"]
 [ext_resource type="PackedScene" uid="uid://bqiiord2qchy1" path="res://src/scenes/environment/sign/readable_sign.tscn" id="7_kw1th"]
+[ext_resource type="PackedScene" uid="uid://bqtrgkf85mkao" path="res://src/scenes/item prefabs/item_story/story_dungeon1/story_item_1.tscn" id="7_qtrut"]
 [ext_resource type="PackedScene" uid="uid://brdxqe0qskvib" path="res://src/scenes/ui/huds/main_hud.tscn" id="10_yx43d"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_uvovq"]
@@ -248,3 +249,6 @@ shape = SubResource("RectangleShape2D_1o2q3")
 
 [node name="Boss_Mole" parent="." unique_id=961012920 instance=ExtResource("6_2pjx1")]
 position = Vector2(-217, -48)
+
+[node name="StoryItem1" parent="." unique_id=280462394 instance=ExtResource("7_qtrut")]
+position = Vector2(-32, -12)

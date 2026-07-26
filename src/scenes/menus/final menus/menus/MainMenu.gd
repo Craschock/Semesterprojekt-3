@@ -2,9 +2,6 @@ extends Control
 
 class_name MainMenu
 
-## Scene the game loads when pressing "Start"
-@export var game_scene: PackedScene
-
 @export_category("Animation Values")
 ## Duration of fade animation
 @export var fade_duration: float = 1.0
@@ -25,8 +22,7 @@ func _ready() -> void:
 func _on_b_start_pressed() -> void:
 	fadeEffect(false)
 	await get_tree().create_timer(fade_duration).timeout
-	if game_scene:
-		get_tree().change_scene_to_packed(game_scene)
+	get_tree().change_scene_to_file("res://src/scenes/menus/final menus/worlds/game.tscn")
 
 
 

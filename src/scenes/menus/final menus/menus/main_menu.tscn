@@ -3,7 +3,6 @@
 [ext_resource type="Script" uid="uid://csi44h81aal2i" path="res://src/scenes/menus/final menus/menus/MainMenu.gd" id="1_lj2fs"]
 [ext_resource type="Texture2D" uid="uid://c3t83ovwgt0od" path="res://assets/sprites/UI/Main Menu/Main_Menu.png" id="1_mvs8x"]
 [ext_resource type="Texture2D" uid="uid://7oe7q25wrv4o" path="res://assets/sprites/UI/Main Menu/Logo.png" id="1_ubtoy"]
-[ext_resource type="PackedScene" uid="uid://ckdifw6x0om4h" path="res://src/scenes/menus/final menus/worlds/game.tscn" id="2_wd6aq"]
 [ext_resource type="Theme" uid="uid://b6yinfg10qg2e" path="res://assets/themes/UITheme.tres" id="3_b7twt"]
 [ext_resource type="Texture2D" uid="uid://p4wjoehasvse" path="res://assets/sprites/UI/Main Menu/ButtonBase.png" id="4_ubtoy"]
 [ext_resource type="Texture2D" uid="uid://6e5gtpm7nvwg" path="res://assets/sprites/UI/Main Menu/IconPlay.png" id="7_fmnjn"]
@@ -20,7 +19,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_lj2fs")
-game_scene = ExtResource("2_wd6aq")
 
 [node name="Background" type="TextureRect" parent="." unique_id=745557963]
 layout_mode = 1

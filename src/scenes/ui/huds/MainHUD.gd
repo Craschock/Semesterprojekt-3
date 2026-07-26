@@ -3,18 +3,22 @@ class_name MainHUD
 
 @export var fade_duration: float = 2.0
 
+# All main UIs
+@onready var player_ui: Control = $PlayerUI
 @onready var debug_ui: Control = $DebugUI
+@onready var pause_ui: Control = $PauseUI
+@onready var story_panel: Control = $StoryPanel
+
 @onready var BlackoutEffect: ColorRect = $BlackoutEffect
 @onready var healthBar: TextureProgressBar = $PlayerUI/HealthBar/HealthBarProgressBar
 
 # Story Stuff
-@onready var story_panel: Control = $StoryPanel
 @onready var story_title_label: Label = $StoryPanel/TitleLabel
 @onready var story_content_label: Label = $StoryPanel/ContentLabel
 
-
 var isFrozen: bool = false
 var isShowing_Story: bool = false
+var isShowing_PauseUI: bool = false
 
 var player: PlayerMovement
 
@@ -28,6 +32,9 @@ func _ready() -> void:
 	
 	if story_panel:
 		story_panel.hide()
+	
+	if pause_ui:
+		pause_ui.hide()
 	
 	await get_tree().process_frame
 	player = PlayerManager.player
@@ -50,6 +57,16 @@ func _unhandled_input(event: InputEvent) -> void:
 		if isShowing_Story:
 			close_story()
 			return
+		
+		# All other cancel stuff
+		
+		if isShowing_PauseUI:
+			close_pauseUI()
+			return
+		
+		if not isShowing_PauseUI:
+			show_pauseUI()
+			return
 
 
 
@@ -70,10 +87,11 @@ func fadeEffect(fade_in: bool) -> void:
 		
 		tween.tween_property(BlackoutEffect, 'modulate:a', 1.0, fade_duration)
 
-# TODO: Change healthbar texture. Currently 0-10 and 90-100 
-# values are lost due to Healthbar progressbar texture length
+# Health bar
 func drawHealth(_current: int, _max: int) -> void:
 	healthBar.value = (float(_current) / float(_max)) * 100
+
+
 
 # Story methods
 func show_story(title: String, content: String) -> void:
@@ -89,6 +107,22 @@ func close_story() -> void:
 	
 	story_panel.hide()
 	freeze_game(false)
+
+
+
+# Pause UI
+func show_pauseUI() -> void:
+	isShowing_PauseUI = true
+	
+	pause_ui.show()
+	freeze_game(true)
+
+func close_pauseUI() -> void:
+	isShowing_PauseUI = false
+	
+	pause_ui.hide()
+	freeze_game(false)
+
 
 
 # Helper
