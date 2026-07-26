@@ -5,7 +5,7 @@ class_name MainHUD
 
 @onready var debug_ui: Control = $DebugUI
 @onready var BlackoutEffect: ColorRect = $BlackoutEffect
-@onready var healthBar: TextureProgressBar = $PlayerUI/TextureProgressBar
+@onready var healthBar: TextureProgressBar = $PlayerUI/HealthBar/HealthBarProgressBar
 
 # Story Stuff
 @onready var story_panel: Control = $StoryPanel
