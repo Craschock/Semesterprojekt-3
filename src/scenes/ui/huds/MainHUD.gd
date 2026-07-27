@@ -129,3 +129,9 @@ func close_pauseUI() -> void:
 func freeze_game(variable: bool) -> void:
 	get_tree().paused = variable
 	isFrozen = variable
+
+
+
+# Buttons
+func _on_button_pressed() -> void:
+	close_story()

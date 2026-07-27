@@ -6,6 +6,8 @@
 [ext_resource type="Texture2D" uid="uid://cjrf165tcsatp" path="res://assets/sprites/UI/Scroll_Background.png" id="4_4r5g8"]
 [ext_resource type="PackedScene" uid="uid://oov8cl7dmvh6" path="res://src/scenes/ui/huds/pause_ui.tscn" id="4_qa6xb"]
 [ext_resource type="FontFile" uid="uid://cy1y6m1xhhhvd" path="res://assets/fonts/Cinzel-VariableFont_wght.ttf" id="5_27c7d"]
+[ext_resource type="Theme" uid="uid://b0parcs1lvieo" path="res://assets/themes/UIPauseTheme.tres" id="7_cpxqm"]
+[ext_resource type="Texture2D" uid="uid://dwvs3f34icpwf" path="res://assets/sprites/UI/Pause_Menu_Button.png" id="8_3nj0v"]
 
 [node name="MainHUD" type="CanvasLayer" unique_id=1196255063]
 script = ExtResource("1_mtgyu")
@@ -91,3 +93,33 @@ text = "TEST TEST TEST TEST TEST TEST"
 horizontal_alignment = 1
 autowrap_mode = 3
 clip_text = true
+
+[node name="Button" type="Button" parent="StoryPanel" unique_id=2122219000]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.351
+anchor_top = 0.822
+anchor_right = 0.44300002
+anchor_bottom = 0.90700006
+offset_left = -0.7999878
+offset_right = -0.7999878
+pivot_offset_ratio = Vector2(0.5, 0.5)
+theme = ExtResource("7_cpxqm")
+theme_override_font_sizes/font_size = 48
+text = "Close"
+flat = true
+
+[node name="PauseMenuButtonFrame" type="TextureRect" parent="StoryPanel/Button" unique_id=886813814]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.372
+anchor_top = -0.101
+anchor_right = 1.368
+anchor_bottom = 1.1090001
+grow_horizontal = 2
+grow_vertical = 2
+rotation = -0.061086524
+pivot_offset_ratio = Vector2(0.5, 0.5)
+texture = ExtResource("8_3nj0v")
+
+[connection signal="pressed" from="StoryPanel/Button" to="." method="_on_button_pressed"]
