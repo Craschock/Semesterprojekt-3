@@ -7,6 +7,7 @@ class_name MainHUD
 @onready var player_ui: Control = $PlayerUI
 @onready var debug_ui: Control = $DebugUI
 @onready var pause_ui: Control = $PauseUI
+@onready var settings_ui: Control = $SettingsUI
 @onready var story_panel: Control = $StoryPanel
 
 @onready var BlackoutEffect: ColorRect = $BlackoutEffect
@@ -19,22 +20,22 @@ class_name MainHUD
 var isFrozen: bool = false
 var isShowing_Story: bool = false
 var isShowing_PauseUI: bool = false
+var isShowing_settings: bool = false
 
 var player: PlayerMovement
 
 func _ready() -> void:
+	pause_ui.pressed_start.connect(close_pauseUI)
+	
+	pause_ui.pressed_settings.connect(open_settings)
+	settings_ui.settings_closed.connect(close_settings)
+	
+	
 	process_mode = Node.PROCESS_MODE_ALWAYS
 	add_to_group("HUD")
 	
 	# Hide all UIs (Also auch für die zukunft alle hiden)
-	if debug_ui:
-		debug_ui.hide()
-	
-	if story_panel:
-		story_panel.hide()
-	
-	if pause_ui:
-		pause_ui.hide()
+	_hide_all_ui()
 	
 	await get_tree().process_frame
 	player = PlayerManager.player
@@ -59,6 +60,9 @@ func _unhandled_input(event: InputEvent) -> void:
 			return
 		
 		# All other cancel stuff
+		if isShowing_settings:
+			settings_ui.handle_cancel()
+			return
 		
 		if isShowing_PauseUI:
 			close_pauseUI()
@@ -69,7 +73,19 @@ func _unhandled_input(event: InputEvent) -> void:
 			return
 
 
-
+# Hide all UIs on start
+func _hide_all_ui() -> void:
+	if debug_ui:
+		debug_ui.hide()
+	
+	if story_panel:
+		story_panel.hide()
+	
+	if pause_ui:
+		pause_ui.hide()
+	
+	if settings_ui:
+		settings_ui.hide()
 
 # Function for animating the Fade Effect
 func fadeEffect(fade_in: bool) -> void:
@@ -122,6 +138,17 @@ func close_pauseUI() -> void:
 	
 	pause_ui.hide()
 	freeze_game(false)
+
+
+
+# Settings
+func open_settings() -> void:
+	isShowing_settings = true
+	settings_ui.show()
+
+func close_settings() -> void:
+	isShowing_settings = false
+	settings_ui.hide()
 
 
 

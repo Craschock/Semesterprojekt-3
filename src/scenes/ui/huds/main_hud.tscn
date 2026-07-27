@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://cjrf165tcsatp" path="res://assets/sprites/UI/Scroll_Background.png" id="4_4r5g8"]
 [ext_resource type="PackedScene" uid="uid://oov8cl7dmvh6" path="res://src/scenes/ui/huds/pause_ui.tscn" id="4_qa6xb"]
 [ext_resource type="FontFile" uid="uid://cy1y6m1xhhhvd" path="res://assets/fonts/Cinzel-VariableFont_wght.ttf" id="5_27c7d"]
+[ext_resource type="PackedScene" uid="uid://dhpwnovigggbs" path="res://src/scenes/ui/huds/settings_ui.tscn" id="5_ihrdj"]
 [ext_resource type="Theme" uid="uid://b0parcs1lvieo" path="res://assets/themes/UIPauseTheme.tres" id="7_cpxqm"]
 [ext_resource type="Texture2D" uid="uid://dwvs3f34icpwf" path="res://assets/sprites/UI/Pause_Menu_Button.png" id="8_3nj0v"]
 
@@ -20,14 +21,7 @@ anchors_preset = -1
 
 [node name="PauseUI" parent="." unique_id=293463871 instance=ExtResource("4_qa6xb")]
 
-[node name="BlackoutEffect" type="ColorRect" parent="." unique_id=871056766]
-visible = false
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0, 0, 0, 1)
+[node name="SettingsUI" parent="." unique_id=1979080550 instance=ExtResource("5_ihrdj")]
 
 [node name="StoryPanel" type="Control" parent="." unique_id=2071429913]
 layout_mode = 3
@@ -121,5 +115,14 @@ grow_vertical = 2
 rotation = -0.061086524
 pivot_offset_ratio = Vector2(0.5, 0.5)
 texture = ExtResource("8_3nj0v")
+
+[node name="BlackoutEffect" type="ColorRect" parent="." unique_id=871056766]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
 
 [connection signal="pressed" from="StoryPanel/Button" to="." method="_on_button_pressed"]

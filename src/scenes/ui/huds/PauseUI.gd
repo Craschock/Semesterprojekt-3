@@ -10,6 +10,9 @@ var hud: MainHUD:
 	get:
 		return get_tree().get_first_node_in_group("HUD")
 
+signal pressed_start
+signal pressed_settings
+
 func _ready() -> void:
 	start_btn.focus_mode = Control.FOCUS_NONE
 	settings_btn.focus_mode = Control.FOCUS_NONE
@@ -19,12 +22,10 @@ func _ready() -> void:
 
 # Button functionality
 func _on_b_start_pressed() -> void:
-	if hud and hud.has_method("close_pauseUI"):
-		hud.close_pauseUI()
+	pressed_start.emit()
 
 func _on_b_settings_pressed() -> void:
-	# nothing
-	pass
+	pressed_settings.emit()
 
 func _on_b_quit_pressed() -> void:
 	if hud:

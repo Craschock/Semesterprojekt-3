@@ -1,0 +1,137 @@
+[gd_scene format=3 uid="uid://dhpwnovigggbs"]
+
+[ext_resource type="Script" uid="uid://jeiho2mfftsv" path="res://src/scenes/ui/huds/SettingsUI.gd" id="1_p4kcv"]
+[ext_resource type="PackedScene" uid="uid://b8y3lqoo7mk7a" path="res://src/scenes/ui/buttons/Button.tscn" id="2_p4kcv"]
+
+[node name="SettingsUI" type="Control" unique_id=1979080550]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+script = ExtResource("1_p4kcv")
+
+[node name="Background" type="ColorRect" parent="." unique_id=1907317353]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+color = Color(0, 0, 0, 0.2627451)
+
+[node name="MenuBG" type="TextureRect" parent="." unique_id=517058938]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 940.0
+offset_top = 532.0
+offset_right = -940.0
+offset_bottom = -537.855
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+
+[node name="MainSettingsButtons" type="VBoxContainer" parent="." unique_id=160152859]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+theme_override_constants/separation = 40
+
+[node name="B_Gameplay" parent="MainSettingsButtons" unique_id=2033026513 instance=ExtResource("2_p4kcv")]
+layout_mode = 2
+text = "Gameplay"
+
+[node name="B_Video" parent="MainSettingsButtons" unique_id=781539663 instance=ExtResource("2_p4kcv")]
+layout_mode = 2
+text = "Video"
+
+[node name="B_Sound" parent="MainSettingsButtons" unique_id=806572644 instance=ExtResource("2_p4kcv")]
+layout_mode = 2
+text = "Sound"
+
+[node name="B_Controls" parent="MainSettingsButtons" unique_id=465191610 instance=ExtResource("2_p4kcv")]
+layout_mode = 2
+text = "Controls"
+
+[node name="B_ReturnToMain" parent="MainSettingsButtons" unique_id=62156279 instance=ExtResource("2_p4kcv")]
+layout_mode = 2
+text = "Return"
+
+[node name="Settings" type="Control" parent="." unique_id=399500969]
+layout_mode = 1
+anchor_left = 0.2
+anchor_top = 0.15
+anchor_right = 0.8
+anchor_bottom = 0.8
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Background" type="ColorRect" parent="Settings" unique_id=127575510]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+color = Color(0, 0, 0, 0.654902)
+
+[node name="B_Return" parent="Settings" unique_id=992505628 instance=ExtResource("2_p4kcv")]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.42900002
+anchor_top = 0.87100005
+anchor_right = 0.57100004
+anchor_bottom = 0.97900003
+scale = Vector2(0.69, 0.69)
+text = "Return"
+
+[node name="P_Gameplay" type="Control" parent="Settings" unique_id=1434662290]
+layout_mode = 1
+anchor_right = 1.0
+anchor_bottom = 0.85
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="P_Video" type="Control" parent="Settings" unique_id=1722614178]
+layout_mode = 1
+anchor_right = 1.0
+anchor_bottom = 0.85
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="P_Sound" type="Control" parent="Settings" unique_id=231096292]
+layout_mode = 1
+anchor_right = 1.0
+anchor_bottom = 0.85
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="P_Controls" type="Control" parent="Settings" unique_id=789690139]
+layout_mode = 1
+anchor_right = 1.0
+anchor_bottom = 0.85
+grow_horizontal = 2
+grow_vertical = 2
+
+[connection signal="pressed" from="MainSettingsButtons/B_Gameplay" to="." method="_on_b_gameplay_pressed"]
+[connection signal="pressed" from="MainSettingsButtons/B_Video" to="." method="_on_b_video_pressed"]
+[connection signal="pressed" from="MainSettingsButtons/B_Sound" to="." method="_on_b_sound_pressed"]
+[connection signal="pressed" from="MainSettingsButtons/B_Controls" to="." method="_on_b_controls_pressed"]
+[connection signal="pressed" from="MainSettingsButtons/B_ReturnToMain" to="." method="_on_b_return_to_main_pressed"]
+[connection signal="pressed" from="Settings/B_Return" to="." method="_on_b_return_pressed"]

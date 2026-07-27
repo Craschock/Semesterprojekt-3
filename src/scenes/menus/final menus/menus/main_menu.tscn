@@ -10,6 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://jiba4gvobe3u" path="res://assets/sprites/UI/Main Menu/IconCredits.png" id="7_y7y0f"]
 [ext_resource type="Texture2D" uid="uid://b330th2m2pe5" path="res://assets/sprites/UI/Main Menu/IconQuit.png" id="8_lj2fs"]
 [ext_resource type="Texture2D" uid="uid://dtmcue54v6te1" path="res://assets/sprites/UI/Main Menu/IconSettings.png" id="8_y7y0f"]
+[ext_resource type="PackedScene" uid="uid://dhpwnovigggbs" path="res://src/scenes/ui/huds/settings_ui.tscn" id="11_4u8gb"]
 [ext_resource type="AudioStream" uid="uid://chpgmsswgowb5" path="res://assets/sounds/music/main_theme_player/Main Char Theme Beginning.mp3" id="11_mqm0f"]
 
 [node name="Main Menu" type="Control" unique_id=153052924]
@@ -199,6 +200,10 @@ grow_vertical = 2
 pivot_offset = Vector2(4.5, 4.5)
 texture = ExtResource("8_lj2fs")
 
+[node name="SettingsUI" parent="." unique_id=1979080550 instance=ExtResource("11_4u8gb")]
+visible = false
+layout_mode = 1
+
 [node name="BlackoutEffect" type="ColorRect" parent="." unique_id=218879034]
 visible = false
 layout_mode = 1
@@ -220,3 +225,4 @@ parameters/looping = true
 [connection signal="pressed" from="VBoxContainer/B_Settings" to="." method="_on_b_settings_pressed"]
 [connection signal="pressed" from="VBoxContainer/B_Credits" to="." method="_on_b_credits_pressed"]
 [connection signal="pressed" from="VBoxContainer/B_Quit" to="." method="_on_b_quit_pressed"]
+[connection signal="settings_closed" from="SettingsUI" to="." method="_on_settings_ui_settings_closed"]

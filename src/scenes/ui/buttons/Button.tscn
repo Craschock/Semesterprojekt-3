@@ -1,0 +1,39 @@
+[gd_scene format=3 uid="uid://b8y3lqoo7mk7a"]
+
+[ext_resource type="Theme" uid="uid://b6yinfg10qg2e" path="res://assets/themes/UITheme.tres" id="1_b1ehq"]
+[ext_resource type="Texture2D" uid="uid://p4wjoehasvse" path="res://assets/sprites/UI/Main Menu/ButtonBase.png" id="1_tnesn"]
+[ext_resource type="Script" uid="uid://cym8lr17kgrer" path="res://src/scenes/ui/buttons/button_effects_module.gd" id="3_3qixd"]
+
+[node name="Button" type="Button" unique_id=2033026513]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -4.0
+offset_top = -4.0
+offset_right = 4.0
+offset_bottom = 4.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+theme = ExtResource("1_b1ehq")
+text = "Button"
+flat = true
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=1420147541]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.3, 1.3)
+pivot_offset_ratio = Vector2(0.5, 0.5)
+texture = ExtResource("1_tnesn")
+expand_mode = 3
+
+[node name="ButtonEffectsModule" type="Node" parent="." unique_id=2056013471]
+script = ExtResource("3_3qixd")
+allow_rotation = false
+metadata/_custom_type_script = "uid://cym8lr17kgrer"
