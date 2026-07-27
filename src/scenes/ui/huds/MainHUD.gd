@@ -144,11 +144,13 @@ func close_pauseUI() -> void:
 # Settings
 func open_settings() -> void:
 	isShowing_settings = true
+	pause_ui.hide()
 	settings_ui.show()
 
 func close_settings() -> void:
 	isShowing_settings = false
 	settings_ui.hide()
+	pause_ui.show()
 
 
 
