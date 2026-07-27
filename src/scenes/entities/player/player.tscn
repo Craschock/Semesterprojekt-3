@@ -1101,6 +1101,7 @@ script = ExtResource("1_12pno")
 speed = 85.0
 max_jump_velocity = -400.0
 time_to_max_charge = 0.67
+max_air_jumps = 2
 
 [node name="HealthComponent" parent="." unique_id=1881424083 instance=ExtResource("2_22ku6")]
 
