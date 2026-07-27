@@ -23,6 +23,7 @@ buses/default_bus_layout="uid://xkb1syc3jhtk"
 
 PlayerManager="*uid://dgopauq4501ns"
 EffectManager="*uid://qcib5dvtt62x"
+SettingsManager="*uid://c2stj5c6pdaf3"
 
 [display]
 

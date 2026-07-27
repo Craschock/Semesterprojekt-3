@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://p1rm07t2wecl" path="res://src/scenes/ui/huds/PauseUI.gd" id="1_k6tcr"]
 [ext_resource type="Texture2D" uid="uid://cdfqq7dgchx2w" path="res://assets/sprites/UI/Pause_Menu.png" id="2_hhhko"]
 [ext_resource type="Theme" uid="uid://b0parcs1lvieo" path="res://assets/themes/UIPauseTheme.tres" id="3_h6wdn"]
+[ext_resource type="Script" uid="uid://cym8lr17kgrer" path="res://src/scenes/ui/buttons/button_effects_module.gd" id="5_i4vts"]
 [ext_resource type="Texture2D" uid="uid://dwvs3f34icpwf" path="res://assets/sprites/UI/Pause_Menu_Button.png" id="6_lus7q"]
 
 [node name="PauseUI" type="Control" unique_id=293463871]
@@ -65,6 +66,11 @@ scale = Vector2(3.0000002, 3.0000002)
 pivot_offset_ratio = Vector2(0.5, 0.5)
 texture = ExtResource("6_lus7q")
 
+[node name="ButtonEffectsModule" type="Node" parent="B_Start" unique_id=705203291]
+script = ExtResource("5_i4vts")
+allow_rotation = false
+metadata/_custom_type_script = "uid://cym8lr17kgrer"
+
 [node name="B_Settings" type="Button" parent="." unique_id=1257640001]
 layout_mode = 1
 anchors_preset = -1
@@ -97,6 +103,11 @@ scale = Vector2(3.0000002, 3.0000002)
 pivot_offset_ratio = Vector2(0.5, 0.5)
 texture = ExtResource("6_lus7q")
 
+[node name="ButtonEffectsModule" type="Node" parent="B_Settings" unique_id=2132236046]
+script = ExtResource("5_i4vts")
+allow_rotation = false
+metadata/_custom_type_script = "uid://cym8lr17kgrer"
+
 [node name="B_Quit" type="Button" parent="." unique_id=2058522949]
 layout_mode = 1
 anchors_preset = -1
@@ -127,6 +138,11 @@ rotation = -0.061086524
 scale = Vector2(3.0000002, 3.0000002)
 pivot_offset_ratio = Vector2(0.5, 0.5)
 texture = ExtResource("6_lus7q")
+
+[node name="ButtonEffectsModule" type="Node" parent="B_Quit" unique_id=1358559569]
+script = ExtResource("5_i4vts")
+allow_rotation = false
+metadata/_custom_type_script = "uid://cym8lr17kgrer"
 
 [connection signal="pressed" from="B_Start" to="." method="_on_b_start_pressed"]
 [connection signal="pressed" from="B_Settings" to="." method="_on_b_settings_pressed"]

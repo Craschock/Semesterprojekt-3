@@ -5,6 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://7oe7q25wrv4o" path="res://assets/sprites/UI/Main Menu/Logo.png" id="1_ubtoy"]
 [ext_resource type="Theme" uid="uid://b6yinfg10qg2e" path="res://assets/themes/UITheme.tres" id="3_b7twt"]
 [ext_resource type="Texture2D" uid="uid://p4wjoehasvse" path="res://assets/sprites/UI/Main Menu/ButtonBase.png" id="4_ubtoy"]
+[ext_resource type="Script" uid="uid://cym8lr17kgrer" path="res://src/scenes/ui/buttons/button_effects_module.gd" id="5_mqm0f"]
 [ext_resource type="Texture2D" uid="uid://6e5gtpm7nvwg" path="res://assets/sprites/UI/Main Menu/IconPlay.png" id="7_fmnjn"]
 [ext_resource type="Texture2D" uid="uid://jiba4gvobe3u" path="res://assets/sprites/UI/Main Menu/IconCredits.png" id="7_y7y0f"]
 [ext_resource type="Texture2D" uid="uid://b330th2m2pe5" path="res://assets/sprites/UI/Main Menu/IconQuit.png" id="8_lj2fs"]
@@ -63,6 +64,11 @@ text = "Play"
 flat = true
 expand_icon = true
 
+[node name="ButtonEffectsModule" type="Node" parent="VBoxContainer/B_Start" unique_id=1543065761]
+script = ExtResource("5_mqm0f")
+allow_rotation = false
+metadata/_custom_type_script = "uid://cym8lr17kgrer"
+
 [node name="ButtonFrame" type="TextureRect" parent="VBoxContainer/B_Start" unique_id=498161491]
 layout_mode = 1
 anchors_preset = -1
@@ -94,6 +100,11 @@ text = "Settings"
 flat = true
 expand_icon = true
 
+[node name="ButtonEffectsModule" type="Node" parent="VBoxContainer/B_Settings" unique_id=1158409403]
+script = ExtResource("5_mqm0f")
+allow_rotation = false
+metadata/_custom_type_script = "uid://cym8lr17kgrer"
+
 [node name="ButtonFrame" type="TextureRect" parent="VBoxContainer/B_Settings" unique_id=1251799468]
 layout_mode = 1
 anchors_preset = -1
@@ -124,6 +135,11 @@ theme = ExtResource("3_b7twt")
 text = "Credits"
 flat = true
 
+[node name="ButtonEffectsModule" type="Node" parent="VBoxContainer/B_Credits" unique_id=288914450]
+script = ExtResource("5_mqm0f")
+allow_rotation = false
+metadata/_custom_type_script = "uid://cym8lr17kgrer"
+
 [node name="ButtonFrame" type="TextureRect" parent="VBoxContainer/B_Credits" unique_id=444757459]
 layout_mode = 1
 anchors_preset = -1
@@ -153,6 +169,11 @@ layout_mode = 2
 theme = ExtResource("3_b7twt")
 text = "Quit"
 flat = true
+
+[node name="ButtonEffectsModule" type="Node" parent="VBoxContainer/B_Quit" unique_id=2102217981]
+script = ExtResource("5_mqm0f")
+allow_rotation = false
+metadata/_custom_type_script = "uid://cym8lr17kgrer"
 
 [node name="ButtonFrame" type="TextureRect" parent="VBoxContainer/B_Quit" unique_id=1911552910]
 layout_mode = 1
