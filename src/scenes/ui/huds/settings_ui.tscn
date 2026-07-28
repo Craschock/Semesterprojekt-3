@@ -102,6 +102,7 @@ scale = Vector2(0.69, 0.69)
 text = "Return"
 
 [node name="P_Gameplay" type="Control" parent="Settings" unique_id=1434662290]
+visible = false
 layout_mode = 1
 anchor_right = 1.0
 anchor_bottom = 0.85
@@ -109,11 +110,27 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="P_Video" type="Control" parent="Settings" unique_id=1722614178]
+visible = false
 layout_mode = 1
 anchor_right = 1.0
 anchor_bottom = 0.85
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="resolution" type="OptionButton" parent="Settings/P_Video" unique_id=2108330248]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 20.0
+grow_horizontal = 2
+
+[node name="fullscreen" type="CheckButton" parent="Settings/P_Video" unique_id=241176717]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 33.0
+offset_bottom = 57.0
+grow_horizontal = 2
 
 [node name="P_Sound" type="Control" parent="Settings" unique_id=231096292]
 layout_mode = 1
@@ -122,7 +139,15 @@ anchor_bottom = 0.85
 grow_horizontal = 2
 grow_vertical = 2
 
+[node name="HSlider" type="HSlider" parent="Settings/P_Sound" unique_id=1718191327]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 16.0
+grow_horizontal = 2
+
 [node name="P_Controls" type="Control" parent="Settings" unique_id=789690139]
+visible = false
 layout_mode = 1
 anchor_right = 1.0
 anchor_bottom = 0.85
