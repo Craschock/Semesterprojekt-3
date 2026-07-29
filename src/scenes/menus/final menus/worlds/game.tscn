@@ -40,15 +40,13 @@ metadata/_custom_type_script = "uid://csehoby86vswg"
 
 [node name="Game" type="Node" unique_id=109101168]
 
-[node name="ParallaxEffect(Mine_Dungeon)" parent="." unique_id=1250214574 instance=ExtResource("1_its74")]
-
 [node name="Enemies" type="Node" parent="." unique_id=702154899]
 
-[node name="GameManager" type="Node" parent="." unique_id=1435991061 node_paths=PackedStringArray("world_generator", "player", "parallaxEffect")]
+[node name="GameManager" type="Node" parent="." unique_id=1435991061 node_paths=PackedStringArray("world_generator")]
 script = ExtResource("1_pr1v7")
 world_generator = NodePath("../World")
-player = NodePath("../Player")
-parallaxEffect = NodePath("../ParallaxEffect(Mine_Dungeon)")
+player_scene = ExtResource("3_s4t1n")
+parallax_scene = ExtResource("1_its74")
 boss_scene = ExtResource("18_hbboa")
 
 [node name="EnemySpawner" type="Node" parent="GameManager" unique_id=1808774082 node_paths=PackedStringArray("world_generator", "entity_container")]
@@ -58,16 +56,12 @@ entity_container = NodePath("../../Enemies")
 enemy_pool = Array[ExtResource("5_e85fw")]([SubResource("Resource_h8ths"), SubResource("Resource_w3vmo"), SubResource("Resource_kjej0")])
 metadata/_custom_type_script = "uid://dq2jcmsb1g1d3"
 
-[node name="Player" parent="." unique_id=80359539 instance=ExtResource("3_s4t1n")]
-max_jump_velocity = -325.0
-
-[node name="World" parent="." unique_id=1622799569 node_paths=PackedStringArray("player") instance=ExtResource("8_owfvr")]
+[node name="World" parent="." unique_id=1622799569 instance=ExtResource("8_owfvr")]
 scale = Vector2(0.35, 0.35)
 world_seed = 73
 view_radius_chunks = 2
 unload_radius_chunks = 3
 region_size_chunks = 24
-player = NodePath("../Player")
 item_scenes = Array[PackedScene]([ExtResource("9_cydkl"), ExtResource("10_hbboa"), ExtResource("11_e85fw"), ExtResource("12_h8ths"), ExtResource("13_w3vmo"), ExtResource("14_kjej0"), ExtResource("15_tuqsm")])
 
 [node name="MainHUD" parent="." unique_id=1196255063 instance=ExtResource("2_oivod")]
