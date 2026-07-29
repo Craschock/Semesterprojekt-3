@@ -12,6 +12,7 @@
 [ext_resource type="Texture2D" uid="uid://dtmcue54v6te1" path="res://assets/sprites/UI/Main Menu/IconSettings.png" id="8_y7y0f"]
 [ext_resource type="PackedScene" uid="uid://dhpwnovigggbs" path="res://src/scenes/ui/huds/settings_ui.tscn" id="11_4u8gb"]
 [ext_resource type="AudioStream" uid="uid://chpgmsswgowb5" path="res://assets/sounds/music/main_theme_player/Main Char Theme Beginning.mp3" id="11_mqm0f"]
+[ext_resource type="PackedScene" uid="uid://bxfosogwnshne" path="res://src/scenes/ui/huds/credits_ui.tscn" id="12_joeew"]
 
 [node name="Main Menu" type="Control" unique_id=153052924]
 layout_mode = 3
@@ -204,6 +205,10 @@ texture = ExtResource("8_lj2fs")
 visible = false
 layout_mode = 1
 
+[node name="CreditsUI" parent="." unique_id=1481697513 instance=ExtResource("12_joeew")]
+visible = false
+layout_mode = 1
+
 [node name="BlackoutEffect" type="ColorRect" parent="." unique_id=218879034]
 visible = false
 layout_mode = 1
@@ -226,3 +231,7 @@ parameters/looping = true
 [connection signal="pressed" from="VBoxContainer/B_Credits" to="." method="_on_b_credits_pressed"]
 [connection signal="pressed" from="VBoxContainer/B_Quit" to="." method="_on_b_quit_pressed"]
 [connection signal="settings_closed" from="SettingsUI" to="." method="_on_settings_ui_settings_closed"]
+[connection signal="pressed" from="CreditsUI/B_CloseCredits" to="." method="_on_b_close_credits_pressed"]
+
+[editable path="CreditsUI"]
+[editable path="CreditsUI/B_CloseCredits"]

@@ -13,15 +13,30 @@ class_name MainMenu
 @onready var title: TextureRect = $Title
 @onready var button_panel: VBoxContainer = $VBoxContainer
 @onready var settings_panel: Control = $SettingsUI
-var is_showing_settings: bool = true
+@onready var credits_panel: Control = $CreditsUI
+
+var is_showing_settings: bool = false
+var is_showing_credits: bool = false
 
 func _ready() -> void:
 	settings_panel.settings_closed.connect(_close_settings)
 	
 	settings_panel.hide()
+	credits_panel.hide()
+	
 	BlackoutEffect.visible = true
 	fadeEffect(true)
 
+
+func _unhandled_input(event: InputEvent) -> void:
+	if event.is_action_pressed("pause"):
+		if is_showing_credits:
+			_close_credits()
+			return
+		
+		if is_showing_settings:
+			settings_panel.handle_cancel()
+			return
 
 
 # What happens when "Start" is pressed
@@ -38,11 +53,26 @@ func _on_b_settings_pressed() -> void:
 	is_showing_settings = true
 	settings_panel.show()
 
+func _close_settings() -> void:
+	settings_panel.hide()
+	is_showing_settings = false
+	_toggle_ui_elements(true)
+
+
 
 # What happens when "Credits" is pressed
 func _on_b_credits_pressed() -> void:
-	pass # Replace with function body.
+	_toggle_ui_elements(false)
+	is_showing_credits = true
+	credits_panel.show()
 
+func _on_b_close_credits_pressed() -> void:
+	_close_credits()
+
+func _close_credits() -> void:
+	credits_panel.hide()
+	is_showing_credits = false
+	_toggle_ui_elements(true)
 
 
 # What happens when "Quit" is pressed
@@ -74,7 +104,3 @@ func _toggle_ui_elements(value: bool) -> void:
 	else:
 		title.hide()
 		button_panel.hide()
-
-func _close_settings() -> void:
-	is_showing_settings = false
-	_toggle_ui_elements(true)

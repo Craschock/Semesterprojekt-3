@@ -1,0 +1,129 @@
+[gd_scene format=3 uid="uid://bxfosogwnshne"]
+
+[ext_resource type="Texture2D" uid="uid://br1mg77a3ued4" path="res://assets/sprites/UI/Credits.png" id="1_hojix"]
+[ext_resource type="PackedScene" uid="uid://b8y3lqoo7mk7a" path="res://src/scenes/ui/buttons/Button.tscn" id="2_74hkl"]
+[ext_resource type="Texture2D" uid="uid://7oe7q25wrv4o" path="res://assets/sprites/UI/Main Menu/Logo.png" id="2_io2r7"]
+[ext_resource type="FontFile" uid="uid://bxicnx5dn3jda" path="res://assets/fonts/PixelFont.ttf" id="4_u3xy1"]
+
+[sub_resource type="FontVariation" id="FontVariation_u3xy1"]
+base_font = ExtResource("4_u3xy1")
+spacing_space = -2
+spacing_top = -2
+spacing_bottom = -6
+
+[node name="CreditsUI" type="Control" unique_id=1481697513]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+
+[node name="BG" type="TextureRect" parent="." unique_id=233566494]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.13100001
+anchor_top = 0.053000003
+anchor_right = 0.869
+anchor_bottom = 0.88900006
+offset_top = -0.12000275
+offset_bottom = -0.11999512
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+texture = ExtResource("1_hojix")
+
+[node name="Title" type="TextureRect" parent="." unique_id=2133565000]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -2148.0
+offset_top = -641.5
+offset_right = 2147.0
+offset_bottom = 294.5
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.12, 0.12)
+pivot_offset_ratio = Vector2(0.5, 0.5)
+texture = ExtResource("2_io2r7")
+
+[node name="GroupName" type="Label" parent="." unique_id=602074370]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.40600002
+anchor_top = 0.358
+anchor_right = 0.59400004
+anchor_bottom = 0.40600002
+offset_left = 0.3199463
+offset_top = 0.23999023
+offset_right = -0.32006836
+offset_bottom = -0.32000732
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("4_u3xy1")
+theme_override_font_sizes/font_size = 24
+text = "made by Nya ≽^•⩊•^≼"
+
+[node name="Names" type="Label" parent="." unique_id=271917941]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 63.0
+offset_top = -24.0
+offset_right = 303.0
+offset_bottom = 145.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = SubResource("FontVariation_u3xy1")
+theme_override_font_sizes/font_size = 24
+text = "- Johanna Bubek
+- Hannah Hoffman
+- Melvin Softic
+- Erik Vogel
+- Izzy Stiefvatter
+- Lou Ruschepaul"
+
+[node name="Roles" type="Label" parent="." unique_id=2037521213]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -340.0
+offset_top = -24.0
+offset_right = 17.0
+offset_bottom = 148.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = SubResource("FontVariation_u3xy1")
+theme_override_font_sizes/font_size = 24
+text = "2D Environment / UI
+2D Characters
+Programming / Development
+Programming / Development
+Management / Sound
+Management / Narrative"
+
+[node name="B_CloseCredits" parent="." unique_id=2033026513 instance=ExtResource("2_74hkl")]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.44900003
+anchor_top = 0.901
+anchor_right = 0.551
+anchor_bottom = 0.98600006
+offset_left = 0.27996826
+offset_top = -4.7200317
+offset_right = -0.2800293
+offset_bottom = -4.920044
+scale = Vector2(0.75, 0.75)
+text = "Close"
+
+[editable path="B_CloseCredits"]
