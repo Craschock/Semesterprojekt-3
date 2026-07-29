@@ -55,7 +55,7 @@ grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(0.8, 0.8)
 pivot_offset_ratio = Vector2(0.5, 0.5)
-theme_override_constants/separation = 50
+theme_override_constants/separation = 32
 alignment = 1
 
 [node name="B_Start" type="Button" parent="VBoxContainer" unique_id=1886310318]

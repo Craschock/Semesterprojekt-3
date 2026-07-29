@@ -50,19 +50,15 @@ expand_icon = true
 
 [node name="PauseMenuButtonFrame" type="TextureRect" parent="B_Start" unique_id=1482461572]
 layout_mode = 1
-anchors_preset = 8
+anchors_preset = -1
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -100.0
-offset_top = -30.0
-offset_right = 100.0
-offset_bottom = 30.0
 grow_horizontal = 2
 grow_vertical = 2
 rotation = -0.061086524
-scale = Vector2(3.0000002, 3.0000002)
+scale = Vector2(2, 2)
 pivot_offset_ratio = Vector2(0.5, 0.5)
 texture = ExtResource("6_lus7q")
 
@@ -87,19 +83,15 @@ expand_icon = true
 
 [node name="PauseMenuButtonFrame" type="TextureRect" parent="B_Settings" unique_id=1347353426]
 layout_mode = 1
-anchors_preset = 8
+anchors_preset = -1
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -100.0
-offset_top = -30.0
-offset_right = 100.0
-offset_bottom = 30.0
 grow_horizontal = 2
 grow_vertical = 2
 rotation = -0.061086524
-scale = Vector2(3.0000002, 3.0000002)
+scale = Vector2(2, 2)
 pivot_offset_ratio = Vector2(0.5, 0.5)
 texture = ExtResource("6_lus7q")
 
@@ -123,19 +115,15 @@ flat = true
 
 [node name="PauseMenuButtonFrame" type="TextureRect" parent="B_Quit" unique_id=1616615046]
 layout_mode = 1
-anchors_preset = 8
+anchors_preset = -1
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -100.0
-offset_top = -30.0
-offset_right = 100.0
-offset_bottom = 30.0
 grow_horizontal = 2
 grow_vertical = 2
 rotation = -0.061086524
-scale = Vector2(3.0000002, 3.0000002)
+scale = Vector2(2, 2)
 pivot_offset_ratio = Vector2(0.5, 0.5)
 texture = ExtResource("6_lus7q")
 

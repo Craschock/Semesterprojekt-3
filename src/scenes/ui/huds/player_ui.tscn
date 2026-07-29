@@ -29,6 +29,8 @@ anchors_preset = -1
 anchor_left = 0.246
 anchor_right = 0.754
 anchor_bottom = 0.15100001
+offset_left = -2.0
+offset_right = -2.0
 grow_horizontal = 2
 pivot_offset_ratio = Vector2(0.5, 0)
 texture = ExtResource("2_21kq3")
@@ -40,7 +42,8 @@ anchor_top = 0.14600001
 anchor_right = 0.5
 anchor_bottom = 0.14600001
 grow_horizontal = 2
-scale = Vector2(4, 4)
+grow_vertical = 2
+scale = Vector2(2, 2)
 pivot_offset_ratio = Vector2(0.5, 0.5)
 
 [node name="HealthBarProgressBar" type="TextureProgressBar" parent="HealthBar" unique_id=1985339553]
@@ -76,14 +79,14 @@ anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
 offset_left = -22.0
-offset_top = 20.0
+offset_top = 0.0
 offset_right = 18.0
-offset_bottom = 60.000015
+offset_bottom = 40.000015
 grow_horizontal = 2
-scale = Vector2(1.3, 1.3)
+scale = Vector2(0.5, 0.5)
 
 [node name="HBoxContainer" parent="InventoryUI" index="0" unique_id=390279050]
-theme_override_constants/separation = 28
+theme_override_constants/separation = 20
 alignment = 1
 
 [editable path="InventoryUI"]

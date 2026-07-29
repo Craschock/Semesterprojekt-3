@@ -1096,6 +1096,7 @@ base_font = ExtResource("37_2bdcf")
 spacing_glyph = -1
 
 [node name="Player" type="CharacterBody2D" unique_id=80359539]
+z_index = -1
 collision_layer = 2
 script = ExtResource("1_12pno")
 speed = 85.0
@@ -1205,7 +1206,7 @@ libraries/ = SubResource("AnimationLibrary_lrig1")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1042958842]
 offset = Vector2(0, -8)
-zoom = Vector2(4.75, 4.75)
+zoom = Vector2(2, 2)
 position_smoothing_enabled = true
 
 [node name="AudioListener2D" type="AudioListener2D" parent="." unique_id=1716945193]

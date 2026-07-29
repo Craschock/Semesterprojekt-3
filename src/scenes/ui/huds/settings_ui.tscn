@@ -37,6 +37,7 @@ grow_vertical = 2
 pivot_offset_ratio = Vector2(0.5, 0.5)
 
 [node name="MainSettingsButtons" type="VBoxContainer" parent="." unique_id=160152859]
+visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -50,7 +51,7 @@ offset_bottom = 20.0
 grow_horizontal = 2
 grow_vertical = 2
 pivot_offset_ratio = Vector2(0.5, 0.5)
-theme_override_constants/separation = 40
+theme_override_constants/separation = 32
 
 [node name="B_Gameplay" parent="MainSettingsButtons" unique_id=2033026513 instance=ExtResource("2_p4kcv")]
 layout_mode = 2
@@ -133,6 +134,7 @@ offset_bottom = 57.0
 grow_horizontal = 2
 
 [node name="P_Sound" type="Control" parent="Settings" unique_id=231096292]
+visible = false
 layout_mode = 1
 anchor_right = 1.0
 anchor_bottom = 0.85
