@@ -3,4 +3,25 @@
 [ext_resource type="PackedScene" uid="uid://cjgno4a0akih6" path="res://src/scenes/item prefabs/item_story/story_item.tscn" id="1_2s34m"]
 
 [node name="StoryItem7" unique_id=280462394 instance=ExtResource("1_2s34m")]
-story_content = "After hearing this, I naturally went looking for him. Unfortunately, I couldn't find him anywhere. I can't ask the supervisor right now, as he's busy preparing for the investor's arrival. I hope he's alright. I'll talk to the supervisor tomorrow after the meeting with the investor. Hopefully, it won't be too late by then."
+story_title = " Experiment Nr. 3 "
+story_content = "Test subject: Naked mole-rat x toad 
+
+Problem statement: Animals of same size, different species 
+
+Goal: adopt all skills of the toad, maintain appearance of naked mole-rat 
+
+Questions: Can the Naked mole-rat handle the skills of the frog? 
+
+Results:  
+
+adopted Skills of Frog: jumping, Tongue projection/Tongue flicking/Lingual projection/ Tongue shooting,  
+
+adopted Skills of Naked mole-rat: biting,  
+
+Appearance of Naked rat-mole in most instances the same, the back is more toad like 
+
+It can use the skills of both species 
+
+Test was a success! 
+
+Next Steps: Release test subjects in suitable area and observe"

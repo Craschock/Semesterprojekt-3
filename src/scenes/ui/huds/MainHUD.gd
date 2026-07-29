@@ -15,7 +15,7 @@ class_name MainHUD
 
 # Story Stuff
 @onready var story_title_label: Label = $StoryPanel/TitleLabel
-@onready var story_content_label: Label = $StoryPanel/ContentLabel
+@onready var story_content_label: Label = $StoryPanel/ScrollContainer/ContentLabel
 
 var isFrozen: bool = false
 var isShowing_Story: bool = false

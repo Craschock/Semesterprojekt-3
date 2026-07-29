@@ -1,0 +1,29 @@
+[gd_scene format=3 uid="uid://bqlir6wc3k7f4"]
+
+[ext_resource type="PackedScene" uid="uid://cjgno4a0akih6" path="res://src/scenes/item prefabs/item_story/story_item.tscn" id="1_20i6y"]
+
+[node name="StoryItem8" unique_id=280462394 instance=ExtResource("1_20i6y")]
+story_title = "Experiment Nr. 78"
+story_content = "Test subject: axolotl x bear 
+
+Problem statement: massive height difference, different species 
+
+Goal:  adapt appearance of axolotl to Bear size 
+
+Questions: Will it still be able to breathe under water  
+
+Results:  
+
+Appearance: Head, Back, Tail, Colors -> axolotl | Legs, Breathing, front of the Body -> Bear 
+
+Can be menacing when meeting it for the first time, but because of the color pallet that feeling will fade very fast. 
+
+Skills: By combining both their breathing systems a new Skill was formed: It can shoot bubbles out of its mouth. They are different from normal bubbles. Getting in contact with it will result in a small explosion, which will be harmful. 
+
+This interesting outcome will be further analysed. 
+
+Memo: The color scheme must be kept darker on further experiments! 
+
+Conclusion: weak creature but interesting abilities. Developed method to adapt appearance to hight. 
+
+Test was a success! "
