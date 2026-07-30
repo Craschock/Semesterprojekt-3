@@ -147,7 +147,6 @@ sources/2 = SubResource("TileSetAtlasSource_87qdy")
 script = ExtResource("1_3r8k2")
 fg_layer = NodePath("Foreground")
 bg_layer = NodePath("Background")
-world_seed = 69
 biomes = Array[ExtResource("2_22d72")]([ExtResource("3_6vgho"), ExtResource("4_22d72")])
 region_size_chunks = 12
 border_thickness = 1

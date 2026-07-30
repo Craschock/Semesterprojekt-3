@@ -6,6 +6,9 @@ class_name DebugUI
 @onready var noclip_btn: CheckButton = $HBoxContainer/Cheats/NoclipButton
 @onready var godmode_btn: CheckButton = $HBoxContainer/Cheats/GodmodeButton
 
+#world seed:
+@onready var seed_label: Label = $HBoxContainer/Cheats/Seed
+
 # unlocks
 @onready var u_digging_btn: CheckButton = $HBoxContainer/Unlocks/Unlock_Digging
 
@@ -20,6 +23,9 @@ func _ready() -> void:
 	fly_btn.focus_mode = Control.FOCUS_NONE
 	noclip_btn.focus_mode = Control.FOCUS_NONE
 	godmode_btn.focus_mode = Control.FOCUS_NONE
+	
+	#seed
+	seed_label.text = "World Seed: %d" % WorldGenerator.current_seed
 
 
 # Buttons

@@ -59,7 +59,6 @@ metadata/_custom_type_script = "uid://dq2jcmsb1g1d3"
 
 [node name="World" parent="." unique_id=1622799569 instance=ExtResource("8_owfvr")]
 scale = Vector2(0.35, 0.35)
-world_seed = 73
 view_radius_chunks = 2
 unload_radius_chunks = 3
 region_size_chunks = 24

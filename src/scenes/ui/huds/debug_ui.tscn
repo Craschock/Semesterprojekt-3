@@ -40,6 +40,10 @@ text = "Noclip"
 layout_mode = 2
 text = "Godmode"
 
+[node name="Seed" type="Label" parent="HBoxContainer/Cheats" unique_id=956036667]
+layout_mode = 2
+text = "World Seed:"
+
 [node name="Unlocks" type="VBoxContainer" parent="HBoxContainer" unique_id=1559956190]
 layout_mode = 2
 

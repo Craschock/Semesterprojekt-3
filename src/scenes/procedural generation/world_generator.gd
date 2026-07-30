@@ -7,7 +7,10 @@ class_name WorldGenerator
 @export var bg_layer: TileMapLayer
 
 @export_group("World")
+static var current_seed: int
 @export var world_seed: int = 67
+##if true, world_seed is replaced with a fresh value each run, ignoring the number above
+@export var randomize_seed: bool = true
 
 ##Side length of a chunk in tiles. Chunks are square.
 @export var chunk_size: int = 32
@@ -147,6 +150,10 @@ var _taken_items: Dictionary = {}
 
 ##Builds the world layout and places the spawn marker. Call once at startup.
 func generate_world() -> void:
+	if randomize_seed:
+		world_seed = Time.get_ticks_usec()
+		current_seed = world_seed
+	
 	_build_world_layout()
 	
 	if has_spawn_point():
@@ -1011,8 +1018,8 @@ func _update_darkness_overlay() -> void:
 	var pad = maxi(1, depth_darkness_range)
 
 	var pc = _last_player_chunk
-	var cmin = pc - Vector2i(view_radius_chunks, view_radius_chunks)
-	var cmax = pc + Vector2i(view_radius_chunks, view_radius_chunks)
+	var cmin = pc - Vector2i(unload_radius_chunks, unload_radius_chunks)
+	var cmax = pc + Vector2i(unload_radius_chunks, unload_radius_chunks)
 
 	var tmin = Vector2i(cmin.x * chunk_size - pad, cmin.y * chunk_size - pad)
 	var tile_w = (cmax.x - cmin.x + 1) * chunk_size + pad * 2
