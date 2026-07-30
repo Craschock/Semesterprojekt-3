@@ -3,7 +3,6 @@
 [ext_resource type="PackedScene" uid="uid://bf5a4ekgqga1w" path="res://src/scenes/menus/test_scenes/test_tiles.tscn" id="2_04uxq"]
 [ext_resource type="Texture2D" uid="uid://ddp62b0mwne0p" path="res://assets/sprites/test/tilemap_packed.png" id="3_5vp6o"]
 [ext_resource type="PackedScene" uid="uid://bh6kjgw51fv7u" path="res://src/scenes/entities/player/player.tscn" id="4_rtu0v"]
-[ext_resource type="PackedScene" uid="uid://djyui1vkp6o6t" path="res://src/scenes/entities/Enemies/boss/boss_mole.tscn" id="6_2pjx1"]
 [ext_resource type="PackedScene" uid="uid://bqiiord2qchy1" path="res://src/scenes/environment/sign/readable_sign.tscn" id="7_kw1th"]
 [ext_resource type="PackedScene" uid="uid://bqtrgkf85mkao" path="res://src/scenes/item prefabs/item_story/story_dungeon1/story_item_1.tscn" id="7_qtrut"]
 [ext_resource type="PackedScene" uid="uid://dfwovdgj1npmp" path="res://src/scenes/item prefabs/item_story/story_dungeon1/story_item_2.tscn" id="8_vumo2"]
@@ -14,6 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://bx6qa7p4i5i84" path="res://src/scenes/item prefabs/item_story/story_dungeon1/story_item_6.tscn" id="12_sn0an"]
 [ext_resource type="PackedScene" uid="uid://ktg14fvvhxcg" path="res://src/scenes/item prefabs/item_story/story_dungeon1/story_item_7.tscn" id="13_8mgve"]
 [ext_resource type="PackedScene" uid="uid://bqlir6wc3k7f4" path="res://src/scenes/item prefabs/item_story/story_dungeon1/story_item_8.tscn" id="14_op0hj"]
+[ext_resource type="PackedScene" uid="uid://d3nfmowlnmco8" path="res://src/scenes/entities/Enemies/small/bat/bat.tscn" id="15_a2p8m"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_uvovq"]
 texture = ExtResource("3_5vp6o")
@@ -254,9 +254,6 @@ shape = SubResource("RectangleShape2D_1o2q3")
 
 [node name="MainHUD" parent="." unique_id=1196255063 instance=ExtResource("10_yx43d")]
 
-[node name="Boss_Mole" parent="." unique_id=961012920 instance=ExtResource("6_2pjx1")]
-position = Vector2(-217, -48)
-
 [node name="StoryItem1" parent="." unique_id=280462394 instance=ExtResource("7_qtrut")]
 position = Vector2(96, -51)
 
@@ -280,3 +277,6 @@ position = Vector2(420, -53)
 
 [node name="StoryItem8" parent="." unique_id=1156583907 instance=ExtResource("14_op0hj")]
 position = Vector2(473, -53)
+
+[node name="bat" parent="." unique_id=717432867 instance=ExtResource("15_a2p8m")]
+position = Vector2(-198.99998, -56.999996)
