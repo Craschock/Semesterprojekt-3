@@ -4,6 +4,10 @@ class_name MoleUScratch
 var boss: boss_mole
 var has_attacked: bool = false
 
+
+
+
+
 @export_category("Attack Settings")
 @export var attack_component: AttackComponent
 
