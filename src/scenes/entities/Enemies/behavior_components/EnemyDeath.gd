@@ -16,6 +16,11 @@ func _ready() -> void:
 
 func enter() -> void:
 	enemy.get_node("AnimatedSprite2D").play(animation_name)
+	
+	# Disable flying if flying enemy
+	if "is_flying_entity" in enemy and enemy.is_flying_entity:
+		enemy.is_flying_entity = false
+		enemy.apply_gravity = true
 
 func physics_update(delta: float) -> void:
 	enemy.velocity.x = move_toward(enemy.velocity.x, 0, friction * delta)

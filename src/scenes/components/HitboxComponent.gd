@@ -18,13 +18,16 @@ func take_hit(attack: AttackComponent) -> void:
 		
 		# Knockback
 		if owner is CharacterBody2D:
-			var dir_x = sign(global_position.x - attack.global_position.x)
-			
-			# If entities are standing on the exact same spot
-			if dir_x == 0:
-				dir_x == 1
-			
-			owner.velocity = Vector2(dir_x * attack.knockback_force, -attack.knockback_force * 0.8)
+			# Is enemy flying type?
+			if "is_flying_entity" in owner and owner.is_flying_entity:
+				var knockback_dir = attack.global_position.direction_to(global_position)
+				owner.velocity = knockback_dir * attack.knockback_force
+			else:
+				var dir_x = sign(global_position.x - attack.global_position.x)
+				# If entities are standing on the exact same spot
+				if dir_x == 0:
+					dir_x = 1
+				owner.velocity = Vector2(dir_x * attack.knockback_force, -attack.knockback_force * 0.8)
 			
 		
 		

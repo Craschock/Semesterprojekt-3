@@ -22,7 +22,7 @@ func _ready() -> void:
 
 func enter() -> void:
 	# Stop movement
-	enemy.velocity.x = 0.0
+	enemy.velocity = Vector2.ZERO
 	enemy.get_node("AnimatedSprite2D").play(animation_name)
 	timer = randf_range(min_idle_time, max_idle_time)
 

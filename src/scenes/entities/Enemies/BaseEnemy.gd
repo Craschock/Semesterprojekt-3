@@ -21,6 +21,8 @@ var stored_velocity: Vector2
 @export var step_height: float = 4.0
 ## Attack Cooldown (in seconds)
 @export var attack_cooldown: float = 2.0
+## Check if entity flies (ignores gravity and step up)
+@export var is_flying_entity: bool = false
 
 var attack_cooldown_timer: float = 0.0
 
@@ -39,12 +41,9 @@ func _ready() -> void:
 func _on_player_spotted() -> void:
 	if is_dead:
 		return
-		
-	var current = state_machine.current_state
-	# Enemy darf nur chasen, wenn er am laufen oder patrolieren war
-	if current == idle_state or current.name == "EnemyWalk" or current.name == "EnemyPatrol":
-		if chase_state:
-			state_machine.force_transition(chase_state.name)
+	
+	if chase_state:
+		state_machine.force_transition(chase_state.name)
 
 func _on_player_lost() -> void:
 	if not is_dead:
@@ -53,13 +52,17 @@ func _on_player_lost() -> void:
 			state_machine.force_transition(idle_state.name)
 
 func _physics_process(delta: float) -> void:
-	if not is_on_floor():
-		velocity.y += gravity * delta
+	
+	if not is_flying_entity:
+		
+		if not is_on_floor():
+			velocity.y += gravity * delta
+		
+		try_step_up()
 	
 	if attack_cooldown_timer > 0.0:
 		attack_cooldown_timer -= delta
 	
-	try_step_up()
 	move_and_slide()
 
 func try_step_up() -> void:
