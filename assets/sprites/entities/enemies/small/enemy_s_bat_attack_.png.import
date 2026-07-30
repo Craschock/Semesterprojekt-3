@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ysp25ciefwi"
-path="res://.godot/imported/enemy_e_nakedmoleratfrog_lick.png-1aaef81c6e162dffb4c933d448f9852a.ctex"
+uid="uid://dbkmrytf47tia"
+path="res://.godot/imported/enemy_s_bat_attack_.png-f8482763a1b1a2348e23052feb8eb670.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/entities/enemies/elite/enemy_e_nakedmoleratfrog_lick.png"
-dest_files=["res://.godot/imported/enemy_e_nakedmoleratfrog_lick.png-1aaef81c6e162dffb4c933d448f9852a.ctex"]
+source_file="res://assets/sprites/entities/enemies/small/enemy_s_bat_attack_.png"
+dest_files=["res://.godot/imported/enemy_s_bat_attack_.png-f8482763a1b1a2348e23052feb8eb670.ctex"]
 
 [params]
 

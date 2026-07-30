@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://body80jhjnb1q"
-path="res://.godot/imported/enemy_s_bat_diveAttack.png-8d7b874ec072901fe79bc5b833710c3c.ctex"
+uid="uid://c7a2owgwno2hh"
+path="res://.godot/imported/enemy_e_nakedmoleratfrog_toungattack.png-dd3aaf7fe73c419aaa6386b0f94e757d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/entities/enemies/small/enemy_s_bat_diveAttack.png"
-dest_files=["res://.godot/imported/enemy_s_bat_diveAttack.png-8d7b874ec072901fe79bc5b833710c3c.ctex"]
+source_file="res://assets/sprites/entities/enemies/elite/enemy_e_nakedmoleratfrog_toungattack.png"
+dest_files=["res://.godot/imported/enemy_e_nakedmoleratfrog_toungattack.png-dd3aaf7fe73c419aaa6386b0f94e757d.ctex"]
 
 [params]
 
