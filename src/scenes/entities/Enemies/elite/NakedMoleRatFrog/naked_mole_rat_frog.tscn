@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://cbjvea05c4mbw"]
+
+[ext_resource type="PackedScene" uid="uid://c301qejfle2yq" path="res://src/scenes/entities/Enemies/base_enemy.tscn" id="1_jwp4l"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_jwp4l"]
+
+[node name="NakedMoleRatFrog" unique_id=961012920 instance=ExtResource("1_jwp4l")]
+
+[node name="AnimatedSprite2D" parent="." index="4" unique_id=1281959025]
+sprite_frames = SubResource("SpriteFrames_jwp4l")
