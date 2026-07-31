@@ -61,9 +61,6 @@ func physics_update(delta: float) -> void:
 			else:
 				enemy.get_node("AnimatedSprite2D").play(anim_down)
 			
-			if enemy.is_on_wall():
-				enemy.velocity.x = 0
-			
 			if enemy.is_on_floor() and enemy.velocity.y >= 0:
 				phase = 2
 				timer = land_duration

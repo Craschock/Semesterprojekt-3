@@ -63,9 +63,6 @@ func physics_update(delta: float) -> void:
 			else:
 				enemy.get_node("AnimatedSprite2D").play(anim_down)
 			
-			if enemy.is_on_wall():
-				enemy.velocity.x = 0
-			
 			if enemy.is_on_floor() and enemy.velocity.y >= 0:
 				phase = 2
 				timer = land_duration
@@ -102,9 +99,16 @@ func _jump() -> void:
 	if target:
 		var distance_x = abs(target.global_position.x - enemy.global_position.x)
 		force_x = clamp(distance_x, min_jump_x, max_jump_x)
+		
 		var jump_ratio = (force_x - min_jump_x) / (max_jump_x - min_jump_x)
 		force_y = lerp(min_jump_y, max_jump_y, jump_ratio)
 		
+		var height_diff = enemy.global_position.y - target.global_position.y
+		
+		if height_diff > 0:
+			force_y += height_diff * 1.5
+			force_y = min(force_y, max_jump_y * 1.8)
+			
 	else:
 		force_x = randf_range(min_jump_x, max_jump_x)
 		force_y = randf_range(min_jump_y, max_jump_y)
