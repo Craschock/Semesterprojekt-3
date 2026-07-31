@@ -12,6 +12,7 @@ size = Vector2(8, 28.635601)
 radius = 36.0
 
 [node name="StoryItem" type="RigidBody2D" unique_id=280462394]
+z_index = -1
 collision_layer = 8
 script = ExtResource("1_3pmj3")
 
