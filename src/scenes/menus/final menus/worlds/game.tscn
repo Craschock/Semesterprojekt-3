@@ -12,7 +12,9 @@
 [ext_resource type="PackedScene" uid="uid://dfd10kendyi1g" path="res://src/scenes/procedural generation/world_generation.tscn" id="8_owfvr"]
 [ext_resource type="PackedScene" uid="uid://bqtrgkf85mkao" path="res://src/scenes/item prefabs/item_story/story_dungeon1/story_item_1.tscn" id="9_cydkl"]
 [ext_resource type="PackedScene" uid="uid://dfwovdgj1npmp" path="res://src/scenes/item prefabs/item_story/story_dungeon1/story_item_2.tscn" id="10_hbboa"]
+[ext_resource type="PackedScene" uid="uid://d3nfmowlnmco8" path="res://src/scenes/entities/Enemies/small/bat/bat.tscn" id="10_kjej0"]
 [ext_resource type="PackedScene" uid="uid://bonuyykwmmjff" path="res://src/scenes/item prefabs/item_story/story_dungeon1/story_item_3.tscn" id="11_e85fw"]
+[ext_resource type="PackedScene" uid="uid://cbjvea05c4mbw" path="res://src/scenes/entities/Enemies/elite/NakedMoleRatFrog/naked_mole_rat_frog.tscn" id="11_tuqsm"]
 [ext_resource type="PackedScene" uid="uid://cuqofgk8wqotj" path="res://src/scenes/item prefabs/item_story/story_dungeon1/story_item_4.tscn" id="12_h8ths"]
 [ext_resource type="PackedScene" uid="uid://bfrvj77du1aeg" path="res://src/scenes/item prefabs/item_story/story_dungeon1/story_item_5.tscn" id="13_w3vmo"]
 [ext_resource type="PackedScene" uid="uid://bx6qa7p4i5i84" path="res://src/scenes/item prefabs/item_story/story_dungeon1/story_item_6.tscn" id="14_kjej0"]
@@ -39,6 +41,18 @@ scene = ExtResource("3_awl1k")
 spawn_chance = 0.15
 metadata/_custom_type_script = "uid://csehoby86vswg"
 
+[sub_resource type="Resource" id="Resource_ooqj2"]
+script = ExtResource("5_e85fw")
+scene = ExtResource("10_kjej0")
+spawn_chance = 0.5
+metadata/_custom_type_script = "uid://csehoby86vswg"
+
+[sub_resource type="Resource" id="Resource_3xllx"]
+script = ExtResource("5_e85fw")
+scene = ExtResource("11_tuqsm")
+spawn_chance = 0.25
+metadata/_custom_type_script = "uid://csehoby86vswg"
+
 [node name="Game" type="Node" unique_id=109101168]
 
 [node name="Enemies" type="Node" parent="." unique_id=702154899]
@@ -54,7 +68,7 @@ boss_scene = ExtResource("18_hbboa")
 script = ExtResource("2_rakx4")
 world_generator = NodePath("../../World")
 entity_container = NodePath("../../Enemies")
-enemy_pool = Array[ExtResource("5_e85fw")]([SubResource("Resource_h8ths"), SubResource("Resource_w3vmo"), SubResource("Resource_kjej0")])
+enemy_pool = Array[ExtResource("5_e85fw")]([SubResource("Resource_h8ths"), SubResource("Resource_w3vmo"), SubResource("Resource_kjej0"), SubResource("Resource_ooqj2"), SubResource("Resource_3xllx")])
 metadata/_custom_type_script = "uid://dq2jcmsb1g1d3"
 
 [node name="World" parent="." unique_id=1622799569 instance=ExtResource("8_owfvr")]
