@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://dr5dccykwm2qn"]
 
 [ext_resource type="Texture2D" uid="uid://7go1wm873nj4" path="res://assets/sprites/UI/Verziehrungen_Ecken.png" id="1_7lt2r"]
-[ext_resource type="Texture2D" uid="uid://b824ww378cac1" path="res://assets/sprites/UI/Item_inv.png" id="2_21kq3"]
+[ext_resource type="Texture2D" uid="uid://dssn1hshmdvhd" path="res://assets/sprites/UI/Inventory/Inv_Bg.png" id="2_kjt40"]
 [ext_resource type="Texture2D" uid="uid://cyersitr31gux" path="res://assets/sprites/UI/HealtBar2.0.png" id="3_kjt40"]
 [ext_resource type="Texture2D" uid="uid://c2vnqk3np1xas" path="res://assets/sprites/UI/Health2.0.png" id="4_gxhcn"]
 [ext_resource type="PackedScene" uid="uid://hi0oqc1o8nv2" path="res://src/scenes/ui/overlay/inventory/inventory_ui.tscn" id="5_kjt40"]
@@ -22,18 +22,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("1_7lt2r")
-
-[node name="Inventory" type="TextureRect" parent="." unique_id=1820875438]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.246
-anchor_right = 0.754
-anchor_bottom = 0.15100001
-offset_left = -2.0
-offset_right = -2.0
-grow_horizontal = 2
-pivot_offset_ratio = Vector2(0.5, 0)
-texture = ExtResource("2_21kq3")
 
 [node name="HealthBar" type="Control" parent="." unique_id=1902679153]
 layout_mode = 1
@@ -73,20 +61,25 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("3_kjt40")
 
+[node name="Inventory" type="TextureRect" parent="." unique_id=1820875438]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.246
+anchor_right = 0.754
+anchor_bottom = 0.15100001
+grow_horizontal = 2
+pivot_offset_ratio = Vector2(0.5, 0)
+texture = ExtResource("2_kjt40")
+
 [node name="InventoryUI" parent="." unique_id=22996944 instance=ExtResource("5_kjt40")]
 layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -22.0
-offset_top = 0.0
-offset_right = 18.0
-offset_bottom = 40.000015
+anchors_preset = -1
+anchor_left = 0.416
+anchor_right = 0.58400005
+anchor_bottom = 0.13700001
+offset_left = 0.020019531
+offset_right = -0.020080566
+offset_bottom = 0.35999298
 grow_horizontal = 2
-scale = Vector2(0.5, 0.5)
-
-[node name="HBoxContainer" parent="InventoryUI" index="0" unique_id=390279050]
-theme_override_constants/separation = 20
-alignment = 1
 
 [editable path="InventoryUI"]

@@ -4,17 +4,20 @@
 [ext_resource type="PackedScene" uid="uid://b2orebf2o02ra" path="res://src/scenes/ui/overlay/inventory/inventory_slot.tscn" id="2_fqjn6"]
 
 [node name="InventoryUI" type="MarginContainer" unique_id=22996944]
-offset_left = -20.0
-offset_top = -20.0
-offset_right = 20.0
-offset_bottom = 20.0
+offset_right = 215.0
+offset_bottom = 99.0
 pivot_offset_ratio = Vector2(0.5, 0.5)
-theme_override_constants/margin_left = 16
-theme_override_constants/margin_top = 16
-theme_override_constants/margin_right = 16
-theme_override_constants/margin_bottom = 16
 script = ExtResource("1_hd6ot")
-slot_scene = ExtResource("2_fqjn6")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=390279050]
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=1856069496]
+layout_mode = 2
+alignment = 1
+
+[node name="InventorySlot" parent="HBoxContainer" unique_id=1776112454 instance=ExtResource("2_fqjn6")]
+layout_mode = 2
+
+[node name="InventorySlot2" parent="HBoxContainer" unique_id=1451477377 instance=ExtResource("2_fqjn6")]
+layout_mode = 2
+
+[node name="InventorySlot3" parent="HBoxContainer" unique_id=1073384675 instance=ExtResource("2_fqjn6")]
 layout_mode = 2

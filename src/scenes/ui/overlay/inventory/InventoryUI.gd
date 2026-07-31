@@ -4,33 +4,33 @@ class_name InventoryUI
 ## Player Inventory data
 var inventory_component: InventoryComponent
 
-## Inventory Slot
-@export var slot_scene: PackedScene 
-
 @onready var slot_container: HBoxContainer = $HBoxContainer
 var slots: Array[InventorySlot] = []
 
 func _ready() -> void:
+	for child in slot_container.get_children():
+		if child is InventorySlot:
+			slots.append(child)
 	
 	await get_tree().process_frame
 	
 	if PlayerManager.player:
 		inventory_component = PlayerManager.player.inventory_component
-		
 	
 	if inventory_component:
+		inventory_component.max_slots = slots.size()
+		
 		_initialize_ui()
+		
 		# Listen for changes
 		inventory_component.inventory_changed.connect(_on_inventory_changed)
 		inventory_component.active_slot_changed.connect(_on_active_slot_changed)
 
 func _initialize_ui() -> void:
-	# Spawn exact number of slots
-	for i in range(inventory_component.max_slots):
-		var slot = slot_scene.instantiate()
-		slot_container.add_child(slot)
-		slots.append(slot)
+	for slot in slots:
 		slot.clear_slot()
+		slot.set_selected(false)
+		
 	_update_all_slots()
 
 func _on_inventory_changed(_item: ItemData, _amount: int) -> void:
@@ -48,8 +48,12 @@ func _update_all_slots() -> void:
 		
 	# Insert based on current inventory
 	var items = inventory_component.contents.keys()
+	
 	for i in range(items.size()):
-		var item = items[i]
-		var amount = inventory_component.contents[item]
-		slots[i].update_slot(item, amount)
-		
+		if i < slots.size():
+			var item = items[i]
+			var amount = inventory_component.contents[item]
+			slots[i].update_slot(item, amount)
+			
+			if inventory_component.active_slot_index == i:
+				slots[i].set_selected(true)
