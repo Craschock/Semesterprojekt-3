@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cysu68ommq02i"
-path="res://.godot/imported/enemy_e_nakedmoleratfrog_death.png-45574cf60a542c5f5fa923d20d3c9053.ctex"
+uid="uid://010ak78hf2rc"
+path="res://.godot/imported/enemy_e_nakedmoleratfrog_absprung.png-ddf09c1eef5c0d7294b4c4fc1aa49ea9.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/entities/enemies/elite/enemy_e_nakedmoleratfrog_death.png"
-dest_files=["res://.godot/imported/enemy_e_nakedmoleratfrog_death.png-45574cf60a542c5f5fa923d20d3c9053.ctex"]
+source_file="res://assets/sprites/entities/enemies/elite/enemy_e_nakedmoleratfrog_absprung.png"
+dest_files=["res://.godot/imported/enemy_e_nakedmoleratfrog_absprung.png-ddf09c1eef5c0d7294b4c4fc1aa49ea9.ctex"]
 
 [params]
 
