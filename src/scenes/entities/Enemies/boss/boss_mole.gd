@@ -12,6 +12,8 @@ var wantsToSwitch_time_timer: float = 0.0
 var is_underground: bool = false
 var is_playerInArena: bool = false
 
+#Izzy here:Adding the sounds needed here
+
 signal boss_defeated
 
 func _ready() -> void:
@@ -56,6 +58,7 @@ func update_facing(direction: float) -> void:
 
 
 func dig_in() -> void:
+	
 	is_underground = true
 
 func dig_out() -> void:

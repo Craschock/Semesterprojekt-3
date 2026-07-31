@@ -2,8 +2,6 @@ extends State
 class_name EnemyFlyingMove
 
 var enemy: BaseEnemy
-@onready var sfx_enemy_walk: AudioStreamPlayer2D = $"../../sfx_enemy_walk"
-
 
 @export_category("State Configuration")
 ## Name of Animation to be played from Animated Sprite 2D (String)

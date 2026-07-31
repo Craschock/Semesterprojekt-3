@@ -242,10 +242,12 @@ disabled = true
 
 [node name="sfx_enemy_attack" type="AudioStreamPlayer2D" parent="." index="7" unique_id=676200732]
 stream = ExtResource("10_4gqxh")
+bus = &"Sounds"
 
 [node name="sfx_enemy_walk" type="AudioStreamPlayer2D" parent="." index="8" unique_id=1354813693]
 stream = ExtResource("11_5caw2")
 volume_db = -25.0
 max_distance = 350.0
+bus = &"Sounds"
 
 [editable path="HitboxComponent"]

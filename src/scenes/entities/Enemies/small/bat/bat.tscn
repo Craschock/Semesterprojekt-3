@@ -10,7 +10,7 @@
 [ext_resource type="Script" uid="uid://3rxdx82oa7oc" path="res://src/scenes/entities/Enemies/small/bat/BatDiveAttack.gd" id="7_70xud"]
 [ext_resource type="Script" uid="uid://cy85r20fkc1tr" path="res://src/scenes/components/AttackComponent.gd" id="8_hj148"]
 [ext_resource type="AudioStream" uid="uid://bo06ishk24s4x" path="res://assets/sounds/entity_sound/enemies_sounds/small/enemy_s_bat_attack.mp3" id="10_gy300"]
-[ext_resource type="AudioStream" uid="uid://i23cgpq1in6" path="res://assets/sounds/entity_sound/enemies_sounds/small/enemy_s_bat_walk.mp3" id="11_3cuuu"]
+[ext_resource type="AudioStream" uid="uid://db3nsliag2yc4" path="res://assets/sounds/entity_sound/enemies_sounds/small/bat_walk(1).mp3" id="11_3cuuu"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ksscf"]
 size = Vector2(20, 8.82353)
@@ -456,6 +456,9 @@ stream = ExtResource("10_gy300")
 position = Vector2(0, -3.5061552e-07)
 scale = Vector2(0.9999998, 0.9999998)
 stream = ExtResource("11_3cuuu")
+volume_db = 0.5
+autoplay = true
+max_distance = 200.0
 
 [editable path="HitboxComponent"]
 [editable path="WeaponPivot/DetectionComponent"]

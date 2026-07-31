@@ -12,7 +12,7 @@ dest_files=["res://.godot/imported/Minen Boss Theme Fight Music.mp3-14c0a2fcfe02
 
 [params]
 
-loop=false
+loop=true
 loop_offset=0
 bpm=0
 beat_count=0

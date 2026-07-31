@@ -8,6 +8,10 @@ class_name BossArenaTrigger
 var triggered: bool = false
 var boss_reference: Node = null
 
+#Izzy here: boss_music added as variable
+@onready var mine_boss_theme_music: AudioStreamPlayer2D = $"../mine_boss_theme_music"
+
+
 func _ready() -> void:
 	body_entered.connect(_on_body_entered)
 	
@@ -29,6 +33,8 @@ func _on_body_entered(body: Node2D) -> void:
 		if boss_reference and boss_reference is boss_mole:
 			boss_reference.unfreeze()
 			boss_reference.is_playerInArena = true
+			#Izzy here: Starting to play boss music
+			mine_boss_theme_music.play()
 			print("Enable boss")
 
 func _on_boss_defeated() -> void:

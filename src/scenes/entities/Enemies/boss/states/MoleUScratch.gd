@@ -3,10 +3,7 @@ class_name MoleUScratch
 
 var boss: boss_mole
 var has_attacked: bool = false
-
-
-
-
+@onready var mine_boss_attack_underground: AudioStreamPlayer2D = $"../../mine_boss_attack_underground"
 
 @export_category("Attack Settings")
 @export var attack_component: AttackComponent
@@ -18,6 +15,8 @@ func enter() -> void:
 	boss.velocity.x = 0.0
 	boss.get_node("HitboxComponent").is_invincible = true
 	has_attacked = false
+	#Izzy here: when mole attacks underground, the attack underground plays
+	mine_boss_attack_underground.play()
 	boss.get_node("AnimatedSprite2D").play("U_attack_scratch")
 	
 	if attack_component:
