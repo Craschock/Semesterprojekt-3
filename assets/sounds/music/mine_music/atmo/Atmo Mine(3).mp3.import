@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://1sprdw8wijsm"
+path="res://.godot/imported/Atmo Mine(3).mp3-eef0831ab07942f8d3e52a8d8e52fb86.mp3str"
+
+[deps]
+
+source_file="res://assets/sounds/music/mine_music/atmo/Atmo Mine(3).mp3"
+dest_files=["res://.godot/imported/Atmo Mine(3).mp3-eef0831ab07942f8d3e52a8d8e52fb86.mp3str"]
+
+[params]
+
+loop=true
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
