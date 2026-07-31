@@ -1213,7 +1213,7 @@ position_smoothing_enabled = true
 
 [node name="sfx_player_attack" type="AudioStreamPlayer2D" parent="." unique_id=223593913]
 stream = ExtResource("33_yjc7t")
-volume_db = -0.98
+volume_db = -8.0
 bus = &"Sounds"
 
 [node name="sfx_player_run" type="AudioStreamPlayer2D" parent="." unique_id=870772094]
@@ -1232,7 +1232,6 @@ volume_db = 3.139
 bus = &"Sounds"
 
 [node name="TextBubble" type="Label" parent="." unique_id=370301571]
-anchors_preset = -1
 offset_left = -25.0
 offset_top = -37.0
 offset_right = 26.0

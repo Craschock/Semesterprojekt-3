@@ -451,12 +451,13 @@ disabled = true
 
 [node name="sfx_enemy_attack" type="AudioStreamPlayer2D" parent="." index="7" unique_id=1525729854]
 stream = ExtResource("10_gy300")
+volume_db = -25.0
 
 [node name="sfx_enemy_walk" type="AudioStreamPlayer2D" parent="." index="8" unique_id=154546352]
 position = Vector2(0, -3.5061552e-07)
 scale = Vector2(0.9999998, 0.9999998)
 stream = ExtResource("11_3cuuu")
-volume_db = 0.5
+volume_db = -30.0
 autoplay = true
 max_distance = 200.0
 

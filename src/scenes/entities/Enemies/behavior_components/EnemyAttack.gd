@@ -3,6 +3,7 @@ class_name EnemyAttack
 
 var enemy: BaseEnemy
 
+
 @export_category("State Configuration")
 ## Name of Animation to be played from Animated Sprite 2D (String)
 @export var animation_name: String = "idle"

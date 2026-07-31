@@ -11,6 +11,7 @@
 [ext_resource type="Script" uid="uid://ddfxiuxfexrms" path="res://src/scenes/entities/Enemies/behavior_components/frog hopping/EnemyFrogChase.gd" id="8_ewss2"]
 [ext_resource type="Script" uid="uid://dpty4j8elextd" path="res://src/scenes/entities/Enemies/behavior_components/EnemyAttack.gd" id="9_u8kgu"]
 [ext_resource type="Script" uid="uid://cy85r20fkc1tr" path="res://src/scenes/components/AttackComponent.gd" id="10_1lwnq"]
+[ext_resource type="AudioStream" uid="uid://16pn7sm0rw5w" path="res://assets/sounds/entity_sound/enemies_sounds/elite/enemy_e_nakedmoleratfrog_bite.mp3" id="11_5gstf"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_bvk2e"]
 radius = 7.3529406
@@ -368,6 +369,9 @@ animation_name = "attack_lick"
 next_state = NodePath("../EnemyFrogChase")
 attack_component = NodePath("../../WeaponPivot/lick")
 metadata/_custom_type_script = "uid://dpty4j8elextd"
+
+[node name="sfx_enemy_attack" type="AudioStreamPlayer2D" parent="StateMachine/EnemyAttack" index="0" unique_id=783621025]
+stream = ExtResource("11_5gstf")
 
 [node name="DetectionComponent" parent="WeaponPivot" parent_id_path=PackedInt32Array(1288338269) index="0" unique_id=120105529]
 memory_duration = 6.7

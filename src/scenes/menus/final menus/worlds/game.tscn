@@ -83,7 +83,7 @@ item_scenes = Array[PackedScene]([ExtResource("9_cydkl"), ExtResource("10_hbboa"
 [node name="sfx_mine_atmo_music" type="AudioStreamPlayer2D" parent="." unique_id=594421042]
 scale = Vector2(0.99999994, 0.99999994)
 stream = ExtResource("20_h8ths")
-volume_db = 0.1
+volume_db = -3.0
 autoplay = true
-max_distance = 4096.0
+max_distance = 9999.0
 bus = &"Music"

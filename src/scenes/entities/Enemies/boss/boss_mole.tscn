@@ -1541,21 +1541,25 @@ char_delay = 0.07
 [node name="mine_boss_attack_slash" type="AudioStreamPlayer2D" parent="." index="9" unique_id=294995804]
 position = Vector2(-53, -80)
 stream = ExtResource("34_mfl05")
+volume_db = -3.0
+pitch_scale = 0.1
 
 [node name="mine_boss_attack_underground" type="AudioStreamPlayer2D" parent="." index="10" unique_id=1121906603]
 stream = ExtResource("35_p3uhn")
+volume_db = 3.0
 
 [node name="mine_boss_walk_underground" type="AudioStreamPlayer2D" parent="." index="11" unique_id=1358428065]
 stream = ExtResource("36_7cvx0")
-volume_db = -4.0
+volume_db = -25.0
 max_distance = 9999.0
 
 [node name="mine_boss_dig" type="AudioStreamPlayer2D" parent="." index="12" unique_id=427106580]
 stream = ExtResource("37_f1qt6")
+volume_db = 3.0
 
 [node name="mine_boss_theme_music" type="AudioStreamPlayer2D" parent="." index="13" unique_id=264746733]
 stream = ExtResource("38_wn4q1")
-volume_db = -5.832
+volume_db = -7.0
 
 [node name="mine_boss_jump" type="AudioStreamPlayer2D" parent="." index="14" unique_id=2022607520]
 stream = ExtResource("39_sneba")

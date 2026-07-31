@@ -575,13 +575,13 @@ disabled = true
 [node name="sfx_enemy_walk" type="AudioStreamPlayer2D" parent="." index="7" unique_id=2118794191]
 position = Vector2(44.499996, -25)
 stream = ExtResource("11_ccpkp")
-volume_db = -8.364
+volume_db = -18.0
 max_distance = 220.0
 
 [node name="sfx_enemy_attack" type="AudioStreamPlayer2D" parent="." index="8" unique_id=971707655]
 position = Vector2(44.499996, -25)
 stream = ExtResource("11_ojuji")
-volume_db = 5.38
+volume_db = -10.0
 max_distance = 500.0
 bus = &"Sounds"
 
