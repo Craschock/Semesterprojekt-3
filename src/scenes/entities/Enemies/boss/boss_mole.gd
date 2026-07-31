@@ -12,6 +12,8 @@ var wantsToSwitch_time_timer: float = 0.0
 var is_underground: bool = false
 var is_playerInArena: bool = false
 
+signal boss_defeated
+
 func _ready() -> void:
 	add_to_group("boss")
 	
@@ -34,6 +36,9 @@ func _physics_process(delta: float) -> void:
 		attack_cooldown_timer -= delta
 	if wantsToSwitch_time_timer > 0.0:
 		wantsToSwitch_time_timer -= delta
+	
+	if is_dead and not state_machine.is_physics_processing():
+		velocity.x = move_toward(velocity.x, 0, 800 * delta)
 	
 	move_and_slide()
 
@@ -68,5 +73,21 @@ func die() -> void:
 	if col_shape:
 		col_shape.set_deferred("disabled", true)
 	
+	state_machine.set_physics_process(false)
+	
+	var sprite = get_node_or_null("AnimatedSprite2D")
+	if sprite:
+		sprite.play("hit")
+		sprite.pause()
+	
+	boss_defeated.emit()
+
+func finish_death() -> void:
+	state_machine.set_physics_process(true)
+	
+	var sprite = get_node_or_null("AnimatedSprite2D")
+	if sprite:
+		sprite.play()
+		
 	loot_drop_component._start_drop()
 	state_machine.force_transition("enemydeath")

@@ -1260,84 +1260,123 @@ size = Vector2(46, 36)
 [sub_resource type="Resource" id="Resource_bv8l1"]
 script = ExtResource("30_qg2od")
 speaker = 1
-text = "Du bist also der Störenfried..."
+text = "So you're the troublemaker..."
 metadata/_custom_type_script = "uid://b416e0hwhsl28"
 
 [sub_resource type="Resource" id="Resource_7cvx0"]
 script = ExtResource("30_qg2od")
 speaker = 1
-text = "Der hier alles durcheinander bringt."
+text = "who's messing everything up."
 metadata/_custom_type_script = "uid://b416e0hwhsl28"
 
 [sub_resource type="Resource" id="Resource_jag5r"]
 script = ExtResource("30_qg2od")
 speaker = 1
-text = "*Sniff* Du.. *Sniff, Sniff*"
+text = "*Sniff* You.. *Sniff, Sniff*"
 metadata/_custom_type_script = "uid://b416e0hwhsl28"
 
 [sub_resource type="Resource" id="Resource_f1qt6"]
 script = ExtResource("30_qg2od")
 speaker = 1
-text = "Du bist auch eine Chimäre."
+text = "You're a chimera too."
 metadata/_custom_type_script = "uid://b416e0hwhsl28"
 
 [sub_resource type="Resource" id="Resource_qg2od"]
 script = ExtResource("30_qg2od")
 speaker = 1
-text = "Was machst du.. "
+text = "What are you doing..."
 metadata/_custom_type_script = "uid://b416e0hwhsl28"
 
 [sub_resource type="Resource" id="Resource_dald7"]
 script = ExtResource("30_qg2od")
 speaker = 1
-text = "Ach nein..."
+text = "Oh don't tell me..."
 metadata/_custom_type_script = "uid://b416e0hwhsl28"
 
 [sub_resource type="Resource" id="Resource_wn4q1"]
 script = ExtResource("30_qg2od")
 speaker = 1
-text = "Wurdest du etwa von unserem Meister vertrieben? "
+text = "were you driven out by our master?"
 metadata/_custom_type_script = "uid://b416e0hwhsl28"
 
 [sub_resource type="Resource" id="Resource_kic0i"]
 script = ExtResource("30_qg2od")
 speaker = 1
-text = "Warst wohl zu schwach?"
+text = "Were you too weak?"
 metadata/_custom_type_script = "uid://b416e0hwhsl28"
 
 [sub_resource type="Resource" id="Resource_sneba"]
 script = ExtResource("30_qg2od")
 speaker = 1
-text = "Riecht danach..."
+text = "Definitely smells like it."
 metadata/_custom_type_script = "uid://b416e0hwhsl28"
 
 [sub_resource type="Resource" id="Resource_vmebq"]
 script = ExtResource("30_qg2od")
-text = "Wer bist du?"
+text = "Who are you?"
 metadata/_custom_type_script = "uid://b416e0hwhsl28"
 
 [sub_resource type="Resource" id="Resource_2luvn"]
 script = ExtResource("30_qg2od")
 speaker = 1
-text = " Ich?"
+text = "Me?"
 metadata/_custom_type_script = "uid://b416e0hwhsl28"
 
 [sub_resource type="Resource" id="Resource_vjoqf"]
 script = ExtResource("30_qg2od")
 speaker = 1
-text = "Ich bin die vom Meister erst erschaffene Chimäre. "
+text = "I'm the chimera the master created."
 metadata/_custom_type_script = "uid://b416e0hwhsl28"
 
 [sub_resource type="Resource" id="Resource_mfl05"]
 script = ExtResource("30_qg2od")
 speaker = 1
-text = "Und die Stärkste noch dazu."
+text = "And the strongest one at that."
 metadata/_custom_type_script = "uid://b416e0hwhsl28"
 
 [sub_resource type="Resource" id="Resource_p3uhn"]
 script = ExtResource("30_qg2od")
 speaker = 1
-text = "Kleine Kostprobe gefällig?	"
+text = "Want a little taste?"
+metadata/_custom_type_script = "uid://b416e0hwhsl28"
+
+[sub_resource type="Resource" id="Resource_1qlad"]
+script = ExtResource("30_qg2od")
+text = "How..."
+metadata/_custom_type_script = "uid://b416e0hwhsl28"
+
+[sub_resource type="Resource" id="Resource_pfq3x"]
+script = ExtResource("30_qg2od")
+text = "How did you?"
+metadata/_custom_type_script = "uid://b416e0hwhsl28"
+
+[sub_resource type="Resource" id="Resource_kcgyn"]
+script = ExtResource("30_qg2od")
+text = "I,"
+metadata/_custom_type_script = "uid://b416e0hwhsl28"
+
+[sub_resource type="Resource" id="Resource_ajtaq"]
+script = ExtResource("30_qg2od")
+text = "I'm the strongest."
+metadata/_custom_type_script = "uid://b416e0hwhsl28"
+
+[sub_resource type="Resource" id="Resource_knqfd"]
+script = ExtResource("30_qg2od")
+text = "So strong"
+metadata/_custom_type_script = "uid://b416e0hwhsl28"
+
+[sub_resource type="Resource" id="Resource_x6b3i"]
+script = ExtResource("30_qg2od")
+text = "that"
+metadata/_custom_type_script = "uid://b416e0hwhsl28"
+
+[sub_resource type="Resource" id="Resource_xtjqc"]
+script = ExtResource("30_qg2od")
+text = "no one"
+metadata/_custom_type_script = "uid://b416e0hwhsl28"
+
+[sub_resource type="Resource" id="Resource_uwa1c"]
+script = ExtResource("30_qg2od")
 metadata/_custom_type_script = "uid://b416e0hwhsl28"
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_j8x64"]
@@ -1471,6 +1510,7 @@ collision_layer = 0
 collision_mask = 2
 script = ExtResource("29_26q5c")
 dialogue_sequence = Array[ExtResource("30_qg2od")]([SubResource("Resource_bv8l1"), SubResource("Resource_7cvx0"), SubResource("Resource_jag5r"), SubResource("Resource_f1qt6"), SubResource("Resource_qg2od"), SubResource("Resource_dald7"), SubResource("Resource_wn4q1"), SubResource("Resource_kic0i"), SubResource("Resource_sneba"), SubResource("Resource_vmebq"), SubResource("Resource_2luvn"), SubResource("Resource_vjoqf"), SubResource("Resource_mfl05"), SubResource("Resource_p3uhn")])
+death_dialogue_sequence = Array[ExtResource("30_qg2od")]([SubResource("Resource_1qlad"), SubResource("Resource_pfq3x"), SubResource("Resource_kcgyn"), SubResource("Resource_ajtaq"), SubResource("Resource_knqfd"), SubResource("Resource_x6b3i"), SubResource("Resource_xtjqc"), SubResource("Resource_uwa1c")])
 metadata/_custom_type_script = "uid://ca7qx8o7jslyp"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BossArenaTrigger" index="0" unique_id=671607519]
