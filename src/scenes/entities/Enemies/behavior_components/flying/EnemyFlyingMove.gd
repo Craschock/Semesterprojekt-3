@@ -2,6 +2,8 @@ extends State
 class_name EnemyFlyingMove
 
 var enemy: BaseEnemy
+@onready var sfx_enemy_walk: AudioStreamPlayer2D = $"../../sfx_enemy_walk"
+
 
 @export_category("State Configuration")
 ## Name of Animation to be played from Animated Sprite 2D (String)
@@ -13,7 +15,7 @@ var enemy: BaseEnemy
 @export var speed: float = 40.0
 @export var min_move_time: float = 0.5
 @export var max_move_time: float = 3.0
-
+	
 var timer: float = 0.0
 var move_direction: Vector2 = Vector2.ZERO
 

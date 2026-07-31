@@ -9,6 +9,8 @@
 [ext_resource type="Script" uid="uid://d4khxfa48vxvi" path="res://src/scenes/entities/Enemies/behavior_components/flying/EnemyFlyingChase.gd" id="6_pontc"]
 [ext_resource type="Script" uid="uid://3rxdx82oa7oc" path="res://src/scenes/entities/Enemies/small/bat/BatDiveAttack.gd" id="7_70xud"]
 [ext_resource type="Script" uid="uid://cy85r20fkc1tr" path="res://src/scenes/components/AttackComponent.gd" id="8_hj148"]
+[ext_resource type="AudioStream" uid="uid://bo06ishk24s4x" path="res://assets/sounds/entity_sound/enemies_sounds/small/enemy_s_bat_attack.mp3" id="10_gy300"]
+[ext_resource type="AudioStream" uid="uid://i23cgpq1in6" path="res://assets/sounds/entity_sound/enemies_sounds/small/enemy_s_bat_walk.mp3" id="11_3cuuu"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ksscf"]
 size = Vector2(20, 8.82353)
@@ -446,6 +448,14 @@ metadata/_custom_type_script = "uid://cy85r20fkc1tr"
 [node name="CollisionShape2D" type="CollisionShape2D" parent="WeaponPivot/Dive" index="0" unique_id=1442891672]
 shape = SubResource("CircleShape2D_hj148")
 disabled = true
+
+[node name="sfx_enemy_attack" type="AudioStreamPlayer2D" parent="." index="7" unique_id=1525729854]
+stream = ExtResource("10_gy300")
+
+[node name="sfx_enemy_walk" type="AudioStreamPlayer2D" parent="." index="8" unique_id=154546352]
+position = Vector2(0, -3.5061552e-07)
+scale = Vector2(0.9999998, 0.9999998)
+stream = ExtResource("11_3cuuu")
 
 [editable path="HitboxComponent"]
 [editable path="WeaponPivot/DetectionComponent"]

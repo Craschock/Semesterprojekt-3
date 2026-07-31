@@ -16,6 +16,7 @@
 [ext_resource type="PackedScene" uid="uid://bwnb4tbly5vtr" path="res://src/scenes/item prefabs/item_pickup/mushroom_brown.tscn" id="15_j28f7"]
 [ext_resource type="PackedScene" uid="uid://ctw3jcjdygapj" path="res://src/scenes/item prefabs/item_pickup/mushroom_red.tscn" id="16_sn0an"]
 [ext_resource type="PackedScene" uid="uid://qdekhakrwp1w" path="res://src/scenes/item prefabs/item_pickup/fish.tscn" id="17_8mgve"]
+[ext_resource type="PackedScene" uid="uid://d3nfmowlnmco8" path="res://src/scenes/entities/Enemies/small/bat/bat.tscn" id="17_sn0an"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_uvovq"]
 texture = ExtResource("3_5vp6o")
@@ -289,3 +290,6 @@ position = Vector2(-15, -6)
 
 [node name="Fish" parent="." unique_id=1598004401 instance=ExtResource("17_8mgve")]
 position = Vector2(22, -5)
+
+[node name="bat" parent="." unique_id=961012920 instance=ExtResource("17_sn0an")]
+position = Vector2(43, -40)
