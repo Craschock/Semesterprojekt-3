@@ -8,7 +8,7 @@ uniform float uv_wind_manual_anim: hint_range(-1, 1) = 1;
 uniform float uv_wind_radial_bend: hint_range(0.0, 5.0) = 0.1;
 group_uniforms;
 
-vec2 uv_wind(vec2 uv)
+vec2 uv_wind(vec2 uv, vec2 w_pos)
 {
 	float wind_offset;
 	if (uv_wind_animate_manual)
@@ -17,7 +17,7 @@ vec2 uv_wind(vec2 uv)
 	}
 	else
 	{
-		wind_offset = sin(TIME * uv_wind_speed * 10.);
+		wind_offset = sin((TIME + w_pos.x * 0.5) * uv_wind_speed * 10.);
 	}
 	
 	uv.x = mix(uv.x, uv.x + uv_wind_amount * 0.01 * wind_offset, 

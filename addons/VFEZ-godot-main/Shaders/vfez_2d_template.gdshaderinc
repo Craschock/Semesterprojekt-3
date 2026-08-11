@@ -353,8 +353,11 @@ group_uniforms;
 #endif
 
 varying vec4 modulate_color;
+varying vec2 world_pos;
 
 void vertex() {
+	world_pos = MODEL_MATRIX[3].xy;
+	
 	#if defined(PARTICLE_ANIM)
 		if (use_particle_anim)
 		{
@@ -479,7 +482,7 @@ void fragment() {
 	#if defined(UV_WIND)
 		if (use_uv_wind)
 		{
-			baseUV = uv_wind(baseUV);
+			baseUV = uv_wind(baseUV, world_pos);
 		}
 	#endif
 

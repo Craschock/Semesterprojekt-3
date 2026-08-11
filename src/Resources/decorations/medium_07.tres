@@ -7,4 +7,5 @@
 script = ExtResource("1_850l5")
 texture = ExtResource("2_850l5")
 spawn_chance = 0.08
+affected_by_wind = true
 metadata/_custom_type_script = "uid://bg0j21vco3sjm"

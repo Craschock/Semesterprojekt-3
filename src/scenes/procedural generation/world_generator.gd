@@ -55,6 +55,9 @@ static var current_seed: int
 ##Scale applied to decoration sprites so they match the tile scaling.
 @export var decoration_scale: float = 1.6
 
+##Global wind material to apply to affected decorations
+@export var global_wind_material: VFEZMaterial2D
+
 @export_group("Items")
 ##List of all Item scenes that can spawn on the floor, each spawn point chooses one randomly
 @export var item_scenes: Array[PackedScene] = []
@@ -1237,6 +1240,8 @@ func _spawn_decorations(chunk: WorldChunk) -> void:
 				sprite.scale = Vector2(decoration_scale, decoration_scale)
 				sprite.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
 				sprite.position = Vector2(left_pixel_x, top_pixel_y)
+				if deco.affected_by_wind and global_wind_material != null:
+					sprite.material = global_wind_material
 				add_child(sprite)
 				chunk.decorations.append(sprite)
 				occupied.append(my_rect)

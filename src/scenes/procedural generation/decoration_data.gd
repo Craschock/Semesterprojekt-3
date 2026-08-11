@@ -39,6 +39,13 @@ enum SizeCategory { SMALL, MEDIUM, MEDIUM_PLUS, LARGE, HANGING }
 ##the difference is barely visible so dont feel obliged to change it lowkey
 @export var light_offset: Vector2 = Vector2.ZERO
 
+@export_group ("Effects")
+
+##if true, apply a globar wind shader to this decoration
+@export var affected_by_wind: bool = false
+
+
+
 
 
 # Code for the Light Node to have a default

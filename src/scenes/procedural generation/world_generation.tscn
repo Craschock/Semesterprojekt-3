@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://delq2h3473ggd" path="res://assets/sprites/pg_sprites/tiles/tilesetdefault.png" id="5_27gof"]
 [ext_resource type="PackedScene" uid="uid://bqtrgkf85mkao" path="res://src/scenes/item prefabs/item_story/story_dungeon1/story_item_1.tscn" id="6_lsx4g"]
 [ext_resource type="Texture2D" uid="uid://cia1xnkbhhsnu" path="res://assets/sprites/pg_sprites/tiles/tilesetyellow.png" id="6_rfy0p"]
+[ext_resource type="Material" uid="uid://bmhd6q1qtxlsp" path="res://assets/shaders/shader_wind.tres" id="6_v6qut"]
 [ext_resource type="PackedScene" uid="uid://dfwovdgj1npmp" path="res://src/scenes/item prefabs/item_story/story_dungeon1/story_item_2.tscn" id="7_8jlte"]
 [ext_resource type="PackedScene" uid="uid://dv8qrnwefoxpp" path="res://src/scenes/procedural generation/SpawnRoom.tscn" id="7_824eo"]
 [ext_resource type="Texture2D" uid="uid://bojaa0j64371d" path="res://assets/sprites/pg_sprites/tiles/tilesetborder.png" id="8_22d72"]
@@ -151,6 +152,7 @@ biomes = Array[ExtResource("2_22d72")]([ExtResource("3_6vgho"), ExtResource("4_2
 region_size_chunks = 12
 border_thickness = 1
 filler_biome = ExtResource("5_3r8k2")
+global_wind_material = ExtResource("6_v6qut")
 item_scenes = Array[PackedScene]([ExtResource("6_lsx4g"), ExtResource("7_8jlte"), ExtResource("8_v6qut"), ExtResource("9_fgwm8"), ExtResource("10_u01k7"), ExtResource("11_uk2ka")])
 depth_shading_enabled = true
 depth_darkness_range = 5
