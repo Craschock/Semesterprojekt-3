@@ -126,4 +126,7 @@ offset_bottom = -4.920044
 scale = Vector2(0.75, 0.75)
 text = "Close"
 
+[node name="ButtonEffectsModule" parent="B_CloseCredits" index="1" unique_id=2056013471]
+allow_scale = true
+
 [editable path="B_CloseCredits"]

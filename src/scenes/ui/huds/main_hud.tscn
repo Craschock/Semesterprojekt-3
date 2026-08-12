@@ -124,7 +124,7 @@ texture = ExtResource("9_ihrdj")
 
 [node name="ButtonEffectsModule" type="Node" parent="StoryPanel/Button" unique_id=93758274]
 script = ExtResource("10_e8mkp")
-allow_rotation = false
+allow_scale = true
 metadata/_custom_type_script = "uid://cym8lr17kgrer"
 
 [node name="BlackoutEffect" type="ColorRect" parent="." unique_id=871056766]

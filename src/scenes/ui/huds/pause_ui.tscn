@@ -64,7 +64,7 @@ texture = ExtResource("6_lus7q")
 
 [node name="ButtonEffectsModule" type="Node" parent="B_Start" unique_id=705203291]
 script = ExtResource("5_i4vts")
-allow_rotation = false
+allow_scale = true
 metadata/_custom_type_script = "uid://cym8lr17kgrer"
 
 [node name="B_Settings" type="Button" parent="." unique_id=1257640001]
@@ -97,7 +97,7 @@ texture = ExtResource("6_lus7q")
 
 [node name="ButtonEffectsModule" type="Node" parent="B_Settings" unique_id=2132236046]
 script = ExtResource("5_i4vts")
-allow_rotation = false
+allow_scale = true
 metadata/_custom_type_script = "uid://cym8lr17kgrer"
 
 [node name="B_Quit" type="Button" parent="." unique_id=2058522949]
@@ -129,7 +129,7 @@ texture = ExtResource("6_lus7q")
 
 [node name="ButtonEffectsModule" type="Node" parent="B_Quit" unique_id=1358559569]
 script = ExtResource("5_i4vts")
-allow_rotation = false
+allow_scale = true
 metadata/_custom_type_script = "uid://cym8lr17kgrer"
 
 [connection signal="pressed" from="B_Start" to="." method="_on_b_start_pressed"]

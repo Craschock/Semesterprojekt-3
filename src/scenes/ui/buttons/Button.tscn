@@ -35,5 +35,5 @@ expand_mode = 3
 
 [node name="ButtonEffectsModule" type="Node" parent="." unique_id=2056013471]
 script = ExtResource("3_3qixd")
-allow_rotation = false
+allow_scale = true
 metadata/_custom_type_script = "uid://cym8lr17kgrer"
