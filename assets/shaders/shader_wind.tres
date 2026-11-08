@@ -15,6 +15,7 @@ code = "
 shader_type canvas_item;
 #define BLEND_MIX
 #define UV_HANDRAWN
+#define UV_WAVE
 #define UV_WIND
 #include \"res://addons/VFEZ-godot-main/Shaders/vfez_2d_template.gdshaderinc\"
 "
@@ -41,10 +42,15 @@ shader_parameter/use_uv_twist = false
 shader_parameter/use_uv_fisheye = false
 shader_parameter/use_uv_pinch = false
 shader_parameter/use_uv_handrawn = true
-shader_parameter/uv_handrawn_amount = 5.0000002375
+shader_parameter/uv_handrawn_amount = 10.000000475
 shader_parameter/uv_handrawn_speed = 0.10000000475
 shader_parameter/use_uv_shake = false
-shader_parameter/use_uv_wave = false
+shader_parameter/use_uv_wave = true
+shader_parameter/uv_wave_amount = 1.0000000475
+shader_parameter/uv_wave_speed = 0.50000002375
+shader_parameter/uv_wave_strength = 7.5
+shader_parameter/uv_wave_x = 0.50000002375
+shader_parameter/uv_wave_y = 0.5
 shader_parameter/use_uv_round_wave = false
 shader_parameter/use_uv_wind = true
 shader_parameter/uv_wind_speed = 0.10000000475
