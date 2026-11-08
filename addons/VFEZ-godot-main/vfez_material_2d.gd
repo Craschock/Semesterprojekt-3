@@ -45,6 +45,7 @@ func _set(property, value):
 		set_shader_parameter(property.replace("shader_parameter/", ""), value)
 		if property.begins_with("shader_parameter/use_"):
 			_update_shader_code()
+	return false
 
 func generate_render_options_definition_string() -> String:
 	var definition_string: String = ""
