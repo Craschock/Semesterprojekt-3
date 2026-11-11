@@ -33,47 +33,64 @@ var is_input_allowed: bool = true
 @export var min_jump_velocity: float = -150.0
 ## Minimum jump height
 @export var max_jump_velocity: float = -350.0
-## How many seconds to reach max jump charge
-@export var time_to_max_charge: float = 0.4
+
 ## How long player can jump after leaving platform
 @export var jump_buffer_time: float = 0.15
+var jump_buffer_timer: float = 0.0
+
 ## How long a jump is a press before it's changing into a charged jumnp
 @export var tap_window: float = 0.1
+## How many seconds to reach max jump charge
+@export var time_to_max_charge: float = 0.4
+var current_jump_charge: float = 0.0
+
 ## Double jump height
 @export var double_jump_velocity: float = -250.0
 ## Amount of mid-air jumps (double jump)
 @export var max_air_jumps: int = 1
+var current_air_jumps: int = 0
+
+## Wall jump Velocity: X = how much push. Y = How much height
+@export var wall_jump_velocity: Vector2 = Vector2(250.0, -300.0)
+
+var was_interrupted_while_charging: bool = false
+
+
+@export_category("Block")
+## How early the player can block again after blocking
+@export var block_cooldown: float = 2.0
+var block_cooldown_timer: float = 0.0
+
 
 # Input Buffers
 @export_category("Input Buffers")
 ## How early a player can use an action before it actually can happen
 @export var action_input_buffer: float = 0.3
+var action_input_buffer_timer: float = 0.0
 ## How early a player can block before actually being able to block
 @export var block_input_buffer: float = 0.3
+var block_input_buffer_timer: float = 0.0
 ## How early a player can jump before landing on a platform that he can jump off
 @export var jump_input_buffer: float = 0.3
+var jump_input_buffer_timer: float = 0.0
 ## How early a player can dig into the ground before being able to perform a dig
 @export var dig_input_buffer: float = 0.3
+var dig_input_buffer_timer: float = 0.0
+
 
 # Unlockables
 @export_category("Unlockables")
 ## Check if player has digging unlocked (1st boss)
 @export var unlocked_digging: bool = false
-
-var action_input_buffer_timer: float = 0.0
-var block_input_buffer_timer: float = 0.0
-var jump_input_buffer_timer: float = 0.0
-var jump_buffer_timer: float = 0.0
-var dig_input_buffer_timer: float = 0.0
-var current_jump_charge: float = 0.0
-var current_air_jumps: int = 0
-var was_interrupted_while_charging: bool = false
 var dig_target_position: Vector2 = Vector2.ZERO
+
 
 
 # Constants
 const ITEM_HOTKEY_OFFSET: int = 1
 const INVALID_POS: Vector2 = Vector2(-99999, -99999) # Error check
+
+
 
 func _ready() -> void:
 	# Setup Singleton PlayerManager
@@ -214,12 +231,15 @@ func decrease_buffers(delta) -> void:
 		jump_input_buffer_timer -= delta
 	if dig_input_buffer_timer > 0.0:
 		dig_input_buffer_timer -= delta
+	if block_cooldown_timer > 0.0:
+		block_cooldown_timer -= delta
 
 func handle_input() -> void:
 	if Input.is_action_just_pressed("attack"):
 		action_input_buffer_timer = action_input_buffer
-	if Input.is_action_just_pressed("block"):
+	if Input.is_action_just_pressed("block") and block_cooldown_timer <= 0.0:
 			block_input_buffer_timer = block_input_buffer
+			block_cooldown_timer = block_cooldown
 	if Input.is_action_just_pressed("jump"):
 			jump_input_buffer_timer = jump_input_buffer
 	if Input.is_action_just_pressed("move_dig"):

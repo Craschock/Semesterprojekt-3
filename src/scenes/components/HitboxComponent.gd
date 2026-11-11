@@ -6,11 +6,23 @@ class_name HitboxComponent
 @export var invincibility_time: float = 0.0
 
 var is_invincible: bool = false
+var is_parrying: bool = false
+
+signal parry_triggered(attack: AttackComponent)
 
 func take_hit(attack: AttackComponent) -> void:
+	
+	# Parry if attack is parry-able
+	if is_parrying:
+		if attack.can_be_parried:
+			parry_triggered.emit(attack)
+			return
+	
 	# Block damage if invincible
 	if is_invincible:
 		return
+	
+	
 	
 	if health_component:
 		health_component.take_damage(attack.damage)

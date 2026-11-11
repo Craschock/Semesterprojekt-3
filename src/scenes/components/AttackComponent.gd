@@ -8,6 +8,8 @@ class_name AttackComponent
 @export var knockback_force: float = 100.0
 ## Changes attack behavior. True applies damage over attack duration. False applies damage in one instance
 @export var continuous_damage: bool = false
+## Can this attack be parried by the player?
+@export var can_be_parried: bool = true
 
 # array for "multiple enemies hit"
 var hit_entities: Array[Area2D] = []
