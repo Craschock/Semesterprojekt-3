@@ -95,7 +95,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_jn06q")
 }],
-"loop": false,
+"loop": 0,
 "name": &"attack_bite",
 "speed": 2.0
 }, {
@@ -133,7 +133,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_g646h")
 }],
-"loop": false,
+"loop": 0,
 "name": &"death",
 "speed": 10.0
 }, {
@@ -141,7 +141,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_w64q1")
 }],
-"loop": false,
+"loop": 0,
 "name": &"hit",
 "speed": 2.0
 }, {
@@ -149,7 +149,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_krs2c")
 }],
-"loop": true,
+"loop": 1,
 "name": &"idle",
 "speed": 1.0
 }, {
@@ -166,7 +166,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_r3pu5")
 }],
-"loop": true,
+"loop": 1,
 "name": &"walk",
 "speed": 8.0
 }]
@@ -174,9 +174,8 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_60o6b"]
 radius = 20.0
 
-[node name="Rat" unique_id=961012920 node_paths=PackedStringArray("chase_state") instance=ExtResource("1_n5j4j")]
+[node name="Rat" unique_id=961012920 instance=ExtResource("1_n5j4j")]
 scale = Vector2(0.67999995, 0.67999995)
-chase_state = NodePath("StateMachine/EnemyChase")
 metadata/_edit_group_ = true
 
 [node name="LootDropComponent" parent="." index="0" unique_id=715616856]
@@ -207,19 +206,22 @@ animation = &"hit"
 [node name="Hit" parent="StateMachine" parent_id_path=PackedInt32Array(1551728817) index="0" unique_id=1304688525 node_paths=PackedStringArray("next_state")]
 next_state = NodePath("../EnemyChase")
 
-[node name="EnemyWalk" type="Node" parent="StateMachine" parent_id_path=PackedInt32Array(1551728817) index="1" unique_id=2654838 node_paths=PackedStringArray("next_state")]
+[node name="EnemyIdle" parent="StateMachine" parent_id_path=PackedInt32Array(1551728817) index="1" unique_id=1319766842 node_paths=PackedStringArray("next_state", "chase_state")]
+next_state = NodePath("../EnemyWalk")
+chase_state = NodePath("../EnemyChase")
+
+[node name="EnemyWalk" type="Node" parent="StateMachine" parent_id_path=PackedInt32Array(1551728817) index="2" unique_id=2654838 node_paths=PackedStringArray("next_state", "chase_state")]
 script = ExtResource("6_5v7a8")
 next_state = NodePath("../EnemyIdle")
+chase_state = NodePath("../EnemyChase")
 metadata/_custom_type_script = "uid://crxt81u8m6s2t"
 
-[node name="EnemyChase" type="Node" parent="StateMachine" parent_id_path=PackedInt32Array(1551728817) index="2" unique_id=499529484 node_paths=PackedStringArray("attack_state")]
+[node name="EnemyChase" type="Node" parent="StateMachine" parent_id_path=PackedInt32Array(1551728817) index="3" unique_id=499529484 node_paths=PackedStringArray("attack_state", "lost_player_state")]
 script = ExtResource("7_w64q1")
 attack_range = 12.5
 attack_state = NodePath("../EnemyAttack")
+lost_player_state = NodePath("../EnemyIdle")
 metadata/_custom_type_script = "uid://dsys1lxnete83"
-
-[node name="EnemyIdle" parent="StateMachine" parent_id_path=PackedInt32Array(1551728817) index="3" unique_id=1319766842 node_paths=PackedStringArray("next_state")]
-next_state = NodePath("../EnemyWalk")
 
 [node name="EnemyAttack" type="Node" parent="StateMachine" parent_id_path=PackedInt32Array(1551728817) index="4" unique_id=1354805761 node_paths=PackedStringArray("next_state", "attack_component")]
 script = ExtResource("7_60o6b")

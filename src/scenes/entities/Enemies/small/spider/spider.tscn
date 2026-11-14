@@ -6,12 +6,9 @@
 [ext_resource type="Texture2D" uid="uid://by133g7ibs5ua" path="res://assets/sprites/entities/enemies/small/enemy_s_spider_death.png" id="2_ngymv"]
 [ext_resource type="Texture2D" uid="uid://cigv6i1we6c6l" path="res://assets/sprites/entities/enemies/small/enemy_s_spider_attack.png" id="2_shaue"]
 [ext_resource type="Texture2D" uid="uid://cmn6gsg3t6l5d" path="res://assets/sprites/entities/enemies/small/enemy_s_spider_walk.png" id="3_j5ugu"]
-[ext_resource type="Script" uid="uid://dsys1lxnete83" path="res://src/scenes/entities/Enemies/behavior_components/EnemyChase.gd" id="6_hk0ny"]
-[ext_resource type="Script" uid="uid://crxt81u8m6s2t" path="res://src/scenes/entities/Enemies/behavior_components/EnemyWalk.gd" id="7_6cd7q"]
-[ext_resource type="Script" uid="uid://dpty4j8elextd" path="res://src/scenes/entities/Enemies/behavior_components/EnemyAttack.gd" id="8_l5emd"]
-[ext_resource type="Script" uid="uid://cy85r20fkc1tr" path="res://src/scenes/components/AttackComponent.gd" id="9_8kkkb"]
-[ext_resource type="AudioStream" uid="uid://mc5t3pljxva3" path="res://assets/sounds/entity_sound/enemies_sounds/small/enemy_s_spider_attack.mp3" id="11_l5emd"]
-[ext_resource type="AudioStream" uid="uid://dq4gqfbp2f386" path="res://assets/sounds/entity_sound/enemies_sounds/small/enemy_s_spider_walk.mp3" id="12_8kkkb"]
+[ext_resource type="Script" uid="uid://cp2ulrwshkoi6" path="res://src/scenes/entities/Enemies/small/spider/spider_turret_idle.gd" id="7_hqt0t"]
+[ext_resource type="Script" uid="uid://ddmqd30rjbbut" path="res://src/scenes/entities/Enemies/small/spider/spider_shoot_attack.gd" id="8_r88r6"]
+[ext_resource type="PackedScene" uid="uid://cokq8yq5oklbo" path="res://src/scenes/entities/Enemies/small/spider/web_projectile.tscn" id="9_hk0ny"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_shaue"]
 radius = 8.823528
@@ -172,7 +169,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_qnehr")
 }],
-"loop": false,
+"loop": 0,
 "name": &"attack_string",
 "speed": 12.0
 }, {
@@ -216,7 +213,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_ihm5v")
 }],
-"loop": false,
+"loop": 0,
 "name": &"death",
 "speed": 10.0
 }, {
@@ -224,7 +221,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_2krvs")
 }],
-"loop": false,
+"loop": 0,
 "name": &"hit",
 "speed": 2.0
 }, {
@@ -232,7 +229,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_4pw75")
 }],
-"loop": false,
+"loop": 0,
 "name": &"idle",
 "speed": 1.0
 }, {
@@ -255,17 +252,14 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_vw3gt")
 }],
-"loop": true,
+"loop": 1,
 "name": &"walk",
 "speed": 8.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_77lx4"]
-size = Vector2(23.235294, 8.823528)
-
-[node name="spider" unique_id=961012920 node_paths=PackedStringArray("chase_state") instance=ExtResource("1_ex5am")]
+[node name="spider" unique_id=961012920 instance=ExtResource("1_ex5am")]
 scale = Vector2(0.68, 0.68)
-chase_state = NodePath("StateMachine/EnemyChase")
+movement_type = 2
 
 [node name="LootDropComponent" parent="." index="0" unique_id=715616856]
 possible_drops = Array[PackedScene]([ExtResource("2_6cd7q")])
@@ -288,55 +282,27 @@ scale = Vector2(0.75, 0.75)
 sprite_frames = SubResource("SpriteFrames_ex5am")
 animation = &"attack_string"
 
-[node name="Hit" parent="StateMachine" parent_id_path=PackedInt32Array(1551728817) index="0" unique_id=1304688525 node_paths=PackedStringArray("next_state")]
-next_state = NodePath("../EnemyChase")
+[node name="StateMachine" parent="." index="5" unique_id=1551728817 node_paths=PackedStringArray("initial_state")]
+initial_state = NodePath("SpiderTurretIdle")
 
-[node name="EnemyIdle" parent="StateMachine" parent_id_path=PackedInt32Array(1551728817) index="1" unique_id=1319766842 node_paths=PackedStringArray("next_state")]
-next_state = NodePath("../EnemyWalk")
+[node name="Hit" parent="StateMachine" index="0" unique_id=1304688525 node_paths=PackedStringArray("next_state")]
+next_state = NodePath("../SpiderTurretIdle")
 
-[node name="EnemyChase" type="Node" parent="StateMachine" parent_id_path=PackedInt32Array(1551728817) index="2" unique_id=1376109809 node_paths=PackedStringArray("attack_state")]
-script = ExtResource("6_hk0ny")
-attack_range = 15.0
-attack_state = NodePath("../EnemyAttack")
-metadata/_custom_type_script = "uid://dsys1lxnete83"
+[node name="SpiderTurretIdle" type="Node" parent="StateMachine" index="3" unique_id=687212621 node_paths=PackedStringArray("attack_state")]
+script = ExtResource("7_hqt0t")
+attack_state = NodePath("../SpiderShootAttack")
+metadata/_custom_type_script = "uid://cp2ulrwshkoi6"
 
-[node name="EnemyWalk" type="Node" parent="StateMachine" parent_id_path=PackedInt32Array(1551728817) index="3" unique_id=460746453 node_paths=PackedStringArray("next_state")]
-script = ExtResource("7_6cd7q")
-next_state = NodePath("../EnemyIdle")
-metadata/_custom_type_script = "uid://crxt81u8m6s2t"
+[node name="SpiderShootAttack" type="Node" parent="StateMachine" index="4" unique_id=60469611 node_paths=PackedStringArray("next_state", "spawn_point")]
+script = ExtResource("8_r88r6")
+next_state = NodePath("../SpiderTurretIdle")
+projectile_scene = ExtResource("9_hk0ny")
+spawn_point = NodePath("../../WeaponPivot/ProjectileSpawnPoint")
+metadata/_custom_type_script = "uid://ddmqd30rjbbut"
 
-[node name="EnemyAttack" type="Node" parent="StateMachine" parent_id_path=PackedInt32Array(1551728817) index="4" unique_id=1481893719 node_paths=PackedStringArray("next_state", "attack_component")]
-script = ExtResource("8_l5emd")
-animation_name = "attack_string"
-next_state = NodePath("../EnemyChase")
-attack_duration = 1.0
-attack_component = NodePath("../../WeaponPivot/Webshot")
-metadata/_custom_type_script = "uid://dpty4j8elextd"
-
-[node name="sfx_enemy_attack" type="AudioStreamPlayer2D" parent="StateMachine" parent_id_path=PackedInt32Array(1551728817) index="5" unique_id=875902224]
-scale = Vector2(0.99999976, 0.99999976)
-
-[node name="Webshot" type="Area2D" parent="WeaponPivot" parent_id_path=PackedInt32Array(1288338269) index="1" unique_id=1479932820]
-collision_layer = 128
-collision_mask = 16
-script = ExtResource("9_8kkkb")
-damage = 4
-knockback_force = 150.0
-metadata/_custom_type_script = "uid://cy85r20fkc1tr"
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="WeaponPivot/Webshot" index="0" unique_id=1458575480]
-position = Vector2(11.911764, -4.411764)
-scale = Vector2(0.99999976, 0.99999976)
-shape = SubResource("RectangleShape2D_77lx4")
-disabled = true
-
-[node name="sfx_enemy_attack" type="AudioStreamPlayer2D" parent="." index="7" unique_id=1538989544]
-stream = ExtResource("11_l5emd")
-
-[node name="sfx_enemy_walk" type="AudioStreamPlayer2D" parent="." index="8" unique_id=1790877251]
-scale = Vector2(0.9999998, 0.9999998)
-stream = ExtResource("12_8kkkb")
-volume_db = -25.0
-max_distance = 350.0
+[node name="ProjectileSpawnPoint" type="Marker2D" parent="WeaponPivot" parent_id_path=PackedInt32Array(1288338269) index="1" unique_id=121934681]
+position = Vector2(2.9411762, -2.9411757)
+scale = Vector2(0.9999999, 0.9999999)
+gizmo_extents = 5.0
 
 [editable path="HitboxComponent"]

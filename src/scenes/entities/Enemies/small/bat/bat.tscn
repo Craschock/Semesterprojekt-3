@@ -248,7 +248,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_7nik8")
 }],
-"loop": false,
+"loop": 0,
 "name": &"attack_dive",
 "speed": 9.0
 }, {
@@ -304,7 +304,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_k8qkr")
 }],
-"loop": false,
+"loop": 0,
 "name": &"death",
 "speed": 10.0
 }, {
@@ -330,7 +330,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_cymi8")
 }],
-"loop": true,
+"loop": 1,
 "name": &"fly",
 "speed": 10.0
 }, {
@@ -338,7 +338,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_hiokp")
 }],
-"loop": false,
+"loop": 0,
 "name": &"hit",
 "speed": 2.0
 }, {
@@ -364,7 +364,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_kvnfe")
 }],
-"loop": true,
+"loop": 1,
 "name": &"idle",
 "speed": 6.0
 }]
@@ -375,11 +375,10 @@ radius = 210.31467
 [sub_resource type="CircleShape2D" id="CircleShape2D_hj148"]
 radius = 11.85626
 
-[node name="bat" unique_id=961012920 node_paths=PackedStringArray("chase_state") instance=ExtResource("1_tkq1a")]
+[node name="bat" unique_id=961012920 instance=ExtResource("1_tkq1a")]
 scale = Vector2(0.68, 0.68)
-chase_state = NodePath("StateMachine/EnemyFlyingChase")
+movement_type = 1
 attack_cooldown = 5.0
-is_flying_entity = true
 
 [node name="HealthComponent" parent="." index="1" unique_id=1881424083]
 max_health = 25
@@ -413,13 +412,13 @@ min_move_time = 1.0
 max_move_time = 5.0
 metadata/_custom_type_script = "uid://6jqfoii2vems"
 
-[node name="EnemyFlyingChase" type="Node" parent="StateMachine" parent_id_path=PackedInt32Array(1551728817) index="4" unique_id=94390455 node_paths=PackedStringArray("attack_state")]
+[node name="EnemyFlyingChase" type="Node" parent="StateMachine" parent_id_path=PackedInt32Array(1551728817) index="3" unique_id=94390455 node_paths=PackedStringArray("attack_state")]
 script = ExtResource("6_pontc")
 hover_radius = 35.0
 attack_state = NodePath("../BatDiveAttack")
 metadata/_custom_type_script = "uid://d4khxfa48vxvi"
 
-[node name="BatDiveAttack" type="Node" parent="StateMachine" parent_id_path=PackedInt32Array(1551728817) index="5" unique_id=2015688623 node_paths=PackedStringArray("next_state", "attack_component")]
+[node name="BatDiveAttack" type="Node" parent="StateMachine" parent_id_path=PackedInt32Array(1551728817) index="4" unique_id=2015688623 node_paths=PackedStringArray("next_state", "attack_component")]
 script = ExtResource("7_70xud")
 animation_name = "attack_dive"
 next_state = NodePath("../EnemyFlyingChase")

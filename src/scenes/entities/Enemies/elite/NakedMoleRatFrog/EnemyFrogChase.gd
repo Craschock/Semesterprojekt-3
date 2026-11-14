@@ -28,6 +28,8 @@ var enemy: BaseEnemy
 @export var attack_range: float = 40.0
 ## Attack state
 @export var attack_state: State
+## State to return to when the player escapes detection
+@export var lost_player_state: State
 
 var phase: int = 0 # 0 = Charge, 1 = Air, 2 = Land
 var timer: float = 0.0
@@ -74,6 +76,10 @@ func physics_update(delta: float) -> void:
 			timer -= delta
 			
 			if timer <= 0.0:
+				if lost_player_state and not enemy.can_see_player():
+					transitioned.emit(self, lost_player_state.name)
+					return
+				
 				if target == null:
 					return
 				

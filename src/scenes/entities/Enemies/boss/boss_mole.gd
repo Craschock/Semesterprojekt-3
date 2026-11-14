@@ -23,10 +23,6 @@ func _ready() -> void:
 	health_component.health_changed.connect(_on_health_changed)
 	
 	var apply_gravity = false
-	var detection = get_node_or_null("WeaponPivot/DetectionComponent")
-	if detection:
-		detection.player_spotted.connect(_on_player_spotted)
-		detection.player_lost.connect(_on_player_lost)
 	
 	floor_snap_length = step_height
 
@@ -43,19 +39,6 @@ func _physics_process(delta: float) -> void:
 		velocity.x = move_toward(velocity.x, 0, 800 * delta)
 	
 	move_and_slide()
-
-# Muss das hier überschreiben, weil die sprites wieder falschrum sind.
-func update_facing(direction: float) -> void:
-	var sprite = get_node_or_null("AnimatedSprite2D")
-	var pivot = get_node_or_null("WeaponPivot")
-	
-	if direction > 0:
-		if sprite: sprite.flip_h = true
-		if pivot: pivot.scale.x = 1
-	elif direction < 0:
-		if sprite: sprite.flip_h = false
-		if pivot: pivot.scale.x = -1
-
 
 func dig_in() -> void:
 	

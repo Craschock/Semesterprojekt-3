@@ -1,0 +1,89 @@
+[gd_scene format=3 uid="uid://ckdifw6x0om4h"]
+
+[ext_resource type="PackedScene" uid="uid://immabpf6mnog" path="res://src/scenes/environment/bg/parallax_effect(mine_dungeon).tscn" id="1_its74"]
+[ext_resource type="Script" uid="uid://cegk7h7irgixa" path="res://src/scenes/menus/final menus/worlds/GameManager.gd" id="1_pr1v7"]
+[ext_resource type="PackedScene" uid="uid://brdxqe0qskvib" path="res://src/scenes/ui/huds/main_hud.tscn" id="2_oivod"]
+[ext_resource type="Script" uid="uid://dq2jcmsb1g1d3" path="res://src/scenes/procedural generation/enemy_spawner/EnemySpawner.gd" id="2_rakx4"]
+[ext_resource type="PackedScene" uid="uid://b0g1yof6kihvq" path="res://src/scenes/entities/Enemies/elite/AxolotlBear/axolotl_bear.tscn" id="3_awl1k"]
+[ext_resource type="PackedScene" uid="uid://dek6vjxqshgg4" path="res://src/scenes/entities/Enemies/small/rat/rat.tscn" id="3_hldpo"]
+[ext_resource type="PackedScene" uid="uid://bh6kjgw51fv7u" path="res://src/scenes/entities/player/player.tscn" id="3_s4t1n"]
+[ext_resource type="Script" uid="uid://csehoby86vswg" path="res://src/scenes/procedural generation/enemy_spawner/EnemySpawnData.gd" id="5_e85fw"]
+[ext_resource type="PackedScene" uid="uid://ckcrqvaawf18p" path="res://src/scenes/entities/Enemies/small/spider/spider.tscn" id="6_cm510"]
+[ext_resource type="PackedScene" uid="uid://dfd10kendyi1g" path="res://src/scenes/procedural generation/world_generation.tscn" id="8_owfvr"]
+[ext_resource type="PackedScene" uid="uid://bqtrgkf85mkao" path="res://src/scenes/item prefabs/item_story/story_dungeon1/story_item_1.tscn" id="9_cydkl"]
+[ext_resource type="PackedScene" uid="uid://dfwovdgj1npmp" path="res://src/scenes/item prefabs/item_story/story_dungeon1/story_item_2.tscn" id="10_hbboa"]
+[ext_resource type="PackedScene" uid="uid://d3nfmowlnmco8" path="res://src/scenes/entities/Enemies/small/bat/bat.tscn" id="10_kjej0"]
+[ext_resource type="PackedScene" uid="uid://bonuyykwmmjff" path="res://src/scenes/item prefabs/item_story/story_dungeon1/story_item_3.tscn" id="11_e85fw"]
+[ext_resource type="PackedScene" uid="uid://cbjvea05c4mbw" path="res://src/scenes/entities/Enemies/elite/NakedMoleRatFrog/naked_mole_rat_frog.tscn" id="11_tuqsm"]
+[ext_resource type="PackedScene" uid="uid://cuqofgk8wqotj" path="res://src/scenes/item prefabs/item_story/story_dungeon1/story_item_4.tscn" id="12_h8ths"]
+[ext_resource type="PackedScene" uid="uid://bfrvj77du1aeg" path="res://src/scenes/item prefabs/item_story/story_dungeon1/story_item_5.tscn" id="13_w3vmo"]
+[ext_resource type="PackedScene" uid="uid://bx6qa7p4i5i84" path="res://src/scenes/item prefabs/item_story/story_dungeon1/story_item_6.tscn" id="14_kjej0"]
+[ext_resource type="PackedScene" uid="uid://ktg14fvvhxcg" path="res://src/scenes/item prefabs/item_story/story_dungeon1/story_item_7.tscn" id="15_tuqsm"]
+[ext_resource type="PackedScene" uid="uid://bqlir6wc3k7f4" path="res://src/scenes/item prefabs/item_story/story_dungeon1/story_item_8.tscn" id="18_h8ths"]
+[ext_resource type="PackedScene" uid="uid://djyui1vkp6o6t" path="res://src/scenes/entities/Enemies/boss/boss_mole.tscn" id="18_hbboa"]
+[ext_resource type="AudioStream" uid="uid://1sprdw8wijsm" path="res://assets/sounds/music/mine_music/atmo/Atmo Mine(3).mp3" id="20_h8ths"]
+
+[sub_resource type="Resource" id="Resource_h8ths"]
+script = ExtResource("5_e85fw")
+scene = ExtResource("3_hldpo")
+spawn_chance = 0.5
+metadata/_custom_type_script = "uid://csehoby86vswg"
+
+[sub_resource type="Resource" id="Resource_w3vmo"]
+script = ExtResource("5_e85fw")
+scene = ExtResource("6_cm510")
+spawn_chance = 0.5
+metadata/_custom_type_script = "uid://csehoby86vswg"
+
+[sub_resource type="Resource" id="Resource_kjej0"]
+script = ExtResource("5_e85fw")
+scene = ExtResource("3_awl1k")
+spawn_chance = 0.15
+metadata/_custom_type_script = "uid://csehoby86vswg"
+
+[sub_resource type="Resource" id="Resource_ooqj2"]
+script = ExtResource("5_e85fw")
+scene = ExtResource("10_kjej0")
+spawn_chance = 0.5
+metadata/_custom_type_script = "uid://csehoby86vswg"
+
+[sub_resource type="Resource" id="Resource_3xllx"]
+script = ExtResource("5_e85fw")
+scene = ExtResource("11_tuqsm")
+spawn_chance = 0.25
+metadata/_custom_type_script = "uid://csehoby86vswg"
+
+[node name="Game" type="Node" unique_id=109101168]
+
+[node name="Enemies" type="Node" parent="." unique_id=702154899]
+
+[node name="GameManager" type="Node" parent="." unique_id=1435991061 node_paths=PackedStringArray("world_generator")]
+script = ExtResource("1_pr1v7")
+world_generator = NodePath("../World")
+player_scene = ExtResource("3_s4t1n")
+parallax_scene = ExtResource("1_its74")
+boss_scene = ExtResource("18_hbboa")
+
+[node name="EnemySpawner" type="Node" parent="GameManager" unique_id=1808774082 node_paths=PackedStringArray("world_generator", "entity_container")]
+script = ExtResource("2_rakx4")
+world_generator = NodePath("../../World")
+entity_container = NodePath("../../Enemies")
+enemy_pool = Array[ExtResource("5_e85fw")]([SubResource("Resource_h8ths"), SubResource("Resource_w3vmo"), SubResource("Resource_kjej0"), SubResource("Resource_ooqj2"), SubResource("Resource_3xllx")])
+metadata/_custom_type_script = "uid://dq2jcmsb1g1d3"
+
+[node name="World" parent="." unique_id=1622799569 instance=ExtResource("8_owfvr")]
+scale = Vector2(0.35, 0.35)
+view_radius_chunks = 2
+unload_radius_chunks = 3
+region_size_chunks = 24
+item_scenes = Array[PackedScene]([ExtResource("9_cydkl"), ExtResource("10_hbboa"), ExtResource("11_e85fw"), ExtResource("12_h8ths"), ExtResource("13_w3vmo"), ExtResource("14_kjej0"), ExtResource("15_tuqsm"), ExtResource("18_h8ths")])
+
+[node name="MainHUD" parent="." unique_id=1196255063 instance=ExtResource("2_oivod")]
+
+[node name="sfx_mine_atmo_music" type="AudioStreamPlayer2D" parent="." unique_id=594421042]
+scale = Vector2(0.99999994, 0.99999994)
+stream = ExtResource("20_h8ths")
+volume_db = -3.0
+autoplay = true
+max_distance = 9999.0
+bus = &"Music"

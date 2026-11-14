@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://43sef3jpffc2"]
+
+[ext_resource type="Script" uid="uid://b25mkuosu8s2k" path="res://src/scenes/entities/Enemies/small/spider/spider_web_thread.gd" id="1_wlpqa"]
+
+[node name="SpiderWebThread" type="Line2D" unique_id=1102330979]
+script = ExtResource("1_wlpqa")

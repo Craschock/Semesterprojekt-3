@@ -4,15 +4,17 @@ class_name EnemyIdle
 var enemy: BaseEnemy
 
 @export_category("State Configuration")
-## Name of Animation to be played from Animated Sprite 2D (String)
+## Name of Animation to be played from AnimatedSprite2D
 @export var animation_name: String = "idle"
-## Next State Node to transition to
+## Next patrol/walk State Node to transition to when timer ends
 @export var next_state: State
+## Chase State to transition to immediately if the player is spotted
+@export var chase_state: State
 
 @export_category("Idle Settings")
-## Minimum amount of how long entity is idle (in seconds)
+## Minimum duration entity stays idle (in seconds)
 @export var min_idle_time: float = 0.5
-## Maximum amount of how long entity is idle (in seconds)
+## Maximum duration entity stays idle (in seconds)
 @export var max_idle_time: float = 2.0
 
 var timer: float = 0.0
@@ -21,14 +23,17 @@ func _ready() -> void:
 	enemy = owner
 
 func enter() -> void:
-	# Stop movement
 	enemy.velocity = Vector2.ZERO
-	enemy.get_node("AnimatedSprite2D").play(animation_name)
+	if enemy.sprite:
+		enemy.sprite.play(animation_name)
 	timer = randf_range(min_idle_time, max_idle_time)
 
 func physics_update(delta: float) -> void:
+	# Transition to chase if player is spotted!
+	if chase_state and enemy.can_see_player():
+		transitioned.emit(self, chase_state.name)
+		return
+		
 	timer -= delta
-	
-	if timer <= 0.0:
-		if next_state:
-			transitioned.emit(self, next_state.name)
+	if timer <= 0.0 and next_state:
+		transitioned.emit(self, next_state.name)

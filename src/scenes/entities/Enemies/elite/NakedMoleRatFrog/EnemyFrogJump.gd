@@ -30,7 +30,10 @@ var enemy: BaseEnemy
 @export var max_jumps: int = 5
 
 @export_category("Transitions")
+## Next idle State Node to transition to when timer ends
 @export var next_state: State
+## Chase State to transition to immediately if the player is spotted
+@export var chase_state: State
 
 var phase: int = 0 # 0 = Charge, 1 = Air, 2 = Land
 var timer: float = 0.0
@@ -48,6 +51,10 @@ func enter() -> void:
 	_start_charge()
 
 func physics_update(delta: float) -> void:
+	if chase_state and enemy.can_see_player():
+		transitioned.emit(self, chase_state.name)
+		return
+	
 	match phase:
 		0: # Charge
 			enemy.velocity.x = move_toward(enemy.velocity.x, 0, 800 * delta)

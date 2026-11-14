@@ -360,7 +360,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_vxffs")
 }],
-"loop": false,
+"loop": 1,
 "name": &"attack_bubbles",
 "speed": 12.0
 }, {
@@ -449,7 +449,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_g8yt8")
 }],
-"loop": false,
+"loop": 0,
 "name": &"death",
 "speed": 10.0
 }, {
@@ -457,7 +457,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_ccpkp")
 }],
-"loop": false,
+"loop": 0,
 "name": &"hit",
 "speed": 2.0
 }, {
@@ -468,7 +468,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_uabav")
 }],
-"loop": true,
+"loop": 1,
 "name": &"idle",
 "speed": 0.5
 }, {
@@ -497,7 +497,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_jic0s")
 }],
-"loop": true,
+"loop": 1,
 "name": &"walk",
 "speed": 8.0
 }]
@@ -505,9 +505,8 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jic0s"]
 size = Vector2(59, 46)
 
-[node name="AxolotlBear" unique_id=961012920 node_paths=PackedStringArray("chase_state") instance=ExtResource("1_xoqvr")]
+[node name="AxolotlBear" unique_id=961012920 instance=ExtResource("1_xoqvr")]
 scale = Vector2(0.6796323, 0.6796323)
-chase_state = NodePath("StateMachine/EnemyChase")
 attack_cooldown = 5.0
 metadata/_edit_group_ = true
 
@@ -527,39 +526,46 @@ position = Vector2(0, -22)
 scale = Vector2(0.75, 0.75)
 sprite_frames = SubResource("SpriteFrames_xoqvr")
 animation = &"attack_bubbles"
+frame_progress = 0.37275013
 
 [node name="Hit" parent="StateMachine" parent_id_path=PackedInt32Array(1551728817) index="0" unique_id=1304688525 node_paths=PackedStringArray("next_state")]
 next_state = NodePath("../EnemyChase")
 
-[node name="EnemyIdle" parent="StateMachine" parent_id_path=PackedInt32Array(1551728817) index="1" unique_id=1319766842 node_paths=PackedStringArray("next_state")]
+[node name="EnemyIdle" parent="StateMachine" parent_id_path=PackedInt32Array(1551728817) index="1" unique_id=1319766842 node_paths=PackedStringArray("next_state", "chase_state")]
 next_state = NodePath("../EnemyWalk")
+chase_state = NodePath("../EnemyChase")
 
-[node name="EnemyWalk" type="Node" parent="StateMachine" parent_id_path=PackedInt32Array(1551728817) index="2" unique_id=677322252 node_paths=PackedStringArray("next_state")]
+[node name="EnemyWalk" type="Node" parent="StateMachine" parent_id_path=PackedInt32Array(1551728817) index="2" unique_id=677322252 node_paths=PackedStringArray("next_state", "chase_state")]
 script = ExtResource("6_2n81r")
 next_state = NodePath("../EnemyIdle")
+chase_state = NodePath("../EnemyChase")
 metadata/_custom_type_script = "uid://crxt81u8m6s2t"
 
-[node name="EnemyChase" type="Node" parent="StateMachine" parent_id_path=PackedInt32Array(1551728817) index="3" unique_id=1264418822 node_paths=PackedStringArray("attack_state")]
+[node name="EnemyChase" type="Node" parent="StateMachine" parent_id_path=PackedInt32Array(1551728817) index="3" unique_id=1264418822 node_paths=PackedStringArray("attack_state", "lost_player_state")]
 script = ExtResource("7_fbim3")
 chase_speed = 75.0
 attack_range = 45.0
 attack_state = NodePath("../EnemyAttack")
+lost_player_state = NodePath("../EnemyIdle")
 metadata/_custom_type_script = "uid://dsys1lxnete83"
 
 [node name="EnemyAttack" type="Node" parent="StateMachine" parent_id_path=PackedInt32Array(1551728817) index="4" unique_id=161212339 node_paths=PackedStringArray("next_state", "attack_component")]
 script = ExtResource("8_vplfo")
 animation_name = "attack_bubbles"
 next_state = NodePath("../EnemyChase")
-attack_duration = 2.167
 attack_component = NodePath("../../WeaponPivot/Bubble")
+attack_duration = 2.167
 metadata/_custom_type_script = "uid://dpty4j8elextd"
 
-[node name="DetectionComponent" parent="WeaponPivot" parent_id_path=PackedInt32Array(1288338269) index="0" unique_id=120105529]
+[node name="WeaponPivot" parent="." index="6" unique_id=1288338269]
+visible = false
+
+[node name="DetectionComponent" parent="WeaponPivot" index="0" unique_id=120105529]
 position = Vector2(0, -16)
 scale = Vector2(1.8800004, 1.8800004)
 proximity_radius = 27.5
 
-[node name="Bubble" type="Area2D" parent="WeaponPivot" parent_id_path=PackedInt32Array(1288338269) index="1" unique_id=1785051116]
+[node name="Bubble" type="Area2D" parent="WeaponPivot" index="1" unique_id=1785051116]
 collision_layer = 128
 collision_mask = 16
 script = ExtResource("9_ukh7j")

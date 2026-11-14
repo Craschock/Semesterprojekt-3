@@ -7,11 +7,12 @@
 [ext_resource type="Texture2D" uid="uid://010ak78hf2rc" path="res://assets/sprites/entities/enemies/elite/enemy_e_nakedmoleratfrog_absprung.png" id="4_58vr3"]
 [ext_resource type="Texture2D" uid="uid://0iu3rdxdgh3i" path="res://assets/sprites/entities/enemies/elite/enemy_e_nakedmoleratfrog_flug.png" id="5_rth6c"]
 [ext_resource type="Texture2D" uid="uid://b1kd8hm5enjiy" path="res://assets/sprites/entities/enemies/elite/enemy_e_nakedmoleratfrog_landung.png" id="6_geume"]
-[ext_resource type="Script" uid="uid://cceee8t1wc2fw" path="res://src/scenes/entities/Enemies/behavior_components/frog hopping/EnemyFrogJump.gd" id="7_5crf6"]
-[ext_resource type="Script" uid="uid://ddfxiuxfexrms" path="res://src/scenes/entities/Enemies/behavior_components/frog hopping/EnemyFrogChase.gd" id="8_ewss2"]
+[ext_resource type="Script" uid="uid://cceee8t1wc2fw" path="res://src/scenes/entities/Enemies/elite/NakedMoleRatFrog/EnemyFrogJump.gd" id="7_5crf6"]
+[ext_resource type="Script" uid="uid://ddfxiuxfexrms" path="res://src/scenes/entities/Enemies/elite/NakedMoleRatFrog/EnemyFrogChase.gd" id="8_ewss2"]
 [ext_resource type="Script" uid="uid://dpty4j8elextd" path="res://src/scenes/entities/Enemies/behavior_components/EnemyAttack.gd" id="9_u8kgu"]
 [ext_resource type="Script" uid="uid://cy85r20fkc1tr" path="res://src/scenes/components/AttackComponent.gd" id="10_1lwnq"]
 [ext_resource type="AudioStream" uid="uid://16pn7sm0rw5w" path="res://assets/sounds/entity_sound/enemies_sounds/elite/enemy_e_nakedmoleratfrog_bite.mp3" id="11_5gstf"]
+[ext_resource type="Texture2D" uid="uid://ck5dgoubsp2gx" path="res://icon.svg" id="13_5746m"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_bvk2e"]
 radius = 7.3529406
@@ -185,7 +186,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_egbha")
 }],
-"loop": false,
+"loop": 0,
 "name": &"attack_lick",
 "speed": 8.0
 }, {
@@ -241,7 +242,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_uapnp")
 }],
-"loop": false,
+"loop": 0,
 "name": &"death",
 "speed": 10.0
 }, {
@@ -249,7 +250,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_vc1bj")
 }],
-"loop": false,
+"loop": 0,
 "name": &"hit",
 "speed": 2.0
 }, {
@@ -260,7 +261,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_1oc2o")
 }],
-"loop": true,
+"loop": 1,
 "name": &"idle",
 "speed": 0.33
 }, {
@@ -274,7 +275,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_p83mu")
 }],
-"loop": false,
+"loop": 0,
 "name": &"jump_charge",
 "speed": 5.0
 }, {
@@ -288,7 +289,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_w1jla")
 }],
-"loop": false,
+"loop": 0,
 "name": &"jump_down",
 "speed": 5.0
 }, {
@@ -302,7 +303,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_6n1qs")
 }],
-"loop": false,
+"loop": 0,
 "name": &"jump_land",
 "speed": 5.0
 }, {
@@ -313,7 +314,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_2udun")
 }],
-"loop": false,
+"loop": 0,
 "name": &"jump_up",
 "speed": 5.0
 }]
@@ -324,9 +325,8 @@ radius = 367.64996
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1lwnq"]
 size = Vector2(27.941189, 13.235299)
 
-[node name="NakedMoleRatFrog" unique_id=961012920 node_paths=PackedStringArray("chase_state") instance=ExtResource("1_jwp4l")]
+[node name="NakedMoleRatFrog" unique_id=961012920 instance=ExtResource("1_jwp4l")]
 scale = Vector2(0.68, 0.68)
-chase_state = NodePath("StateMachine/EnemyFrogChase")
 
 [node name="CollisionShape2D" parent="HitboxComponent" parent_id_path=PackedInt32Array(232939803) index="0" unique_id=1698255179]
 position = Vector2(0, -7.352941)
@@ -342,7 +342,7 @@ shape = SubResource("RectangleShape2D_bvk2e")
 position = Vector2(0, -13.5)
 scale = Vector2(0.75, 0.75)
 sprite_frames = SubResource("SpriteFrames_jwp4l")
-animation = &"hit"
+animation = &"attack_lick"
 
 [node name="Hit" parent="StateMachine" parent_id_path=PackedInt32Array(1551728817) index="0" unique_id=1304688525 node_paths=PackedStringArray("next_state")]
 next_state = NodePath("../EnemyFrogChase")
@@ -393,6 +393,12 @@ position = Vector2(13.970586, -12.49999)
 scale = Vector2(0.9999996, 0.9999996)
 shape = SubResource("RectangleShape2D_1lwnq")
 disabled = true
+
+[node name="Line2D" type="Line2D" parent="." index="7" unique_id=1713320196]
+points = PackedVector2Array(5.8823524, -14.705881, 135.2941, -73.5294)
+width = 0.78
+texture = ExtResource("13_5746m")
+texture_mode = 2
 
 [editable path="HitboxComponent"]
 [editable path="WeaponPivot/DetectionComponent"]
