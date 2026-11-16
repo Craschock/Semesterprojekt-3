@@ -402,20 +402,23 @@ animation = &"attack_dive"
 [node name="Hit" parent="StateMachine" parent_id_path=PackedInt32Array(1551728817) index="0" unique_id=1304688525 node_paths=PackedStringArray("next_state")]
 next_state = NodePath("../EnemyFlyingChase")
 
-[node name="EnemyIdle" parent="StateMachine" parent_id_path=PackedInt32Array(1551728817) index="1" unique_id=1319766842 node_paths=PackedStringArray("next_state")]
+[node name="EnemyIdle" parent="StateMachine" parent_id_path=PackedInt32Array(1551728817) index="1" unique_id=1319766842 node_paths=PackedStringArray("next_state", "chase_state")]
 next_state = NodePath("../EnemyFlyingMove")
+chase_state = NodePath("../EnemyFlyingChase")
 
-[node name="EnemyFlyingMove" type="Node" parent="StateMachine" parent_id_path=PackedInt32Array(1551728817) index="2" unique_id=986710453 node_paths=PackedStringArray("next_state")]
+[node name="EnemyFlyingMove" type="Node" parent="StateMachine" parent_id_path=PackedInt32Array(1551728817) index="2" unique_id=986710453 node_paths=PackedStringArray("next_state", "chase_state")]
 script = ExtResource("5_hiokp")
 next_state = NodePath("../EnemyIdle")
+chase_state = NodePath("../EnemyFlyingChase")
 min_move_time = 1.0
 max_move_time = 5.0
 metadata/_custom_type_script = "uid://6jqfoii2vems"
 
-[node name="EnemyFlyingChase" type="Node" parent="StateMachine" parent_id_path=PackedInt32Array(1551728817) index="3" unique_id=94390455 node_paths=PackedStringArray("attack_state")]
+[node name="EnemyFlyingChase" type="Node" parent="StateMachine" parent_id_path=PackedInt32Array(1551728817) index="3" unique_id=94390455 node_paths=PackedStringArray("attack_state", "lost_player_state")]
 script = ExtResource("6_pontc")
 hover_radius = 35.0
 attack_state = NodePath("../BatDiveAttack")
+lost_player_state = NodePath("../EnemyIdle")
 metadata/_custom_type_script = "uid://d4khxfa48vxvi"
 
 [node name="BatDiveAttack" type="Node" parent="StateMachine" parent_id_path=PackedInt32Array(1551728817) index="4" unique_id=2015688623 node_paths=PackedStringArray("next_state", "attack_component")]

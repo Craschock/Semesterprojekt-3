@@ -347,27 +347,31 @@ animation = &"attack_lick"
 [node name="Hit" parent="StateMachine" parent_id_path=PackedInt32Array(1551728817) index="0" unique_id=1304688525 node_paths=PackedStringArray("next_state")]
 next_state = NodePath("../EnemyFrogChase")
 
-[node name="EnemyIdle" parent="StateMachine" parent_id_path=PackedInt32Array(1551728817) index="1" unique_id=1319766842 node_paths=PackedStringArray("next_state")]
+[node name="EnemyIdle" parent="StateMachine" parent_id_path=PackedInt32Array(1551728817) index="1" unique_id=1319766842 node_paths=PackedStringArray("next_state", "chase_state")]
 next_state = NodePath("../EnemyFrogJump")
+chase_state = NodePath("../EnemyFrogChase")
 
-[node name="EnemyFrogJump" type="Node" parent="StateMachine" parent_id_path=PackedInt32Array(1551728817) index="3" unique_id=476558267 node_paths=PackedStringArray("next_state")]
+[node name="EnemyFrogJump" type="Node" parent="StateMachine" parent_id_path=PackedInt32Array(1551728817) index="3" unique_id=476558267 node_paths=PackedStringArray("next_state", "chase_state")]
 script = ExtResource("7_5crf6")
 next_state = NodePath("../EnemyIdle")
+chase_state = NodePath("../EnemyFrogChase")
 metadata/_custom_type_script = "uid://cceee8t1wc2fw"
 
-[node name="EnemyFrogChase" type="Node" parent="StateMachine" parent_id_path=PackedInt32Array(1551728817) index="4" unique_id=2059670438 node_paths=PackedStringArray("attack_state")]
+[node name="EnemyFrogChase" type="Node" parent="StateMachine" parent_id_path=PackedInt32Array(1551728817) index="4" unique_id=2059670438 node_paths=PackedStringArray("attack_state", "lost_player_state")]
 script = ExtResource("8_ewss2")
 min_jump_y = 40.0
 min_jump_x = 40.0
 attack_range = 18.0
 attack_state = NodePath("../EnemyAttack")
+lost_player_state = NodePath("../EnemyIdle")
 metadata/_custom_type_script = "uid://ddfxiuxfexrms"
 
-[node name="EnemyAttack" type="Node" parent="StateMachine" parent_id_path=PackedInt32Array(1551728817) index="5" unique_id=1751226237 node_paths=PackedStringArray("next_state", "attack_component")]
+[node name="EnemyAttack" type="Node" parent="StateMachine" parent_id_path=PackedInt32Array(1551728817) index="5" unique_id=1751226237 node_paths=PackedStringArray("next_state", "attack_component", "attack_sfx")]
 script = ExtResource("9_u8kgu")
 animation_name = "attack_lick"
 next_state = NodePath("../EnemyFrogChase")
 attack_component = NodePath("../../WeaponPivot/lick")
+attack_sfx = NodePath("sfx_enemy_attack")
 metadata/_custom_type_script = "uid://dpty4j8elextd"
 
 [node name="sfx_enemy_attack" type="AudioStreamPlayer2D" parent="StateMachine/EnemyAttack" index="0" unique_id=783621025]
