@@ -12,6 +12,9 @@ class_name DebugUI
 # unlocks
 @onready var u_digging_btn: CheckButton = $HBoxContainer/Unlocks/Unlock_Digging
 
+# boss arrow
+@onready var bossarrow_btn: CheckButton = $HBoxContainer/Cheats/BossArrowButton
+
 # We store the original collision masks so we can restore them when noclip turns off
 var original_layer: int = 2
 var original_mask: int = 5
@@ -23,6 +26,7 @@ func _ready() -> void:
 	fly_btn.focus_mode = Control.FOCUS_NONE
 	noclip_btn.focus_mode = Control.FOCUS_NONE
 	godmode_btn.focus_mode = Control.FOCUS_NONE
+	bossarrow_btn.focus_mode = Control.FOCUS_NONE
 	
 	#seed
 	seed_label.text = "World Seed: %d" % WorldGenerator.current_seed
@@ -61,6 +65,11 @@ func _on_godmode_button_toggled(toggled_on: bool) -> void:
 		var hitbox = player.get_node_or_null("HitboxComponent")
 		if hitbox:
 			hitbox.is_invincible = toggled_on
+
+func _on_boss_arrow_button_toggled(toggled_on: bool) -> void:
+	var arrow = get_tree().get_first_node_in_group("boss_arrow")
+	if arrow:
+		arrow.visible = toggled_on
 
 # unlocks
 func _on_unlock_digging_toggled(toggled_on: bool) -> void:

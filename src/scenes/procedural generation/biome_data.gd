@@ -94,6 +94,12 @@ enum Placement {
 ##All decorations that can spawn in this biome.
 @export var decorations: Array[DecorationData] = []
 
+@export_group("Cave Shape")
+
+@export_range(1.0,10.0,0.1) var horizontal_stretch: float = 3.0
+
+@export var tunnel_mode:bool = false
+
 @export_group("Tile Atlas")
 
 ##Atlas source id of the foreground TileMapLayer (tile edges).

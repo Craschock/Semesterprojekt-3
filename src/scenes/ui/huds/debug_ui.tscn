@@ -40,6 +40,10 @@ text = "Noclip"
 layout_mode = 2
 text = "Godmode"
 
+[node name="BossArrowButton" type="CheckButton" parent="HBoxContainer/Cheats" unique_id=1222510136]
+layout_mode = 2
+text = "Boss Arrow"
+
 [node name="Seed" type="Label" parent="HBoxContainer/Cheats" unique_id=956036667]
 layout_mode = 2
 text = "World Seed:"
@@ -61,4 +65,5 @@ layout_mode = 2
 [connection signal="toggled" from="HBoxContainer/Cheats/FlyButton" to="." method="_on_fly_button_toggled"]
 [connection signal="toggled" from="HBoxContainer/Cheats/NoclipButton" to="." method="_on_noclip_button_toggled"]
 [connection signal="toggled" from="HBoxContainer/Cheats/GodmodeButton" to="." method="_on_godmode_button_toggled"]
+[connection signal="toggled" from="HBoxContainer/Cheats/BossArrowButton" to="." method="_on_boss_arrow_button_toggled"]
 [connection signal="toggled" from="HBoxContainer/Unlocks/Unlock_Digging" to="." method="_on_unlock_digging_toggled"]

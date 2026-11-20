@@ -325,6 +325,7 @@ func _build_rooms() -> void:
 				"rect": Rect2i(interior_x, interior_y, w, h),
 				"wall": biome.room_wall_thickness,
 				"biome": biome,
+				"kind": "spawn",
 			})
 			# Drop the player near the middle of the room's floor.
 			_spawn_tile = Vector2i(center_x, interior_y + h - 1)
@@ -343,6 +344,7 @@ func _build_rooms() -> void:
 				"rect": Rect2i(b_interior_x, b_interior_y, bw, bh),
 				"wall": biome.room_wall_thickness,
 				"biome": biome,
+				"kind": "boss",
 			})
 			_boss_room_rect = Rect2i(b_interior_x, b_interior_y, bw, bh)
 
@@ -445,6 +447,19 @@ func _on_item_exiting(item: Node) -> void:
 	var chunk: WorldChunk = _loaded_chunks.get(cp)
 	if chunk != null:
 		chunk.decorations.erase(item)
+
+##hpritontal caves
+func _cave_value(biome: BiomeData, noise: FastNoiseLite, wx: int, wy: int) -> float:
+	var s = biome.horizontal_stretch
+	if not biome.tunnel_mode:
+		return noise.get_noise_2d(float(wx) / s, float(wy))
+	var best = 1.0
+	for dy in range(-1, 2):   # use -2..2 for roughly 4 tiles of headroom
+		var y = float(wy + dy)
+		var n = noise.get_noise_2d(float(wx) / s, y)
+		var n2 = noise.get_noise_2d(float(wx) / s + 1000.0, y + 1000.0)
+		best = minf(best, minf(absf(n), absf(n2)))
+	return best * 2.0 - 1.0
 
 # --- Prebuilt rooms ---
 ##Classifies a tile against all prebuilt rooms.
@@ -730,7 +745,7 @@ func _generate_chunk_corners(chunk: WorldChunk) -> void:
 						else:
 							solid = _solid_with_cave_fade(biome, noise, wx, wy, surface_y, thr)
 					else:
-						solid = noise.get_noise_2d(wx, wy) > thr
+						solid = _cave_value(biome, noise, wx, wy) > thr
 
 			# Prebuilt rooms override the generated noise, but not player edits, which are
 			# applied afterwards so spawn and boss rooms can still be dug through.
@@ -776,7 +791,7 @@ func _solid_with_cave_fade(biome: BiomeData, noise: FastNoiseLite, wx: int, wy: 
 	# the threshold starts very low (-1 means almost everything is solid) and rises to
 	# the biome's real threshold with depth, letting the caves open up gradually.
 	var eff_thr = lerpf(-1.0, thr, t)
-	return noise.get_noise_2d(wx, wy) > eff_thr
+	return _cave_value(biome, noise, wx, wy) > eff_thr
 
 
 ##Renders a chunk: builds a corner mask per tile and converts it into atlas coordinates.
@@ -1419,6 +1434,18 @@ func get_spawn_room_rect_px() -> Rect2:
 		Vector2(_spawn_room_rect.position) * tile_pixel_size,
 		Vector2(_spawn_room_rect.size) * tile_pixel_size
 	)
+	
+##returns the centre of every boss room in PIXEL COORDINATES
+##(if u need world coordinates use to_global() helper ufnction)
+func get_boss_room_positions() -> Array[Vector2]:
+	var result: Array[Vector2] = []
+	for room in _rooms:
+		if room.get("kind", "") != "boss":
+			continue
+		var rect: Rect2i = room["rect"]
+		var center = Vector2(rect.position) + Vector2(rect.size) / 2.0
+		result.append(center * tile_pixel_size)
+	return result
 
 func _place_tutorial() -> void:
 	if tutorial_scene == null or not has_spawn_point():
