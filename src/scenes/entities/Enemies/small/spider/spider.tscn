@@ -300,6 +300,9 @@ projectile_scene = ExtResource("9_hk0ny")
 spawn_point = NodePath("../../WeaponPivot/ProjectileSpawnPoint")
 metadata/_custom_type_script = "uid://ddmqd30rjbbut"
 
+[node name="EnemyStunned" parent="StateMachine" index="5" unique_id=894087829 node_paths=PackedStringArray("next_state")]
+next_state = NodePath("../SpiderTurretIdle")
+
 [node name="ProjectileSpawnPoint" type="Marker2D" parent="WeaponPivot" parent_id_path=PackedInt32Array(1288338269) index="1" unique_id=121934681]
 position = Vector2(2.9411762, -2.9411757)
 scale = Vector2(0.9999999, 0.9999999)

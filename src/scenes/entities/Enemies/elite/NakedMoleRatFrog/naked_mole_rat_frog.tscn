@@ -12,7 +12,9 @@
 [ext_resource type="Script" uid="uid://dpty4j8elextd" path="res://src/scenes/entities/Enemies/behavior_components/EnemyAttack.gd" id="9_u8kgu"]
 [ext_resource type="Script" uid="uid://cy85r20fkc1tr" path="res://src/scenes/components/AttackComponent.gd" id="10_1lwnq"]
 [ext_resource type="AudioStream" uid="uid://16pn7sm0rw5w" path="res://assets/sounds/entity_sound/enemies_sounds/elite/enemy_e_nakedmoleratfrog_bite.mp3" id="11_5gstf"]
+[ext_resource type="Script" uid="uid://dylvm644pifio" path="res://src/scenes/entities/Enemies/elite/NakedMoleRatFrog/FrogTongueAttack.gd" id="12_kdegr"]
 [ext_resource type="Texture2D" uid="uid://ck5dgoubsp2gx" path="res://icon.svg" id="13_5746m"]
+[ext_resource type="Script" uid="uid://cadwp6h16hh8k" path="res://src/scenes/entities/Enemies/elite/NakedMoleRatFrog/TongueTip.gd" id="14_c04gb"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_bvk2e"]
 radius = 7.3529406
@@ -325,6 +327,9 @@ radius = 367.64996
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1lwnq"]
 size = Vector2(27.941189, 13.235299)
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_f7jhf"]
+radius = 6.0
+
 [node name="NakedMoleRatFrog" unique_id=961012920 instance=ExtResource("1_jwp4l")]
 scale = Vector2(0.68, 0.68)
 
@@ -357,25 +362,35 @@ next_state = NodePath("../EnemyIdle")
 chase_state = NodePath("../EnemyFrogChase")
 metadata/_custom_type_script = "uid://cceee8t1wc2fw"
 
-[node name="EnemyFrogChase" type="Node" parent="StateMachine" parent_id_path=PackedInt32Array(1551728817) index="4" unique_id=2059670438 node_paths=PackedStringArray("attack_state", "lost_player_state")]
+[node name="EnemyFrogChase" type="Node" parent="StateMachine" parent_id_path=PackedInt32Array(1551728817) index="4" unique_id=2059670438 node_paths=PackedStringArray("attack_state", "tongue_attack_state", "lost_player_state")]
 script = ExtResource("8_ewss2")
 min_jump_y = 40.0
 min_jump_x = 40.0
-attack_range = 18.0
 attack_state = NodePath("../EnemyAttack")
+tongue_attack_state = NodePath("../FrogTongueAttack")
 lost_player_state = NodePath("../EnemyIdle")
 metadata/_custom_type_script = "uid://ddfxiuxfexrms"
 
-[node name="EnemyAttack" type="Node" parent="StateMachine" parent_id_path=PackedInt32Array(1551728817) index="5" unique_id=1751226237 node_paths=PackedStringArray("next_state", "attack_component", "attack_sfx")]
+[node name="FrogTongueAttack" type="Node" parent="StateMachine" parent_id_path=PackedInt32Array(1551728817) index="5" unique_id=975610182 node_paths=PackedStringArray("mouth_point", "tongue_line", "tongue_tip", "attack_sfx", "bite_followup_state", "next_state")]
+script = ExtResource("12_kdegr")
+mouth_point = NodePath("../../WeaponPivot/MouthPoint")
+tongue_line = NodePath("../../TongueLine")
+tongue_tip = NodePath("../../TongueTip")
+attack_sfx = NodePath("../../sounds/sfx_enemy_attack")
+bite_followup_state = NodePath("../EnemyAttack")
+next_state = NodePath("../EnemyFrogChase")
+metadata/_custom_type_script = "uid://dylvm644pifio"
+
+[node name="EnemyAttack" type="Node" parent="StateMachine" parent_id_path=PackedInt32Array(1551728817) index="6" unique_id=1751226237 node_paths=PackedStringArray("next_state", "attack_component", "attack_sfx")]
 script = ExtResource("9_u8kgu")
 animation_name = "attack_lick"
 next_state = NodePath("../EnemyFrogChase")
 attack_component = NodePath("../../WeaponPivot/lick")
-attack_sfx = NodePath("sfx_enemy_attack")
+attack_sfx = NodePath("../../sounds/sfx_enemy_attack")
 metadata/_custom_type_script = "uid://dpty4j8elextd"
 
-[node name="sfx_enemy_attack" type="AudioStreamPlayer2D" parent="StateMachine/EnemyAttack" index="0" unique_id=783621025]
-stream = ExtResource("11_5gstf")
+[node name="EnemyStunned" parent="StateMachine" parent_id_path=PackedInt32Array(1551728817) index="7" unique_id=894087829 node_paths=PackedStringArray("next_state")]
+next_state = NodePath("../EnemyFrogChase")
 
 [node name="DetectionComponent" parent="WeaponPivot" parent_id_path=PackedInt32Array(1288338269) index="0" unique_id=120105529]
 memory_duration = 6.7
@@ -398,11 +413,30 @@ scale = Vector2(0.9999996, 0.9999996)
 shape = SubResource("RectangleShape2D_1lwnq")
 disabled = true
 
-[node name="Line2D" type="Line2D" parent="." index="7" unique_id=1713320196]
-points = PackedVector2Array(5.8823524, -14.705881, 135.2941, -73.5294)
-width = 0.78
+[node name="MouthPoint" type="Marker2D" parent="WeaponPivot" parent_id_path=PackedInt32Array(1288338269) index="2" unique_id=58024063]
+position = Vector2(8, -12)
+
+[node name="TongueLine" type="Line2D" parent="." index="7" unique_id=1713320196]
+width = 5.0
 texture = ExtResource("13_5746m")
 texture_mode = 2
+
+[node name="TongueTip" type="Area2D" parent="." index="8" unique_id=792429698]
+collision_layer = 128
+collision_mask = 17
+script = ExtResource("14_c04gb")
+damage = 0
+metadata/_custom_type_script = "uid://cadwp6h16hh8k"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TongueTip" index="0" unique_id=449459961]
+shape = SubResource("CircleShape2D_f7jhf")
+disabled = true
+
+[node name="sounds" type="Node" parent="." index="9" unique_id=1468884642]
+
+[node name="sfx_enemy_attack" type="AudioStreamPlayer2D" parent="sounds" index="0" unique_id=783621025]
+scale = Vector2(0.9999998, 0.9999998)
+stream = ExtResource("11_5gstf")
 
 [editable path="HitboxComponent"]
 [editable path="WeaponPivot/DetectionComponent"]

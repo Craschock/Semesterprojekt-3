@@ -557,6 +557,9 @@ attack_component = NodePath("../../WeaponPivot/Bubble")
 attack_duration = 2.167
 metadata/_custom_type_script = "uid://dpty4j8elextd"
 
+[node name="EnemyStunned" parent="StateMachine" parent_id_path=PackedInt32Array(1551728817) index="6" unique_id=894087829 node_paths=PackedStringArray("next_state")]
+next_state = NodePath("../EnemyChase")
+
 [node name="WeaponPivot" parent="." index="6" unique_id=1288338269]
 visible = false
 

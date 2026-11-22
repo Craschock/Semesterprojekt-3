@@ -24,6 +24,13 @@ const MIN_STEP_VELOCITY_X: float = 1.0
 @export var hit_state_name: String = "hit"
 ## Name of the Death state node in the StateMachine
 @export var death_state_name: String = "enemydeath"
+## If true, getting parried puts this enemy into its Stunned state
+@export var can_be_stunned: bool = true
+## How long this enemy stays stunned after being parried (in seconds)
+@export var parry_stun_duration: float = 1.5
+## Name of the Stunned state node in the StateMachine
+@export var stun_state_name: String = "enemystunned"
+
 
 # Cached Node References for States to use cleanly
 @onready var health_component: HealthComponent = $HealthComponent
@@ -122,8 +129,24 @@ func unfreeze() -> void:
 func _on_health_changed(_current: int, _max: int) -> void:
 	if is_dead:
 		return
+	# Do not break out of stun early when player hits enemy
+	if state_machine.current_state is EnemyStunned:
+		return
 	if can_be_staggered:
 		state_machine.force_transition(hit_state_name)
+
+func on_attack_parried(_attack: AttackComponent) -> void:
+	if is_dead or not can_be_stunned:
+		return
+	apply_stun(parry_stun_duration)
+
+func apply_stun(duration: float = -1.0) -> void:
+	if is_dead:
+		return
+	var stun_state = state_machine.states.get(stun_state_name.to_lower())
+	if stun_state is EnemyStunned:
+		stun_state.set_duration(duration if duration > 0.0 else parry_stun_duration)
+		state_machine.force_transition(stun_state_name)
 
 func die() -> void:
 	if is_dead:

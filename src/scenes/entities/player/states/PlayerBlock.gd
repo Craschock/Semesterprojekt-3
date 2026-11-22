@@ -13,6 +13,9 @@ var timer: float = 0.0
 
 func _ready() -> void:
 	player = owner
+	var hitbox: HitboxComponent = player.get_node_or_null("HitboxComponent")
+	if hitbox:
+		hitbox.parry_triggered.connect(_on_parry_success)
 
 func enter() -> void:
 	_toggle_parry(true)
@@ -41,5 +44,7 @@ func _toggle_parry(value: bool) -> void:
 		get_tree().create_timer(grace_period).timeout.connect(func():
 			player.get_node("HitboxComponent").is_parrying = false
 		)
-	
-	
+
+func _on_parry_success(_attack: AttackComponent) -> void:
+	# Refund block cooldown when the parry was successfull.
+	player.block_cooldown_timer = 0.0

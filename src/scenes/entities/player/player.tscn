@@ -38,6 +38,7 @@
 [ext_resource type="AudioStream" uid="uid://cy2obn81ytyis" path="res://assets/sounds/entity_sound/player_sounds/player_consume_sound.mp3" id="27_0aevd"]
 [ext_resource type="Script" uid="uid://clwfqn0ju40t0" path="res://src/scenes/entities/player/states/PlayerDigOut.gd" id="27_i38os"]
 [ext_resource type="AudioStream" uid="uid://br0yqp2pt67tb" path="res://assets/sounds/entity_sound/player_sounds/player_death_sound.mp3" id="28_aomop"]
+[ext_resource type="Script" uid="uid://c6b02jx3c71oj" path="res://src/scenes/entities/player/states/PlayerPulled.gd" id="30_aofh7"]
 [ext_resource type="AudioStream" uid="uid://bvba25tcmvc6u" path="res://assets/sounds/entity_sound/player_sounds/player_attack_sound.mp3" id="33_yjc7t"]
 [ext_resource type="FontFile" uid="uid://ww3qpbbtk4gc" path="res://assets/fonts/PixelOperator8.ttf" id="37_2bdcf"]
 [ext_resource type="Script" uid="uid://dv5tfkgu55epl" path="res://src/scenes/ui/dialogue/TextBubble.gd" id="38_2bdcf"]
@@ -1165,6 +1166,9 @@ script = ExtResource("9_084ju")
 
 [node name="Block" type="Node" parent="StateMachine" unique_id=998086391]
 script = ExtResource("23_gf154")
+
+[node name="Pulled" type="Node" parent="StateMachine" unique_id=217701898]
+script = ExtResource("30_aofh7")
 
 [node name="Item_Consume" type="Node" parent="StateMachine" unique_id=1060968053]
 script = ExtResource("19_johpv")

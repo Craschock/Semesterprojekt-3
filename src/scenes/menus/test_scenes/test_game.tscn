@@ -17,6 +17,7 @@
 [ext_resource type="PackedScene" uid="uid://ctw3jcjdygapj" path="res://src/scenes/item prefabs/item_pickup/mushroom_red.tscn" id="16_sn0an"]
 [ext_resource type="PackedScene" uid="uid://qdekhakrwp1w" path="res://src/scenes/item prefabs/item_pickup/fish.tscn" id="17_8mgve"]
 [ext_resource type="PackedScene" uid="uid://ckcrqvaawf18p" path="res://src/scenes/entities/Enemies/small/spider/spider.tscn" id="17_sn0an"]
+[ext_resource type="PackedScene" uid="uid://cbjvea05c4mbw" path="res://src/scenes/entities/Enemies/elite/NakedMoleRatFrog/naked_mole_rat_frog.tscn" id="18_8mgve"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_uvovq"]
 texture = ExtResource("3_5vp6o")
@@ -292,4 +293,7 @@ position = Vector2(-15, -6)
 position = Vector2(22, -5)
 
 [node name="spider" parent="." unique_id=961012920 instance=ExtResource("17_sn0an")]
-position = Vector2(-65, -50)
+position = Vector2(-261, -166.99998)
+
+[node name="NakedMoleRatFrog" parent="." unique_id=1096985293 instance=ExtResource("18_8mgve")]
+position = Vector2(-163.99998, 2.999998)

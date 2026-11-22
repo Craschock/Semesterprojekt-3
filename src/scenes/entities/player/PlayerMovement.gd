@@ -16,6 +16,7 @@ class_name PlayerMovement
 ## Maximum step height
 @export var step_height: float = 4.0
 var stored_velocity: Vector2
+var is_pulled: bool = false
 
 # Physics
 @export_category("Physics")
@@ -112,7 +113,8 @@ func _physics_process(delta: float) -> void:
 		return
 	
 	# Apply gravity
-	apply_gravitation(delta)
+	if not is_pulled:
+		apply_gravitation(delta)
 	# Decreasing Buffers
 	decrease_buffers(delta)
 	# Autostep
@@ -126,6 +128,8 @@ func _physics_process(delta: float) -> void:
 # Utility Methods
 
 func _on_health_changed(_current: int, _max: int) -> void:
+	if is_pulled:
+		return
 	state_machine.force_transition("hit")
 
 func _on_health_depleted() -> void:
@@ -292,3 +296,13 @@ func get_dig_out_target(max_upwards_scan: int = 5) -> Vector2:
 			return fg_layer.to_global(fg_layer.map_to_local(check_pos))
 			
 	return INVALID_POS
+
+func start_pull(target: Node2D, pull_speed: float, stop_distance: float, max_duration: float) -> void:
+	var pull_state = state_machine.states.get("pulled") as PlayerPulled
+	if pull_state:
+		pull_state.setup_pull(target, pull_speed, stop_distance, max_duration)
+		state_machine.force_transition("pulled")
+
+func stop_pull() -> void:
+	if is_pulled and state_machine.current_state is PlayerPulled:
+		state_machine.force_transition("idle")

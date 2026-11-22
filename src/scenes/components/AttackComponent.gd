@@ -1,6 +1,8 @@
 extends Area2D
 class_name AttackComponent
 
+signal parried(defender: Node)
+
 @export_category("Attack Stats")
 ## Amount of damage an attack deals
 @export var damage: int = 10
@@ -30,12 +32,12 @@ func _on_area_entered(area: Area2D) -> void:
 		area.take_hit(self)
 		hit_entities.append(area)
 
-## Clear memory of hit entities right before a new attack starts
+# Clear memory of hit entities right before a new attack starts
 func clear_hit_list() -> void:
 	hit_entities.clear()
 
-## Enables or disables all collision shapes under this AttackComponent.
-## Can be called from State scripts OR directly via an AnimationPlayer
+# Enables or disables all collision shapes under this AttackComponent.
+# Can be called from State scripts OR directly via an AnimationPlayer
 func set_active(is_active: bool) -> void:
 	if is_active:
 		clear_hit_list()
@@ -43,3 +45,9 @@ func set_active(is_active: bool) -> void:
 	for child in get_children():
 		if child is CollisionShape2D or child is CollisionPolygon2D:
 			child.set_deferred("disabled", not is_active)
+
+# Called by HitboxComponent when this attack is successfully parried
+func notify_parried(defender: Node) -> void:
+	parried.emit(defender)
+	if owner != null and owner.has_method("on_attack_parried"):
+		owner.on_attack_parried(self)

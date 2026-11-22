@@ -9,12 +9,11 @@
 [ext_resource type="PackedScene" uid="uid://b17p735ram0ly" path="res://src/scenes/components/detection_component.tscn" id="6_cqa0d"]
 [ext_resource type="Script" uid="uid://2em4t2sf5xtv" path="res://src/scenes/entities/Enemies/behavior_components/EnemyDeath.gd" id="8_3m4sl"]
 [ext_resource type="Script" uid="uid://ckiamh2oybkg3" path="res://src/scenes/components/LootDropComponent.gd" id="8_ke3wq"]
+[ext_resource type="Script" uid="uid://dd5c5w4200gq3" path="res://src/scenes/entities/Enemies/behavior_components/EnemyStunned.gd" id="9_eihu0"]
 
-[node name="BaseEnemy" type="CharacterBody2D" unique_id=961012920 node_paths=PackedStringArray("idle_state")]
+[node name="BaseEnemy" type="CharacterBody2D" unique_id=961012920]
 collision_layer = 4
 script = ExtResource("1_4qdbe")
-idle_state = NodePath("StateMachine/EnemyIdle")
-step_height = 5.0
 
 [node name="LootDropComponent" type="Node2D" parent="." unique_id=715616856 node_paths=PackedStringArray("health_component")]
 script = ExtResource("8_ke3wq")
@@ -45,6 +44,10 @@ metadata/_custom_type_script = "uid://b1llifetbvfpl"
 [node name="EnemyDeath" type="Node" parent="StateMachine" unique_id=764193855]
 script = ExtResource("8_3m4sl")
 metadata/_custom_type_script = "uid://2em4t2sf5xtv"
+
+[node name="EnemyStunned" type="Node" parent="StateMachine" unique_id=894087829]
+script = ExtResource("9_eihu0")
+metadata/_custom_type_script = "uid://dd5c5w4200gq3"
 
 [node name="WeaponPivot" type="Node2D" parent="." unique_id=1288338269]
 

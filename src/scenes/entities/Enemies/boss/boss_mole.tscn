@@ -1474,6 +1474,9 @@ metadata/_custom_type_script = "uid://gqeb8nwhnam0"
 script = ExtResource("27_kic0i")
 metadata/_custom_type_script = "uid://ngfwax1ycwe0"
 
+[node name="EnemyStunned" parent="StateMachine" index="14" unique_id=894087829 node_paths=PackedStringArray("next_state")]
+next_state = NodePath("../MoleIdle")
+
 [node name="DetectionComponent" parent="WeaponPivot" parent_id_path=PackedInt32Array(1288338269) index="0" unique_id=120105529]
 visible = false
 

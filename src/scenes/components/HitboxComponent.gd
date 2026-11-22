@@ -27,6 +27,7 @@ func take_hit(attack: AttackComponent) -> void:
 	# Check Parry 
 	if is_parrying and attack.can_be_parried:
 		parry_triggered.emit(attack)
+		attack.notify_parried(owner)
 		return
 	
 	# Block damage if invincible
