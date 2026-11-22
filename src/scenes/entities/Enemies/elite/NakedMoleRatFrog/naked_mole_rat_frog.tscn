@@ -13,7 +13,7 @@
 [ext_resource type="Script" uid="uid://cy85r20fkc1tr" path="res://src/scenes/components/AttackComponent.gd" id="10_1lwnq"]
 [ext_resource type="AudioStream" uid="uid://16pn7sm0rw5w" path="res://assets/sounds/entity_sound/enemies_sounds/elite/enemy_e_nakedmoleratfrog_bite.mp3" id="11_5gstf"]
 [ext_resource type="Script" uid="uid://dylvm644pifio" path="res://src/scenes/entities/Enemies/elite/NakedMoleRatFrog/FrogTongueAttack.gd" id="12_kdegr"]
-[ext_resource type="Texture2D" uid="uid://ck5dgoubsp2gx" path="res://icon.svg" id="13_5746m"]
+[ext_resource type="Texture2D" uid="uid://dthmgex8xjj4" path="res://assets/sprites/entities/enemies/elite/Sprite_Nacktmullfrog_tongue_seperate3.png" id="13_kdegr"]
 [ext_resource type="Script" uid="uid://cadwp6h16hh8k" path="res://src/scenes/entities/Enemies/elite/NakedMoleRatFrog/TongueTip.gd" id="14_c04gb"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_bvk2e"]
@@ -418,7 +418,7 @@ position = Vector2(8, -12)
 
 [node name="TongueLine" type="Line2D" parent="." index="7" unique_id=1713320196]
 width = 5.0
-texture = ExtResource("13_5746m")
+texture = ExtResource("13_kdegr")
 texture_mode = 2
 
 [node name="TongueTip" type="Area2D" parent="." index="8" unique_id=792429698]
