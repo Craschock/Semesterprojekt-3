@@ -17,6 +17,26 @@
 [ext_resource type="Texture2D" uid="uid://b7c77fmrtt7rg" path="res://assets/sprites/background/Dust3.png" id="11_poq5f"]
 [ext_resource type="Texture2D" uid="uid://su8ppkiw03b2" path="res://assets/sprites/background/Dust4.png" id="12_ghn7d"]
 
+[sub_resource type="Gradient" id="Gradient_g55f3"]
+offsets = PackedFloat32Array(0.020547945, 0.55479455, 0.9931507)
+colors = PackedColorArray(3.1585806e-08, 0.051328212, 0.046587892, 1, 0.5624274, 0.63166004, 0.60362047, 1, 0.9662656, 0.96221536, 0.97805446, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_rscg6"]
+gradient = SubResource("Gradient_g55f3")
+
+[sub_resource type="Environment" id="Environment_g4v7s"]
+background_mode = 3
+ssil_radius = 12.58
+ssil_normal_rejection = 0.0
+glow_enabled = true
+glow_intensity = 0.1
+glow_strength = 1.31
+glow_bloom = 0.98
+adjustment_enabled = true
+adjustment_brightness = 0.76
+adjustment_saturation = 1.19
+adjustment_color_correction = SubResource("GradientTexture2D_rscg6")
+
 [node name="ParallaxEffect(Mine_Dungeon)" type="CanvasLayer" unique_id=1308505183]
 layer = -10
 script = ExtResource("1_g55f3")
@@ -130,3 +150,6 @@ texture = ExtResource("9_olb7a")
 position = Vector2(1920, 360)
 scale = Vector2(1.8740847, 1.8749999)
 texture = ExtResource("10_wlwje")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=641665242]
+environment = SubResource("Environment_g4v7s")
